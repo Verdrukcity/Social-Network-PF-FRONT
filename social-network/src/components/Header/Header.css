@@ -1,19 +1,8 @@
 /*
-CSS por ahora solo tiene establecido e importado los iconos del componente Header
+CSS por ahora solo tiene el background-color del mismo
 */
 
-.icon-home{
-  background-image: url("../../shared/assets/icons/home.png");
-}
-.icon-trend{
-  background-image: url("../../shared/assets/icons/trend.png");
-}
-.icon-explore{
-  background-image: url("../../shared/assets/icons/explore.png");
-}
-.icon-categories{
-  background-image: url("../../shared/assets/icons/categories.png");
-}
-.icon-profile{
-  background-image: url("../../shared/assets/icons/profile.png");
+.icons-container{
+  background-color: #FF8D00;
+  list-style: none;
 }

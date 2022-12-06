@@ -1,32 +1,35 @@
-import React from 'react'
-import "./Header.css"
+import React from "react";
+import * as allIcons from "../../shared/assets/icons/all-icons";
+import "./Header.css";
 
 /*
 Componente del header con los iconos establecidos, 
-el tag <a></a> se pude modificar luego por el tag <Link></Link>
+el tag <img/> se pude modificar y/o agregar luego por el tag <Link></Link>
 de React-Router
 */
+
+console.log(allIcons.home);
 
 export default function Header() {
   return (
     <div>
-      <ul>
-        <li id='icon-home'>
-          <a href='' className='icon-home'></a>
+      <ul className="icons-container" >
+        <li id="icon-home">
+          <img src={allIcons.home} alt="icon-home" />
         </li>
-        <li id='icon-trend'>
-          <a href='' className='icon-trend'></a>
+        <li id="icon-trend">
+          <img src={allIcons.trend} alt="icon-trend" />
         </li>
-        <li id='icon-explore'>
-          <a href='' className='icon-explore'></a>
+        <li id="icon-explore">
+          <img src={allIcons.explore} alt="icon-explore" />
         </li>
-        <li id='icon-categories'>
-          <a href='' className='icon-categories'></a>
+        <li id="icon-categories">
+          <img src={allIcons.categories} alt="icon-categories" />
         </li>
-        <li id='icon-profile'>
-          <a href='' className='icon-profile'></a>
+        <li id="icon-profile">
+          <img src={allIcons.profile} alt="icon-profile" />
         </li>
       </ul>
     </div>
-  )
+  );
 }

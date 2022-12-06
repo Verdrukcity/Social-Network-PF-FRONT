@@ -1,6 +1,5 @@
 import React from 'react'
-import arrowUp from '../../shared/assets/icons/arrow-up.png'
-import addPost from '../../shared/assets/icons/plus.png'
+import { arrowUp, plus } from '../../shared/assets/icons/all-icons'
 import Header from '../Header/Header.js'
 import './Home.css'
 
@@ -16,11 +15,7 @@ export default function Home() {
     <div id='home'>
       <Header />
       <button id='btn-add-post'>
-        <img
-          className='icon add-post'
-          src={addPost}
-          alt='icon to create post'
-        />
+        <img className='icon add-post' src={plus} alt='icon to create post' />
       </button>
       <button id='btn-go-up'>
         <img
