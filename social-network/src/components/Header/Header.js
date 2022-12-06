@@ -12,19 +12,19 @@ export default function Header() {
     <div>
       <ul>
         <li id='icon-home'>
-          <a href="" className="icon-home" ></a>
+          <a href='' className='icon-home'></a>
         </li>
         <li id='icon-trend'>
-          <a href="" className="icon-trend" ></a>
+          <a href='' className='icon-trend'></a>
         </li>
         <li id='icon-explore'>
-          <a href="" className="icon-explore" ></a>
+          <a href='' className='icon-explore'></a>
         </li>
         <li id='icon-categories'>
-          <<a href="" className="icon-categories" ></a>
+          <a href='' className='icon-categories'></a>
         </li>
         <li id='icon-profile'>
-          <a href="" className="icon-profile" ></a>
+          <a href='' className='icon-profile'></a>
         </li>
       </ul>
     </div>
