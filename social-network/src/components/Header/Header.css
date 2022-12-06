@@ -4,4 +4,5 @@ CSS por ahora solo tiene el background-color del mismo
 
 .icons-container{
   background-color: #FF8D00;
+  list-style: none;
 }
