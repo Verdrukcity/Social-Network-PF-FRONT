@@ -4,7 +4,7 @@ import "./Header.css";
 
 /*
 Componente del header con los iconos establecidos, 
-el tag <a></a> se pude modificar luego por el tag <Link></Link>
+el tag <img/> se pude modificar y/o agregar luego por el tag <Link></Link>
 de React-Router
 */
 
