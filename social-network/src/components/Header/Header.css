@@ -1,3 +1,7 @@
+/*
+CSS por ahora solo tiene establecido e importado los iconos del componente Header
+*/
+
 .icon-home{
   background-image: url("../../shared/assets/icons/home.png");
 }

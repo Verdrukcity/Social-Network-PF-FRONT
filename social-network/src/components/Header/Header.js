@@ -1,4 +1,11 @@
 import React from 'react'
+import "./Header.css"
+
+/*
+Componente del header con los iconos establecidos, 
+el tag <a></a> se pude modificar luego por el tag <Link></Link>
+de React-Router
+*/
 
 export default function Header() {
   return (
