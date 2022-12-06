@@ -1,0 +1,20 @@
+#home #btn-add-post,
+#btn-go-up {
+  width: 90px;
+  height: 90px;
+
+  border-radius: 50%;
+  border: none;
+}
+
+#btn-add-post {
+  background-color: #ff8d00;
+}
+
+#btn-go-up {
+  background-color: #cf4b2e;
+}
+
+#home .icon {
+  width: 50%;
+}
