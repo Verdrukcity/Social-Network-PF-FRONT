@@ -1,0 +1,15 @@
+.icon-home{
+  background-image: url("../../shared/assets/icons/home.png");
+}
+.icon-trend{
+  background-image: url("../../shared/assets/icons/trend.png");
+}
+.icon-explore{
+  background-image: url("../../shared/assets/icons/explore.png");
+}
+.icon-categories{
+  background-image: url("../../shared/assets/icons/categories.png");
+}
+.icon-profile{
+  background-image: url("../../shared/assets/icons/profile.png");
+}

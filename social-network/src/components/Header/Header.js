@@ -5,19 +5,19 @@ export default function Header() {
     <div>
       <ul>
         <li id='icon-home'>
-          <span></span>
+          <a href="" className="icon-home" ></a>
         </li>
         <li id='icon-trend'>
-          <span></span>
+          <a href="" className="icon-trend" ></a>
         </li>
         <li id='icon-explore'>
-          <span></span>
+          <a href="" className="icon-explore" ></a>
         </li>
         <li id='icon-categories'>
-          <span></span>
+          <<a href="" className="icon-categories" ></a>
         </li>
         <li id='icon-profile'>
-          <span></span>
+          <a href="" className="icon-profile" ></a>
         </li>
       </ul>
     </div>
