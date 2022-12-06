@@ -1,0 +1,8 @@
+export { default as arrowUp } from "./arrow-up.png"
+export { default as categories } from "./categories.png"
+export { default as explore } from "./explore.png"
+export { default as home } from "./home.png"
+export { default as logo } from "./logo.png"
+export { default as plus } from "./plus.png"
+export { default as profile } from "./profile.png"
+export { default as trend } from "./trend.png"
