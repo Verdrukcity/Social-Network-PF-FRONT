@@ -1,0 +1,72 @@
+
+body{
+
+    background-color: #eaeaea;
+    
+}
+.titulo{
+
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 100px;
+    color: #ff8d00;
+    text-align: center;
+    position: relative;
+    left: 20px;
+}
+.formulario{
+
+        height: 700px;
+        width: 500px;
+        border-radius: 15px;
+        background-color: #d9d9d9;
+        margin: 10px 100px;
+        border: 2px solid transparent;
+        padding: 50px;
+        position: relative;
+       left: 300px;
+}
+.formImput{
+
+    border-radius: 15px;
+    height: 30px;
+    width: 200px;
+    border-color: transparent;
+    
+}
+.campoFormulario{
+
+    padding: 10px;
+    width: 70px;
+    margin-left: 150px;
+   
+   
+}
+.selectFormulario{
+
+    
+    border-color: transparent;
+    margin-left: 20px;
+    display: inline-flex;
+    padding: 10px;
+}
+.botonRegister{
+    border-radius: 15px;
+    height: 40px;
+    width: 150px;
+    color: white;
+    background-color: #ff8d00;
+    font-size: 30px;
+    border: 2px solid transparent;
+    margin-left: 180px;
+    
+}
+.botonPadding{
+
+
+padding-top: 70px;
+}
+.country{
+
+    padding: 10px;
+    order: 2px solid transparent;
+}
