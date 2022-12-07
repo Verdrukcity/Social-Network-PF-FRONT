@@ -8,12 +8,10 @@ el tag <img/> se pude modificar y/o agregar luego por el tag <Link></Link>
 de React-Router
 */
 
-console.log(allIcons.home);
-
 export default function Header() {
   return (
-    <div>
-      <ul className="icons-container" >
+    <div id="header-component" >
+      <ul id="icons-container" >
         <li id="icon-home">
           <img src={allIcons.home} alt="icon-home" />
         </li>

@@ -9,10 +9,16 @@
 
 #btn-add-post {
   background-color: #ff8d00;
+  position: fixed;
+  bottom: 30px;
+  left: 30px;
 }
 
 #btn-go-up {
   background-color: #cf4b2e;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
 }
 
 #home .icon {
