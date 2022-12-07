@@ -1,8 +1,19 @@
 /*
 CSS por ahora solo tiene el background-color del mismo
 */
+#header-component {
+  justify-content: center;
+  display: flex;
+  position: sticky;
+}
 
-.icons-container{
-  background-color: #FF8D00;
+#icons-container {
+  background-color: #ff8d00;
   list-style: none;
+  width: 50%;
+  height: 50%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  padding: 10px;
+  border-radius: 50px;
 }
