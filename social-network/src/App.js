@@ -14,8 +14,8 @@ function App() {
     <BrowserRouter>
       <div className='App'>
         <Switch>
-          <Route exact path='/' component={Home} />
-          <Route exact path='/' element={< Registro />}></Route>
+          <Route exact path='/reply/home' component={Home} />
+          <Route exact path='/reply/register' element={< Registro />}></Route>
         </Switch>
       </div>
     </BrowserRouter>
