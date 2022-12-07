@@ -1,3 +1,6 @@
+
+@import url('../../shared/assets/globals.css');
+
 /*
 CSS por ahora solo tiene el background-color del mismo
 */
@@ -8,7 +11,7 @@ CSS por ahora solo tiene el background-color del mismo
 }
 
 #icons-container {
-  background-color: #ff8d00;
+  background-color: var(--main-orange-primary);
   list-style: none;
   width: 50%;
   height: 50%;
