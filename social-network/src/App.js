@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import './App.css'
+import Home from './components/Home/Home'
+import Registro from './components/Formularios/Registro';
+/*
+  App se utiliza para navegar a las rutas necesarias en el frontend:
+   • Home en la ruta '/'
+   nota: se usa react-router-dom 5.2.0
+*/
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <BrowserRouter>
+      <div className='App'>
+        <Switch>
+          <Route exact path='/' component={Home} />
+          <Route exact path='/Register' element={< Registro />}></Route>
+        </Switch>
+      </div>
+    </BrowserRouter>
+  )
 }
 
-export default App;
+export default App
