@@ -1,0 +1,54 @@
+.formularioLogin {
+
+    height: 500px;
+    width: 350px;
+    border-radius: 15px;
+    background-color: #d9d9d9;
+    margin: 10px 100px;
+    border: 2px solid transparent;
+    padding: 50px;
+    position: relative;
+    left: 1000px;
+    top: 100px
+}
+.tituloLogin {
+
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 100px;
+    color: #ff8d00;
+    text-align: center;
+    position: relative;
+    left: 20px;
+}
+
+.botonLogin {
+    border-radius: 15px;
+    height: 40px;
+    width: 150px;
+    color: white;
+    background-color: #ff8d00;
+    font-size: 20px;
+    border: 2px solid transparent;
+    margin-left: 20px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+
+}
+.campoFormularioLogin {
+
+    padding: 10px;
+    width: 70px;
+    margin-left: 80px;
+
+
+
+}
+.registertext{
+
+    display: inline-flex;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.registerScreen{
+
+    color: #ff8d00;
+    margin-top: 15px;
+}

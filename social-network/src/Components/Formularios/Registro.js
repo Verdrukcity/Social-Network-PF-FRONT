@@ -2,7 +2,10 @@ import React, {Fragment, useState} from 'react';
 import Select from 'react-select'
 import { SelectDatepicker } from 'react-select-datepicker';
 import "./Registro.css"
+import { useHistory } from 'react-router-dom'
 const Registro = () => {
+
+    const history= useHistory();
 
 
     const [datos, setDatos] = useState({
@@ -39,6 +42,9 @@ const Registro = () => {
     const enviarDatos = (event) => {
         event.preventDefault()
         console.log(datos)
+        alert("Usuario creado correctamente");
+  
+        history.push('/reply/home')
     }
 
     const onDateChange = (value)=>{
