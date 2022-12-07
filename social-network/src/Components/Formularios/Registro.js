@@ -12,8 +12,11 @@ const Registro = () => {
         lastName:'',
         birthDate:new Date(),
         country:'',
+        password:'',
+        confirmPassword:'',
 
     })
+    const [estiloInput, setEstiloInput] = useState('formImput');
     const options = [
   { value: 'Colombia', label: 'Colombia' },
   { value: 'Argentina', label: 'Argentina' },
@@ -45,6 +48,20 @@ const Registro = () => {
                      })
 
     }
+
+    const confirmacionPassword= (event)=>{
+            setDatos({
+            ...datos,
+            [event.target.name] : event.target.value
+        })
+         console.log(datos.confirmPassword+ datos.password)
+        if(datos.password!==event.target.value)
+         setEstiloInput('formImputMal')
+        if(datos.password===event.target.value)
+         setEstiloInput('formImput')
+        
+
+    }
     return (
         <Fragment>
            
@@ -62,8 +79,14 @@ const Registro = () => {
                    <div className="campoFormulario">
                     <input type="text" placeholder="Name" className="formImput" onChange={handleInputChange} name="name"></input>
                 </div>
-                   <div className="campoFormulario">
+                <div className="campoFormulario">
                     <input type="text" placeholder="LastName" className="formImput" onChange={handleInputChange} name="lastName"></input>
+                </div>
+                <div className="campoFormulario">
+                    <input type="password" placeholder="Password" className="formImput" onChange={handleInputChange} name="password"></input>
+                </div>
+                <div className="campoFormulario">
+                    <input type="password" placeholder="Confirm Password" className={estiloInput} onChange={confirmacionPassword} name="confirmPassword"></input>
                 </div>
                <div className='selectFormulario'>
                     
