@@ -1,0 +1,5 @@
+@import url('../../../assets/globals.css');
+
+.dialog-bg{
+    background-color: var(--main-orange-primary);
+}

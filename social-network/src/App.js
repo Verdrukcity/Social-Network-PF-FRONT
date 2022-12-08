@@ -1,9 +1,11 @@
 
+import React from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import './App.css'
-import Home from './components/Home/Home'
-import Registro from './components/Formularios/Registro';
-import Login from './components/Login/Login';
+import Register from './Components/Register/Register'
+import Home from './Components/Home/Home'
+import Login from './Components/Login/Login'
+
 /*
   App se utiliza para navegar a las rutas necesarias en el frontend:
    • Home en la ruta '/'
@@ -12,15 +14,20 @@ import Login from './components/Login/Login';
 
 function App() {
   return (
-    <BrowserRouter>
-      <div className='App'>
-        <Switch>
-          <Route exact path='/reply/home' component={Home} />
-          <Route exact path='/reply/register' component={Registro }></Route>
-           <Route exact path='/reply/Login' component={Login }></Route>
-        </Switch>
-      </div>
-    </BrowserRouter>
+    <React.Fragment>
+
+      <BrowserRouter>
+        <div className='App'>
+          <Switch>
+            <Route exact path='/' />
+            <Route exact path='/reply/home' component={Home}/>
+            <Route exact path='/reply/register' component={Register} ></Route>
+            <Route exact path='/reply/Login' component={Login} ></Route>
+          </Switch>
+        </div>
+      </BrowserRouter>
+
+    </React.Fragment>
   )
 }
 

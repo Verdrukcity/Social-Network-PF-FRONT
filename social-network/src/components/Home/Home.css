@@ -1,3 +1,5 @@
+@import url('../../shared/assets/globals.css');
+
 #home #btn-add-post,
 #btn-go-up {
   width: 90px;
@@ -12,6 +14,10 @@
   position: fixed;
   bottom: 30px;
   left: 30px;
+  cursor: pointer;
+}
+#btn-add-post:hover{
+  background-color: #e27c00 ;
 }
 
 #btn-go-up {
@@ -19,6 +25,10 @@
   position: fixed;
   bottom: 30px;
   right: 30px;
+  cursor: pointer;
+}
+#btn-go-up:hover{
+  background-color: #b23f25;
 }
 
 #home .icon {
