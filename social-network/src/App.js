@@ -4,6 +4,7 @@ import './App.css'
 import Home from './components/Home/Home'
 import Login from './components/Login/Login'
 import Register from './components/Register/Register'
+import LandingPage from './components/LandingPage/LandingPage'
 
 /*
   App se utiliza para navegar a las rutas necesarias en el frontend:
@@ -17,7 +18,7 @@ function App() {
       <BrowserRouter>
         <div className='App'>
           <Switch>
-            <Route exact path='/' />
+            <Route exact path='/' component={LandingPage} />
             <Route exact path='/reply/home' component={Home} />
             <Route exact path='/reply/register' component={Register}></Route>
             <Route exact path='/reply/Login' component={Login}></Route>

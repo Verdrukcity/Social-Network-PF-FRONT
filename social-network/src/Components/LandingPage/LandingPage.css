@@ -1,0 +1,83 @@
+/* REPLY */
+#background {
+    position: relative;
+    width: 1440px;
+    height: 1024px;
+
+    background: #EAEAEA;
+}
+
+
+
+#reply-title {
+    position: absolute;
+    width: 435px;
+    height: 132px;
+    left: 58px;
+    top: 45px;
+
+    font-family: 'Inter';
+    /* font-style: italic; */
+    font-weight: 900;
+    font-size: 128px;
+    line-height: 155px;
+
+    color: #FF8D00;
+}
+
+/* Eres lo que publicas. */
+#text-eres-lo-que-publicas {
+    position: absolute;
+    width: 551px;
+    height: 294px;
+    left: 88px;
+    top: 406px;
+
+    font-family: 'Inter';
+    /* font-style: italic; */
+    font-weight: 900;
+    font-size: 96px;
+    line-height: 116px;
+
+    color: #000000;
+}
+
+/* Login */
+#box-login {
+    position: relative;
+    width: 201px;
+    height: 57px;
+    left: 1046px;
+    top: 78px;
+
+    color: #FFFFFF;
+    background: #FF8D00;
+    border-radius: 50px;
+}
+
+/* imbg2 1 */
+#image-lp {
+    position: absolute;
+    width: 630px;
+    height: 498px;
+    left: 720px;
+    top: 263px;
+}
+
+#box-home {
+    position: absolute;
+    width: 64px;
+    height: 65px;
+    left: 1286px;
+    top: 70px;
+}
+
+#img-home {
+    position: absolute;
+    left: 16.67%;
+    right: 16.67%;
+    top: 12.5%;
+    bottom: 12.5%;
+
+    background: #FF8D00;
+}
