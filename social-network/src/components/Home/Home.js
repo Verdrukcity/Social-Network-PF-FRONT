@@ -1,9 +1,9 @@
-import React from "react";
-import { arrowUp, plus } from "../../shared/assets/icons/all-icons";
-import Header from "../Header/Header.js";
-import ButtonActions from "../../shared/componets/ButtonActions/ButtonActions";
-import "./Home.css";
-import DialogCreatePost from "../../shared/componets/dialogs/dialogCreatePost/DialogCreatePost";
+import React from 'react'
+import { arrowUp, plus } from '../../shared/assets/icons/all-icons'
+import ButtonActions from '../../shared/components/ButtonActions/ButtonActions'
+import DialogCreatePost from '../../shared/components/dialogs/dialogCreatePost/DialogCreatePost'
+import Header from '../Header/Header.js'
+import './Home.css'
 
 /*
   Home es el componente principal donde el usuario encuentra:
@@ -22,43 +22,42 @@ export default function Home() {
   /**
    * estado local para abrir y cerrar el dialog del create
    */
-  const [open, setOpen] = React.useState(false);
-
+  const [open, setOpen] = React.useState(false)
 
   const addPost = (event) => {
     /*Esta funcion deberia agregar un post*/
-    setOpen(true);
-  };
+    setOpen(true)
+  }
 
   const goToUp = (event) => {
     /*Esta funcion deberia llevarte al inicio de las publicaciones*/
-  };
+  }
 
   return (
-    <div id="home">
+    <div id='home'>
       <Header />
 
       <ButtonActions
-        type="submit"
+        type='submit'
         action={addPost}
-        id="btn-add-post"
+        id='btn-add-post'
         content={
-          <img className="icon add-post" src={plus} alt="icon to create post" />
+          <img className='icon add-post' src={plus} alt='icon to create post' />
         }
       />
       <DialogCreatePost open={open} setOpen={setOpen} />
       <ButtonActions
-        type={"submit"}
+        type={'submit'}
         action={goToUp}
-        id={"btn-go-up"}
+        id={'btn-go-up'}
         content={
           <img
-            className="icon go-up"
+            className='icon go-up'
             src={arrowUp}
-            alt="icon to go up in the feed"
+            alt='icon to go up in the feed'
           />
         }
       />
     </div>
-  );
+  )
 }
