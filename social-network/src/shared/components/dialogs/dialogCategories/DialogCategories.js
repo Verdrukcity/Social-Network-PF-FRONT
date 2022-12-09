@@ -3,6 +3,12 @@ import ClickAwayListener from '@mui/material/ClickAwayListener'
 import * as React from 'react'
 import './DialogCategories.css'
 
+/*
+  Este Dialog permite mostrar en un cuadro aparte las categorías
+  que el usuario puede encontrar en la página para filtrar las
+  publicaciones en su feed
+*/
+
 export default function ClickAway({ buttonContent }) {
   const [open, setOpen] = React.useState(false)
 
@@ -16,13 +22,16 @@ export default function ClickAway({ buttonContent }) {
 
   const styles = {
     position: 'absolute',
-    top: 28,
+    top: 40,
     right: 0,
-    left: 0,
+    left: '-30vw',
     zIndex: 1,
-    border: '1px solid',
+    border: 'none',
+    borderRadius: '25px',
     p: 1,
-    bgcolor: 'background.paper',
+    width: '50vw',
+    height: '40vh',
+    bgcolor: '#D9D9D9',
   }
 
   return (
@@ -33,7 +42,7 @@ export default function ClickAway({ buttonContent }) {
         </li>
         {open ? (
           <Box className='box-style' sx={styles}>
-            Click me, I will stay visible until you click outside.
+            Aquí van a aparecer todas las categorías para ser filtradas
           </Box>
         ) : null}
       </Box>
