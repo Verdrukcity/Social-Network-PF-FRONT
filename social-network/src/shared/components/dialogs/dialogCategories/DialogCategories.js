@@ -11,6 +11,25 @@ import './DialogCategories.css'
 
 export default function ClickAway({ buttonContent, innerContent }) {
   const [open, setOpen] = React.useState(false)
+  const [active, setActive] = React.useState({})
+
+  const handlePress = (e) => {
+    let { id, style } = e.target
+
+    if (active[id]) {
+      setActive({
+        ...active,
+        [id]: false,
+      })
+    } else {
+      setActive({
+        ...active,
+        [id]: true,
+      })
+    }
+
+    active[id] ? (style.color = 'white') : (style.color = 'black')
+  }
 
   const handleClick = () => {
     setOpen((prev) => !prev)
@@ -34,6 +53,8 @@ export default function ClickAway({ buttonContent, innerContent }) {
     height: 'auto',
     textAlign: 'left',
     bgcolor: '#D9D9D9',
+    boxShadow:
+      'rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px',
   }
 
   return (
@@ -45,9 +66,14 @@ export default function ClickAway({ buttonContent, innerContent }) {
         {open ? (
           <Box sx={styles}>
             <h3 className='categories-title'>Categorías destacadas</h3>
-            <section className='d-flex'>
-              {innerContent?.map((category) => (
-                <button className='button-category'>{category}</button>
+            <section className='d-flex flex-wrap'>
+              {innerContent?.map((inner) => (
+                <button
+                  id={inner}
+                  className='button-inner'
+                  onClick={handlePress}>
+                  {inner}
+                </button>
               ))}
             </section>
           </Box>

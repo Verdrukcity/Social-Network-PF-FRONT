@@ -5,7 +5,19 @@ import categoriesActions from '../actions/categoriesActions'
  * estado global categorías
  */
 const initialState = {
-  name: ['deportes', 'comedia', 'música', 'comida'],
+  name: [
+    'música',
+    'comida',
+    'viajes',
+    'idiomas',
+    'comedia',
+    'deportes',
+    'mascotas',
+    'filosofía',
+    'académico',
+    'tecnología',
+    'naturaleza',
+  ],
 }
 
 export const categories = createSlice({
