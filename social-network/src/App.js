@@ -1,11 +1,11 @@
 import React from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import './App.css'
-import Home from './components/Home/Home'
-import Login from './components/Login/Login'
-import Register from './components/Register/Register'
-import LandingPage from './components/LandingPage/LandingPage'
-import PostDetail from './components/PostDetail/PostDetail'
+import Home from './Components/Home/Home'
+import Login from './Components/Login/Login'
+import Register from './Components/Register/Register'
+import LandingPage from './Components/LandingPage/LandingPage'
+import PostDetail from './Components/PostDetail/PostDetail'
 
 /*
   App se utiliza para navegar a las rutas necesarias en el frontend:
