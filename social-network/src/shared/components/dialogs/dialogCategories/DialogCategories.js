@@ -9,7 +9,7 @@ import './DialogCategories.css'
   publicaciones en su feed
 */
 
-export default function ClickAway({ buttonContent }) {
+export default function ClickAway({ buttonContent, innerContent }) {
   const [open, setOpen] = React.useState(false)
 
   const handleClick = () => {
@@ -29,8 +29,10 @@ export default function ClickAway({ buttonContent }) {
     border: 'none',
     borderRadius: '25px',
     p: 1,
+    padding: '15px 70px',
     width: '50vw',
-    height: '40vh',
+    height: 'auto',
+    textAlign: 'left',
     bgcolor: '#D9D9D9',
   }
 
@@ -41,8 +43,13 @@ export default function ClickAway({ buttonContent }) {
           {buttonContent}
         </li>
         {open ? (
-          <Box className='box-style' sx={styles}>
-            Aquí van a aparecer todas las categorías para ser filtradas
+          <Box sx={styles}>
+            <h3 className='categories-title'>Categorías destacadas</h3>
+            <section className='d-flex'>
+              {innerContent?.map((category) => (
+                <button className='button-category'>{category}</button>
+              ))}
+            </section>
           </Box>
         ) : null}
       </Box>

@@ -1,12 +1,19 @@
 @import url(../../../assets/globals.css);
 
-.box-style {
-  position: 'absolute';
-  top: 28;
-  right: 0;
-  left: 0;
-  z-index: 1;
-  border: '1px solid';
-  padding: 1;
-  background-color: var(--main-gray);
+.categories-title {
+  font-size: 1.6rem;
+  font-weight: bold;
+
+  color: var(--main-red-secondary);
+}
+
+.button-category {
+  margin: 10px;
+  padding: 5px 15px;
+
+  border: none;
+  border-radius: 25px;
+
+  color: var(--main-white);
+  background-color: var(--main-red);
 }
