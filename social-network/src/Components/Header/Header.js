@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { getAllCategories } from '../../redux/reducer/categoriesReducer'
 import * as allIcons from '../../shared/assets/icons/all-icons'
 import DialogCategories from '../../shared/components/dialogs/dialogCategories/DialogCategories.js'
 import './Header.css'
@@ -10,6 +12,14 @@ de React-Router
 */
 
 export default function Header() {
+  const dispatch = useDispatch()
+
+  const categories = useSelector((state) => state.categories.name)
+
+  useEffect(() => {
+    dispatch(getAllCategories())
+  }, [dispatch])
+
   return (
     <div id='header-component'>
       <ul id='icons-container'>
@@ -22,13 +32,13 @@ export default function Header() {
         <li id='icon-explore'>
           <img src={allIcons.explore} alt='icon-explore' />
         </li>
-        <li id='icon-categories'>
-          <DialogCategories
-            buttonContent={
-              <img src={allIcons.categories} alt='icon-categories' />
-            }
-          />
-        </li>
+        <DialogCategories
+          id='icon-categories'
+          buttonContent={
+            <img src={allIcons.categories} alt='icon-categories' />
+          }
+          innerContent={categories}
+        />
         <li id='icon-profile'>
           <img src={allIcons.profile} alt='icon-profile' />
         </li>
