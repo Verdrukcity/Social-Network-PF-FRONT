@@ -1,44 +1,75 @@
 import React from 'react'
 import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import Button from '@mui/material/Button';
+
 import { useTheme } from '@mui/material/styles';
 
 import './DialogCreatePost.css'
+import { imgPhotoLoad } from '../../../assets/icons/all-icons';
 
-export default function DialogCreatePost({open, setOpen}) {
+export default function DialogCreatePost({open, setOpen,changeImage, ImageSelectedPrevious}) {
+ 
+
+
+  /**
+   * variables para que cuando el dialogo se abra menos de md se ponga en pantalla completa
+   */
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
+
+    /**
+     * funcion para cerrar el dialog
+     */
     const handleClose =()=>{
         setOpen(false);
 
     }
+
   return (
     <Dialog
         fullScreen={fullScreen}
         open={open}
         onClose={handleClose}
         aria-labelledby="responsive-dialog-title"
-        
-        
       >
         <div className='dialog-bg'>
         <DialogContent>
-          <DialogContentText>
-            Let Google help apps determine location. This means sending anonymous
-            location data to Google, even when no apps are running.
-          </DialogContentText>
+             
+        <div className='d-flex'>
+          <div className='image-upload-wrap m-2'>
+            <input type='file'
+                    onChange={(e)=>{changeImage(e)}}
+                    accept="image/*"
+                    className='file-upload-input'
+            />
+              <div >
+              <img src={imgPhotoLoad} className='text-information-img img-fluid' />
+              </div>
+            </div>
+
+          <div className='m-2'>
+            <div className='d-flex justify-content-start align-items-center'>
+              <img src={imgPhotoLoad} className='profile-img' />
+              <h3>Name</h3>
+            </div>
+            <div className=''>
+              <input type='text' placeholder='Que piensas?' />
+            </div>
+          </div>
+
+          </div>
+          <div className='d-flex justify-content-center align-items-center'>
+          
+          </div>
+
+
+
+
         </DialogContent>
-        <DialogActions>
-          <Button autoFocus onClick={handleClose}>
-            Cancel
-          </Button>
-          <Button onClick={handleClose}>Subscribe</Button>
-        </DialogActions>
+        
 
       </div>
       </Dialog>

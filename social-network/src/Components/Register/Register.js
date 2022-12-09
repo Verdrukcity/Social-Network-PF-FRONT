@@ -53,6 +53,10 @@ const Register = () => {
                      })
 
     }
+    /*paises habiamos queddo en tenerlo cableado y despues hacer una ruta para los paises, en el de categorias tendriasmos unas por default y que el usuario pueda buscarlo con un input select */
+    /* */
+
+
 
     const confirmacionPassword= (event)=>{
             setDatos({
