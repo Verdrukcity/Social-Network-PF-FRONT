@@ -1,5 +1,8 @@
 .formularioLogin {
-
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     height: 500px;
     width: 350px;
     border-radius: 15px;
@@ -8,8 +11,16 @@
     border: 2px solid transparent;
     padding: 50px;
     position: relative;
-    left: 1000px;
-    top: 100px
+    top: 100px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.377);
+}
+.imgLogin{
+    margin-top: 100px;
+}
+.container2{
+    display: flex;
+    justify-content:center;
+
 }
 .tituloLogin {
 
@@ -18,29 +29,26 @@
     color: #ff8d00;
     text-align: center;
     position: relative;
-    left: 20px;
+    margin-bottom: 40px;
+
 }
 
 .botonLogin {
     border-radius: 15px;
+    margin-bottom: 25px;
     height: 40px;
     width: 150px;
     color: white;
     background-color: #ff8d00;
     font-size: 20px;
     border: 2px solid transparent;
-    margin-left: 20px;
     font-family: Georgia, 'Times New Roman', Times, serif;
 
 }
 .campoFormularioLogin {
 
     padding: 10px;
-    width: 70px;
-    margin-left: 80px;
-
-
-
+    width: 300px;
 }
 .registertext{
 
@@ -51,4 +59,8 @@
 
     color: #ff8d00;
     margin-top: 15px;
+}
+.formImput{
+    text-align: center;
+    outline: none;
 }

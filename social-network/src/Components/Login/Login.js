@@ -1,9 +1,7 @@
 import React, {Fragment, useState} from 'react';
-import { arrowUp, plus } from '../../shared/assets/icons/all-icons'
-import Header from '../Header/Header.js'
 import './Login.css'
 import { useHistory, Link } from 'react-router-dom'
-
+import { imgLogin } from '../../shared/assets/icons/all-icons';
 /*
   Home es el componente principal donde el usuario encuentra:
    • El header con los botones de navegación
@@ -37,8 +35,10 @@ export default function Login() {
         history.push('/reply/home')
     }
   return (
-    <div >
-      <form className="formularioLogin" onSubmit={enviarDatos}>
+    <div className='.container'>
+      <div className='container2'>
+        <img className='imgLogin' src={imgLogin}></img>
+       <form className="formularioLogin" onSubmit={enviarDatos}>
                 
                 <h1 className='tituloLogin'>Reply</h1>
             
@@ -58,7 +58,9 @@ export default function Login() {
                 <p> if you don't have an account,  <Link className="registerScreen" to={`/reply/registere`}><a> register here</a></Link> </p>
                 
                 </div>
-            </form>
+            </form> 
+      </div>
+      
 
     
     </div>

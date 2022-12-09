@@ -6,27 +6,38 @@ import './LandingPage.css'
  * Agregue un alt a la imagen (landingPage) para evitar un warning de compilacion
  */
 
-export default function LandingPage (){
+export default function LandingPage() {
     return (
-        <main id='background'>
-            <div id="reply-title">REPLY</div>
-            <div id="text-eres-lo-que-publicas">Eres lo que publicas</div>
-            <img
-                id="image-lp"
-                src={landingPage}
-                alt="landing-page-image"
-            />
-            <a id="box-login" href='/reply/register'>Register
-            </a>
-            <a id="box-login" href='/reply/login'>Login
-            </a>
-            <a id="box-home" href="/reply/home">
-                <img
-                    src={home}
-                    id="img-home"
-                    alt="home"
-                />
-            </a>
+        <main className=".container" >
+
+            <div className="containerButtons">
+            <div>
+                    <p className="fontLandingO">REPLY</p>
+                </div>
+                <a id="button" href='/reply/register'>
+                    Register
+                </a>
+                <a id="button" href='/reply/login'>
+                    Login
+                </a>
+                <a id="button"  href="/reply/home">
+                    <img src={home} alt="home" />
+                </a>
+            </div>
+            <div className="containerFont">
+                
+                <div className="containerEres">
+                    <p className="fontLandingN">Eres lo que publicas</p>
+                </div>
+                <div>
+                        <img id="landingPage" src={landingPage} />
+                </div>
+
+            </div>
+
+
+
+
         </main>
     )
 
