@@ -1,83 +1,63 @@
 /* REPLY */
-#background {
-    position: relative;
-    width: 1440px;
-    height: 1024px;
-
-    background: #EAEAEA;
+@import url('https://fonts.googleapis.com/css2?family=Brygada+1918:wght@700&family=Roboto:wght@700&display=swap');
+* { 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-
-
-
-#reply-title {
+.container{
+    display: flex;
     position: absolute;
-    width: 435px;
-    height: 132px;
-    left: 58px;
-    top: 45px;
-
-    font-family: 'Inter';
-    /* font-style: italic; */
-    font-weight: 900;
-    font-size: 128px;
-    line-height: 155px;
-
+    margin-left: 50px;
+    margin-right: 50px;
+    flex-direction: column;
+    height: 100%;
+    background-color: rgb(255, 255, 255);
+}
+.containerButtons{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+#button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 50px;
+    background-color: #FF8D00  ;
+    color: #EAEAEA;
+    margin: 20px;
+    border-radius: 1rem;
+}
+.containerFont{
+    display: flex;
+    align-items:flex-start;
+    justify-content: space-between;
+    
+}
+#landingPage{
+    position:relative;
+ 
+    float: inline-end;
+}
+.fontLandingO{
     color: #FF8D00;
+    font-size: 100px;
+    font-family: 'Brygada 1918', serif;
+    font-family: 'Roboto', sans-serif;
+    font-style: italic;
+    font-weight: bold;
+    margin-right: 30px;
+    margin-left: 30px;
 }
-
-/* Eres lo que publicas. */
-#text-eres-lo-que-publicas {
-    position: absolute;
-    width: 551px;
-    height: 294px;
-    left: 88px;
-    top: 406px;
-
-    font-family: 'Inter';
-    /* font-style: italic; */
-    font-weight: 900;
-    font-size: 96px;
-    line-height: 116px;
-
-    color: #000000;
+.fontLandingN{
+    font-size: 80px;
+    font-family: 'Brygada 1918', serif;
+    
 }
-
-/* Login */
-#box-login {
-    position: relative;
-    width: 201px;
-    height: 57px;
-    left: 1046px;
-    top: 78px;
-
-    color: #FFFFFF;
-    background: #FF8D00;
-    border-radius: 50px;
-}
-
-/* imbg2 1 */
-#image-lp {
-    position: absolute;
-    width: 630px;
-    height: 498px;
-    left: 720px;
-    top: 263px;
-}
-
-#box-home {
-    position: absolute;
-    width: 64px;
-    height: 65px;
-    left: 1286px;
-    top: 70px;
-}
-
-#img-home {
-    position: absolute;
-    left: 16.67%;
-    right: 16.67%;
-    top: 12.5%;
-    bottom: 12.5%;
-
-    background: #FF8D00;
+.containerEres{
+    display: flex;
+    align-items: center;
 }
