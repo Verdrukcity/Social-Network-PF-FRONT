@@ -1,15 +1,33 @@
-import { createReducer } from "@reduxjs/toolkit"
-
-const statePost={
-    posts:[]
+import { createSlice } from '@reduxjs/toolkit'
+import postActions from '../actions/postActions'
+/**
+ * estado global de los posts
+ */
+const initialState = {
+  posts:[]
+  
 }
 
- const postReducer = createReducer(statePost, (builder) => {
-    builder
-      .addCase('CREATE_POST', (state, action) => {
-        // "mutate" the array by calling push()
-        state.posts.push(action.payload)
-      })
+export const findAllPost = createSlice({
+  name: 'post',
+  initialState,
 
+  reducers: {
+    
+    getAllPosts:(state)=>{
+      /**
+      * llamo a la accion de todos los posts  
+      */
+      postActions.getAllPosts(state)
+    },
+
+
+  },
 })
-export default postReducer
+
+/**
+ * aqui importas todos los actions que vas creando 
+ */
+export const { getAllPosts } = findAllPost.actions
+
+export default findAllPost.reducer
