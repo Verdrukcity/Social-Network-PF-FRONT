@@ -9,7 +9,6 @@ import { useTheme } from '@mui/material/styles';
 import { useDispatch, useSelector } from 'react-redux'
 import './DialogCreatePost.css'
 import { imgPhotoLoad } from '../../../assets/icons/all-icons';
-import { createPost } from '../../../../redux/actions';
 
 export default function DialogCreatePost({open, setOpen,changeImage, ImageSelectedPrevious}) {
  /**
@@ -17,9 +16,6 @@ export default function DialogCreatePost({open, setOpen,changeImage, ImageSelect
   */
   const dispatch = useDispatch()
 
-  useEffect(()=>{
-    dispatch(createPost())
-  },[dispatch])
 
   /**
    * variables para que cuando el dialogo se abra menos de md se ponga en pantalla completa
