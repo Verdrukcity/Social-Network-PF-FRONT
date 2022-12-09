@@ -5,6 +5,7 @@ import Home from './Components/Home/Home'
 import Login from './Components/Login/Login'
 import Register from './Components/Register/Register'
 import LandingPage from './Components/LandingPage/LandingPage'
+import PostDetail from './Components/PostDetail/PostDetail'
 
 /*
   App se utiliza para navegar a las rutas necesarias en el frontend:
@@ -22,6 +23,7 @@ function App() {
             <Route exact path='/reply/home' component={Home} />
             <Route exact path='/reply/register' component={Register}></Route>
             <Route exact path='/reply/Login' component={Login}></Route>
+            <Route exact path='/reply/postdetail/:id' component={PostDetail} />
           </Switch>
         </div>
       </BrowserRouter>
