@@ -48,6 +48,7 @@ export default function Home() {
 
   const addPost = (event) => {
     /*Esta funcion deberia agregar un post*/
+    event.preventDefault()
     setOpen(true)
   }
 
