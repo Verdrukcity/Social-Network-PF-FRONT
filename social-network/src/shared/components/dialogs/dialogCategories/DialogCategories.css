@@ -1,0 +1,12 @@
+@import url(../../../assets/globals.css);
+
+.box-style {
+  position: 'absolute';
+  top: 28;
+  right: 0;
+  left: 0;
+  z-index: 1;
+  border: '1px solid';
+  padding: 1;
+  background-color: var(--main-gray);
+}
