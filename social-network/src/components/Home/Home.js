@@ -24,6 +24,28 @@ export default function Home() {
    */
   const [open, setOpen] = React.useState(false)
 
+  /**
+   * 
+   * estado local para recibir la imagen  
+   */
+  const [ImageSelectedPrevious, setImageSelectedPrevious] = React.useState(null);
+
+  const changeImage = (e) => {
+    console.log(e.target.files);
+    if (e.target.files[0] !== undefined) {
+      
+      const reader = new FileReader();
+
+      reader.readAsDataURL(e.target.files[0]);
+
+      reader.onload = (e) => {
+        e.preventDefault();
+        setImageSelectedPrevious(e.target.result); // le damos el binario de la imagen para mostrarla en pantalla
+      };
+    }
+  };
+
+
   const addPost = (event) => {
     /*Esta funcion deberia agregar un post*/
     setOpen(true)
@@ -45,7 +67,7 @@ export default function Home() {
           <img className='icon add-post' src={plus} alt='icon to create post' />
         }
       />
-      <DialogCreatePost open={open} setOpen={setOpen} />
+      <DialogCreatePost open={open} setOpen={setOpen} changeImage={changeImage} ImageSelectedPrevious={ImageSelectedPrevious} />
       <ButtonActions
         type={'submit'}
         action={goToUp}
