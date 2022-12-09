@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { arrowUp, plus } from '../../shared/assets/icons/all-icons'
 import ButtonActions from '../../shared/components/ButtonActions/ButtonActions'
+import Card from '../../shared/components/Cards/Card'
 import DialogCreatePost from '../../shared/components/dialogs/dialogCreatePost/DialogCreatePost'
 import Header from '../Header/Header.js'
 import {getAllPosts} from '../../redux/actions'
@@ -93,6 +94,7 @@ export default function Home() {
           />
         }
       />
+      <Card></Card>
     </div>
   )
 }
