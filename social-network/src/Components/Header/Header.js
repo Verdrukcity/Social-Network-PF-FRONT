@@ -1,5 +1,6 @@
 import React from 'react'
 import * as allIcons from '../../shared/assets/icons/all-icons'
+import DialogCategories from '../../shared/components/dialogs/dialogCategories/DialogCategories.js'
 import './Header.css'
 
 /*
@@ -22,7 +23,11 @@ export default function Header() {
           <img src={allIcons.explore} alt='icon-explore' />
         </li>
         <li id='icon-categories'>
-          <img src={allIcons.categories} alt='icon-categories' />
+          <DialogCategories
+            buttonContent={
+              <img src={allIcons.categories} alt='icon-categories' />
+            }
+          />
         </li>
         <li id='icon-profile'>
           <img src={allIcons.profile} alt='icon-profile' />

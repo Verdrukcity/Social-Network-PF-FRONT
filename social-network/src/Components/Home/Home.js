@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { arrowUp, plus } from '../../shared/assets/icons/all-icons'
 import ButtonActions from '../../shared/components/ButtonActions/ButtonActions'
 import Card from '../../shared/components/Cards/Card'
 import DialogCreatePost from '../../shared/components/dialogs/dialogCreatePost/DialogCreatePost'
 import Header from '../Header/Header.js'
+import {getAllPosts} from '../../redux/actions'
 import './Home.css'
 
 /*
@@ -23,7 +25,17 @@ export default function Home() {
   /**
    * estado local para abrir y cerrar el dialog del create
    */
-  const [open, setOpen] = React.useState(false)
+  const [open, setOpen] = useState(false)
+
+
+
+  const dispatch = useDispatch();
+  /**
+   * Dispatch y useEffect para traer todos los posts del back 
+   */
+  useEffect(() => {
+    dispatch(getAllPosts())
+  }, [dispatch])
 
   /**
    * 
@@ -49,6 +61,7 @@ export default function Home() {
 
   const addPost = (event) => {
     /*Esta funcion deberia agregar un post*/
+    event.preventDefault()
     setOpen(true)
   }
 
@@ -85,3 +98,4 @@ export default function Home() {
     </div>
   )
 }
+
