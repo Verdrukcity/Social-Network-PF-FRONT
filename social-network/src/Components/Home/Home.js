@@ -1,6 +1,7 @@
 import React from 'react'
 import { arrowUp, plus } from '../../shared/assets/icons/all-icons'
 import ButtonActions from '../../shared/components/ButtonActions/ButtonActions'
+import Card from '../../shared/components/Cards/Card'
 import DialogCreatePost from '../../shared/components/dialogs/dialogCreatePost/DialogCreatePost'
 import Header from '../Header/Header.js'
 import './Home.css'
@@ -80,6 +81,7 @@ export default function Home() {
           />
         }
       />
+      <Card></Card>
     </div>
   )
 }
