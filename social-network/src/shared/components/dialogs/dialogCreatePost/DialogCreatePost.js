@@ -1,18 +1,25 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
-import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 import { useTheme } from '@mui/material/styles';
 
+
+import { useDispatch, useSelector } from 'react-redux'
 import './DialogCreatePost.css'
 import { imgPhotoLoad } from '../../../assets/icons/all-icons';
+import { createPost } from '../../../../redux/actions';
 
 export default function DialogCreatePost({open, setOpen,changeImage, ImageSelectedPrevious}) {
- 
+ /**
+  * hook para el dispatch
+  */
+  const dispatch = useDispatch()
 
+  useEffect(()=>{
+    dispatch(createPost())
+  },[dispatch])
 
   /**
    * variables para que cuando el dialogo se abra menos de md se ponga en pantalla completa
