@@ -92,12 +92,12 @@ export default function Home() {
         obj[key] ? activeCategories.add(key) : activeCategories.delete(key)
       }
 
-      const activeCategoriesArr = Array.from(activeCategories)
-
-      return activeCategories.size > 0 ? activeCategoriesArr : false
+      return Array.from(activeCategories)
     }
 
-    dispatch(getByCategory(getCategories(active)))
+    const categoryFilter = getCategories(active)
+
+    dispatch(getByCategory(categoryFilter))
   }, [dispatch, active])
 
   // END FILTER BY CATEGORIES

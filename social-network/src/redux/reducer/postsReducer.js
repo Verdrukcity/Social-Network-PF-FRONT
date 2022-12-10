@@ -31,15 +31,11 @@ const filterByCategory = (state, action) => {
   // const newTodos = state.todos.filter((todo) => todo.id !== action.payload)
   // state.todos = newTodos
 
-  /* state.posts = state.posts.filter((e) => {
-    return e.category?.includes(action.payload)
-  }) */
-
   const notNullPosts = state.posts.length ? state.posts[0] : state.posts
 
-  const filterCategories = notNullPosts.filter((p) => {
-    return p.category.includes(action.payload)
-  })
+  const filterCategories = notNullPosts.filter((p) =>
+    p.category.includes(action.payload)
+  )
 
   state.posts = filterCategories
 }

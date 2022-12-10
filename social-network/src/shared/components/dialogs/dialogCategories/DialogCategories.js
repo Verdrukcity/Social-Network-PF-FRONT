@@ -1,8 +1,6 @@
 import Box from '@mui/material/Box'
 import ClickAwayListener from '@mui/material/ClickAwayListener'
 import * as React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { getByCategory } from '../../../../redux/reducer/postsReducer'
 import './DialogCategories.css'
 
 /*
