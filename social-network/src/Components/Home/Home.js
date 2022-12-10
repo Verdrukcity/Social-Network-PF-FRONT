@@ -27,7 +27,7 @@ export default function Home() {
    * estado local para abrir y cerrar el dialog del create
    */
   const [open, setOpen] = useState(false);
-  const posts = useSelector((state) => state.posts);
+  const posts = useSelector((state) => state.posts.posts[0]);
 
   const dispatch = useDispatch();
   /**
@@ -77,22 +77,18 @@ export default function Home() {
         ImageSelectedPrevious={ImageSelectedPrevious}
       />
       <div className="row justify-content-center mt-10">
+        {console.log(posts)}
         {posts &&
-          posts.posts.map((post) => {
+          posts.map(data => {
             return (
-              posts &&
-              post.data.map((data) => {
-                return (
-                  <Card
-                    key={data._id}
-                    id={data._id}
-                    text={data.text}
-                    img={data.multimedia}
-                    username={"UserName"}
-                    userImg={data.multimedia}
-                  />
-                );
-              })
+              <Card
+                key={data._id}
+                id={data._id}
+                text={data.text}
+                img={data.multimedia}
+                username={"UserName"}
+                userImg={data.multimedia}
+              />
             );
           })}
       </div>

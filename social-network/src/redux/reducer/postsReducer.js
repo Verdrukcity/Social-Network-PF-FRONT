@@ -30,7 +30,7 @@ export const findAllPost = createSlice({
 export const getAllPostsAsync = (data) => async (dispatch) => {
  try{
   const response = await axios.get("http://127.0.0.1:3001/create")
-  dispatch(getAllPosts(response.data))
+  dispatch(getAllPosts(response.data.data))
  } catch(error){
   console.log(error)
  }
