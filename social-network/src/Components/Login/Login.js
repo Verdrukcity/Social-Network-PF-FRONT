@@ -30,9 +30,15 @@ export default function Login() {
     const enviarDatos = (event) => {
         event.preventDefault()
         console.log(datos)
-        alert("Usuario creado correctamente");
+
+         if(datos.userName===""||datos.password==="")
+        alert("faltan campos por llenar");
+        else
+        {alert("Usuario logueado correctamente");
+          history.push('/reply/home')}
+        
   
-        history.push('/reply/home')
+        
     }
   return (
     <div className='.container'>
@@ -55,7 +61,7 @@ export default function Login() {
                 </div>
                   
                   <div className='registertext'>
-                <p> if you don't have an account,  <Link className="registerScreen" to={`/reply/registere`}><a> register here</a></Link> </p>
+                <p> if you don't have an account,  <Link className="registerScreen" to={`/reply/register`}><a> register here</a></Link> </p>
                 
                 </div>
             </form> 

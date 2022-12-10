@@ -11,12 +11,12 @@ function Card(props) {
 
     }
   return (
-    <div id='cardContainer'>
+    <div id='cardContainer' className="m-5" >
 
         <div className='cardContainerContent'>
             <div>
                 <img className='imgCard' src={props.img || obj.img}
-                 alt='"imagen perrito'></img>
+                 alt='imagen perrito'></img>
             </div>
             <div>
                 <div className='userInfo'>

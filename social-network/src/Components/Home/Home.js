@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { getAllPosts } from '../../redux/reducer/postsReducer'
-import { arrowUp, plus } from '../../shared/assets/icons/all-icons'
-import ButtonActions from '../../shared/components/ButtonActions/ButtonActions'
-import Card from '../../shared/components/Cards/Card'
-import DialogCreatePost from '../../shared/components/dialogs/dialogCreatePost/DialogCreatePost'
-import Header from '../Header/Header.js'
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllPostsAsync } from "../../redux/reducer/postsReducer";
+import { arrowUp, plus } from "../../shared/assets/icons/all-icons";
+import ButtonActions from "../../shared/components/ButtonActions/ButtonActions";
+import Card from "../../shared/components/Cards/Card";
+import DialogCreatePost from "../../shared/components/dialogs/dialogCreatePost/DialogCreatePost";
+import Header from "../Header/Header.js";
 
-import './Home.css'
+import "./Home.css";
 
 /*
   Home es el componente principal donde el usuario encuentra:
@@ -26,28 +26,26 @@ export default function Home() {
   /**
    * estado local para abrir y cerrar el dialog del create
    */
-  const [open, setOpen] = useState(false)
-
-
+  const [open, setOpen] = useState(false);
+  const posts = useSelector((state) => state.posts.posts[0]);
 
   const dispatch = useDispatch();
   /**
-   * Dispatch y useEffect para traer todos los posts del back 
+   * Dispatch y useEffect para traer todos los posts del back
    */
   useEffect(() => {
-    dispatch(getAllPosts())
-  }, [dispatch])
+    dispatch(getAllPostsAsync());
+  }, [dispatch]);
 
   /**
-   * 
-   * estado local para recibir la imagen  
+   *
+   * estado local para recibir la imagen
    */
-  const [ImageSelectedPrevious, setImageSelectedPrevious] = React.useState(null);
+  const [ImageSelectedPrevious, setImageSelectedPrevious] =
+    React.useState(null);
 
   const changeImage = (e) => {
-    console.log(e.target.files);
     if (e.target.files[0] !== undefined) {
-      
       const reader = new FileReader();
 
       reader.readAsDataURL(e.target.files[0]);
@@ -59,47 +57,67 @@ export default function Home() {
     }
   };
 
-
   const addPost = (event) => {
     /*Esta funcion deberia agregar un post*/
-    event.preventDefault()
-    setOpen(true)
-  }
+    event.preventDefault();
+    setOpen(true);
+  };
 
   const goToUp = (event) => {
     /*Esta funcion deberia llevarte al inicio de las publicaciones*/
-  }
+  };
 
   return (
-    <div id='home'>
+    <div id="home">
       <Header />
+      <DialogCreatePost
+        open={open}
+        setOpen={setOpen}
+        changeImage={changeImage}
+        ImageSelectedPrevious={ImageSelectedPrevious}
+      />
+      <div className="row justify-content-center mt-10">
 
-      <ButtonActions
-        type='submit'
-        action={addPost}
-        id='btn-add-post'
-        content={
-          <img className='icon add-post' src={plus} alt='icon to create post' />
-        }
-      />
-      <DialogCreatePost open={open} setOpen={setOpen} changeImage={changeImage} ImageSelectedPrevious={ImageSelectedPrevious} />
-      <ButtonActions
-        type={'submit'}
-        action={goToUp}
-        id={'btn-go-up'}
-        content={
-          <img
-            className='icon go-up'
-            src={arrowUp}
-            alt='icon to go up in the feed'
-          />
-        }
-      />
-      <div className='d-flex justify-content-center'>
-      
-        <Card></Card>
+        {posts &&
+          posts.map(data => {
+            return (
+              <Card
+                key={data._id}
+                id={data._id}
+                text={data.text}
+                img={data.multimedia}
+                username={"UserName"}
+                userImg={data.multimedia}
+              />
+            );
+          })}
+      </div>
+      <div>
+        <ButtonActions
+          type="submit"
+          action={addPost}
+          id="btn-add-post"
+          content={
+            <img
+              className="icon add-post"
+              src={plus}
+              alt="icon to create post"
+            />
+          }
+        />
+        <ButtonActions
+          type={"submit"}
+          action={goToUp}
+          id={"btn-go-up"}
+          content={
+            <img
+              className="icon go-up"
+              src={arrowUp}
+              alt="icon to go up in the feed"
+            />
+          }
+        />
       </div>
     </div>
-  )
+  );
 }
-

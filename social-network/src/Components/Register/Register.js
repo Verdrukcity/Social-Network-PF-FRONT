@@ -19,7 +19,9 @@ const Register = () => {
         confirmPassword:'',
 
     })
+    const [botonSubmit, setotBonSubmits] = useState(true)
     const [estiloInput, setEstiloInput] = useState('formImput');
+    const [estiloEmail, setEstiloEmail] = useState('formImput');
     const options = [
   { value: 'Colombia', label: 'Colombia' },
   { value: 'Argentina', label: 'Argentina' },
@@ -33,6 +35,37 @@ const Register = () => {
     const handleInputChange = (event) => {
         // console.log(event.target.name)
         // console.log(event.target.value)
+         if(datos.userName===""||datos.email===""||datos.name===""||datos.lastName===""||datos.country===""||datos.password===""||datos.confirmPassword==="")
+         setotBonSubmits(true)
+         else setotBonSubmits(false)
+
+        
+       if(event.target.name=== "email")
+        {
+              if (/^([\da-z_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/.test(event.target.value)){
+             setEstiloEmail('formImput')
+            } else {
+             setEstiloEmail('formImputMal')
+            }
+
+        }
+
+        if(event.target.name=== "name" || event.target.name=== "lastName" )
+        {
+            var entrada=event.target.value;
+            entrada=entrada.slice(-1);
+            
+                if (/^[0-9]$/.test(entrada)){
+                    alert("no se permiten numeros en el  "+ event.target.name);
+                    return;
+                }
+
+
+
+        }
+       
+
+
         setDatos({
             ...datos,
             [event.target.name] : event.target.value
@@ -41,10 +74,14 @@ const Register = () => {
 
     const enviarDatos = (event) => {
         event.preventDefault()
-        alert("Usuario creado correctamente");
-  
-        history.push('/reply/home')
-    }
+
+
+        if(datos.userName===""||datos.email===""||datos.name===""||datos.lastName===""||datos.country===""||datos.password===""||datos.confirmPassword==="")
+        alert("faltan campos por llenar");
+        else
+        {alert("Usuario creado correctamente");
+          history.push('/reply/login')}
+       }
 
     const onDateChange = (value)=>{
          setDatos({
@@ -79,22 +116,22 @@ const Register = () => {
                 <h1 className='titulo'>Reply</h1>
             
                 <div className="campoFormulario">
-                    <input type="text" placeholder="UserName" className="formImput" onChange={handleInputChange} name="userName"></input>
+                    <input type="text" placeholder="UserName" value={datos.userName} className="formImput" onChange={handleInputChange} name="userName"></input>
                 </div>
                 <div className="campoFormulario">
-                    <input type="text" placeholder="Email" className="formImput" onChange={handleInputChange} name="email"></input>
+                    <input type="text" placeholder="Email" value={datos.email} className={estiloEmail} onChange={handleInputChange} name="email"></input>
                 </div>
                    <div className="campoFormulario">
-                    <input type="text" placeholder="Name" className="formImput" onChange={handleInputChange} name="name"></input>
+                    <input type="text" placeholder="Name" value={datos.name} className="formImput" onChange={handleInputChange} name="name"></input>
                 </div>
                 <div className="campoFormulario">
-                    <input type="text" placeholder="LastName" className="formImput" onChange={handleInputChange} name="lastName"></input>
+                    <input type="text" placeholder="LastName" value={datos.lastName} className="formImput" onChange={handleInputChange} name="lastName"></input>
                 </div>
                 <div className="campoFormulario">
-                    <input type="password" placeholder="Password" className="formImput" onChange={handleInputChange} name="password"></input>
+                    <input type="password" placeholder="Password" value={datos.password} className="formImput" onChange={handleInputChange} name="password"></input>
                 </div>
                 <div className="campoFormulario">
-                    <input type="password" placeholder="Confirm Password" className={estiloInput} onChange={confirmacionPassword} name="confirmPassword"></input>
+                    <input type="password" placeholder="Confirm Password" value={datos.confirmPassword} className={estiloInput} onChange={confirmacionPassword} name="confirmPassword"></input>
                 </div>
                <div className='selectFormulario'>
                     
@@ -118,7 +155,7 @@ const Register = () => {
 
                 </div>
                 <div className='botonPadding'>
-                    <button type="submit" className="botonRegister">Register</button>
+                    <button type="submit" className="botonRegister" disabled={botonSubmit}>Register</button>
                 </div>
                   
                 
