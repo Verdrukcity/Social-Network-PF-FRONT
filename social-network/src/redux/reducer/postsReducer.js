@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, current } from '@reduxjs/toolkit'
 import axios from 'axios'
 
 /**
@@ -8,32 +8,11 @@ const initialState = {
   posts: [],
 }
 
-export const findAllPost = createSlice({
-  name: 'post',
-  initialState,
+// ACTIONS
 
-  reducers: {
-    getAllPosts: (state, action) => {
-      /**
-       * llamo a la accion de todos los posts
-       */
-      state.posts = [action.payload]
-    },
-
-    getByCategory: (state, action) => {
-      /*
-       * filtro por categoría(s)
-       */
-
-      // posts -----------> [{... category: ['','',''] },...]
-      // action.payload --> ['deportes','comedia',...]
-
-      state.posts = state.posts.filter((e) =>
-        e.category?.includes(action.payload)
-      )
-    },
-  },
-})
+/*
+ * trae todas las publicaciones
+ */
 
 export const getAllPostsAsync = (data) => async (dispatch) => {
   try {
@@ -43,6 +22,45 @@ export const getAllPostsAsync = (data) => async (dispatch) => {
     console.log(error)
   }
 }
+
+/*
+ * filtro por categoría(s)
+ */
+
+const filterByCategory = (state, action) => {
+  // const newTodos = state.todos.filter((todo) => todo.id !== action.payload)
+  // state.todos = newTodos
+
+  /* state.posts = state.posts.filter((e) => {
+    return e.category?.includes(action.payload)
+  }) */
+
+  const notNullPosts = state.posts.length ? state.posts[0] : state.posts
+
+  const filterCategories = notNullPosts.filter((p) => {
+    return p.category.includes(action.payload)
+  })
+
+  state.posts = filterCategories
+}
+
+// REDUCER
+
+export const findAllPost = createSlice({
+  name: 'post',
+  initialState,
+
+  reducers: {
+    getAllPosts: (state, action) => {
+      /**
+       * llamo a la acción de todos los posts
+       */
+      state.posts = [action.payload]
+    },
+
+    getByCategory: filterByCategory,
+  },
+})
 
 /**
  * aquí importas todos los actions que vas creando

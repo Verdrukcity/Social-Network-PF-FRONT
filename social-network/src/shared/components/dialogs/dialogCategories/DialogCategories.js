@@ -14,7 +14,7 @@ import './DialogCategories.css'
 export default function ClickAway({ buttonContent, innerContent }) {
   const dispatch = useDispatch()
 
-  // const posts = useSelector((state) => state.posts.posts[0])
+  const posts = useSelector((state) => state.posts.posts[0])
   // console.log(posts)
 
   const [open, setOpen] = React.useState(false)
