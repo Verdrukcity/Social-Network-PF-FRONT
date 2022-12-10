@@ -96,7 +96,6 @@ export default function Home() {
     }
 
     const categoryFilter = getCategories(active)
-    console.log(categoryFilter)
 
     dispatch(getByCategory(categoryFilter))
   }, [dispatch, active])
