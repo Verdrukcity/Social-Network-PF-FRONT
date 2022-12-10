@@ -8,10 +8,86 @@ import { useTheme } from '@mui/material/styles';
 
 import { useDispatch, useSelector } from 'react-redux'
 import './DialogCreatePost.css'
+
 import { imgPhotoLoad } from '../../../assets/icons/all-icons';
 
+
+import Box from '@mui/material/Box';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import Chip from '@mui/material/Chip';
+import { Button, DialogActions, TextareaAutosize } from '@mui/material';
+
+
+
+
+
+function getStyles(name, categoryName, theme) {
+  return {
+    fontWeight:
+      categoryName.indexOf(name) === -1
+        ? theme.typography.fontWeightRegular
+        : theme.typography.fontWeightMedium,
+  };
+}
+
+
 export default function DialogCreatePost({open, setOpen,changeImage, ImageSelectedPrevious}) {
- /**
+ 
+ /**array de strings provisional para las categorias */
+
+ const categories=['comedia','deportes','videojuegos','cocina','perros','gatos']
+
+ const theme = useTheme();
+ const [categoryName, setCategory] = React.useState([]);
+ const [textArea,SetTextArea]=React.useState('')
+
+ const [createToSend,createToSendSet] = React.useState({
+
+    img:'',
+    text:'',
+  categories:[]
+
+ })
+
+/**funciones para manejar los cambios  */
+/**funcion que maneja el estado de las categorias */
+  const handleChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setCategory(
+      // On autofill we get a stringified value.
+      typeof value === 'string' ? value.split(',') : value,
+    );
+  };
+  /* funcion que controla el text */
+  const hanldeChangeText=(e)=>{
+    e.preventDefault()
+    let value = e.target.value
+    SetTextArea(value)
+
+  }
+ /*funcion que envia la data */
+  const handleSubmit=(e)=>{
+    e.preventDefault()
+    let value = e.target.value
+    createToSendSet(
+      prev=>({
+        ...prev,
+        categories:categoryName,
+        img:ImageSelectedPrevious,
+        text:textArea
+      })
+
+    )
+    
+   
+  }
+  /**
   * hook para el dispatch
   */
   const dispatch = useDispatch()
@@ -20,8 +96,7 @@ export default function DialogCreatePost({open, setOpen,changeImage, ImageSelect
   /**
    * variables para que cuando el dialogo se abra menos de md se ponga en pantalla completa
    */
-    const theme = useTheme();
-    const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
+    
 
     /**
      * funcion para cerrar el dialog
@@ -33,42 +108,85 @@ export default function DialogCreatePost({open, setOpen,changeImage, ImageSelect
 
   return (
     <Dialog
-        fullScreen={fullScreen}
+        
         open={open}
         onClose={handleClose}
         aria-labelledby="responsive-dialog-title"
       >
-        <div className='dialog-bg'>
+        <div className='dialog-bg overflow-hidden'>
         <DialogContent>
-             
-        <div className='d-flex'>
+             <h2 className='text-center color-whie-reply'>Crea tu publicacion!</h2>
+        <div className='d-flex w-100 h-100 '>
           <div className='image-upload-wrap m-2'>
             <input type='file'
                     onChange={(e)=>{changeImage(e)}}
                     accept="image/*"
                     className='file-upload-input'
             />
+
               <div >
-              <img src={imgPhotoLoad} className='text-information-img img-fluid' />
+              
+              {ImageSelectedPrevious&&<img src={ImageSelectedPrevious} className='text-information-img img-fluid' />}
+              {!ImageSelectedPrevious&&<img src={imgPhotoLoad} className='text-information-img img-fluid' />}
               </div>
             </div>
 
-          <div className='m-2'>
-            <div className='d-flex justify-content-start align-items-center'>
-              <img src={imgPhotoLoad} className='profile-img' />
-              <h3>Name</h3>
+          <div className='m-2 w-100 d-flex flex-column'>
+            <div className='w-100 d-flex justify-content-start align-items-center '>
+              <img src={imgPhotoLoad} className='profile-img'/>
+              <h3 className=' ms-2 color-whie-reply'>Name</h3>
             </div>
-            <div className=''>
-              <input type='text' placeholder='Que piensas?' />
+
+            <div className=' w-100  bg-input p-2 mt-2 border-radius-30 align-items-stretch p-2'>
+              <TextareaAutosize
+              className='dialog-input p-2 w-100 color-whie-reply'
+              aria-label="minimum height"
+              minRows={3}
+              maxRows={6}
+              placeholder="Agrega tu comentario aqui!"
+              onChange={hanldeChangeText}
+            />
             </div>
           </div>
 
           </div>
           <div className='d-flex justify-content-center align-items-center'>
-          
+
+          <FormControl sx={{ m: 1, width: 300 }}>
+          <InputLabel id="demo-multiple-chip-label">Categorias</InputLabel>
+          <Select
+            labelId="demo-multiple-chip-label"
+            id="demo-multiple-chip"
+            multiple
+            value={categoryName}
+            onChange={handleChange}
+            input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
+            renderValue={(selected) => (
+              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                {selected.map((value) => (
+                  <Chip key={value} label={value} />
+                ))}
+              </Box>
+            )}
+            
+          >
+            {categories.map((name) => (
+              <MenuItem
+                key={name}
+                value={name}
+                style={getStyles(name, categoryName, theme)}
+              >
+                {name}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
           </div>
 
-
+          <DialogActions className='d-flex justify-content-center'>
+            <Button onClick={handleSubmit}>Crear</Button>
+            
+        </DialogActions>
 
 
         </DialogContent>
