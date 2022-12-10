@@ -9,27 +9,12 @@ import './DialogCategories.css'
   publicaciones en su feed
 */
 
-export default function ClickAway({ buttonContent, innerContent }) {
+export default function ClickAway({
+  buttonContent,
+  innerContent,
+  filterByCategory,
+}) {
   const [open, setOpen] = React.useState(false)
-  const [active, setActive] = React.useState({})
-
-  const handlePress = (e) => {
-    let { id, style } = e.target
-
-    if (active[id]) {
-      setActive({
-        ...active,
-        [id]: false,
-      })
-    } else {
-      setActive({
-        ...active,
-        [id]: true,
-      })
-    }
-
-    active[id] ? (style.color = 'white') : (style.color = 'black')
-  }
 
   const handleClick = () => {
     setOpen((prev) => !prev)
@@ -71,7 +56,7 @@ export default function ClickAway({ buttonContent, innerContent }) {
                 <button
                   id={inner}
                   className='button-inner'
-                  onClick={handlePress}>
+                  onClick={filterByCategory}>
                   {inner}
                 </button>
               ))}
