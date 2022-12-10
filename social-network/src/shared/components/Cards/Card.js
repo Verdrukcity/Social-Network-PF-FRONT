@@ -1,13 +1,14 @@
 import React from 'react'
 import "./Card.css"
+// the props we are going to use are:
+// img, username, imgUser, text
 function Card(props) {
    const obj = {
-        img:"",
         username:"compañero guerra",
         imgUser:"https://images.cointelegraph.com/images/1434_aHR0cHM6Ly9pbWFnZXMuY29pbnRlbGVncmFwaC5jb20vaW1hZ2VzLzcxN19hSFIwY0hNNkx5OXpNeTVqYjJsdWRHVnNaV2R5WVhCb0xtTnZiUzkxY0d4dllXUnpMekl3TWpFdE1UQXZNRGxpWVRaaU1Ea3ROR00wTmkwMFlqUmtMV0ZsT0RFdFlUWTNOakpoWVdReE56QmhMbXB3Wnc9PS5qcGc=.jpg",
         img:"https://g.foolcdn.com/image/?url=https%3A%2F%2Fg.foolcdn.com%2Feditorial%2Fimages%2F679277%2Fshiba-inu-dogecoin-cryptocurrency-blockchain-network-getty.jpg&op=resize&w=700",
         text:"Hello, world!",
-        comments:[],
+
     }
   return (
     <div id='cardContainer'>
