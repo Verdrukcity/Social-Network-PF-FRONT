@@ -77,7 +77,7 @@ export default function Home() {
         ImageSelectedPrevious={ImageSelectedPrevious}
       />
       <div className="row justify-content-center mt-10">
-        {console.log(posts)}
+
         {posts &&
           posts.map(data => {
             return (

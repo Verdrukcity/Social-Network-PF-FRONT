@@ -6,7 +6,7 @@ export default function ButtonActions({type, action, id, content}) {
 		
 		event.preventDefault()
 		action(event)
-
+		
 	}
 
 
