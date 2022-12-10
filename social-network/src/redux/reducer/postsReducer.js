@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
-import postActions from '../actions/postActions'
 import axios from 'axios'
+import postActions from '../actions/postActions'
 /**
  * estado global de los posts
  */
