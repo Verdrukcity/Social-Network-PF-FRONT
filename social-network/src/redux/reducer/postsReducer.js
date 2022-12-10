@@ -1,4 +1,4 @@
-import { createSlice, current } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 
 /**
@@ -37,7 +37,7 @@ const filterByCategory = (state, action) => {
     p.category.includes(action.payload)
   )
 
-  state.posts = filterCategories
+  state.posts = [filterCategories]
 }
 
 // REDUCER
