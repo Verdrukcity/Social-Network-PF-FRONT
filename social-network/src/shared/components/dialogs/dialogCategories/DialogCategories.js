@@ -1,6 +1,8 @@
 import Box from '@mui/material/Box'
 import ClickAwayListener from '@mui/material/ClickAwayListener'
 import * as React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { getByCategory } from '../../../../redux/reducer/postsReducer'
 import './DialogCategories.css'
 
 /*
@@ -10,6 +12,11 @@ import './DialogCategories.css'
 */
 
 export default function ClickAway({ buttonContent, innerContent }) {
+  const dispatch = useDispatch()
+
+  // const posts = useSelector((state) => state.posts.posts[0])
+  // console.log(posts)
+
   const [open, setOpen] = React.useState(false)
   const [active, setActive] = React.useState({})
 
@@ -56,6 +63,25 @@ export default function ClickAway({ buttonContent, innerContent }) {
     boxShadow:
       'rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px',
   }
+
+  React.useEffect(() => {
+    /*
+     * Array de categorías extraídas del objeto active
+     */
+    function getCategories(obj) {
+      const activeCategories = new Set()
+
+      for (const key in obj) {
+        obj[key] ? activeCategories.add(key) : activeCategories.delete(key)
+      }
+
+      const activeCategoriesArr = Array.from(activeCategories)
+
+      return activeCategories.size > 0 ? activeCategoriesArr : false
+    }
+
+    dispatch(getByCategory(getCategories(active)))
+  }, [dispatch, active])
 
   return (
     <ClickAwayListener onClickAway={handleClickAway}>
