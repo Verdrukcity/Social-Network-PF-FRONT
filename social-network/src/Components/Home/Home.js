@@ -150,7 +150,7 @@ export default function Home() {
               <Card
                 key={data._id}
                 id={data._id}
-                userId={data.userId}
+                userId={data.userId._id}
                 text={data.text}
                 img={data.multimedia}
                 username={data.userData.user_Name}
