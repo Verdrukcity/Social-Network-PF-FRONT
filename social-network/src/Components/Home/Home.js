@@ -81,6 +81,12 @@ export default function Home() {
     active[id] ? (style.color = 'white') : (style.color = 'black')
   }
 
+  /* 
+    TODO: mostrar todos los post cuando se quiten los filtros
+    // si todas las categorías están en false/undefined en active cargar allPost
+    • cuando quite el focus en el categories debería mantenerse el estilo
+  */
+
   React.useEffect(() => {
     /*
      * Array de categorías extraídas del objeto active
@@ -97,28 +103,27 @@ export default function Home() {
 
     const categoryFilter = getCategories(active)
 
-    dispatch(getByCategory(categoryFilter))
+    categoryFilter.length > 0
+      ? dispatch(getByCategory(categoryFilter))
+      : dispatch(getAllPostsAsync())
   }, [dispatch, active])
 
   // END FILTER BY CATEGORIES
 
   const addPost = (event) => {
-    /*Esta funcion deberia agregar un post*/
+    /*Esta función debería agregar un post*/
     event.preventDefault()
     setOpen(true)
   }
 
   const goToUp = (event) => {
-    /*Esta funcion deberia llevarte al inicio de las publicaciones*/
+    /*Esta función debería llevarte al inicio de las publicaciones*/
   }
 
   return (
     <div id='home'>
       <Header filterByCategory={filterByCategory} />
-      <DialogCreatePost
-        open={open}
-        setOpen={setOpen}
-      />
+      <DialogCreatePost open={open} setOpen={setOpen} />
       <div className='row justify-content-center mt-10'>
         {posts &&
           posts.map((data) => {
