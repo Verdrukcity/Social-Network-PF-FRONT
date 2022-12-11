@@ -142,8 +142,8 @@ export default function Home() {
                 userId={data.userId}
                 text={data.text}
                 img={data.multimedia}
-                username={'UserName'}
-                userImg={data.multimedia}
+                username={data.userId.user_Name}
+                userImg={data.userId.image_profil}
                 categories={data.category}
                 comments={data.commentId}
               />
