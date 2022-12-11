@@ -8,26 +8,27 @@ import './LandingPage.css'
 
 export default function LandingPage() {
     return (
-        <main className=".container" >
+        <main className="container-{breakpoint} bg" >
 
-            <div className="containerButtons">
-            <div>
-                    <p className="fontLandingO">REPLY</p>
+            <div className="container-{breakpoint} d-flex justify-content-between align-items-center">
+                <div>
+                    <p className="fontLandingO ">REPLY</p>
                 </div>
-                <a id="button" href='/reply/register'>
+                <div className="d-flex">
+                    <a id="button" href='/reply/register'>
                     Register
                 </a>
                 <a id="button" href='/reply/login'>
                     Login
                 </a>
-                <a id="button"  href="/reply/home">
-                    <img src={home} alt="home" />
-                </a>
+                </div>
+                
+               
             </div>
-            <div className="containerFont">
+            <div className="container-{breakpoint} d-flex justify-content-evenly">
                 
                 <div className="containerEres">
-                    <p className="fontLandingN">Eres lo que publicas</p>
+                    <p className="fontLandingN">Eres lo que <br></br>publicas.</p>
                 </div>
                 <div>
                         <img id="landingPage" src={landingPage} />

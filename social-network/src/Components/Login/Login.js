@@ -41,12 +41,12 @@ export default function Login() {
         
     }
   return (
-    <div className='.container'>
-      <div className='container2'>
+    <div className='container-{breakpoint} bg'>
+      <div className=' bg d-flex justify-content-evenly align-items-center '>
         <img className='imgLogin' src={imgLogin}></img>
        <form className="formularioLogin" onSubmit={enviarDatos}>
                 
-                <h1 className='tituloLogin'>Reply</h1>
+                <h1 className='replyTitle reply'>REPLY</h1>
             
                 <div className="campoFormularioLogin">
                     <input type="text" placeholder="UserName" className="formImput" onChange={handleInputChange} name="userName"></input>

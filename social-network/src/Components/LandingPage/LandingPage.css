@@ -1,25 +1,9 @@
 /* REPLY */
-@import url('https://fonts.googleapis.com/css2?family=Brygada+1918:wght@700&family=Roboto:wght@700&display=swap');
-* { 
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-.container{
-    display: flex;
-    position: absolute;
-    margin-left: 50px;
-    margin-right: 50px;
-    flex-direction: column;
-    height: 100%;
-    background-color: rgb(255, 255, 255);
-}
-.containerButtons{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    
-}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@800;900&display=swap');
+
+
+
 #button{
     display: flex;
     justify-content: center;
@@ -30,34 +14,23 @@
     color: #EAEAEA;
     margin: 20px;
     border-radius: 1rem;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.201);
+    text-decoration: none;
 }
-.containerFont{
-    display: flex;
-    align-items:flex-start;
-    justify-content: space-between;
-    
-}
-#landingPage{
-    position:relative;
- 
-    float: inline-end;
-}
+
+
 .fontLandingO{
     color: #FF8D00;
-    font-size: 100px;
-    font-family: 'Brygada 1918', serif;
-    font-family: 'Roboto', sans-serif;
+    font-size: 128px;
+    font-family: 'Inter', sans-serif;
     font-style: italic;
-    font-weight: bold;
     margin-right: 30px;
     margin-left: 30px;
 }
 .fontLandingN{
-    font-size: 80px;
-    font-family: 'Brygada 1918', serif;
+    color: black;
+    font-size: 96px;
+    font-family: 'Inter', sans-serif;
+    font-style: italic;
     
-}
-.containerEres{
-    display: flex;
-    align-items: center;
 }
