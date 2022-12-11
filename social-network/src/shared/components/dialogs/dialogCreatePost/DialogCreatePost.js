@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -20,8 +20,9 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
 import { Button, DialogActions, imageListItemClasses, TextareaAutosize } from '@mui/material';
-import { CreatePostsAsync } from '../../../../redux/reducer/postsReducer';
+import { CreatePostsAsync, getDetailUser } from '../../../../redux/reducer/postsReducer';
 import axios from 'axios';
+import { getAllCategoriesAsync } from '../../../../redux/reducer/categoriesReducer';
 
 
 
@@ -37,7 +38,7 @@ function getStyles(name, categoryName, theme) {
 }
 
 
-export default function DialogCreatePost({open, setOpen}) {
+export default function DialogCreatePost({open, setOpen, innerContent}) {
 
 
     /**
@@ -48,20 +49,32 @@ export default function DialogCreatePost({open, setOpen}) {
  
  /**array de strings provisional para las categorias */
 
- const categories=['comedia','deportes','videojuegos','cocina','perros','gatos']
+ const categories= innerContent
  const [file,fileSet]=React.useState()
  const theme = useTheme();
  const [categoryName, setCategory] = React.useState([]);
  const [textArea,SetTextArea]=React.useState('')
 
- const [createToSend,createToSendSet] = React.useState({
 
-  category:[],
-  multimedia:'',
-  text:''
+ const detailUser = useSelector(state => state.userDetail )
+ 
 
- })
 
+
+ /**funcion que busca las categorias para enviarlas al crear el post */
+  // let categories = useSelector((state) => state.categories.name)
+  //   console.log(categories)
+  // categories = categories[0]?.map((e)=>e.category)
+
+  
+
+const [active,setactive]=useState(false)
+useEffect(() => {
+  
+  dispatch(getAllCategoriesAsync())
+  dispatch(getDetailUser())
+
+}, [dispatch])
 
 
 
@@ -110,9 +123,12 @@ const changeImage = (e) => {
     e.preventDefault()
     let formData = new FormData()
     formData.append('text',textArea)
-    formData.append('category',categoryName)
+    
+    for (var i = 0; i < categoryName.length; i++) {
+      formData.append('category', categoryName[i]);
+    }
     formData.append('multimedia', file)
-   
+    
     dispatch(CreatePostsAsync(formData))
    
   }
@@ -199,7 +215,7 @@ const changeImage = (e) => {
             )}
             
           >
-            {categories.map((name) => (
+            {categories?.map((name) => (
               <MenuItem
                 key={name}
                 value={name}
