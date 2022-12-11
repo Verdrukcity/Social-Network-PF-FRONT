@@ -19,6 +19,12 @@
     border-radius: 1rem;
     margin: 20px;
 }
+.containerCategories{
+    background-color: #FF8D00  ;
+    color: #EAEAEA;
+    margin: 20px;
+    border-radius: 1rem;
+}
 .cardContainerContent{
     display: flex;
     flex-direction: row;
@@ -48,7 +54,7 @@
     font-style: italic;
     
 }
-.coments{
+.comments{
     display: flex;
     justify-content: center;
     background-color: #EAEAEA;
@@ -61,4 +67,13 @@
     border-radius: 10px;
     border: none;
     text-align: center;
+}
+.commentBtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FF8D00  ;
+    color: #EAEAEA;
+    margin: 15px;
+    border-radius: 10px;
 }
