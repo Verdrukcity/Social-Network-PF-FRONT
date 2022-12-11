@@ -1,8 +1,9 @@
 .container-fluid{
     height: 100vh;
     background-color: #EB853D;
-    padding: 5%;
+    padding: 3%;
     font-style: italic;
+    /* overflow-y: hidden; */
 }
 
 .postImg{
@@ -61,12 +62,11 @@
 }
 
 .usercont{
-
     border: black solid;
 }
 
 .userimg{
-    width: 10%;
+    
     height: 125%;
     margin-right: auto;
     border-radius: 50%;
@@ -84,24 +84,20 @@
     padding: 20px;
     border-radius: 25px;
 }
+
 .textComent{
     color: white;
-    background-color:transparent;
+    background-color:#00000033;
     border-radius: 25px;
-    padding:10px;
-    width: 400px;
-    height: 200px;
-   
+    margin-bottom: 10px;
+    height: 30%;
 
 }
-  .listaComentarios{
 
-        overflow-y: scroll;
-        width: 550px;
-        height: 500px;
-        padding-top: 30px;
-        padding: 50px;
-        display: inline-block;
-        
+.comentscont{        
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 50%;
+    
+}
 
-  }
