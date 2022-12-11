@@ -118,8 +118,6 @@ export default function Home() {
       <DialogCreatePost
         open={open}
         setOpen={setOpen}
-        changeImage={changeImage}
-        ImageSelectedPrevious={ImageSelectedPrevious}
       />
       <div className='row justify-content-center mt-10'>
         {posts &&

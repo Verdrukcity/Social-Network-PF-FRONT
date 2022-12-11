@@ -19,7 +19,9 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
-import { Button, DialogActions, TextareaAutosize } from '@mui/material';
+import { Button, DialogActions, imageListItemClasses, TextareaAutosize } from '@mui/material';
+import { CreatePostsAsync } from '../../../../redux/reducer/postsReducer';
+import axios from 'axios';
 
 
 
@@ -35,7 +37,7 @@ function getStyles(name, categoryName, theme) {
 }
 
 
-export default function DialogCreatePost({open, setOpen,changeImage, ImageSelectedPrevious}) {
+export default function DialogCreatePost({open, setOpen}) {
  
  /**array de strings provisional para las categorias */
 
@@ -47,11 +49,53 @@ export default function DialogCreatePost({open, setOpen,changeImage, ImageSelect
 
  const [createToSend,createToSendSet] = React.useState({
 
-    img:'',
-    text:'',
-  categories:[]
+  category:[],
+  multimedia:'',
+  text:''
 
  })
+
+
+
+
+ const [ImageSelectedPrevious, setImageSelectedPrevious] =
+ React.useState(null);
+
+ const [file,fileSet]=React.useState()
+const changeImage = (e) => {
+ 
+ if (e.target.files[0] !== undefined) {
+ let archivito = e.target.files[0]
+   const reader = new FileReader();
+  console.log(archivito)
+   fileSet({file:archivito})
+   
+   let formData = new FormData()
+   formData.append('text',textArea)
+   formData.append('category',categoryName)
+   formData.append('multimedia', e.target.files[0]  )
+   
+   axios.post("http://127.0.0.1:3001/create/6393c1ae810999a485add50e",formData,
+   {
+     // Endpoint to send files
+     headers: {
+       // Add any auth token here
+       
+       'content-type': 'multipart/form-data',
+     }
+
+   }
+  ) 
+
+
+   reader.readAsDataURL(e.target.files[0]);
+
+   reader.onload = (e) => {
+     e.preventDefault();
+     setImageSelectedPrevious(e.target.result); // le damos el binario de la imagen para mostrarla en pantalla
+   };
+ }
+};
 
 /**funciones para manejar los cambios  */
 /**funcion que maneja el estado de las categorias */
@@ -61,7 +105,7 @@ export default function DialogCreatePost({open, setOpen,changeImage, ImageSelect
     } = event;
     setCategory(
       // On autofill we get a stringified value.
-      typeof value === 'string' ? value.split(',') : value,
+      value
     );
   };
   /* funcion que controla el text */
@@ -72,19 +116,26 @@ export default function DialogCreatePost({open, setOpen,changeImage, ImageSelect
 
   }
  /*funcion que envia la data */
-  const handleSubmit=(e)=>{
+  const handleSubmit=async (e)=>{
     e.preventDefault()
-    let value = e.target.value
-    createToSendSet(
-      prev=>({
-        ...prev,
-        categories:categoryName,
-        img:ImageSelectedPrevious,
-        text:textArea
-      })
+   
+    // let formData = new FormData();
+    // const { multimedia } = req.files;     //require the multimedia file and the text from the body
+    // const { text, type } = req.body;
+   
+    // createToSendSet({
+    //     multimedia:file,
+    //     category:categoryName,
+    //     text:textArea
+    //  }
+    //  )
+    let filess = file
+  
 
-    )
-    
+
+
+    // dispatch(CreatePostsAsync(formData))
+   
    
   }
   /**
@@ -118,7 +169,11 @@ export default function DialogCreatePost({open, setOpen,changeImage, ImageSelect
              <h2 className='text-center color-whie-reply'>Crea tu publicacion!</h2>
         <div className='d-flex w-100 h-100 '>
           <div className='image-upload-wrap m-2'>
-            <input type='file'
+            
+          
+          
+          <input type='file'
+                    name='multimedia'
                     onChange={(e)=>{changeImage(e)}}
                     accept="image/*"
                     className='file-upload-input'
