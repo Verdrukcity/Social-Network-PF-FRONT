@@ -7,7 +7,8 @@ import axios from 'axios'
 const initialState = {
   posts: [],
   created: {},
-  comments: []
+  comments: [],
+  detail: {}
 }
 
 /*
@@ -42,6 +43,10 @@ export const findAllPost = createSlice({
        * llamo a la accion de todos los posts
        */
       state.created = [action.payload]
+    },
+    getPostDetail:(state, action)=>{
+      state.detail = action.payload
+
     },
 
     getByCategory: filterByCategory,
@@ -83,11 +88,26 @@ export const createComment = (data, postId) => {
     }
   }
 }
+export const getPostDetailAsync = (postId) => async (dispatch) => {
+  
+  try{
+    //Obtenemos el post buscado por id en la variable details
+    const details = await axios.get(`http://127.0.0.1:3001/detail/${postId}`)
+
+    //despachamos la accion 
+    dispatch(getPostDetail(details.data))
+
+  }
+  catch(error){
+    console.log(error)
+  }
+ }
+ 
 
 
 /**
  * aquí importas todos los actions que vas creando
  */
-export const { getAllPosts, getByCategory, createPosts } = findAllPost.actions
+export const { getAllPosts, getByCategory,createPosts, getPostDetail } = findAllPost.actions
 
 export default findAllPost.reducer
