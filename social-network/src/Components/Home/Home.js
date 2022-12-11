@@ -89,7 +89,6 @@ export default function Home() {
     }
 
     active[id] ? (style.border = 'none') : (style.border = '4px solid orange')
-
   }
 
   /* 
@@ -144,8 +143,6 @@ export default function Home() {
         innerContent={categoriesArr} 
         userDetail={userDetailArr}
       />
-    
-
       <div className='row justify-content-center mt-10'>
         {posts &&
           posts.map((data) => {
