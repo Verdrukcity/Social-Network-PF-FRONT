@@ -19,6 +19,7 @@ import './Header.css'
  */
 
 export default function Header({ filterByCategory, innerContent }) {
+  console.log(innerContent)
   const dispatch = useDispatch()
 
   let history = useHistory()

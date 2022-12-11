@@ -33,6 +33,8 @@ export default function Home() {
   const posts = useSelector((state) => state.posts.posts[0])
   let categories = useSelector((state) => state.categories.name)
 
+  const categoriesArr = categories[0]?.map((c) => c.category)
+
   const dispatch = useDispatch()
   /**
    * Dispatch y useEffect para traer todos los posts del back
@@ -127,7 +129,7 @@ export default function Home() {
     <div id='home'>
       <Header
         filterByCategory={filterByCategory}
-        innerContent={categories[0]?.map((c) => c.category)}
+        innerContent={categoriesArr}
       />
       <DialogCreatePost open={open} setOpen={setOpen} />
       <div className='row justify-content-center mt-10'>
