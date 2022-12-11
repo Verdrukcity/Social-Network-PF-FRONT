@@ -67,7 +67,7 @@ export const getAllPostsAsync = (data) => async (dispatch) => {
 export const CreatePostsAsync = (data) =>  (dispatch) => {
   try{
     console.log(data)
-     axios.post("http://127.0.0.1:3001/create/6393c1ae810999a485add50e",data,
+     axios.post("http://127.0.0.1:3001/create/639530440a0e40b78f5ef4ca",data,
     {
       // Endpoint to send files
       headers: {

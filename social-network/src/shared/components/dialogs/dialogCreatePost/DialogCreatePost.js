@@ -67,15 +67,18 @@ const changeImage = (e) => {
  if (e.target.files[0] !== undefined) {
  let archivito = e.target.files[0]
    const reader = new FileReader();
-  console.log(archivito)
+  
    fileSet({file:archivito})
    
+  console.log(categoryName)
+
+
    let formData = new FormData()
    formData.append('text',textArea)
    formData.append('category',categoryName)
    formData.append('multimedia', e.target.files[0]  )
    
-   axios.post("http://127.0.0.1:3001/create/6393c1ae810999a485add50e",formData,
+   axios.post("http://127.0.0.1:3001/create/639530440a0e40b78f5ef4ca",formData,
    {
      // Endpoint to send files
      headers: {
