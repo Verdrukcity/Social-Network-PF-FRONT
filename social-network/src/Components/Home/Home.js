@@ -131,7 +131,7 @@ export default function Home() {
         filterByCategory={filterByCategory}
         innerContent={categoriesArr}
       />
-      <DialogCreatePost open={open} setOpen={setOpen} />
+      <DialogCreatePost open={open} setOpen={setOpen} innerContent={categoriesArr} />
       <div className='row justify-content-center mt-10'>
         {posts &&
           posts.map((data) => {

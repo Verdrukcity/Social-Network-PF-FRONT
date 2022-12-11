@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 
+
 /**
  * estado global de los posts
  */
@@ -8,7 +9,8 @@ const initialState = {
   posts: [],
   created: {},
   comments: [],
-  detail: {}
+  detail: {},
+  userDetail:{}
 }
 
 /*
@@ -48,7 +50,12 @@ export const findAllPost = createSlice({
       state.detail = action.payload
 
     },
+    getDetailUser:(state,action)=>{
 
+      state.userDetail = [action.payload]
+
+    },
+    
     getByCategory: filterByCategory,
   },
 })
@@ -61,9 +68,18 @@ export const getAllPostsAsync = (data) => async (dispatch) => {
     console.log(error)
   }
 }
+export const getUserDetailAsync = (data) => async (dispatch) => {
+  try {
+    const response = await axios.get(`http://127.0.0.1:3001/userDetail/639604a18b5c1a0e8d07388f`)
+    dispatch(getDetailUser(response[0]))
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 export const CreatePostsAsync = (data) =>  (dispatch) => {
   try{
-    axios.post("http://127.0.0.1:3001/create/6395f657f42d85e1e89fe507",data,
+    axios.post("http://127.0.0.1:3001/create/639604a18b5c1a0e8d07388f",data,
     {
       // Endpoint to send files
       headers: {
@@ -108,6 +124,6 @@ export const getPostDetailAsync = (postId) => async (dispatch) => {
 /**
  * aquí importas todos los actions que vas creando
  */
-export const { getAllPosts, getByCategory,createPosts, getPostDetail } = findAllPost.actions
+export const { getAllPosts, getByCategory,createPosts, getPostDetail,getDetailUser } = findAllPost.actions
 
 export default findAllPost.reducer
