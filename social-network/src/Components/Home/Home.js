@@ -133,10 +133,13 @@ export default function Home() {
               <Card
                 key={data._id}
                 id={data._id}
+                userId={data.userId}
                 text={data.text}
                 img={data.multimedia}
                 username={'UserName'}
                 userImg={data.multimedia}
+                categories={data.category}
+                comments={data.commentId}
               />
             )
           })}
