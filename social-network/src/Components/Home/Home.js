@@ -78,7 +78,9 @@ export default function Home() {
       })
     }
 
-    active[id] ? (style.color = 'white') : (style.color = 'black')
+    active[id] ? (style.border = 'none') : (style.border = '4px solid orange')
+
+    console.log(style)
   }
 
   /* 

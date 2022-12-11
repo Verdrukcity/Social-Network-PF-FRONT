@@ -6,29 +6,21 @@ import axios from 'axios'
  */
 const initialState = {
   posts: [],
-  created:{}
+  created: {},
 }
-
-
 
 /*
  * filtro por categoría(s)
  */
 
 const filterByCategory = (state, action) => {
-  // const newTodos = state.todos.filter((todo) => todo.id !== action.payload)
-  // state.todos = newTodos
-
   const notNullPosts = state.posts.length ? state.posts[0] : state.posts
 
   const filterCategories = notNullPosts.filter((p) =>
-    p.category.includes(action.payload)
+    p.category?.includes(action.payload)
   )
 
   state.posts = [filterCategories]
-  
-  
-  
 }
 
 // REDUCER
@@ -44,10 +36,10 @@ export const findAllPost = createSlice({
        */
       state.posts = [action.payload]
     },
-    createPosts:(state, action)=>{
+    createPosts: (state, action) => {
       /**
-      * llamo a la accion de todos los posts  
-      */
+       * llamo a la accion de todos los posts
+       */
       state.created = [action.payload]
     },
 
@@ -55,40 +47,35 @@ export const findAllPost = createSlice({
   },
 })
 
-
 export const getAllPostsAsync = (data) => async (dispatch) => {
- try{
-  const response = await axios.get("http://127.0.0.1:3001/create")
-  dispatch(getAllPosts(response.data.data))
- } catch(error){
-  console.log(error)
- }
-}
-export const CreatePostsAsync = (data) =>  (dispatch) => {
-  try{
-    console.log(data)
-     axios.post("http://127.0.0.1:3001/create/639530440a0e40b78f5ef4ca",data,
-    {
-      // Endpoint to send files
-      headers: {
-        // Add any auth token here
-        
-        'content-type': 'multipart/form-data',
-      },
- 
-    }
-   ).then(response=>dispatch(createPosts(response.data.data)))
-   
-  } catch(error){
-   console.log(error)
+  try {
+    const response = await axios.get('http://127.0.0.1:3001/create')
+    dispatch(getAllPosts(response.data.data))
+  } catch (error) {
+    console.log(error)
   }
- }
- 
+}
+export const CreatePostsAsync = (data) => (dispatch) => {
+  try {
+    console.log(data)
+    axios
+      .post('http://127.0.0.1:3001/create/639530440a0e40b78f5ef4ca', data, {
+        // Endpoint to send files
+        headers: {
+          // Add any auth token here
 
+          'content-type': 'multipart/form-data',
+        },
+      })
+      .then((response) => dispatch(createPosts(response.data.data)))
+  } catch (error) {
+    console.log(error)
+  }
+}
 
 /**
  * aquí importas todos los actions que vas creando
  */
-export const { getAllPosts, getByCategory,createPosts } = findAllPost.actions
+export const { getAllPosts, getByCategory, createPosts } = findAllPost.actions
 
 export default findAllPost.reducer
