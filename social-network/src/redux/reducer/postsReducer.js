@@ -19,11 +19,9 @@ const initialState = {
 const filterByCategory = (state, action) => {
   const notNullPosts = state.posts.length ? state.posts[0] : state.posts
 
-  const filterCategories = notNullPosts.filter((post) => {
-    return action.payload.every((filter) => {
-      return post.category.includes(filter)
-    })
-  })
+  const filterCategories = notNullPosts.filter((post) =>
+    action.payload.every((filter) => post.category.includes(filter))
+  )
 
   state.posts = [filterCategories]
 }
