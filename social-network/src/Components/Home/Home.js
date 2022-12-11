@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
   getAllPostsAsync,
   getByCategory,
+  getUserDetailAsync,
 } from '../../redux/reducer/postsReducer'
 import { arrowUp, plus } from '../../shared/assets/icons/all-icons'
 import ButtonActions from '../../shared/components/ButtonActions/ButtonActions'
@@ -32,15 +33,21 @@ export default function Home() {
   const [open, setOpen] = useState(false)
   const posts = useSelector((state) => state.posts.posts[0])
   let categories = useSelector((state) => state.categories.name)
-
+  
+  let userDetail = useSelector((state) => state.posts.userDetail)
   const categoriesArr = categories[0]?.map((c) => c.category)
-
+  const userDetailArr = userDetail[0]?.map((c) =>c) 
+  
   const dispatch = useDispatch()
   /**
    * Dispatch y useEffect para traer todos los posts del back
    */
+  
   useEffect(() => {
+    /**me traigo todos los posts */
     dispatch(getAllPostsAsync())
+    /**me traigo el detalle del usuario */
+    dispatch(getUserDetailAsync())
   }, [dispatch])
 
   /**
@@ -124,15 +131,17 @@ export default function Home() {
   }
 
   return (
+    
     <div id='home'>
-      <Header
+    <Header
         filterByCategory={filterByCategory}
         innerContent={categoriesArr}
       />
-      <DialogCreatePost
-        open={open}
-        setOpen={setOpen}
-        innerContent={categoriesArr}
+      <DialogCreatePost 
+        open={open} 
+        setOpen={setOpen} 
+        innerContent={categoriesArr} 
+        userDetail={userDetailArr}
       />
       <div className='row justify-content-center mt-10'>
         {posts &&
@@ -144,8 +153,8 @@ export default function Home() {
                 userId={data.userId}
                 text={data.text}
                 img={data.multimedia}
-                username={data.userId.user_Name}
-                userImg={data.userId.image_profil}
+                username={data.userData.user_Name}
+                userImg={data.userData.image_profil}
                 categories={data.category}
                 comments={data.commentId}
               />

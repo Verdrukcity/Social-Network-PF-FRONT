@@ -38,40 +38,28 @@ function getStyles(name, categoryName, theme) {
 }
 
 
-export default function DialogCreatePost({open, setOpen, innerContent}) {
+export default function DialogCreatePost({open, setOpen, innerContent,userDetail}) {
 
 
     /**
   * hook para el dispatch
   */
     const dispatch = useDispatch()
-
- 
+  
  /**array de strings provisional para las categorias */
 
  const categories= innerContent
+
  const [file,fileSet]=React.useState()
  const theme = useTheme();
  const [categoryName, setCategory] = React.useState([]);
  const [textArea,SetTextArea]=React.useState('')
 
 
- const detailUser = useSelector(state => state.userDetail )
- 
 
-
-
- /**funcion que busca las categorias para enviarlas al crear el post */
-  // let categories = useSelector((state) => state.categories.name)
-  //   console.log(categories)
-  // categories = categories[0]?.map((e)=>e.category)
-
-  
-
-const [active,setactive]=useState(false)
 useEffect(() => {
   
-  dispatch(getAllCategoriesAsync())
+  
   dispatch(getDetailUser())
 
 }, [dispatch])
@@ -159,9 +147,7 @@ const changeImage = (e) => {
              <h2 className='text-center color-whie-reply'>Crea tu publicacion!</h2>
         <div className='d-flex w-100 h-100 '>
           <div className='image-upload-wrap m-2'>
-            
-          
-          
+
           <input type='file'
                     name='multimedia'
                     onChange={(e)=>{changeImage(e)}}
@@ -177,10 +163,13 @@ const changeImage = (e) => {
             </div>
 
           <div className='m-2 w-100 d-flex flex-column'>
-            <div className='w-100 d-flex justify-content-start align-items-center '>
-              <img src={imgPhotoLoad} className='profile-img'/>
-              <h3 className=' ms-2 color-whie-reply'>Name</h3>
+          {userDetail?.map((name) => (
+            
+            <div key={name.name} className='w-100 d-flex justify-content-start align-items-center '>
+              <img src={name.image_profil} className='profile-img'/>
+                <h3 className=' ms-2 color-whie-reply'>{name.user_Name}</h3>
             </div>
+            ))}
 
             <div className=' w-100  bg-input p-2 mt-2 border-radius-30 align-items-stretch p-2'>
               <TextareaAutosize

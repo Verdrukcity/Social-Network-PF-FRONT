@@ -9,7 +9,7 @@ const initialState = {
   created: {},
   comments: [],
   detail: {},
-  userDetail: {},
+  userDetail:[]
 }
 
 /*
@@ -50,6 +50,7 @@ export const findAllPost = createSlice({
     },
     getDetailUser: (state, action) => {
       state.userDetail = [action.payload]
+
     },
 
     getByCategory: filterByCategory,
@@ -64,12 +65,12 @@ export const getAllPostsAsync = (data) => async (dispatch) => {
     console.log(error)
   }
 }
-export const getUserDetailAsync = (data) => async (dispatch) => {
+
+export const getUserDetailAsync = (data) => (dispatch) => {
   try {
-    const response = await axios.get(
-      `http://127.0.0.1:3001/userDetail/639604a18b5c1a0e8d07388f`
-    )
-    dispatch(getDetailUser(response[0]))
+      axios.get(`http://127.0.0.1:3001/userDetail/639604a18b5c1a0e8d07388f`)
+        .then(response=>dispatch(getDetailUser(response.data)))
+    
   } catch (error) {
     console.log(error)
   }
@@ -116,12 +117,7 @@ export const getPostDetailAsync = (postId) => async (dispatch) => {
 /**
  * aquí importas todos los actions que vas creando
  */
-export const {
-  getAllPosts,
-  getByCategory,
-  createPosts,
-  getPostDetail,
-  getDetailUser,
-} = findAllPost.actions
+
+export const { getAllPosts, getByCategory,createPosts, getPostDetail, getDetailUser } = findAllPost.actions
 
 export default findAllPost.reducer
