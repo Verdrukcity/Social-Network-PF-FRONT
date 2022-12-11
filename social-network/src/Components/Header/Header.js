@@ -18,10 +18,9 @@ import './Header.css'
  * ° El boton de profile debería llevar a un nuevo componente que muestra el perfil del usuario..
  */
 
-export default function Header({ filterByCategory }) {
+export default function Header({ filterByCategory, innerContent }) {
   const dispatch = useDispatch()
 
-  let categories = useSelector((state) => state.categories.name)
   let history = useHistory()
 
   useEffect(() => {
@@ -81,7 +80,7 @@ export default function Header({ filterByCategory }) {
           buttonContent={
             <img src={allIcons.categories} alt='icon-categories' />
           }
-          innerContent={categories[0]?.map((c) => c.category)}
+          innerContent={innerContent}
         />
         <li id='icon-profile'>
           <ButtonActions

@@ -31,6 +31,7 @@ export default function Home() {
    */
   const [open, setOpen] = useState(false)
   const posts = useSelector((state) => state.posts.posts[0])
+  let categories = useSelector((state) => state.categories.name)
 
   const dispatch = useDispatch()
   /**
@@ -124,7 +125,10 @@ export default function Home() {
 
   return (
     <div id='home'>
-      <Header filterByCategory={filterByCategory} />
+      <Header
+        filterByCategory={filterByCategory}
+        innerContent={categories[0]?.map((c) => c.category)}
+      />
       <DialogCreatePost open={open} setOpen={setOpen} />
       <div className='row justify-content-center mt-10'>
         {posts &&
