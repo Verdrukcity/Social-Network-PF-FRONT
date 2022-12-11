@@ -1,4 +1,5 @@
 /*colores principales*/
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@800&display=swap');
 :root {
   --main-white: #eaeaea;
   --main-orange-ligth: #ebc886;
@@ -7,4 +8,16 @@
   --main-red: #cf4b2e;
   --main-red-secondary: #ff4800;
   --main-gray: #d9d9d9;
+}
+
+.bg{
+  height: 762px;
+  background-color: var(--main-white);
+}
+.replyTitle{
+  color: var(--main-orange-primary);
+  font-size: 96px;
+  font-family: 'Inter', sans-serif;
+  font-style: italic;
+  
 }
