@@ -7,6 +7,8 @@ import axios from 'axios'
 const initialState = {
   posts: [],
   created: {},
+  comments: [],
+  detail: {}
 }
 
 /*
@@ -42,6 +44,10 @@ export const findAllPost = createSlice({
        */
       state.created = [action.payload]
     },
+    getPostDetail:(state, action)=>{
+      state.detail = action.payload
+
+    },
 
     getByCategory: filterByCategory,
   },
@@ -55,27 +61,53 @@ export const getAllPostsAsync = (data) => async (dispatch) => {
     console.log(error)
   }
 }
-export const CreatePostsAsync = (data) => (dispatch) => {
-  try {
-    console.log(data)
-    axios
-      .post('http://127.0.0.1:3001/create/639530440a0e40b78f5ef4ca', data, {
-        // Endpoint to send files
-        headers: {
-          // Add any auth token here
-
-          'content-type': 'multipart/form-data',
-        },
-      })
-      .then((response) => dispatch(createPosts(response.data.data)))
-  } catch (error) {
-    console.log(error)
+export const CreatePostsAsync = (data) =>  (dispatch) => {
+  try{
+    axios.post("http://127.0.0.1:3001/create/6395f657f42d85e1e89fe507",data,
+    {
+      // Endpoint to send files
+      headers: {
+        // Add any auth token here
+        'content-type': 'multipart/form-data',
+      }
+    }
+   ).then(response=>dispatch(createPosts(response.data.data)))
+   
+  } catch(error){
+   console.log(error)
   }
 }
+
+export const createComment = (data, postId) => {
+  return async function(){
+    try {
+      await axios.post(`http://127.0.0.1:3001/comment/${postId}`, data)
+      //console.log('createcomment')
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+export const getPostDetailAsync = (postId) => async (dispatch) => {
+  
+  try{
+    //Obtenemos el post buscado por id en la variable details
+    const details = await axios.get(`http://127.0.0.1:3001/detail/${postId}`)
+
+    //despachamos la accion 
+    dispatch(getPostDetail(details.data))
+
+  }
+  catch(error){
+    console.log(error)
+  }
+ }
+ 
+
 
 /**
  * aquí importas todos los actions que vas creando
  */
-export const { getAllPosts, getByCategory, createPosts } = findAllPost.actions
+export const { getAllPosts, getByCategory,createPosts, getPostDetail } = findAllPost.actions
 
 export default findAllPost.reducer
