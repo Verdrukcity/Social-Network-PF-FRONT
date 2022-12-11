@@ -6,22 +6,10 @@ import axios from 'axios'
  */
 const initialState = {
   posts: [],
+  created:{}
 }
 
-// ACTIONS
 
-/*
- * trae todas las publicaciones
- */
-
-export const getAllPostsAsync = (data) => async (dispatch) => {
-  try {
-    const response = await axios.get('http://127.0.0.1:3001/create')
-    dispatch(getAllPosts(response.data.data))
-  } catch (error) {
-    console.log(error)
-  }
-}
 
 /*
  * filtro por categoría(s)
@@ -38,8 +26,8 @@ const filterByCategory = (state, action) => {
   )
 
   state.posts = [filterCategories]
-  posts:[],
-  created:{}
+  
+  
   
 }
 
@@ -101,7 +89,6 @@ export const CreatePostsAsync = (data) =>  (dispatch) => {
 /**
  * aquí importas todos los actions que vas creando
  */
-export const { getAllPosts, getByCategory } = findAllPost.actions
-export const { getAllPosts,createPosts,getByCategory } = findAllPost.actions
+export const { getAllPosts, getByCategory,createPosts } = findAllPost.actions
 
 export default findAllPost.reducer
