@@ -1,6 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, current } from '@reduxjs/toolkit'
 import axios from 'axios'
-
 
 /**
  * estado global de los posts
@@ -10,7 +9,7 @@ const initialState = {
   created: {},
   comments: [],
   detail: {},
-  userDetail:{}
+  userDetail: {},
 }
 
 /*
@@ -20,9 +19,11 @@ const initialState = {
 const filterByCategory = (state, action) => {
   const notNullPosts = state.posts.length ? state.posts[0] : state.posts
 
-  const filterCategories = notNullPosts.filter((p) =>
-    p.category?.includes(action.payload)
-  )
+  const filterCategories = notNullPosts.filter((post) => {
+    return action.payload.every((filter) => {
+      return post.category.includes(filter)
+    })
+  })
 
   state.posts = [filterCategories]
 }
@@ -46,16 +47,13 @@ export const findAllPost = createSlice({
        */
       state.created = [action.payload]
     },
-    getPostDetail:(state, action)=>{
+    getPostDetail: (state, action) => {
       state.detail = action.payload
-
     },
-    getDetailUser:(state,action)=>{
-
+    getDetailUser: (state, action) => {
       state.userDetail = [action.payload]
-
     },
-    
+
     getByCategory: filterByCategory,
   },
 })
@@ -70,32 +68,33 @@ export const getAllPostsAsync = (data) => async (dispatch) => {
 }
 export const getUserDetailAsync = (data) => async (dispatch) => {
   try {
-    const response = await axios.get(`http://127.0.0.1:3001/userDetail/639604a18b5c1a0e8d07388f`)
+    const response = await axios.get(
+      `http://127.0.0.1:3001/userDetail/639604a18b5c1a0e8d07388f`
+    )
     dispatch(getDetailUser(response[0]))
   } catch (error) {
     console.log(error)
   }
 }
 
-export const CreatePostsAsync = (data) =>  (dispatch) => {
-  try{
-    axios.post("http://127.0.0.1:3001/create/639604a18b5c1a0e8d07388f",data,
-    {
-      // Endpoint to send files
-      headers: {
-        // Add any auth token here
-        'content-type': 'multipart/form-data',
-      }
-    }
-   ).then(response=>dispatch(createPosts(response.data.data)))
-   
-  } catch(error){
-   console.log(error)
+export const CreatePostsAsync = (data) => (dispatch) => {
+  try {
+    axios
+      .post('http://127.0.0.1:3001/create/639604a18b5c1a0e8d07388f', data, {
+        // Endpoint to send files
+        headers: {
+          // Add any auth token here
+          'content-type': 'multipart/form-data',
+        },
+      })
+      .then((response) => dispatch(createPosts(response.data.data)))
+  } catch (error) {
+    console.log(error)
   }
 }
 
 export const createComment = (data, postId) => {
-  return async function(){
+  return async function () {
     try {
       await axios.post(`http://127.0.0.1:3001/comment/${postId}`, data)
       //console.log('createcomment')
@@ -105,25 +104,26 @@ export const createComment = (data, postId) => {
   }
 }
 export const getPostDetailAsync = (postId) => async (dispatch) => {
-  
-  try{
+  try {
     //Obtenemos el post buscado por id en la variable details
     const details = await axios.get(`http://127.0.0.1:3001/detail/${postId}`)
 
-    //despachamos la accion 
+    //despachamos la accion
     dispatch(getPostDetail(details.data))
-
-  }
-  catch(error){
+  } catch (error) {
     console.log(error)
   }
- }
- 
-
+}
 
 /**
  * aquí importas todos los actions que vas creando
  */
-export const { getAllPosts, getByCategory,createPosts, getPostDetail,getDetailUser } = findAllPost.actions
+export const {
+  getAllPosts,
+  getByCategory,
+  createPosts,
+  getPostDetail,
+  getDetailUser,
+} = findAllPost.actions
 
 export default findAllPost.reducer

@@ -82,8 +82,6 @@ export default function Home() {
     }
 
     active[id] ? (style.border = 'none') : (style.border = '4px solid orange')
-
-    console.log(style)
   }
 
   /* 
@@ -131,7 +129,11 @@ export default function Home() {
         filterByCategory={filterByCategory}
         innerContent={categoriesArr}
       />
-      <DialogCreatePost open={open} setOpen={setOpen} innerContent={categoriesArr} />
+      <DialogCreatePost
+        open={open}
+        setOpen={setOpen}
+        innerContent={categoriesArr}
+      />
       <div className='row justify-content-center mt-10'>
         {posts &&
           posts.map((data) => {
