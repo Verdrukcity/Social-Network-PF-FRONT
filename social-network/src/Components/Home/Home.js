@@ -84,7 +84,7 @@ export default function Home() {
   /* 
     TODO: mostrar todos los post cuando se quiten los filtros
     // si todas las categorías están en false/undefined en active cargar allPost
-    • cuando quite el focus en el categories deberían mantenerse el estilo
+    • cuando quite el focus en el categories debería mantenerse el estilo
   */
 
   React.useEffect(() => {
@@ -111,13 +111,13 @@ export default function Home() {
   // END FILTER BY CATEGORIES
 
   const addPost = (event) => {
-    /*Esta funcion deberia agregar un post*/
+    /*Esta función debería agregar un post*/
     event.preventDefault()
     setOpen(true)
   }
 
   const goToUp = (event) => {
-    /*Esta funcion deberia llevarte al inicio de las publicaciones*/
+    /*Esta función debería llevarte al inicio de las publicaciones*/
   }
 
   return (
