@@ -38,11 +38,18 @@ function getStyles(name, categoryName, theme) {
 
 
 export default function DialogCreatePost({open, setOpen}) {
+
+
+    /**
+  * hook para el dispatch
+  */
+    const dispatch = useDispatch()
+
  
  /**array de strings provisional para las categorias */
 
  const categories=['comedia','deportes','videojuegos','cocina','perros','gatos']
-
+ const [file,fileSet]=React.useState()
  const theme = useTheme();
  const [categoryName, setCategory] = React.useState([]);
  const [textArea,SetTextArea]=React.useState('')
@@ -61,34 +68,14 @@ export default function DialogCreatePost({open, setOpen}) {
  const [ImageSelectedPrevious, setImageSelectedPrevious] =
  React.useState(null);
 
- const [file,fileSet]=React.useState()
+
 const changeImage = (e) => {
  
  if (e.target.files[0] !== undefined) {
- let archivito = e.target.files[0]
+ let fileToUse = e.target.files[0]
    const reader = new FileReader();
   
-   fileSet({file:archivito})
-   
-  console.log(categoryName)
-
-
-   let formData = new FormData()
-   formData.append('text',textArea)
-   formData.append('category',categoryName)
-   formData.append('multimedia', e.target.files[0]  )
-   
-   axios.post("http://127.0.0.1:3001/create/639530440a0e40b78f5ef4ca",formData,
-   {
-     // Endpoint to send files
-     headers: {
-       // Add any auth token here
-       
-       'content-type': 'multipart/form-data',
-     }
-
-   }
-  ) 
+   fileSet(fileToUse)
 
 
    reader.readAsDataURL(e.target.files[0]);
@@ -121,30 +108,14 @@ const changeImage = (e) => {
  /*funcion que envia la data */
   const handleSubmit=async (e)=>{
     e.preventDefault()
+    let formData = new FormData()
+    formData.append('text',textArea)
+    formData.append('category',categoryName)
+    formData.append('multimedia', file)
    
-    // let formData = new FormData();
-    // const { multimedia } = req.files;     //require the multimedia file and the text from the body
-    // const { text, type } = req.body;
-   
-    // createToSendSet({
-    //     multimedia:file,
-    //     category:categoryName,
-    //     text:textArea
-    //  }
-    //  )
-    let filess = file
-  
-
-
-
-    // dispatch(CreatePostsAsync(formData))
-   
+    dispatch(CreatePostsAsync(formData))
    
   }
-  /**
-  * hook para el dispatch
-  */
-  const dispatch = useDispatch()
 
 
   /**

@@ -55,21 +55,20 @@ export const getAllPostsAsync = (data) => async (dispatch) => {
     console.log(error)
   }
 }
-export const CreatePostsAsync = (data) => (dispatch) => {
-  try {
-    console.log(data)
-    axios
-      .post('http://127.0.0.1:3001/create/639530440a0e40b78f5ef4ca', data, {
-        // Endpoint to send files
-        headers: {
-          // Add any auth token here
-
-          'content-type': 'multipart/form-data',
-        },
-      })
-      .then((response) => dispatch(createPosts(response.data.data)))
-  } catch (error) {
-    console.log(error)
+export const CreatePostsAsync = (data) =>  (dispatch) => {
+  try{
+    axios.post("http://127.0.0.1:3001/create/6395f657f42d85e1e89fe507",data,
+    {
+      // Endpoint to send files
+      headers: {
+        // Add any auth token here
+        'content-type': 'multipart/form-data',
+      }
+    }
+   ).then(response=>dispatch(createPosts(response.data.data)))
+   
+  } catch(error){
+   console.log(error)
   }
 }
 
