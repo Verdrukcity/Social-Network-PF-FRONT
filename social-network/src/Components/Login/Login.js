@@ -29,7 +29,6 @@ export default function Login() {
 
     const enviarDatos = (event) => {
         event.preventDefault()
-        console.log(datos)
 
          if(datos.userName===""||datos.password==="")
         alert("faltan campos por llenar");
