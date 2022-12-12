@@ -79,25 +79,39 @@
 }
 
 .textpost{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     color: white;
     background-color: #00000033;
     padding: 20px;
     border-radius: 25px;
 }
 
-.textComent{
+.comentcont{
     color: white;
     background-color:#00000033;
     border-radius: 25px;
     margin-bottom: 10px;
     height: 30%;
-
 }
 
 .comentscont{        
+    display: flex;
+    flex-direction: column;
     overflow-y: scroll;
     overflow-x: hidden;
     height: 50%;
-    
 }
 
+.textcomment{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -10px;
+}
+
+.comentimg{
+    border-radius: 50%;
+    height: 50px;
+}

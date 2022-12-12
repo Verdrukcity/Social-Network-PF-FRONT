@@ -36,13 +36,34 @@ export default function PostDetail(props){
         
         //este if es cochino, pero si no lo hacia me rompía, perdonchi
         if (Object.keys(details).length){
-            
+            console.log(details)
+            var profile
+            var profileImg
+            var postImg
+            var description
+            var categories
+    
+            if (details.userId.constructor == Array){                
+                profile = details.userId[0].user_Name
+                profileImg = details.userId[0].image_profil
+                description = details.post.text
+                postImg = details.post.multimedia
+                categories = details.post.category
+
+            }
+            else {
+                profile = details.userId.user_Name
+                profileImg = details.userId.image_profil
+                postImg = details.multimedia
+                description = details.text
+                categories = details.category
+            }
             setPostDetail({
-                profile: details.userId[0].user_Name,
-                profileImg: details.userId[0].image_profil,
-                description: details.post.text,
-                postImg: details.post.multimedia,
-                categories: details.post.category,
+                profile,
+                profileImg,
+                description,
+                postImg,
+                categories,
                 comments: details.comment
             })
         }
@@ -61,7 +82,7 @@ export default function PostDetail(props){
                     {/* Aqui va a mapear las categories que contenga el post (esto es temporal)*/}
                     <div className="categoriescont">
                          <p className="categorysimbol">#</p>
-                          { postDetail.categories.length!==0?postDetail.categories.map(                    
+                          { postDetail.categories?postDetail.categories.map(                    
                         (categoria)=> <p className="category">{categoria}</p>
                         ):( <div><p >Sin categorias</p>
                           </div> )
@@ -87,16 +108,16 @@ export default function PostDetail(props){
                         
                         {/* Aqui va a mapear los comentarios (esto es temporal) */}
                         
-                        { postDetail.comments.length!==0?postDetail.comments.map(                    
+                        { postDetail.comments?postDetail.comments.map(                    
                         (comment)=> { return(
-                                <div className="textComent">
+                                <div className="comentcont">
                                     <div className="row">
-                                        <img className="col-2 userimg" alt="imagen comment perfil" src={comment.user.image_profil}></img>
-                                        <p className="col">{comment.user.user_Name}</p>
+                                        <img className="col-2 comentimg" src={comment.user.image_profil}></img>
+                                        <h5 className="col username">{comment.user.user_Name}</h5>
                                     </div> 
-                            
-                                    <p className="">{comment.comment.text}</p>
-                            
+                                    <div className="textcomment">
+                                        <p className="">{comment.comment.text}</p>
+                                    </div>
                                 </div> 
                                 )                    
                         }
