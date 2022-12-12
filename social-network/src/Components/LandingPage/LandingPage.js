@@ -1,5 +1,5 @@
 import React from "react";
-import { home, landingPage } from "../../shared/assets/icons/all-icons";
+import { landingPage } from "../../shared/assets/icons/all-icons";
 import './LandingPage.css'
 
 /**
@@ -31,14 +31,11 @@ export default function LandingPage() {
                     <p className="fontLandingN">Eres lo que <br></br>publicas.</p>
                 </div>
                 <div>
-                        <img id="landingPage" src={landingPage} />
+                        <img  id="landingPage" alt="imagen landingpage" src={landingPage} />
                 </div>
 
             </div>
-
-
-
-
+ 
         </main>
     )
 

@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { getUserDetailAsync } from "../../redux/reducer/postsReducer";
 import * as allIcons from "../../shared/assets/icons/all-icons";
-import Header from "../Header/Header";
 import Card from "../../shared/components/Cards/Card";
 import ButtonActions from "../../shared/components/ButtonActions/ButtonActions";
 import "./Profile.css";
@@ -37,7 +36,7 @@ export default function Profile(props) {
 				<div className="profile-container-user">
 					<img
 						src={user ? user[0].image_profil : props.profileImage}
-						alt="user-image"
+						alt="perfil"
 						className="user-image"
 					/>
 
@@ -53,7 +52,7 @@ export default function Profile(props) {
 						</span>
 					</div>
 					<div className="profile-container-ff" >
-						<img src={allIcons.cash} alt="cash-image" />
+						<img src={allIcons.cash} alt="cashicon" />
 						<span>
 							Your balance: <p>$ {props.cashValue}</p>
 						</span>

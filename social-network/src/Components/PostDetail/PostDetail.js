@@ -25,7 +25,7 @@ export default function PostDetail(props){
     //dispatch para obtener el detalle
     useEffect(()=>{
         dispatch(getPostDetailAsync(id))
-    },[])
+    },[dispatch,id])
 
     //traigo el detail del store
     const details = useSelector(state => state.posts.detail)
@@ -56,7 +56,7 @@ export default function PostDetail(props){
                 
                 {/* primera columna con foto y cateogries */}
                 <div className="col-8">
-                    <img className="postImg" src={postDetail.postImg}/>
+                    <img className="postImg" alt="imagen-detail" src={postDetail.postImg}/>
 
                     {/* Aqui va a mapear las categories que contenga el post (esto es temporal)*/}
                     <div className="categoriescont">
@@ -75,7 +75,7 @@ export default function PostDetail(props){
                 {/* segunda columna con user, texto de post y comentarios */}
                 <div className="col userandcomments">
                     <div className="row">
-                        <img className="col-2 userimg" src={postDetail.profileImg}></img>
+                        <img className="col-2 userimg" alt="imagen perfil" src={postDetail.profileImg}></img>
                         <h3 className="col username">{postDetail.profile}</h3>
                     </div>
                     <div className="textpost">
@@ -91,7 +91,7 @@ export default function PostDetail(props){
                         (comment)=> { return(
                                 <div className="textComent">
                                     <div className="row">
-                                        <img className="col-2 userimg" src={comment.user.image_profil}></img>
+                                        <img className="col-2 userimg" alt="imagen comment perfil" src={comment.user.image_profil}></img>
                                         <p className="col">{comment.user.user_Name}</p>
                                     </div> 
                             
@@ -110,7 +110,7 @@ export default function PostDetail(props){
 
             {/* imagen con la flecha para ir atras */}
             <Link to={`/reply/home`}>
-                <img className='arrowback' src={arrowUp}/>
+                <img className='arrowback' alt="imagen flecha" src={arrowUp}/>
             </Link>
         
         </div>
