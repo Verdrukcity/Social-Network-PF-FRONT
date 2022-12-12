@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   getAllPostsAsync,
@@ -18,7 +18,6 @@ import './Home.css'
    • El header con los botones de navegación
    • Las publicaciones (la ruta es /reply)
    • Botón para crear publicación y subir al inicio
-
   Se realizó la importacion del componente ButtonActtions, 
   este tiene un boton de forma global funcional,
   el mismo ejecuta una accion que le pasas por props,
@@ -50,24 +49,8 @@ export default function Home() {
     dispatch(getUserDetailAsync())
   }, [dispatch])
 
-  /**
-   *
-   * estado local para recibir la imagen
-   */
-  const [ImageSelectedPrevious, setImageSelectedPrevious] = React.useState(null)
+  const ref = useRef(null);
 
-  const changeImage = (e) => {
-    if (e.target.files[0] !== undefined) {
-      const reader = new FileReader()
-
-      reader.readAsDataURL(e.target.files[0])
-
-      reader.onload = (e) => {
-        e.preventDefault()
-        setImageSelectedPrevious(e.target.result) // le damos el binario de la imagen para mostrarla en pantalla
-      }
-    }
-  }
 
   // FILTER BY CATEGORIES
 
@@ -126,13 +109,17 @@ export default function Home() {
     setOpen(true)
   }
 
+  
+
+
   const goToUp = (event) => {
     /*Esta función debería llevarte al inicio de las publicaciones*/
+    ref.current?.scrollIntoView({behavior: 'smooth'});
   }
 
   return (
     
-    <div id='home'>
+    <div ref={ref} id='home' className='mt-2'>
     <Header
         filterByCategory={filterByCategory}
         innerContent={categoriesArr}

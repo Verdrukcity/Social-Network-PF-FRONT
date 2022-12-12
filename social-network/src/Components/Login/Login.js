@@ -1,4 +1,4 @@
-import React, {Fragment, useState} from 'react';
+import React, { useState} from 'react';
 import './Login.css'
 import { useHistory, Link } from 'react-router-dom'
 import { imgLogin } from '../../shared/assets/icons/all-icons';
@@ -42,7 +42,7 @@ export default function Login() {
   return (
     <div className='container-{breakpoint} bg'>
       <div className=' bg d-flex justify-content-evenly align-items-center '>
-        <img className='imgLogin' src={imgLogin}></img>
+        <img className='imgLogin' alt='imagen login' src={imgLogin}></img>
        <form className="formularioLogin" onSubmit={enviarDatos}>
                 
                 <h1 className='replyTitle reply'>REPLY</h1>

@@ -32,6 +32,15 @@
 
   }
  
+  .button-create{
+
+    background-color: #d77937;
+    color: #ffffff;
+
+  }
+  .MuiButton-text{
+    color: #ffffff;
+  }
  
   
   .text-information-img{
@@ -70,3 +79,17 @@
     border-radius: 50%;
     
   }
+  #buttonAction{
+    color: #ffffff;
+    background-color: #d77937;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+  }
+  #buttonAction:active{
+    background-color: #ba692f;
+  } 
+  #buttonAction:hover{
+    background-color: #ba692f;
+  } 
+  

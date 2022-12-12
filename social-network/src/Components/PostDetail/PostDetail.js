@@ -25,7 +25,7 @@ export default function PostDetail(props){
     //dispatch para obtener el detalle
     useEffect(()=>{
         dispatch(getPostDetailAsync(id))
-    },[])
+    },[dispatch,id])
 
     //traigo el detail del store
     const details = useSelector(state => state.posts.detail)
@@ -36,13 +36,34 @@ export default function PostDetail(props){
         
         //este if es cochino, pero si no lo hacia me rompía, perdonchi
         if (Object.keys(details).length){
-            
+            console.log(details)
+            var profile
+            var profileImg
+            var postImg
+            var description
+            var categories
+    
+            if (details.userId.constructor == Array){                
+                profile = details.userId[0].user_Name
+                profileImg = details.userId[0].image_profil
+                description = details.post.text
+                postImg = details.post.multimedia
+                categories = details.post.category
+
+            }
+            else {
+                profile = details.userId.user_Name
+                profileImg = details.userId.image_profil
+                postImg = details.multimedia
+                description = details.text
+                categories = details.category
+            }
             setPostDetail({
-                profile: details.userId[0].user_Name,
-                profileImg: details.userId[0].image_profil,
-                description: details.post.text,
-                postImg: details.post.multimedia,
-                categories: details.post.category,
+                profile,
+                profileImg,
+                description,
+                postImg,
+                categories,
                 comments: details.comment
             })
         }
@@ -56,12 +77,12 @@ export default function PostDetail(props){
                 
                 {/* primera columna con foto y cateogries */}
                 <div className="col-8">
-                    <img className="postImg" src={postDetail.postImg}/>
+                    <img className="postImg" alt="imagen-detail" src={postDetail.postImg}/>
 
                     {/* Aqui va a mapear las categories que contenga el post (esto es temporal)*/}
                     <div className="categoriescont">
                          <p className="categorysimbol">#</p>
-                          { postDetail.categories.length!==0?postDetail.categories.map(                    
+                          { postDetail.categories?postDetail.categories.map(                    
                         (categoria)=> <p className="category">{categoria}</p>
                         ):( <div><p >Sin categorias</p>
                           </div> )
@@ -75,7 +96,7 @@ export default function PostDetail(props){
                 {/* segunda columna con user, texto de post y comentarios */}
                 <div className="col userandcomments">
                     <div className="row">
-                        <img className="col-2 userimg" src={postDetail.profileImg}></img>
+                        <img className="col-2 userimg" alt="imagen perfil" src={postDetail.profileImg}></img>
                         <h3 className="col username">{postDetail.profile}</h3>
                     </div>
                     <div className="textpost">
@@ -87,16 +108,16 @@ export default function PostDetail(props){
                         
                         {/* Aqui va a mapear los comentarios (esto es temporal) */}
                         
-                        { postDetail.comments.length!==0?postDetail.comments.map(                    
+                        { postDetail.comments?postDetail.comments.map(                    
                         (comment)=> { return(
-                                <div className="textComent">
+                                <div className="comentcont">
                                     <div className="row">
-                                        <img className="col-2 userimg" src={comment.user.image_profil}></img>
-                                        <p className="col">{comment.user.user_Name}</p>
+                                        <img className="col-2 comentimg" src={comment.user.image_profil}></img>
+                                        <h5 className="col username">{comment.user.user_Name}</h5>
                                     </div> 
-                            
-                                    <p className="">{comment.comment.text}</p>
-                            
+                                    <div className="textcomment">
+                                        <p className="">{comment.comment.text}</p>
+                                    </div>
                                 </div> 
                                 )                    
                         }
@@ -110,7 +131,7 @@ export default function PostDetail(props){
 
             {/* imagen con la flecha para ir atras */}
             <Link to={`/reply/home`}>
-                <img className='arrowback' src={arrowUp}/>
+                <img className='arrowback' alt="imagen flecha" src={arrowUp}/>
             </Link>
         
         </div>
