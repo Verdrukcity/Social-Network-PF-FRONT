@@ -50,7 +50,13 @@ function Card(props) {
                 <div>
                     <img className='imgCard' src={props.img || obj.img}
                         alt='postImg'></img>
-                    <p className='containerCategories'># {props.categories}</p>
+                    <p className= 'd-flex containerCategories'>
+                        # {props.categories?.map((e)=>{
+                            return(
+                                <p className='me-2'>{e} </p>
+                            )
+                        })}
+                        </p>
                 </div>
                 <div>
                     <div className='userInfo'>
