@@ -18,7 +18,6 @@ import './Home.css'
    • El header con los botones de navegación
    • Las publicaciones (la ruta es /reply)
    • Botón para crear publicación y subir al inicio
-
   Se realizó la importacion del componente ButtonActtions, 
   este tiene un boton de forma global funcional,
   el mismo ejecuta una accion que le pasas por props,

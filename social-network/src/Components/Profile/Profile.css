@@ -1,3 +1,23 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@800;900&display=swap");
+
+.profile-container {
+	background-color: #d9d9d9;
+	margin: 30px;
+	border-radius: 20px;
+	padding: 20px;
+	font-family: "Inter", sans-serif;
+	font-style: italic;
+	color: white;
+}
+.profile-container h1 {
+	color: black;
+	margin: 50px 0px 0px 0px;
+}
+.goToHome {
+	display: flex;
+	transform: rotate(-90deg);
+	width: max-content;
+}
 .user-image {
 	width: 150px;
 	border-radius: 50%;
@@ -5,5 +25,54 @@
 
 .profile-container-dates {
 	display: grid;
-    grid-template-columns: repeat(2, 1fr);
+	grid-template-columns: repeat(2, 1fr);
+}
+.profile-container-dates {
+	margin: 20px 0px 0px 0px;
+	align-items: center;
+}
+
+.profile-container-ff {
+	width: fit-content;
+}
+
+.profile-container-ff span {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	background-color: #ff8d00;
+	padding: 5px 0px 5px 15px;
+	border-radius: 25px;
+	align-items: center;
+	font-weight: bold;
+	font-style: oblique;
+	margin: 10px;
+}
+.profile-container-ff p {
+	text-align: right;
+	margin: 0px 15px 0px 0px;
+}
+.profile-container-ff img {
+	padding: 3px;
+}
+
+.profile-container-user {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	justify-items: center;
+	align-items: center;
+}
+
+.profile-container-user h3 {
+	text-align: start;
+	width: -webkit-fill-available;
+	color: black;
+}
+.profile-container-balance {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+}
+.profile-container-posts {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }

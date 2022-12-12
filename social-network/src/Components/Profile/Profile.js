@@ -1,40 +1,83 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { getUserDetailAsync } from "../../redux/reducer/postsReducer";
 import * as allIcons from "../../shared/assets/icons/all-icons";
+import Header from "../Header/Header";
 import Card from "../../shared/components/Cards/Card";
-import './Profile.css'
+import ButtonActions from "../../shared/components/ButtonActions/ButtonActions";
+import "./Profile.css";
 
 export default function Profile(props) {
+	const user = useSelector((state) => state.posts.userDetail[0]);
+
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(getUserDetailAsync());
+	}, [dispatch]);
+
+	let history = useHistory();
+
+	const goTo = () => {
+		history.push("/reply/home");
+	};
+
 	return (
-		<div className="profile-container" >
-			<div className="profile-container-dates" >
-				<div className="profile-container-user" >
-					<img src={props.profileImage} alt="user-image" className="user-image" />
-					<p >{props.username}</p>
+		<div className="profile-container">
+			<div className="goToHome">
+				<ButtonActions
+					type="submit"
+					action={goTo}
+					id="all-icons"
+					content={<img src={allIcons.arrowUp} alt="icon-home" />}
+				/>
+			</div>
+			<div className="profile-container-dates">
+				<div className="profile-container-user">
+					<img
+						src={user ? user[0].image_profil : props.profileImage}
+						alt="user-image"
+						className="user-image"
+					/>
+
+					<h3>{user && user[0].user_Name}</h3>
 				</div>
-				<div className="profile-container-balance" >
-					<div>
-						<span>{`Follows: ${props.follows}`}</span>
-						<span>{`Followers: ${props.followers}`}</span>
+				<div className="profile-container-balance">
+					<div className="profile-container-ff">
+						<span>
+							Follows: <p>{props.follows}</p>
+						</span>
+						<span>
+							Followers: <p>{props.followers}</p>
+						</span>
 					</div>
-					<div>
+					<div className="profile-container-ff" >
 						<img src={allIcons.cash} alt="cash-image" />
-						<p>{props.cashValue}</p>
+						<span>
+							Your balance: <p>$ {props.cashValue}</p>
+						</span>
 					</div>
 				</div>
 			</div>
-			<div className="profile-container-posts" >
-				{props.userPosts.map((data) => {
-					return (
-						<Card
-							key={data._id}
-							id={data._id}
-							text={data.text}
-							img={data.multimedia}
-							username={"UserName"}
-							userImg={data.multimedia}
-						/>
-					);
-				})}
+			<h1>Your posts</h1>
+			<div className="profile-container-posts">
+				{user &&
+					user[0].contents.map((data) => {
+						return (
+							<Card
+								key={data._id}
+								id={data._id}
+								userId={data.userId}
+								text={data.text}
+								img={data.multimedia}
+								username={user[0].user_Name}
+								userImg={user[0].image_profil}
+								categories={data.category}
+								comments={data.commentId}
+							/>
+						);
+					})}
 			</div>
 		</div>
 	);
