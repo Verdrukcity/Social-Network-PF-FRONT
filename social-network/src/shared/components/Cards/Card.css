@@ -1,3 +1,4 @@
+@import url(../../assets/globals.css);
 #cardContainer{
     display: flex;
     flex-direction: column;
@@ -9,9 +10,9 @@
     
 }
 .userImgCard{
-    width: 40px;
-    height: 40px;
-    border-radius: 100%;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
 }
 .imgCard{
     width: 500px;
@@ -22,8 +23,13 @@
 .containerCategories{
     background-color: #FF8D00  ;
     color: #EAEAEA;
-    margin: 20px;
+   
     border-radius: 1rem;
+}
+.card-container-categories{
+
+    background-color: var(--main-red-secondary);
+    border-radius: 30px;
 }
 .cardContainerContent{
     display: flex;
@@ -45,14 +51,12 @@
 }
 .userInfo{
     display: flex;
-    justify-content: space-evenly;
-    justify-items: center;
-    margin: 30px;
-    margin-top: 40px;
+    justify-content: flex-start;
+    align-items: center;
     color: #EAEAEA;
     font-size: 20px;
     font-style: italic;
-    
+
 }
 .comments{
     display: flex;

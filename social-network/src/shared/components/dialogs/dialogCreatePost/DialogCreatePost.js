@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
-import useMediaQuery from '@mui/material/useMediaQuery';
 
 import { useTheme } from '@mui/material/styles';
 
 
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import './DialogCreatePost.css'
 
 import { imgPhotoLoad } from '../../../assets/icons/all-icons';
@@ -19,10 +18,10 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
-import { Button, DialogActions, imageListItemClasses, TextareaAutosize } from '@mui/material';
+import {  DialogActions, TextareaAutosize } from '@mui/material';
 import { CreatePostsAsync, getDetailUser } from '../../../../redux/reducer/postsReducer';
-import axios from 'axios';
-import { getAllCategoriesAsync } from '../../../../redux/reducer/categoriesReducer';
+import ButtonActions from '../../ButtonActions/ButtonActions';
+import Loader from '../../loader/loader';
 
 
 
@@ -40,7 +39,7 @@ function getStyles(name, categoryName, theme) {
 
 export default function DialogCreatePost({open, setOpen, innerContent,userDetail}) {
 
-
+  
     /**
   * hook para el dispatch
   */
@@ -56,11 +55,12 @@ export default function DialogCreatePost({open, setOpen, innerContent,userDetail
  const [textArea,SetTextArea]=React.useState('')
 
 
+ const [loader,setLoader] = useState(false)
 
 useEffect(() => {
-  
-  
-  dispatch(getDetailUser())
+
+    dispatch(getDetailUser())
+    
 
 }, [dispatch])
 
@@ -116,8 +116,12 @@ const changeImage = (e) => {
       formData.append('category', categoryName[i]);
     }
     formData.append('multimedia', file)
+    setLoader(true)
     
-    dispatch(CreatePostsAsync(formData))
+    await dispatch(CreatePostsAsync(formData))
+    setLoader(false)
+    
+    window.location.reload();
    
   }
 
@@ -141,8 +145,11 @@ const changeImage = (e) => {
         open={open}
         onClose={handleClose}
         aria-labelledby="responsive-dialog-title"
+        
       >
         <div className='dialog-bg overflow-hidden'>
+        {loader && <Loader/>}
+        
         <DialogContent>
              <h2 className='text-center color-whie-reply'>Crea tu publicacion!</h2>
         <div className='d-flex w-100 h-100 '>
@@ -157,8 +164,8 @@ const changeImage = (e) => {
 
               <div >
               
-              {ImageSelectedPrevious&&<img src={ImageSelectedPrevious} className='text-information-img img-fluid' />}
-              {!ImageSelectedPrevious&&<img src={imgPhotoLoad} className='text-information-img img-fluid' />}
+              {ImageSelectedPrevious&&<img src={ImageSelectedPrevious} className='text-information-img img-fluid' alt='imagen para seleccionar' />}
+              {!ImageSelectedPrevious&&<img src={imgPhotoLoad} className='text-information-img img-fluid' alt='imagen seleccionada' />}
               </div>
             </div>
 
@@ -166,7 +173,7 @@ const changeImage = (e) => {
           {userDetail?.map((name) => (
             
             <div key={name.name} className='w-100 d-flex justify-content-start align-items-center '>
-              <img src={name.image_profil} className='profile-img'/>
+              <img src={name.image_profil} className='profile-img' alt='imagen de perfil'/>
                 <h3 className=' ms-2 color-whie-reply'>{name.user_Name}</h3>
             </div>
             ))}
@@ -218,7 +225,10 @@ const changeImage = (e) => {
           </div>
 
           <DialogActions className='d-flex justify-content-center'>
-            <Button onClick={handleSubmit}>Crear</Button>
+            <div className=''>
+
+              <ButtonActions action={handleSubmit} id={'buttonAction'} content={'Crear'} />
+            </div>
             
         </DialogActions>
 
