@@ -12,9 +12,7 @@ export default function Profile(props) {
 	const user = useSelector((state) => state.posts.userDetail[0]);
 
 	const dispatch = useDispatch();
-	/**
-	 * Dispatch y useEffect para traer el detalle del usuario del back
-	 */
+
 	useEffect(() => {
 		dispatch(getUserDetailAsync());
 	}, [dispatch]);
