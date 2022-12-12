@@ -33,8 +33,6 @@ export default function PostDetail(props){
     
     //cuando este la info en el reducer, la traigo al componente
     useEffect(()=>{
-        
-        //este if es cochino, pero si no lo hacia me rompía, perdonchi
         if (Object.keys(details).length){
             console.log(details)
             setPostDetail({
