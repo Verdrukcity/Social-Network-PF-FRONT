@@ -130,7 +130,7 @@ export default function Home() {
         innerContent={categoriesArr} 
         userDetail={userDetailArr}
       />
-      <div className='row justify-content-center mt-10'>
+      <div className='container d-flex flex-column justify-content-center mt-10'>
         {posts &&
           posts.map((data) => {
             return (

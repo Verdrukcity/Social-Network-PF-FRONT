@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom'
 import "./Card.css"
 import { createComment } from '../../../redux/reducer/postsReducer'
 import { useDispatch } from 'react-redux'
+import { likeIcon, payIcon, shareIcon } from '../../assets/icons/all-icons'
 // the props we are going to use are:
 // img, username, imgUser, text
 //hacer un efecto para ir a details, cuando paso por sobre la foto que se haga una spmbra o se agrande un poco...
@@ -42,9 +43,10 @@ function Card(props) {
         history.push('/reply/home')
 
     };
+    
 
     return (
-        <div id='cardContainer' className="m-5" >
+        <div id='cardContainer' className="container d-flex justify-content-center flex-column mb-5 p-0  w-auto h-auto" >
 
             <div className='cardContainerContent'>
                 <div>
@@ -75,15 +77,30 @@ function Card(props) {
                     </div>
                 </div>
             </div>
-
-            <div className='comments'>
+                        
+            <div className='comments p-2 d-flex align-items-center justify-content-evenly m-0 p-0'>
+                <div className='d-flex  flex-column'>
+                    <img src={likeIcon} className='icon-size' alt='icon de likes'/>
+                    <p className='fw-bold'>111</p>
+                </div>
                 <input className='inp' value={input.text} name='text' placeholder='Deja tu comentario  aqui' onChange={handleInputChange}></input>
                 <button className='commentBtn' onClick={handleSubmit}>Comentar</button>
+                <div className='d-flex justify-content-center align-items-center '>
+                    <img src={payIcon} className='icon-size m-2' alt='icon de pay'/>
+                    <img src={shareIcon} className='icon-size m-2' alt='icon de share'/>
+                </div>
             </div>
-            <a href={`/reply/postdetail/${props.id}`}>Ver todos los comentarios</a>
+            
+
+
+
+
+
+
 
         </div>
     )
 }
-
+// recordar que este link es para el detalle 
+// <a href={`/reply/postdetail/${props.id}`}>Ver todos los comentarios</a>
 export default Card
