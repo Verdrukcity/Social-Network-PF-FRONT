@@ -71,7 +71,7 @@ export default function PostDetail(props){
 
     return(
         
-        <div className="container-fluid"> 
+        <div className="container-fluid bg-podt-detail"> 
 
             <div className="row secondCont">
                 

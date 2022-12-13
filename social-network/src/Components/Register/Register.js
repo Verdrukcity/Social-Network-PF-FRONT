@@ -108,42 +108,41 @@ const Register = () => {
 
     }
     return (
-        <Fragment>
+        <div className="container-fluid container-flex-center bg">
            
             
-            <form className="formulario" onSubmit={enviarDatos}>
+            <form className="formulario container-flex-center " onSubmit={enviarDatos}>
                 
-                <h1 className='titulo'>Reply</h1>
-            
-                <div className="campoFormulario">
+                <h1 className='replyTitle'>Reply</h1>
+            <div className='container-flex-center container-imputs-register'>
+                <div className="container-form-register">
                     <input type="text" placeholder="UserName" value={datos.userName} className="formImput" onChange={handleInputChange} name="userName"></input>
                 </div>
-                <div className="campoFormulario">
+                <div className="container-form-register">
                     <input type="text" placeholder="Email" value={datos.email} className={estiloEmail} onChange={handleInputChange} name="email"></input>
                 </div>
-                   <div className="campoFormulario">
+                <div className="container-form-register">
                     <input type="text" placeholder="Name" value={datos.name} className="formImput" onChange={handleInputChange} name="name"></input>
                 </div>
-                <div className="campoFormulario">
+                <div className="container-form-register">
                     <input type="text" placeholder="LastName" value={datos.lastName} className="formImput" onChange={handleInputChange} name="lastName"></input>
                 </div>
-                <div className="campoFormulario">
+                <div className="container-form-register">
                     <input type="password" placeholder="Password" value={datos.password} className="formImput" onChange={handleInputChange} name="password"></input>
                 </div>
-                <div className="campoFormulario">
+                <div className="container-form-register">
                     <input type="password" placeholder="Confirm Password" value={datos.confirmPassword} className={estiloInput} onChange={confirmacionPassword} name="confirmPassword"></input>
                 </div>
-               <div className='selectFormulario'>
-                    
-
-               </div>
-               
+               <div className='selectFormulario'></div>
+            </div>
                 <div className='selectFormulario'>
-                    <SelectDatepicker
+                    <div className=''>
+                       <SelectDatepicker className='select-date-register form-select'
                     selectedDate={datos.birthDate}
                     onDateChange={(value)=>onDateChange(value)}
                     />
-                     <Select className='country'
+                    <label for="pais" className='labelPais'>Pais</label>
+                     <Select name='pais' className='country'
                         options={options}
                         value={datos.country}
                         onChange={ 
@@ -151,17 +150,19 @@ const Register = () => {
                             ...datos,
                             ["country"] : value
                      })}
-                />
+                /> 
+                    </div>
+                    
 
                 </div>
                 <div className='botonPadding'>
-                    <button type="submit" className="botonRegister" disabled={botonSubmit}>Register</button>
+                    <button type="submit" className="botonLogin" disabled={botonSubmit}>Register</button>
                 </div>
                   
                 
             </form>
            
-        </Fragment>
+        </div>
     );
 }
  
