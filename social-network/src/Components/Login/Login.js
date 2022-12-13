@@ -64,13 +64,15 @@ export default function Login() {
        <form className="formularioLogin" onSubmit={enviarDatos}>
                 
                 <h1 className='replyTitle reply'>REPLY</h1>
-            
-                <div className="campoFormularioLogin">
+                <div className='container-imputs-login'>
+                  <div className="campoFormularioLogin">
                     <input type="text" placeholder="UserName" className="formImput" onChange={handleInputChange} name="userName"></input>
                 </div>
                 <div className="campoFormularioLogin">
                     <input type="password" placeholder="Password" className="formImput" onChange={handleInputChange} name="password"></input>
                 </div>
+                </div>
+                
                  
                          
                 <div className='botonPadding'>

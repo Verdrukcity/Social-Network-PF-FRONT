@@ -77,14 +77,14 @@ const Register = () => {
 
       if (/^[0-9]$/.test(entrada)) {
 
-         MySwal.fire({
-                  position: 'top-end',
-                  icon: 'error',
-                  title: ('no se permiten numeros en el  ' + event.target.name),
-                  showConfirmButton: false,
-                  timer: 1500
-                });
-       
+        MySwal.fire({
+          position: 'top-end',
+          icon: 'error',
+          title: ('no se permiten numeros en el  ' + event.target.name),
+          showConfirmButton: false,
+          timer: 1500
+        });
+
         return
       }
     }
@@ -106,23 +106,22 @@ const Register = () => {
       datos.country === '' ||
       datos.password === '' ||
       datos.confirmPassword === ''
-    )
-     { 
+    ) {
       MySwal.fire({
-                  icon: 'error',
-                  title: 'faltan campos por llenar',
-                  showConfirmButton: false,
-                  timer: 1500
-                });
+        icon: 'error',
+        title: 'faltan campos por llenar',
+        showConfirmButton: false,
+        timer: 1500
+      });
     }
     else {
       MySwal.fire({
-                  position: 'top-end',
-                  icon: 'success',
-                  title: 'Usuario creado Correctamente',
-                  showConfirmButton: false,
-                  timer: 1500
-                });
+        position: 'top-end',
+        icon: 'success',
+        title: 'Usuario creado Correctamente',
+        showConfirmButton: false,
+        timer: 1500,
+      });
       history.push('/reply/login')
     }
   }
@@ -146,97 +145,98 @@ const Register = () => {
   }
   return (
     <Fragment>
-        <div className='container-fluid container-flex-center bg'>
-            <form className='formulario container-flex-center' onSubmit={enviarDatos}>
-        <h1 className='replyTitle'>Reply</h1>
-    <div className='container-flex-center container-imputs-register'>
-        <div className='container-form-register'>
-          <input
-            type='text'
-            placeholder='UserName'
-            value={datos.userName}
-            className='formImput'
-            onChange={handleInputChange}
-            name='userName'></input>
-        </div>
-        <div className='container-form-register'>
-          <input
-            type='text'
-            placeholder='Email'
-            value={datos.email}
-            className={estiloEmail}
-            onChange={handleInputChange}
-            name='email'></input>
-        </div>
-        <div className='container-form-register'>
-          <input
-            type='text'
-            placeholder='Name'
-            value={datos.name}
-            className='formImput'
-            onChange={handleInputChange}
-            name='name'></input>
-        </div>
-        <div className='container-form-register'>
-          <input
-            type='text'
-            placeholder='LastName'
-            value={datos.lastName}
-            className='formImput'
-            onChange={handleInputChange}
-            name='lastName'></input>
-        </div>
-        <div className='container-form-register'>
-          <input
-            type='password'
-            placeholder='Password'
-            value={datos.password}
-            className='formImput'
-            onChange={handleInputChange}
-            name='password'></input>
-        </div>
-        <div className='container-form-register'>
-          <input
-            type='password'
-            placeholder='Confirm Password'
-            value={datos.confirmPassword}
-            className={estiloInput}
-            onChange={confirmacionPassword}
-            name='confirmPassword'></input>
-        </div>
-        <div className='selectFormulario'></div>
+      <div className='container-fluid container-flex-center bg'>
+        <form className='formulario container-flex-center' onSubmit={enviarDatos}>
+          <h1 className='replyTitle adjust-repli-size'>Reply</h1>
+          <div className='container-flex-center container-imputs-register'>
+            <div className='container-form-register'>
+              <input
+                type='text'
+                placeholder='UserName'
+                value={datos.userName}
+                className='formImput'
+                onChange={handleInputChange}
+                name='userName'></input>
+            </div>
+            <div className='container-form-register'>
+              <input
+                type='text'
+                placeholder='Email'
+                value={datos.email}
+                className={estiloEmail}
+                onChange={handleInputChange}
+                name='email'></input>
+            </div>
+            <div className='container-form-register'>
+              <input
+                type='text'
+                placeholder='Name'
+                value={datos.name}
+                className='formImput'
+                onChange={handleInputChange}
+                name='name'></input>
+            </div>
+            <div className='container-form-register'>
+              <input
+                type='text'
+                placeholder='LastName'
+                value={datos.lastName}
+                className='formImput'
+                onChange={handleInputChange}
+                name='lastName'></input>
+            </div>
+            <div className='container-form-register'>
+              <input
+                type='password'
+                placeholder='Password'
+                value={datos.password}
+                className='formImput'
+                onChange={handleInputChange}
+                name='password'></input>
+            </div>
+            <div className='container-form-register'>
+              <input
+                type='password'
+                placeholder='Confirm Password'
+                value={datos.confirmPassword}
+                className={estiloInput}
+                onChange={confirmacionPassword}
+                name='confirmPassword'></input>
+            </div>
+            <div className='selectFormulario'></div>
 
-    </div>
-        
-        <div className='selectFormulario'>
-          <SelectDatepicker className='select-date-register form-select'
-            selectedDate={datos.birthDate}
-            onDateChange={(value) => onDateChange(value)}
-          />
-          <label for="pais" className='labelPais'>Pais</label>
-          <Select
-            className='country'
-            options={options}
-            value={datos.country}
-            onChange={(value) =>
-              setDatos({
-                ...datos,
-                country: value,
-              })
-            }
-          />
-        </div>
-        <div className='botonPadding'>
-          <button
-            type='submit'
-            className='botonLogin'
-            disabled={botonSubmit}>
-            Register
-          </button>
-        </div>
-      </form> 
-        </div>
-     
+          </div>
+
+          <div className='selectFormulario'>
+            <SelectDatepicker className='select-date-register form-select'
+              selectedDate={datos.birthDate}
+              onDateChange={(value) => onDateChange(value)}
+            />
+            <label  className='labelPais'>Pais</label>
+            <Select
+              className='country'
+              options={options}
+              value={datos.country}
+              onChange={(value) =>
+                setDatos({
+                  ...datos,
+                  country: value,
+                })
+              }
+            />
+          </div>
+          <div className='botonPadding'>
+            <button
+              type='submit'
+              className='botonLogin'
+              disabled={botonSubmit}>
+              Register
+            </button>
+          </div>
+          
+        </form>
+      </div>
+
     </Fragment>
   )
 }
