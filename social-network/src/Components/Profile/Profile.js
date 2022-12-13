@@ -8,7 +8,11 @@ import ButtonActions from "../../shared/components/ButtonActions/ButtonActions";
 import "./Profile.css";
 
 export default function Profile(props) {
-	const user = useSelector((state) => state.posts.userDetail[0]);
+	const user = useSelector((state) => state.posts.userDetail);
+
+	console.log(user)
+
+	// const caca = useSelector((state) => state.posts.userDetail)
 
 	const dispatch = useDispatch();
 
@@ -24,6 +28,7 @@ export default function Profile(props) {
 
 	return (
 		<div className="profile-container">
+			{console.log(user)}
 			<div className="goToHome">
 				<ButtonActions
 					type="submit"
@@ -35,12 +40,12 @@ export default function Profile(props) {
 			<div className="profile-container-dates">
 				<div className="profile-container-user">
 					<img
-						src={user ? user[0].image_profil : props.profileImage}
+						src={user ? user.image_profil : props.profileImage}
 						alt="perfil"
 						className="user-image"
 					/>
 
-					<h3>{user && user[0].user_Name}</h3>
+					<h3>{user && user.user_Name}</h3>
 				</div>
 				<div className="profile-container-balance">
 					<div className="profile-container-ff">
@@ -61,8 +66,8 @@ export default function Profile(props) {
 			</div>
 			<h1>Your posts</h1>
 			<div className="profile-container-posts">
-				{user &&
-					user[0].contents.map((data) => {
+				{user.contents &&
+					user.contents.map((data) => {
 						return (
 							<Card
 								key={data._id}
@@ -70,8 +75,8 @@ export default function Profile(props) {
 								userId={data.userId}
 								text={data.text}
 								img={data.multimedia}
-								username={user[0].user_Name}
-								userImg={user[0].image_profil}
+								username={user.user_Name}
+								userImg={user.image_profil}
 								categories={data.category}
 								comments={data.commentId}
 							/>

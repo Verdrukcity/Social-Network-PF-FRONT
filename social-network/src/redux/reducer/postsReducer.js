@@ -8,7 +8,7 @@ const initialState = {
   created: {},
   comments: [],
   detail: {},
-  userDetail:[]
+  userDetail:{}
 }
 
 // REDUCERS
@@ -33,7 +33,8 @@ export const postSlice = createSlice({
       state.detail = action.payload
     },
     getDetailUser: (state, action) => {
-      state.userDetail = [action.payload]
+      state.userDetail = action.payload
+
     },
     getByCategory: (state, action) => {
       const notNullPosts = state.posts.length ? state.posts[0] : state.posts
