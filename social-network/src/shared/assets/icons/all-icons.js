@@ -17,3 +17,7 @@ export { default as landingPage } from "./landing-page.png"
 export { default as imgPhotoLoad } from "./imgPhoto.jpg"
 export { default as imgLogin } from "./imgLogin.png"
 export { default as cash } from "./cash.png"
+
+export {default as likeIcon} from "./likeIcon.svg"
+export {default as payIcon} from "./payIcon.svg"
+export {default as shareIcon} from "./shareIcon.svg"
