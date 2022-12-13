@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { getUserDetailAsync } from "../../redux/reducer/postsReducer";
+import { getUserDetailAsync } from "../../redux/actions/postActions";
 import * as allIcons from "../../shared/assets/icons/all-icons";
 import Card from "../../shared/components/Cards/Card";
 import ButtonActions from "../../shared/components/ButtonActions/ButtonActions";

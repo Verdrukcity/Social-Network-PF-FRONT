@@ -5,7 +5,7 @@ import { arrowUp } from "../../shared/assets/icons/all-icons";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from "react";
-import {getPostDetailAsync} from '../../redux/reducer/postsReducer'
+import {getPostDetailAsync} from '../../redux/actions/postActions'
 
 
 export default function PostDetail(props){

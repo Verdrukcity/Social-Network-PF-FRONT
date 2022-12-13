@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {
+/* import {
   getAllPostsAsync,
   getByCategory,
   getUserDetailAsync,
-} from '../../redux/reducer/postsReducer'
+} from '../../redux/reducer/postsReducer' */
+import { getByCategory } from '../../redux/reducer/postsReducer'
+import { getAllPostsAsync, getUserDetailAsync } from '../../redux/actions/postActions'
 import { arrowUp, plus } from '../../shared/assets/icons/all-icons'
 import ButtonActions from '../../shared/components/ButtonActions/ButtonActions'
 import Card from '../../shared/components/Cards/Card'
