@@ -8,7 +8,10 @@ import './LandingPage.css'
 
 export default function LandingPage() {
     return (
+
+
         <main className="container-fluid contenedor-landing-main " >
+
 
             <div className="container d-flex justify-content-center align-items-center containerHeader">
                 <div className="container">

@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom'
 import "./Card.css"
 import { createComment } from '../../../redux/reducer/postsReducer'
 import { useDispatch } from 'react-redux'
-import { likeIcon, payIcon, shareIcon } from '../../assets/icons/all-icons'
+import { likeIcon, payIcon, sendIcon, shareIcon } from '../../assets/icons/all-icons'
 // the props we are going to use are:
 // img, username, imgUser, text
 //hacer un efecto para ir a details, cuando paso por sobre la foto que se haga una spmbra o se agrande un poco...
@@ -48,55 +48,61 @@ function Card(props) {
     return (
         <div id='cardContainer' className="container d-flex justify-content-center flex-column mb-5 p-0  w-auto h-auto" >
 
-            <div className='cardContainerContent'>
-                <div>
-                    <img className='imgCard' src={props.img || obj.img}
-                        alt='postImg'></img>
-                    <div className= 'd-flex containerCategories p-0 m-0 align-items-center'>
+            <div className='d-flex '>
+                <div className=''>
+                    <div className='container p-4 pb-0 m-0'>
+                        <div className='d-flex col m-0'>
+                            <div className='row-8 d-block'>
+                                <img className='imgCard' src={props.img || obj.img} alt='postImg'></img>
+                            </div>
+
+                            <div className='row-2 ms-3'>
+                                <div className='userInfo'>
+                                    <img className='userImgCard img-fluid me-2' src={props.userImg || obj.imgUser} alt="userImg"></img>
+                                    <p className='fs-3 fw-bold '>{props.username || obj.username}</p>
+                                </div>
+
+                                <div className='containerContentInfo'>
+                                    <p className='p-2 m-0 h-100'>{props.text || obj.text}</p>
+                            </div>
+
+                        </div>
+                    
+                        </div>
+                    </div>
+                    
+                    <div className= 'd-flex color-white ps-4 pt-0 m-0 align-items-center'>
                         <p className='fs-3 m-2'>#</p>
                         <div className='d-flex align-items-center'>
 
-                        {props.categories?.map((e)=>{
-                            return(
+                            {props.categories?.map((e)=>{
+                                return(
                                 <p className='m-2 p-2 text-center card-container-categories'>{e} </p>
-                            )
-                        })}
+                                )
+                            })}
                         </div>
-                        </div>
-                </div>
-                <div>
-                    <div className='userInfo p-2 m-2'>
-                        <img className='userImgCard me-4' src={props.userImg || obj.imgUser} alt="userImg"></img>
-                        <p className='fs-4 fw-bold m-2'>{props.username || obj.username}</p>
-                    </div>
-
-                    <div className='containerContentInfo'>
-                        <p>{props.text || obj.text}</p>
-                    </div>
-                    <div>
                     </div>
                 </div>
+                
             </div>
                         
             <div className='comments p-2 d-flex align-items-center justify-content-evenly m-0 p-0'>
                 <div className='d-flex  flex-column'>
                     <img src={likeIcon} className='icon-size' alt='icon de likes'/>
-                    <p className='fw-bold'>111</p>
+                    <p className='fw-bold m-0'>111</p>
                 </div>
-                <input className='inp' value={input.text} name='text' placeholder='Deja tu comentario  aqui' onChange={handleInputChange}></input>
-                <button className='commentBtn' onClick={handleSubmit}>Comentar</button>
-                <div className='d-flex justify-content-center align-items-center '>
+                <div className='inp p-2 d-flex'>
+                    <input className='inp text-start' value={input.text} name='text' placeholder='Escribe un comentario ...' onChange={handleInputChange} />
+                    <img src={sendIcon} onClick={handleSubmit} className='curser-pointer-card icon-size m-2 ' alt='icon de share'/>
+
+                </div>
+                {/* <button className='commentBtn' onClick={handleSubmit}>Comentar</button> */}
+                <div className='d-flex justify-content-center align-items-center'>
                     <img src={payIcon} className='icon-size m-2' alt='icon de pay'/>
                     <img src={shareIcon} className='icon-size m-2' alt='icon de share'/>
                 </div>
             </div>
             
-
-
-
-
-
-
 
         </div>
     )

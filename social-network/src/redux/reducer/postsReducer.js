@@ -68,7 +68,7 @@ export const getAllPostsAsync = (data) => async (dispatch) => {
 
 export const getUserDetailAsync = (data) => (dispatch) => {
   try {
-      axios.get(`http://127.0.0.1:3001/userDetail/639604a18b5c1a0e8d07388f`)
+      axios.get(`http://127.0.0.1:3001/userDetail/6397eb6086a98217539df22b `)
         .then(response=>dispatch(getDetailUser(response.data)))
     
   } catch (error) {
@@ -79,7 +79,7 @@ export const getUserDetailAsync = (data) => (dispatch) => {
 export const CreatePostsAsync = (data) => (dispatch) => {
   try {
     axios
-      .post('http://127.0.0.1:3001/create/639604a18b5c1a0e8d07388f', data, {
+      .post('http://127.0.0.1:3001/create/6397eb6086a98217539df22b ', data, {
         // Endpoint to send files
         headers: {
           // Add any auth token here
