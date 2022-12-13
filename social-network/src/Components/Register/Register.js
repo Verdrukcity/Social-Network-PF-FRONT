@@ -8,7 +8,13 @@ import {
   getAllCountriesAsync,
 } from '../../redux/reducer/countriesReducer'
 import './Register.css'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
+
 const Register = () => {
+
+  const MySwal = withReactContent(Swal)
   const dispatch = useDispatch()
   const history = useHistory()
 
@@ -72,7 +78,15 @@ const Register = () => {
       entrada = entrada.slice(-1)
 
       if (/^[0-9]$/.test(entrada)) {
-        alert('no se permiten numeros en el  ' + event.target.name)
+
+         MySwal.fire({
+                  position: 'top-end',
+                  icon: 'error',
+                  title: ('no se permiten numeros en el  ' + event.target.name),
+                  showConfirmButton: false,
+                  timer: 1500
+                });
+       
         return
       }
     }
@@ -95,9 +109,22 @@ const Register = () => {
       datos.password === '' ||
       datos.confirmPassword === ''
     )
-      alert('faltan campos por llenar')
+     { 
+      MySwal.fire({
+                  icon: 'error',
+                  title: 'faltan campos por llenar',
+                  showConfirmButton: false,
+                  timer: 1500
+                });
+    }
     else {
-      alert('Usuario creado correctamente')
+      MySwal.fire({
+                  position: 'top-end',
+                  icon: 'success',
+                  title: 'Usuario creado Correctamente',
+                  showConfirmButton: false,
+                  timer: 1500
+                });
       history.push('/reply/login')
     }
   }

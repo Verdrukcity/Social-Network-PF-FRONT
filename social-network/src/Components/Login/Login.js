@@ -2,6 +2,9 @@ import React, { useState} from 'react';
 import './Login.css'
 import { useHistory, Link } from 'react-router-dom'
 import { imgLogin } from '../../shared/assets/icons/all-icons';
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
 /*
   Home es el componente principal donde el usuario encuentra:
    • El header con los botones de navegación
@@ -17,6 +20,7 @@ export default function Login() {
         password:'',
        
     })
+    const MySwal = withReactContent(Swal)
 
       const handleInputChange = (event) => {
         // console.log(event.target.name)
@@ -31,9 +35,23 @@ export default function Login() {
         event.preventDefault()
 
          if(datos.userName===""||datos.password==="")
-        alert("faltan campos por llenar");
+       {
+          MySwal.fire({
+                      title: <strong>Oops...</strong>,
+                      html: <i>Faltan campos por llenar!</i>,
+                      icon: 'error',
+                      
+                    })
+
+       }
         else
-        {alert("Usuario logueado correctamente");
+        {MySwal.fire({
+                  position: 'top-end',
+                  icon: 'success',
+                  title: 'Usuario logueado correctamente',
+                  showConfirmButton: false,
+                  timer: 1500
+                });
           history.push('/reply/home')}
         
   
