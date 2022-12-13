@@ -1,30 +1,38 @@
 @import url(../../assets/globals.css);
-#cardContainer{
-    display: flex;
-    flex-direction: column;
-    background-color: #EB853D;
-    min-width: 900px;
-    max-width: 900px;
-    border-radius: 1rem;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.466);
-    
+
+.icon-size{
+    width: 25px;
+    height: 25px;
+    color: #D77937;
 }
+
+#cardContainer{
+    background-color: #EB853D;
+    border-radius: 30px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.466);
+}
+
+.curser-pointer-card{
+    cursor: pointer;
+}
+
 .userImgCard{
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
+   
 }
 .imgCard{
-    width: 500px;
-    height: 400px;
+   max-width: 400px;
     border-radius: 1rem;
-    margin: 20px;
+    width: auto;
+   
 }
-.containerCategories{
-    background-color: #FF8D00  ;
+.color-white{
+    
     color: #EAEAEA;
    
-    border-radius: 1rem;
+    
 }
 .card-container-categories{
 
@@ -37,17 +45,14 @@
 
 }
 .containerContentInfo{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 20px;
-    width: 300px;
-    height: 70%;
+    
     background-color: #D77937;
     border-radius: 1rem;
     color: #EAEAEA;
     font-size: 16px;
     font-style: italic;
+    height: 77%;
+
 }
 .userInfo{
     display: flex;
@@ -56,22 +61,23 @@
     color: #EAEAEA;
     font-size: 20px;
     font-style: italic;
-
 }
 .comments{
-    display: flex;
-    justify-content: center;
-    background-color: #EAEAEA;
+    
+    background-color: #ffffff;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.466);
-    border-radius: 10px;
+    border-radius: 30px;
 }
 .inp{
     margin: 10px;
-    width: 90%;
+    width: 100%;
     border-radius: 10px;
     border: none;
     text-align: center;
+    background-color: #EAEAEA;
+    outline: none;
 }
+
 .commentBtn{
     display: flex;
     justify-content: center;

@@ -33,45 +33,22 @@ export default function PostDetail(props){
     
     //cuando este la info en el reducer, la traigo al componente
     useEffect(()=>{
-        
-        //este if es cochino, pero si no lo hacia me rompía, perdonchi
         if (Object.keys(details).length){
             console.log(details)
-            var profile
-            var profileImg
-            var postImg
-            var description
-            var categories
-    
-            if (details.userId.constructor == Array){                
-                profile = details.userId[0].user_Name
-                profileImg = details.userId[0].image_profil
-                description = details.post.text
-                postImg = details.post.multimedia
-                categories = details.post.category
-
-            }
-            else {
-                profile = details.userId.user_Name
-                profileImg = details.userId.image_profil
-                postImg = details.multimedia
-                description = details.text
-                categories = details.category
-            }
             setPostDetail({
-                profile,
-                profileImg,
-                description,
-                postImg,
-                categories,
-                comments: details.comment
+                profile: details.userId.user_Name,
+                profileImg: details.userId.image_profil,
+                description: details.post.text,
+                postImg: details.post.multimedia,
+                categories: details.post.category,
+                comments: details.comments
             })
         }
     }, [details])
 
     return(
         
-        <div className="container-fluid"> 
+        <div className="container-fluid bg-podt-detail"> 
 
             <div className="row secondCont">
                 
@@ -108,15 +85,15 @@ export default function PostDetail(props){
                         
                         {/* Aqui va a mapear los comentarios (esto es temporal) */}
                         
-                        { postDetail.comments?postDetail.comments.map(                    
+                        { postDetail.comments.length?postDetail.comments.map(                    
                         (comment)=> { return(
                                 <div className="comentcont">
                                     <div className="row">
-                                        <img className="col-2 comentimg" src={comment.user.image_profil}></img>
-                                        <h5 className="col username">{comment.user.user_Name}</h5>
+                                        <img className="col-2 comentimg" src={comment.profileId.image_profil}></img>
+                                        <h5 className="col username">{comment.profileId.user_Name}</h5>
                                     </div> 
                                     <div className="textcomment">
-                                        <p className="">{comment.comment.text}</p>
+                                        <p className="">{comment.text}</p>
                                     </div>
                                 </div> 
                                 )                    

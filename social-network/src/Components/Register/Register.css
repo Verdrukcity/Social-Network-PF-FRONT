@@ -1,56 +1,28 @@
 
-body{
-
-    background-color: #eaeaea;
-    
-}
-.titulo{
-
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: 100px;
-    color: #ff8d00;
-    text-align: center;
-    position: relative;
-    left: 20px;
-}
 .formulario{
 
         height: 750px;
         width: 650px;
         border-radius: 15px;
-        background-color: #d9d9d9;
-        margin: 10px 100px;
+        background-color: var(--main-gray);
         border: 2px solid transparent;
         padding: 50px;
         position: relative;
-       left: 300px;
+        flex-direction: column;
 }
-.formImput{
-
-    border-radius: 25px;
-    height: 50px;
-    width: 300px;
-    font-size: 21px;
-    border-color: transparent;
-    background-color:white;
-    border: 1px solid transparent;
-    
-    
+.container-form-register{
+    margin: 10px;
 }
-.campoFormulario{
+@media (min-width:1000px){
+    .container-imputs-register{
+        flex-direction: column;
+    }
+}
+.container-imputs-register{
 
-    padding: 10px;
-    width: 70px;
-    margin-left: 180px;
-    
-   
-   
 }
 .selectFormulario{
-
-    
     border-color: transparent;
-    
     display: inline-flex;
     padding: 10px;
 }
@@ -66,11 +38,7 @@ body{
     font-family: Georgia, 'Times New Roman', Times, serif;
     
 }
-.botonPadding{
 
-
-padding-top: 70px;
-}
 .country{
 
     padding: 10px;
@@ -84,4 +52,40 @@ padding-top: 70px;
     border: 2px solid transparent;
    border-color: rgb(201, 9, 9);
 
+}
+@media(max-width: 450px){
+    .formulario{
+        width: 95%;
+        height: 95%;
+    }
+    .replyTitle{
+        font-size: 75px;
+    }
+    .formImput{
+        width: 100%;
+        height: 20px;
+        font-size: 18px;
+    }
+   .select-date-register{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    color: gray;
+    width: 150px;
+   }
+   .botonPadding{
+    padding: 0;
+   }
+}
+@media(min-width: 450px){
+   
+    .formImput{
+        width: 100%;
+        height: 36px;
+    }
+}
+.labelPais{
+    margin-top: 8px;
+    color: black;
+    font-size: large;
 }

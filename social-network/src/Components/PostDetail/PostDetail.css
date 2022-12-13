@@ -1,9 +1,11 @@
 .container-fluid{
-    height: 100vh;
-    background-color: #EB853D;
     padding: 3%;
-    font-style: italic;
     /* overflow-y: hidden; */
+}
+.bg-podt-detail{
+    background-color: var(--main-orange-secondary);
+    height: 100vh;
+    font-style: italic;
 }
 
 .postImg{
