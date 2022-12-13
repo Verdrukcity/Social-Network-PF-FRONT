@@ -9,21 +9,20 @@
         padding: 50px;
         position: relative;
         flex-direction: column;
+        overflow-y: hidden;
 }
 .container-form-register{
     margin: 10px;
 }
-@media (min-width:1000px){
+
     .container-imputs-register{
         flex-direction: column;
     }
-}
-.container-imputs-register{
 
-}
 .selectFormulario{
+    display: flex;
+    flex-direction: column;
     border-color: transparent;
-    display: inline-flex;
     padding: 10px;
 }
 .botonRegister{
@@ -53,16 +52,19 @@
    border-color: rgb(201, 9, 9);
 
 }
+.adjust-repli-size{
+    font-size: 80px;
+}
 @media(max-width: 450px){
     .formulario{
         width: 95%;
         height: 95%;
     }
     .replyTitle{
-        font-size: 75px;
+        display: none;
     }
     .formImput{
-        width: 100%;
+        width: 90%;
         height: 20px;
         font-size: 18px;
     }
