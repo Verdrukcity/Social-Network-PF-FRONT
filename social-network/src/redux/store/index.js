@@ -1,14 +1,16 @@
 import { configureStore } from '@reduxjs/toolkit'
-import categoriesReducer from '../reducer/categoriesReducer'
-import countriesReducer from '../reducer/countriesReducer'
-import postsReducer from '../reducer/postsReducer'
+import posts from '../reducer/postsReducer'
+import comments from '../reducer/commentsReducer'
+import categories from '../reducer/categoriesReducer'
+import countries from '../reducer/countriesReducer'
 
-//Se agrego el getAllPostReducer al reducer para traer los posts del back
+
 const store = configureStore({
   reducer: {
-    posts: postsReducer,
-    categories: categoriesReducer,
-    countries: countriesReducer,
+    posts: posts,
+    countries: countries,
+    comments: comments,
+    categories: categories,
   },
 })
 

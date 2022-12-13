@@ -3,10 +3,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import Select from 'react-select'
 import { SelectDatepicker } from 'react-select-datepicker'
-import {
-  allCountries,
-  getAllCountriesAsync,
-} from '../../redux/reducer/countriesReducer'
+import { allCountries } from '../../redux/reducer/countriesReducer'
+import { getAllCountriesAsync } from '../../redux/actions/countriesActions'
 import './Register.css'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'

@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit'
-import axios from 'axios'
 
 /**
  * estado global países
@@ -8,9 +7,8 @@ const initialState = {
   list: [],
 }
 
-// REDUCER
-
-export const countries = createSlice({
+// REDUCERS
+export const countriesSlice = createSlice({
   name: 'countries',
   initialState,
 
@@ -27,27 +25,14 @@ export const countries = createSlice({
   },
 })
 
-// ACTIONS
-
-export const getAllCountriesAsync = () => async (dispatch) => {
-  try {
-    const response = await axios.get('http://localhost:3001/maps')
-
-    const countriesName = response.data.data.map((country) => country.name)
-
-    dispatch(getAllCountries(countriesName))
-  } catch (error) {
-    console.log(error)
-  }
-}
 
 // USE SELECTOR
 export const allCountries = (state) => state.countries.list
 
 /**
- * aquí se importan todos los actions y el reducer
+ * aquí se exportan todos los reducer y las actions.
+ * las countriesSlice.actions hay que importarlas desde las actions y las despachamos desde actions.
  */
+export const { getAllCountries } = countriesSlice.actions
 
-export const { getAllCountries } = countries.actions
-
-export default countries.reducer
+export default countriesSlice.reducer

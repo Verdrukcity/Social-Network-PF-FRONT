@@ -19,7 +19,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
 import {  DialogActions, TextareaAutosize } from '@mui/material';
-import { CreatePostsAsync, getDetailUser } from '../../../../redux/reducer/postsReducer';
+import { CreatePostsAsync, getUserDetailAsync } from '../../../../redux/actions/postActions';
 import ButtonActions from '../../ButtonActions/ButtonActions';
 import Loader from '../../loader/loader';
 
@@ -59,7 +59,8 @@ export default function DialogCreatePost({open, setOpen, innerContent,userDetail
 
 useEffect(() => {
 
-    dispatch(getDetailUser())
+    dispatch(getUserDetailAsync())
+
     
 
 }, [dispatch])

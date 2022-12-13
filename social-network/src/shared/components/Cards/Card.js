@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import "./Card.css"
-import { createComment } from '../../../redux/reducer/postsReducer'
+import { createComment } from '../../../redux/actions/commentsActions'
 import { useDispatch } from 'react-redux'
 import { likeIcon, payIcon, sendIcon, shareIcon } from '../../assets/icons/all-icons'
 // the props we are going to use are:

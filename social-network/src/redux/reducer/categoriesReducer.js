@@ -1,6 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit'
-import axios from 'axios'
-// import categoriesActions from '../actions/categoriesActions'
 
 /**
  * estado global categorías
@@ -9,7 +7,7 @@ const initialState = {
   name: [],
 }
 
-export const categories = createSlice({
+export const categoriesSlice = createSlice({
   name: 'categories',
   initialState,
 
@@ -23,18 +21,10 @@ export const categories = createSlice({
   },
 })
 
-export const getAllCategoriesAsync = (data) => async (dispatch) => {
-  try {
-    const response = await axios.get('http://127.0.0.1:3001/category')
-    dispatch(getAllCategories(response.data.data))
-  } catch (error) {
-    console.log(error)
-  }
-}
-
 /**
- * aquí se importan todos los actions y el reducer
+ * aquí se exportan todos los reducer y las actions.
+ * las countriesSlice.actions hay que importarlas desde las actions y las despachamos desde actions.
  */
-export const { getAllCategories } = categories.actions
+export const { getAllCategories } = categoriesSlice.actions
 
-export default categories.reducer
+export default categoriesSlice.reducer

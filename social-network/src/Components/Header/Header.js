@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { getAllCategoriesAsync } from '../../redux/reducer/categoriesReducer'
+import { getAllCategoriesAsync } from '../../redux/actions/categoriesActions'
 import * as allIcons from '../../shared/assets/icons/all-icons'
 import ButtonActions from '../../shared/components/ButtonActions/ButtonActions'
 import DialogCategories from '../../shared/components/dialogs/dialogCategories/DialogCategories.js'
