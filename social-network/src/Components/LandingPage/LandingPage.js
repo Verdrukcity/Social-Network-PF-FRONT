@@ -8,7 +8,7 @@ import './LandingPage.css'
 
 export default function LandingPage() {
     return (
-        <main className="container-{breakpoint} bg" >
+        <main className="container-fluid bg" >
 
             <div className="container-{breakpoint} d-flex justify-content-between align-items-center">
                 <div>
