@@ -30,13 +30,10 @@ export const countries = createSlice({
 // ACTIONS
 
 export const getAllCountriesAsync = () => async (dispatch) => {
-  /**
-   * TODO: consultar endpoint con todos los países
-   */
   try {
-    const response = await axios.get('https://restcountries.com/v3/all')
+    const response = await axios.get('http://localhost:3001/maps')
 
-    const countriesName = response.data.map((country) => country.name.common)
+    const countriesName = response.data.data.map((country) => country.name)
 
     dispatch(getAllCountries(countriesName))
   } catch (error) {
