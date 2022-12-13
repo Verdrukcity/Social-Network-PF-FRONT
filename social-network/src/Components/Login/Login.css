@@ -10,9 +10,15 @@
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.201);
    
 }
+
 .imgLogin{
     height: 450px;
     width: 409px;
+}
+@media (max-width: 1000px){
+    .imgLogin{
+        display: none;
+    }
 }
 /* .container2{
     display: flex;
@@ -32,7 +38,13 @@
     border: 2px solid transparent;
     font-family: Georgia, 'Times New Roman', Times, serif;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.201);
+    transition: 0.5s;
 }
+.botonLogin:hover{
+    background-color: var(--main-orange-ligth);
+    color: var(--main-orange-primary);
+}
+
 .campoFormularioLogin {
     display: flex;
     justify-content: center;
@@ -52,10 +64,30 @@
     margin-top: 15px;
 }
 .formImput{
+
+    border-radius: 25px;
+    height: 50px;
+    width: 300px;
+    font-size: 21px;
+    border-color: transparent;
+    background-color:white;
+    border: 1px solid transparent;  
     text-align: center;
     outline: none;
 }
 .reply{
     font-size: 98px;
     font-weight: 900px;
+}
+@media (max-width: 450px){
+    .formularioLogin{
+        width: 85%;
+    }
+    .reply{
+        margin-top: 10px;
+        font-size: 70px;
+    }
+    .campoFormularioLogin{
+        height: 100px;
+    }
 }

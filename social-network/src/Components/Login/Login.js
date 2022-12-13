@@ -40,8 +40,8 @@ export default function Login() {
         
     }
   return (
-    <div className='container-{breakpoint} bg'>
-      <div className=' bg d-flex justify-content-evenly align-items-center '>
+    <div className='container-fluid bg container-flex-center'>
+      <div className=' container-flex-center '>
         <img className='imgLogin' alt='imagen login' src={imgLogin}></img>
        <form className="formularioLogin" onSubmit={enviarDatos}>
                 

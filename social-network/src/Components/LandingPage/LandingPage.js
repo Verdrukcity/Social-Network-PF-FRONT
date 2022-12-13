@@ -8,30 +8,33 @@ import './LandingPage.css'
 
 export default function LandingPage() {
     return (
-        <main className="container-{breakpoint} bg" >
 
-            <div className="container-{breakpoint} d-flex justify-content-between align-items-center">
-                <div>
-                    <p className="fontLandingO ">REPLY</p>
+
+        <main className="container-fluid contenedor-landing-main " >
+
+
+            <div className="container d-flex justify-content-center align-items-center containerHeader">
+                <div className="container">
+                    <h1 className="replyTitle">REPLY</h1>
                 </div>
-                <div className="d-flex">
-                    <a id="button" href='/reply/register'>
+                <div className="container container-flex-center">
+                    <a type="button" className="font butons-landing bx-shadow" href='/reply/register'>
                     Register
                 </a>
-                <a id="button" href='/reply/login'>
+                <a type="button" className="font butons-landing bx-shadow" href='/reply/login'>
                     Login
                 </a>
                 </div>
                 
                
             </div>
-            <div className="container-{breakpoint} d-flex justify-content-evenly">
+            <div className="container-fluid container-flex-center container-img-eres">
                 
-                <div className="containerEres">
-                    <p className="fontLandingN">Eres lo que <br></br>publicas.</p>
+                <div className="container">
+                    <p className="font-landing">Eres lo que <br></br>publicas.</p>
                 </div>
-                <div>
-                        <img  id="landingPage" alt="imagen landingpage" src={landingPage} />
+                <div className="container">
+                        <img  className="img-fluid landing-img" alt="imagen landingpage" src={landingPage} />
                 </div>
 
             </div>
