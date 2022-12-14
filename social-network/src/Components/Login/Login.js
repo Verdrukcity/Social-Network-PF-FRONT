@@ -25,7 +25,7 @@ export default function Login() {
     userName: '',
     password: '',
   })
-  const MySwal = withReactContent(Swal)
+  const sweetAlert = withReactContent(Swal)
 
   const handleInputChange = (event) => {
     setDatos({
@@ -34,20 +34,22 @@ export default function Login() {
     })
   }
 
-  function checkLogin() {
+  function checkLogin(e) {
+    e.preventDefault()
+
     const usernames = users.map((u) => u.user_Name)
 
     if (!usernames.includes(datos.userName)) {
-      MySwal.fire({
+      sweetAlert.fire({
         title: <strong>Oops...</strong>,
         html: <i>El usuario no existe</i>,
         icon: 'error',
       })
     } else if (usernames.includes(datos.userName)) {
-      MySwal.fire({
-        position: 'top-end',
+      sweetAlert.fire({
+        position: 'center ',
         icon: 'success',
-        title: 'Usuario logueado correctamente',
+        title: 'El usuario ingresó correctamente',
         showConfirmButton: false,
         timer: 1500,
       })
@@ -65,12 +67,12 @@ export default function Login() {
         <img className='imgLogin' alt='imagen login' src={imgLogin}></img>
         <form className='formularioLogin'>
           <h1 className='replyTitle reply'>REPLY</h1>
-          <div className='container-imputs-login'>
+          <div className='container-inputs-login'>
             <div className='campoFormularioLogin'>
               <input
                 type='text'
                 placeholder='UserName'
-                className='formImput'
+                className='formInput'
                 onChange={handleInputChange}
                 name='userName'></input>
             </div>
@@ -78,19 +80,19 @@ export default function Login() {
               <input
                 type='password'
                 placeholder='Password'
-                className='formImput'
+                className='formInput'
                 onChange={handleInputChange}
                 name='password'></input>
             </div>
           </div>
 
-          <div className='botonPadding'>
-            <button type='submit' className='botonLogin' onClick={checkLogin}>
+          <div className='btnPadding'>
+            <button type='submit' className='btnLogin' onClick={checkLogin}>
               Login
             </button>
           </div>
 
-          <div className='registertext'>
+          <div className='registerText'>
             <p>
               if you don't have an account,{' '}
               <Link className='registerScreen' to={`/reply/register`}>

@@ -28,7 +28,7 @@
 } */
 
 
-.botonLogin {
+.btnLogin {
     border-radius: 15px;
     margin-bottom: 25px;
     height: 40px;
@@ -41,7 +41,7 @@
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.201);
     transition: 0.5s;
 }
-.botonLogin:hover{
+.btnLogin:hover{
     background-color: var(--main-orange-ligth);
     color: var(--main-orange-primary);
 }
@@ -54,7 +54,7 @@
     padding: 10px;
     width: 400px;
 }
-.registertext{
+.registerText{
 
     display: inline-flex;
     font-family:Arial, Helvetica, sans-serif
@@ -64,7 +64,7 @@
     color: #ff8d00;
     margin-top: 15px;
 }
-.formImput{
+.formInput{
 
     border-radius: 25px;
     height: 50px;
