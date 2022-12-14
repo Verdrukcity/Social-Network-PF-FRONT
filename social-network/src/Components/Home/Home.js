@@ -5,8 +5,11 @@ import { useDispatch, useSelector } from 'react-redux'
   getByCategory,
   getUserDetailAsync,
 } from '../../redux/reducer/postsReducer' */
+import {
+  getAllPostsAsync,
+  getUserDetailAsync,
+} from '../../redux/actions/postActions'
 import { getByCategory } from '../../redux/reducer/postsReducer'
-import { getAllPostsAsync, getUserDetailAsync } from '../../redux/actions/postActions'
 import { arrowUp, plus } from '../../shared/assets/icons/all-icons'
 import ButtonActions from '../../shared/components/ButtonActions/ButtonActions'
 import Card from '../../shared/components/Cards/Card'
@@ -34,16 +37,16 @@ export default function Home() {
   const [open, setOpen] = useState(false)
   const posts = useSelector((state) => state.posts.posts[0])
   let categories = useSelector((state) => state.categories.name)
-  
+
   let userDetail = useSelector((state) => state.posts.userDetail)
   const categoriesArr = categories[0]?.map((c) => c.category)
-  const userDetailArr = userDetail[0]?.map((c) =>c) 
-  
+  const userDetailArr = userDetail[0]?.map((c) => c)
+
   const dispatch = useDispatch()
   /**
    * Dispatch y useEffect para traer todos los posts del back
    */
-  
+
   useEffect(() => {
     /**me traigo todos los posts */
     dispatch(getAllPostsAsync())
@@ -51,57 +54,35 @@ export default function Home() {
     dispatch(getUserDetailAsync())
   }, [dispatch])
 
-  const ref = useRef(null);
-
+  const ref = useRef(null)
 
   // FILTER BY CATEGORIES
 
-  const [active, setActive] = React.useState({})
+  /*
+   * filterByCategory hace el dispatch de un estado con los categories activos
+   */
 
-  const filterByCategory = (e) => {
-    let { id, style } = e.target
+  const [activeCategories, setActiveCategories] = useState(new Set())
 
-    if (active[id]) {
-      setActive({
-        ...active,
-        [id]: false,
-      })
-    } else {
-      setActive({
-        ...active,
-        [id]: true,
-      })
-    }
+  function filterByCategory(e) {
+    const { id } = e.target
 
-    active[id] ? (style.border = 'none') : (style.border = '4px solid orange')
+    // preguntar por id y agregar o elimina la categoría del estado
+    activeCategories.has(id)
+      ? setActiveCategories(
+          (prev) => new Set([...prev].filter((x) => x !== id))
+        )
+      : setActiveCategories(
+          (activeCategories) => new Set([...activeCategories, id])
+        )
   }
 
-  /* 
-    TODO: mostrar todos los post cuando se quiten los filtros
-    // si todas las categorías están en false/undefined en active cargar allPost
-    • cuando quite el focus en el categories debería mantenerse el estilo
-  */
-
-  React.useEffect(() => {
-    /*
-     * Array de categorías extraídas del objeto active
-     */
-    function getCategories(obj) {
-      const activeCategories = new Set()
-
-      for (const key in obj) {
-        obj[key] ? activeCategories.add(key) : activeCategories.delete(key)
-      }
-
-      return Array.from(activeCategories)
-    }
-
-    const categoryFilter = getCategories(active)
-
-    categoryFilter.length > 0
-      ? dispatch(getByCategory(categoryFilter))
-      : dispatch(getAllPostsAsync())
-  }, [dispatch, active])
+  useEffect(() => {
+    // si hay elementos activos despacha una acción de filtrado
+    activeCategories.size === 0
+      ? dispatch(getAllPostsAsync())
+      : dispatch(getByCategory(Array.from(activeCategories)))
+  }, [dispatch, activeCategories])
 
   // END FILTER BY CATEGORIES
 
@@ -111,25 +92,21 @@ export default function Home() {
     setOpen(true)
   }
 
-  
-
-
   const goToUp = (event) => {
     /*Esta función debería llevarte al inicio de las publicaciones*/
-    ref.current?.scrollIntoView({behavior: 'smooth'});
+    ref.current?.scrollIntoView({ behavior: 'smooth' })
   }
 
   return (
-    
     <div ref={ref} id='home' className='mt-2'>
-    <Header
+      <Header
         filterByCategory={filterByCategory}
         innerContent={categoriesArr}
       />
-      <DialogCreatePost 
-        open={open} 
-        setOpen={setOpen} 
-        innerContent={categoriesArr} 
+      <DialogCreatePost
+        open={open}
+        setOpen={setOpen}
+        innerContent={categoriesArr}
         userDetail={userDetailArr}
       />
       <div className='container d-flex flex-column justify-content-center mt-10'>
