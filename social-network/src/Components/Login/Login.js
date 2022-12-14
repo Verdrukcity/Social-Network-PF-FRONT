@@ -85,7 +85,7 @@ export default function Login() {
               {' '}
               if you don't have an account,{' '}
               <Link className='registerScreen' to={`/reply/register`}>
-                <a> register here</a>
+                register here
               </Link>{' '}
             </p>
           </div>

@@ -1,16 +1,17 @@
 import { configureStore } from '@reduxjs/toolkit'
-import posts from '../reducer/postsReducer'
-import comments from '../reducer/commentsReducer'
 import categories from '../reducer/categoriesReducer'
+import comments from '../reducer/commentsReducer'
 import countries from '../reducer/countriesReducer'
-
+import posts from '../reducer/postsReducer'
+import users from '../reducer/userReducer'
 
 const store = configureStore({
   reducer: {
-    posts: posts,
-    countries: countries,
-    comments: comments,
-    categories: categories,
+    users,
+    posts,
+    comments,
+    countries,
+    categories,
   },
 })
 

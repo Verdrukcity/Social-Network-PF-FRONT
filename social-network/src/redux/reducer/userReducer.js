@@ -26,12 +26,12 @@ export const usersSlice = createSlice({
 })
 
 // USE SELECTOR
-export const allCountries = (state) => state.users.list
+export const allUsers = (state) => state.users.list
 
 /**
  * aquí se exportan todos los reducer y las actions.
  * las usersSlice.actions hay que importarlas desde las actions y las despachamos desde actions.
  */
-export const { getAllCountries } = usersSlice.actions
+export const { getAllUsers } = usersSlice.actions
 
 export default usersSlice.reducer
