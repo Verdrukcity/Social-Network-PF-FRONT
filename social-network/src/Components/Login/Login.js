@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
-import { allUsers } from '../../redux/reducer/userReducer'
+import { getAllUsersAsync } from '../../redux/actions/usersActions'
+import { allUsersSelector } from '../../redux/reducer/usersReducer'
 import { imgLogin } from '../../shared/assets/icons/all-icons'
 import './Login.css'
 
@@ -15,8 +16,10 @@ import './Login.css'
 */
 
 export default function Login() {
+  const dispatch = useDispatch()
+
   const history = useHistory()
-  const users = useSelector(allUsers)
+  const users = useSelector(allUsersSelector)
 
   const [datos, setDatos] = useState({
     userName: '',
@@ -25,24 +28,23 @@ export default function Login() {
   const MySwal = withReactContent(Swal)
 
   const handleInputChange = (event) => {
-    // console.log(event.target.name)
-    // console.log(event.target.value)
     setDatos({
       ...datos,
       [event.target.name]: event.target.value,
     })
   }
 
-  const enviarDatos = (event) => {
-    event.preventDefault()
+  function checkLogin() {
+    const usernames = users.map((u) => u.user_Name)
 
-    if (datos.userName === '' || datos.password === '') {
+    console.log(usernames, datos.userName)
+    if (!usernames.includes(datos.userName)) {
       MySwal.fire({
         title: <strong>Oops...</strong>,
-        html: <i>Faltan campos por llenar!</i>,
+        html: <i>El usuario no existe</i>,
         icon: 'error',
       })
-    } else {
+    } else if (usernames.includes(datos.userName)) {
       MySwal.fire({
         position: 'top-end',
         icon: 'success',
@@ -53,11 +55,16 @@ export default function Login() {
       history.push('/reply/home')
     }
   }
+
+  useEffect(() => {
+    dispatch(getAllUsersAsync())
+  }, [dispatch])
+
   return (
     <div className='container-fluid bg container-flex-center'>
       <div className=' container-flex-center '>
         <img className='imgLogin' alt='imagen login' src={imgLogin}></img>
-        <form className='formularioLogin' onSubmit={enviarDatos}>
+        <form className='formularioLogin'>
           <h1 className='replyTitle reply'>REPLY</h1>
           <div className='container-imputs-login'>
             <div className='campoFormularioLogin'>
@@ -79,7 +86,7 @@ export default function Login() {
           </div>
 
           <div className='botonPadding'>
-            <button type='submit' className='botonLogin' >
+            <button type='submit' className='botonLogin' onClick={checkLogin}>
               Login
             </button>
           </div>
