@@ -4,7 +4,7 @@ import { createSlice } from '@reduxjs/toolkit'
  * estado global países
  */
 const initialState = {
-  list: [],
+  list: [{ username: 'hola42', password: 'hola42' }],
 }
 
 // REDUCERS

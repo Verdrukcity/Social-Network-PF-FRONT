@@ -82,11 +82,10 @@ export default function Login() {
 
           <div className='registertext'>
             <p>
-              {' '}
               if you don't have an account,{' '}
               <Link className='registerScreen' to={`/reply/register`}>
                 register here
-              </Link>{' '}
+              </Link>
             </p>
           </div>
         </form>
