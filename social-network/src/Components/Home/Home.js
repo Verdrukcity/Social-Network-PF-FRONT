@@ -62,7 +62,7 @@ export default function Home() {
    * filterByCategory hace el dispatch de un estado con los categories activos
    */
 
-  const [activeCategories, setActiveCategories] = React.useState(new Set())
+  const [activeCategories, setActiveCategories] = useState(new Set())
 
   function filterByCategory(e) {
     const { id } = e.target
@@ -82,7 +82,6 @@ export default function Home() {
     activeCategories.size === 0
       ? dispatch(getAllPostsAsync())
       : dispatch(getByCategory(Array.from(activeCategories)))
-    console.log(Array.from(activeCategories))
   }, [dispatch, activeCategories])
 
   // END FILTER BY CATEGORIES
