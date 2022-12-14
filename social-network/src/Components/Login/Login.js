@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import { allUsers } from '../../redux/reducer/userReducer'
 import { imgLogin } from '../../shared/assets/icons/all-icons'
 import './Login.css'
 
@@ -14,6 +16,8 @@ import './Login.css'
 
 export default function Login() {
   const history = useHistory()
+  const users = useSelector(allUsers)
+
   const [datos, setDatos] = useState({
     userName: '',
     password: '',
@@ -75,7 +79,7 @@ export default function Login() {
           </div>
 
           <div className='botonPadding'>
-            <button type='submit' className='botonLogin'>
+            <button type='submit' className='botonLogin' >
               Login
             </button>
           </div>
