@@ -37,7 +37,6 @@ export default function Login() {
   function checkLogin() {
     const usernames = users.map((u) => u.user_Name)
 
-    console.log(usernames, datos.userName)
     if (!usernames.includes(datos.userName)) {
       MySwal.fire({
         title: <strong>Oops...</strong>,
