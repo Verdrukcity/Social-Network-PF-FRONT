@@ -61,12 +61,11 @@ function Card(props) {
                                     <img className='userImgCard img-fluid me-2' src={props.userImg || obj.imgUser} alt="userImg"></img>
                                     <p className='fs-3 fw-bold '>{props.username || obj.username}</p>
                                 </div>
-
                                 <div className='containerContentInfo'>
                                     <p className='p-2 m-0 h-100'>{props.text || obj.text}</p>
+                                </div>
+                                <a className='text-morecomments' href={`/reply/postdetail/${props.id}`}>Ver todos los comentarios...</a>
                             </div>
-
-                        </div>
                     
                         </div>
                     </div>
@@ -93,10 +92,8 @@ function Card(props) {
                 </div>
                 <div className='inp p-2 d-flex'>
                     <input className='inp text-start' value={input.text} name='text' placeholder='Escribe un comentario ...' onChange={handleInputChange} />
-                    <img src={sendIcon} onClick={handleSubmit} className='curser-pointer-card icon-size m-2 ' alt='icon de share'/>
-
+                    <img src={sendIcon} onClick={handleSubmit} className='curser-pointer-card icon-size m-2 ' alt='icon de share'/>        
                 </div>
-                {/* <button className='commentBtn' onClick={handleSubmit}>Comentar</button> */}
                 <div className='d-flex justify-content-center align-items-center'>
                     <img src={payIcon} className='icon-size m-2' alt='icon de pay'/>
                     <img src={shareIcon} className='icon-size m-2' alt='icon de share'/>
@@ -108,5 +105,5 @@ function Card(props) {
     )
 }
 // recordar que este link es para el detalle 
-// <a href={`/reply/postdetail/${props.id}`}>Ver todos los comentarios</a>
+
 export default Card
