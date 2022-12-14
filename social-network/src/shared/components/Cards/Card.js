@@ -4,11 +4,14 @@ import "./Card.css"
 import { createComment } from '../../../redux/actions/commentsActions'
 import { useDispatch } from 'react-redux'
 import { likeIcon, payIcon, sendIcon, shareIcon } from '../../assets/icons/all-icons'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 // the props we are going to use are:
 // img, username, imgUser, text
 //hacer un efecto para ir a details, cuando paso por sobre la foto que se haga una spmbra o se agrande un poco...
 
 function Card(props) {
+      const MySwal = withReactContent(Swal)
     const obj = {
         username: "compañero guerra",
         imgUser: "https://images.cointelegraph.com/images/1434_aHR0cHM6Ly9pbWFnZXMuY29pbnRlbGVncmFwaC5jb20vaW1hZ2VzLzcxN19hSFIwY0hNNkx5OXpNeTVqYjJsdWRHVnNaV2R5WVhCb0xtTnZiUzkxY0d4dllXUnpMekl3TWpFdE1UQXZNRGxpWVRaaU1Ea3ROR00wTmkwMFlqUmtMV0ZsT0RFdFlUWTNOakpoWVdReE56QmhMbXB3Wnc9PS5qcGc=.jpg",
@@ -34,7 +37,14 @@ function Card(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        alert('Comentario posteado con éxito')
+        
+    MySwal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Comentario Posteado Correctamente',
+        showConfirmButton: false,
+        timer: 1500,
+      });
         dispatch(createComment(input, props.id))
         //console.log('reset input..')
         setInput({
