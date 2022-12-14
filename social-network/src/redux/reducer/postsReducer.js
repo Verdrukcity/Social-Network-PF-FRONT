@@ -1,14 +1,15 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, current } from '@reduxjs/toolkit'
 
 /**
  * estado global de los posts
  */
 const initialState = {
   posts: [],
+  allPost: [],
   created: {},
   comments: [],
   detail: {},
-  userDetail:{}
+  userDetail: {},
 }
 
 // REDUCERS
@@ -20,12 +21,15 @@ export const postSlice = createSlice({
     getAllPosts: (state, action) => {
       /**
        * llamo a la acción de todos los posts
+        state allPost es una referencia a todos los post para ser usado en el filtro de categorías
        */
+
+      state.allPost = [action.payload]
       state.posts = [action.payload]
     },
     createPosts: (state, action) => {
       /**
-       * llamo a la accion de todos los posts
+       * llamo a la acción de todos los posts
        */
       state.created = [action.payload]
     },
@@ -34,14 +38,16 @@ export const postSlice = createSlice({
     },
     getDetailUser: (state, action) => {
       state.userDetail = action.payload
-
     },
     getByCategory: (state, action) => {
-      const notNullPosts = state.posts.length ? state.posts[0] : state.posts
-      
+      const notNullPosts = state.allPost.length
+        ? state.allPost[0]
+        : state.allPost
+
       const filterCategories = notNullPosts.filter((post) =>
         action.payload.every((filter) => post.category.includes(filter))
       )
+
       state.posts = [filterCategories]
     },
   },
@@ -51,6 +57,12 @@ export const postSlice = createSlice({
  * aquí se exportan todos los reducer y las actions.
  * las countriesSlice.actions hay que importarlas desde las actions y las despachamos desde actions.
  */
-export const { getAllPosts, getByCategory,createPosts, getPostDetail, getDetailUser } = postSlice.actions
+export const {
+  getAllPosts,
+  getByCategory,
+  createPosts,
+  getPostDetail,
+  getDetailUser,
+} = postSlice.actions
 
 export default postSlice.reducer
