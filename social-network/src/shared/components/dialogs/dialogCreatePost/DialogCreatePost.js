@@ -23,7 +23,8 @@ import { CreatePostsAsync, getUserDetailAsync } from '../../../../redux/actions/
 import ButtonActions from '../../ButtonActions/ButtonActions';
 import Loader from '../../loader/loader';
 
-
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 
 
@@ -117,12 +118,39 @@ const changeImage = (e) => {
       formData.append('category', categoryName[i]);
     }
     formData.append('multimedia', file)
-    setLoader(true)
+   
     
-    await dispatch(CreatePostsAsync(formData))
-    setLoader(false)
-    
+   
+    const MySwal = withReactContent(Swal)
+    setOpen(false)
+     MySwal.fire({
+        position: 'top-end',
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, Post!',
+        target:true
+        
+  }).then(async (result) => {
+    if (result.isConfirmed) {
+      setOpen(true)
+       setLoader(true)
+      await dispatch(CreatePostsAsync(formData))
+       setLoader(false)
+      Swal.fire(
+        'Posted!',
+        'Your file has been Posted.',
+        'success',
+        
+      )
+      
+    }
     window.location.reload();
+  })
+   
    
   }
 
