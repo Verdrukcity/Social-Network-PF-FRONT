@@ -119,7 +119,7 @@ const Register = () => {
     else {
       //de country solo necesito el id para que lo busque en la db, y el birthdate era un objeto y necesita un string
       let userToCreate = {...datos,country: datos.country.value ,birthdate: datos.birthdate.toString()}
-      dispatch(createUser(hola))
+      dispatch(createUser(userToCreate))
       MySwal.fire({
         position: 'top-end',
         icon: 'success',
