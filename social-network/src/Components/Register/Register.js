@@ -8,6 +8,7 @@ import { getAllCountriesAsync } from '../../redux/actions/countriesActions'
 import './Register.css'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import { createUser } from '../../redux/actions/usersActions'
 
 
 const Register = () => {
@@ -21,26 +22,27 @@ const Register = () => {
    * retorna como value/label el array de objetos options
    */
 
-  const countries = useSelector(allCountries)
+  const countries = useSelector(state=> state.countries.list)
 
+  //el value será el id, que necesitamos, y el label lo que muestra el select
   const options = countries.map((country) => {
     return {
-      value: country,
-      label: country,
+      value: country.id,
+      label: country.name,
     }
   })
 
   const [datos, setDatos] = useState({
-    userName: '',
+    user_Name: '',
     email: '',
     name: '',
-    lastName: '',
-    birthDate: new Date(),
+    lastname: '',
+    birthdate: new Date(),
     country: '',
     password: '',
     confirmPassword: '',
   })
-  const [botonSubmit, setBotonSubmits] = useState(true)
+  // const [botonSubmit, setBotonSubmits] = useState(true)
   const [estiloInput, setEstiloInput] = useState('formImput')
   const [estiloEmail, setEstiloEmail] = useState('formImput')
 
@@ -50,16 +52,16 @@ const Register = () => {
 
   const handleInputChange = (event) => {
     if (
-      datos.userName === '' ||
+      datos.user_Name === '' ||
       datos.email === '' ||
       datos.name === '' ||
-      datos.lastName === '' ||
+      datos.lastname === '' ||
       datos.country === '' ||
       datos.password === '' ||
       datos.confirmPassword === ''
     )
-      setBotonSubmits(true)
-    else setBotonSubmits(false)
+    //   setBotonSubmits(true)
+    // else setBotonSubmits(false)
 
     if (event.target.name === 'email') {
       if (
@@ -71,7 +73,7 @@ const Register = () => {
       }
     }
 
-    if (event.target.name === 'name' || event.target.name === 'lastName') {
+    if (event.target.name === 'name' || event.target.name === 'lastname') {
       var entrada = event.target.value
       entrada = entrada.slice(-1)
 
@@ -99,7 +101,7 @@ const Register = () => {
     event.preventDefault()
 
     if (
-      datos.userName === '' ||
+      datos.user_Name === '' ||
       datos.email === '' ||
       datos.name === '' ||
       datos.lastName === '' ||
@@ -115,6 +117,9 @@ const Register = () => {
       });
     }
     else {
+      //de country solo necesito el id para que lo busque en la db, y el birthdate era un objeto y necesita un string
+      let userToCreate = {...datos,country: datos.country.value ,birthdate: datos.birthdate.toString()}
+      dispatch(createUser(userToCreate))
       MySwal.fire({
         position: 'top-end',
         icon: 'success',
@@ -129,7 +134,7 @@ const Register = () => {
   const onDateChange = (value) => {
     setDatos({
       ...datos,
-      birthDate: value,
+      birthdate: value,
     })
   }
   /*paises habiamos queddo en tenerlo cableado y despues hacer una ruta para los paises, en el de categorias tendriasmos unas por default y que el usuario pueda buscarlo con un input select */
@@ -153,10 +158,10 @@ const Register = () => {
               <input
                 type='text'
                 placeholder='UserName'
-                value={datos.userName}
+                value={datos.user_Name}
                 className='formImput'
                 onChange={handleInputChange}
-                name='userName'></input>
+                name='user_Name'></input>
             </div>
             <div className='container-form-register'>
               <input
@@ -180,10 +185,10 @@ const Register = () => {
               <input
                 type='text'
                 placeholder='LastName'
-                value={datos.lastName}
+                value={datos.lastname}
                 className='formImput'
                 onChange={handleInputChange}
-                name='lastName'></input>
+                name='lastname'></input>
             </div>
             <div className='container-form-register'>
               <input
@@ -209,7 +214,7 @@ const Register = () => {
 
           <div className='selectFormulario'>
             <SelectDatepicker className='select-date-register form-select'
-              selectedDate={datos.birthDate}
+              selectedDate={datos.birthdate}
               onDateChange={(value) => onDateChange(value)}
             />
             <label  className='labelPais'>Pais</label>
@@ -229,7 +234,7 @@ const Register = () => {
             <button
               type='submit'
               className='botonLogin'
-              disabled={botonSubmit}>
+              /*disabled={botonSubmit}*/>
               Register
             </button>
           </div>
