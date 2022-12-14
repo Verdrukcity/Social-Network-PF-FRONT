@@ -48,51 +48,49 @@ export default function PostDetail(props){
 
     return(
         
-        <div className="container-fluid bg-podt-detail"> 
+        <div className="bg-podt-detail p-2"> 
 
-            <div className="row secondCont">
-                
+            <div className="container mt-4 ">
+                <div className="row">
                 {/* primera columna con foto y cateogries */}
-                <div className="col-8">
-                    <img className="postImg" alt="imagen-detail" src={postDetail.postImg}/>
+                <div className="col-8 ">
+                    <img className="postImg w-100" alt="imagen-detail" src={postDetail.postImg}/>
 
                     {/* Aqui va a mapear las categories que contenga el post (esto es temporal)*/}
-                    <div className="categoriescont">
+                    <div className=" mt-2 w-100 d-flex">
                          <p className="categorysimbol">#</p>
-                          { postDetail.categories?postDetail.categories.map(                    
-                        (categoria)=> <p className="category">{categoria}</p>
-                        ):( <div><p >Sin categorias</p>
-                          </div> )
-
-               
-
-          } 
+                         <div className="d-flex justify-content-start align-items-center w-100">
+                            { postDetail.categories?postDetail.categories.map(                    
+                                (categoria)=> <p className="category p-2 ms-2 me-2">{categoria}</p>
+                                ):( <div><p >Sin categorias</p></div> )
+                            } 
+                         </div>
                     </div>
                 </div>
 
-                {/* segunda columna con user, texto de post y comentarios */}
-                <div className="col userandcomments">
+                {/* segunda columna con user, texto de post y comentarios userandcomments */}
+                <div className="col-4">
                     <div className="row">
-                        <img className="col-2 userimg" alt="imagen perfil" src={postDetail.profileImg}></img>
-                        <h3 className="col username">{postDetail.profile}</h3>
+                        <img className="col-4 userimg" alt="imagen perfil" src={postDetail.profileImg}></img>
+                        <h3 className="col-8 username d-flex justify-content-center align-items-start">{postDetail.profile}</h3>
                     </div>
-                    <div className="textpost">
-                        <p className="row">{postDetail.description}</p>
+                    <div className="textpost mt-2">
+                        <p className="">{postDetail.description}</p>
                     </div>
 
-                    <h4>Coments</h4>
+                    <h4 className="username mt-2 mb-2">Comentarios</h4>
+                    
                     <div className="comentscont">
-                        
                         {/* Aqui va a mapear los comentarios (esto es temporal) */}
                         
                         { postDetail.comments.length?postDetail.comments.map(                    
                         (comment)=> { return(
                                 <div className="comentcont">
-                                    <div className="row">
-                                        <img className="col-2 comentimg" src={comment.profileId.image_profil}></img>
-                                        <h5 className="col username">{comment.profileId.user_Name}</h5>
+                                    <div className="d-flex p-2 justify-content-start align-items-center">
+                                        <img className="comentimg" alt="image-profile" src={comment.profileId.image_profil}></img>
+                                        <h5 className="username ms-2 fs-6">{comment.profileId.user_Name}</h5>
                                     </div> 
-                                    <div className="textcomment">
+                                    <div className="textcommen fs-6">
                                         <p className="">{comment.text}</p>
                                     </div>
                                 </div> 
@@ -100,12 +98,10 @@ export default function PostDetail(props){
                         }
                         ):( <p >Sin comentarios</p>
                         )  } 
-                    
                     </div>
                 </div>
-
+                </div>
             </div>
-
             {/* imagen con la flecha para ir atras */}
             <Link to={`/reply/home`}>
                 <img className='arrowback' alt="imagen flecha" src={arrowUp}/>

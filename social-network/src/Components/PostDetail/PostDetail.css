@@ -6,11 +6,13 @@
     background-color: var(--main-orange-secondary);
     height: 100vh;
     font-style: italic;
+    overflow: hidden;
 }
 
 .postImg{
-    width: 60%;
+    
     border-radius: 25px;
+    
 }
 
 .col-8{
@@ -36,8 +38,7 @@
 .category{
     color: white;
     background-color: #CF4B2E;
-    border-radius: 5px;
-    padding: 5px;
+    border-radius: 15px;
 }
 
 .arrowback{
@@ -53,15 +54,10 @@
 }
 
 .arrowback:hover{
-    background-color: #b23f25;
+    background-color: #d47500;
 }
 
-.userandcomments{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    margin-right: 3%;
-}
+
 
 .usercont{
     border: black solid;
@@ -85,14 +81,14 @@
     justify-content: center;
     align-items: center;
     color: white;
-    background-color: #00000033;
+    background-color: #c46e31;
     padding: 20px;
     border-radius: 25px;
 }
 
 .comentcont{
     color: white;
-    background-color:#00000033;
+    background-color:#FF8D00;
     border-radius: 25px;
     margin-bottom: 10px;
     height: 30%;
@@ -104,13 +100,39 @@
     overflow-y: scroll;
     overflow-x: hidden;
     height: 50%;
+    
 }
+.comentscont::-webkit-scrollbar-track-piece {
+    background-color: #eb853d;
+}
+      
+    /* width */
+    .comentscont::-webkit-scrollbar {
+    width: 5px;
+    
+  }
+  
+  /* Track */
+  
+   
+  /* Handle */
+  .comentscont::-webkit-scrollbar-thumb {
+    background: #ffffff; 
+    border-radius: 3px;
+  }
+  
+  /* Handle on hover */
+  .comentscont::-webkit-scrollbar-thumb:hover {
+    background: #e0e0e0; 
+  }  
+
+
 
 .textcomment{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: -10px;
+    
 }
 
 .comentimg{

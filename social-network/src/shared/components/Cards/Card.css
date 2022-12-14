@@ -1,5 +1,13 @@
 @import url(../../assets/globals.css);
 
+.text-morecomments{
+    text-decoration: none;
+    color: #d77a37;
+}
+.text-morecomments:hover{
+    color: #ffffff;
+}
+
 .icon-size{
     width: 25px;
     height: 25px;
