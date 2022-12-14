@@ -24,8 +24,8 @@ export const postSlice = createSlice({
         state allPost es una referencia a todos los post para ser usado en el filtro de categorías
        */
 
-      state.allPost = [action.payload]
-      state.posts = [action.payload]
+      state.allPost = action.payload
+      state.posts = action.payload
     },
     createPosts: (state, action) => {
       /**
@@ -40,15 +40,13 @@ export const postSlice = createSlice({
       state.userDetail = action.payload
     },
     getByCategory: (state, action) => {
-      const notNullPosts = state.allPost.length
-        ? state.allPost[0]
-        : state.allPost
+      const notNullPosts = state.allPost
 
       const filterCategories = notNullPosts.filter((post) =>
         action.payload.every((filter) => post.category.includes(filter))
       )
 
-      state.posts = [filterCategories]
+      state.posts = filterCategories
     },
   },
 })

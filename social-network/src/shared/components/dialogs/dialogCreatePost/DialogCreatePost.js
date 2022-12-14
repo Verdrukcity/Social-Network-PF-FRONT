@@ -171,13 +171,13 @@ const changeImage = (e) => {
             </div>
 
           <div className='m-2 w-100 d-flex flex-column'>
-          {userDetail?.map((name) => (
+          {
             
-            <div key={name.name} className='w-100 d-flex justify-content-start align-items-center '>
-              <img src={name.image_profil} className='profile-img' alt='imagen de perfil'/>
-                <h3 className=' ms-2 color-whie-reply'>{name.user_Name}</h3>
+            <div key={userDetail.name} className='w-100 d-flex justify-content-start align-items-center '>
+              <img src={userDetail.image_profil} className='profile-img' alt='imagen de perfil'/>
+                <h3 className=' ms-2 color-whie-reply'>{userDetail.user_Name}</h3>
             </div>
-            ))}
+            }
 
             <div className=' w-100  bg-input p-2 mt-2 border-radius-30 align-items-stretch p-2'>
               <TextareaAutosize

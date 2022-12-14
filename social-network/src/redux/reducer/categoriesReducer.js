@@ -16,7 +16,7 @@ export const categoriesSlice = createSlice({
       /**
        * traer todos las categorías
        */
-      state.name = [action.payload]
+      state.name = action.payload
     },
   },
 })

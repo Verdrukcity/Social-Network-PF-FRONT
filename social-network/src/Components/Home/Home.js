@@ -35,12 +35,12 @@ export default function Home() {
    * estado local para abrir y cerrar el dialog del create
    */
   const [open, setOpen] = useState(false)
-  const posts = useSelector((state) => state.posts.posts[0])
+  const posts = useSelector((state) => state.posts.posts)
   let categories = useSelector((state) => state.categories.name)
 
   let userDetail = useSelector((state) => state.posts.userDetail)
-  const categoriesArr = categories[0]?.map((c) => c.category)
-  const userDetailArr = userDetail[0]?.map((c) => c)
+  
+  const categoriesArr = categories?.map((c) => c.category)
 
   const dispatch = useDispatch()
   /**
@@ -107,7 +107,7 @@ export default function Home() {
         open={open}
         setOpen={setOpen}
         innerContent={categoriesArr}
-        userDetail={userDetailArr}
+        userDetail={userDetail}
       />
       <div className='container d-flex flex-column justify-content-center mt-10'>
         {posts &&
@@ -119,8 +119,8 @@ export default function Home() {
                 userId={data.userId._id}
                 text={data.text}
                 img={data.multimedia}
-                username={data.userData.user_Name}
-                userImg={data.userData.image_profil}
+                username={data.userId.user_Name}
+                userImg={data.userId.image_profil}
                 categories={data.category}
                 comments={data.commentId}
               />
