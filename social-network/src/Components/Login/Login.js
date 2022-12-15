@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import {
@@ -8,7 +8,6 @@ import {
 	authUserAsync,
 } from '../../redux/actions/usersActions'
 import {
-	allUsersSelector,
 	messageSelector,
 } from '../../redux/reducer/usersReducer'
 import { imgLogin } from '../../shared/assets/icons/all-icons'
@@ -24,15 +23,13 @@ import './Login.css'
 export default function Login() {
 	const dispatch = useDispatch()
 
-	// const history = useHistory()
-	// const users = useSelector(allUsersSelector)
 	const message = useSelector(messageSelector)
 
 	const [datos, setDatos] = useState({
 		userName: '',
 		password: '',
 	})
-	//const sweetAlert = withReactContent(Swal)
+	const sweetAlert = withReactContent(Swal)
 
 	const handleInputChange = (event) => {
 		setDatos({
@@ -49,6 +46,12 @@ export default function Login() {
 		dispatch(authUserAsync(datos))
 
 		console.log(message)
+
+		sweetAlert.fire({
+			title: <strong>Oops...</strong>,
+			html: <i>{message}</i>,
+			icon: 'error',
+		})
 
 		/* 		if (!usernames.includes(datos.userName)) {
 			sweetAlert.fire({

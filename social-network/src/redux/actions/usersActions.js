@@ -26,6 +26,6 @@ export const authUserAsync = (data) => async (dispatch) => {
 		const response = await axios.post('http://127.0.0.1:3001/authuser', data)
 		dispatch(authUser(response))
 	} catch (error) {
-		dispatch(authUser(error.request.response))
+		console.log(error)
 	}
 }
