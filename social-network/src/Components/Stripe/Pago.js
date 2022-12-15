@@ -6,6 +6,8 @@ import {
   confirmacionPagosAsync
 } from '../../redux/actions/pagoActions'
 import { useDispatch, useSelector } from 'react-redux'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 const stripePromise=loadStripe("pk_test_51MEyrGDmJ76nV301LY38auCykppTQuCiIuFCfTqy63OJxi6jEAlHlcLO2LbEe1qgZUqHRSUyZw2gwM8g5qrg2I1H00gKjFjIH9")
 //const stripeBack= new Strip("sk_test_51MEyrGDmJ76nV301pUGNCGjJEgoiyVA3hP3TORnqWLm9qCYzRZh9DtRyGeayF2albXGtTKjQI18jDIzht5t7Yy4q00hc6AcVCN")
@@ -15,7 +17,7 @@ const CheckOutForm=()=>{
     const dispatch = useDispatch()
     const handleSubmit=async (e)=>{
         e.preventDefault();
-
+ const MySwal = withReactContent(Swal)
    const {error,paymentMethod} = await stripe.createPaymentMethod({
 
             type: 'card',
@@ -28,7 +30,25 @@ const CheckOutForm=()=>{
             const amount=50;        
 
             const respuesta=await dispatch(confirmacionPagosAsync({id:paymentMethod.id,amount:amount}))
-             console.log(respuesta)
+
+
+              {MySwal.fire({
+                  position: 'top-end',
+                  icon: 'success',
+                  title: 'El pago esta en estado  ' + respuesta,
+                  showConfirmButton: false,
+                  timer: 1500
+                });
+               }
+       }
+        else{
+
+            MySwal.fire({
+                      title: <strong>Oops...</strong>,
+                      html: <i>{error.message}</i>,
+                      icon: 'error',
+                      
+                    })
         }
         
 
