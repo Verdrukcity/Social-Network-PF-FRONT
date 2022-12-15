@@ -3,8 +3,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
-import { getAllUsersAsync } from '../../redux/actions/usersActions'
-import { allUsersSelector } from '../../redux/reducer/usersReducer'
+import {
+	getAllUsersAsync,
+	authUserAsync,
+} from '../../redux/actions/usersActions'
+import {
+	allUsersSelector,
+	messageSelector,
+} from '../../redux/reducer/usersReducer'
 import { imgLogin } from '../../shared/assets/icons/all-icons'
 import './Login.css'
 
@@ -16,92 +22,99 @@ import './Login.css'
 */
 
 export default function Login() {
-  const dispatch = useDispatch()
+	const dispatch = useDispatch()
 
-  const history = useHistory()
-  const users = useSelector(allUsersSelector)
+	// const history = useHistory()
+	// const users = useSelector(allUsersSelector)
+	const message = useSelector(messageSelector)
 
-  const [datos, setDatos] = useState({
-    userName: '',
-    password: '',
-  })
-  const sweetAlert = withReactContent(Swal)
+	const [datos, setDatos] = useState({
+		userName: '',
+		password: '',
+	})
+	//const sweetAlert = withReactContent(Swal)
 
-  const handleInputChange = (event) => {
-    setDatos({
-      ...datos,
-      [event.target.name]: event.target.value,
-    })
-  }
+	const handleInputChange = (event) => {
+		setDatos({
+			...datos,
+			[event.target.name]: event.target.value,
+		})
+	}
 
-  function checkLogin(e) {
-    e.preventDefault()
+	function checkLogin(e) {
+		e.preventDefault()
 
-    const usernames = users.map((u) => u.user_Name)
+		//const usernames = users.map((u) => u.user_Name)
 
-    if (!usernames.includes(datos.userName)) {
-      sweetAlert.fire({
-        title: <strong>Oops...</strong>,
-        html: <i>El usuario no existe</i>,
-        icon: 'error',
-      })
-    } else if (usernames.includes(datos.userName)) {
-      sweetAlert.fire({
-        position: 'center ',
-        icon: 'success',
-        title: 'El usuario ingresó correctamente',
-        showConfirmButton: false,
-        timer: 1500,
-      })
-      history.push('/reply/home')
-    }
-  }
+		dispatch(authUserAsync(datos))
 
-  useEffect(() => {
-    dispatch(getAllUsersAsync())
-  }, [dispatch])
+		console.log(message)
 
-  return (
-    <div className='container-fluid bg container-flex-center'>
-      <div className=' container-flex-center '>
-        <img className='imgLogin' alt='imagen login' src={imgLogin}></img>
-        <form className='formularioLogin'>
-          <h1 className='replyTitle reply'>REPLY</h1>
-          <div className='container-inputs-login'>
-            <div className='campoFormularioLogin'>
-              <input
-                type='text'
-                placeholder='UserName'
-                className='formInput'
-                onChange={handleInputChange}
-                name='userName'></input>
-            </div>
-            <div className='campoFormularioLogin'>
-              <input
-                type='password'
-                placeholder='Password'
-                className='formInput'
-                onChange={handleInputChange}
-                name='password'></input>
-            </div>
-          </div>
+		/* 		if (!usernames.includes(datos.userName)) {
+			sweetAlert.fire({
+				title: <strong>Oops...</strong>,
+				html: <i>{message}</i>,
+				icon: 'error',
+			})
+		} else if (usernames.includes(datos.userName)) {
+			sweetAlert.fire({
+				position: 'center ',
+				icon: 'success',
+				title: 'El usuario ingresó correctamente',
+				showConfirmButton: false,
+				timer: 1500,
+			})
+			history.push('/reply/home')
+		} */
+	}
 
-          <div className='btnPadding'>
-            <button type='submit' className='btnLogin' onClick={checkLogin}>
-              Login
-            </button>
-          </div>
+	useEffect(() => {
+		dispatch(getAllUsersAsync())
+	}, [dispatch])
 
-          <div className='registerText'>
-            <p>
-              if you don't have an account,{' '}
-              <Link className='registerScreen' to={`/reply/register`}>
-                register here
-              </Link>
-            </p>
-          </div>
-        </form>
-      </div>
-    </div>
-  )
+	return (
+		<div className='container-fluid bg container-flex-center'>
+			<div className=' container-flex-center '>
+				<img className='imgLogin' alt='imagen login' src={imgLogin}></img>
+				<form className='formularioLogin'>
+					<h1 className='replyTitle reply'>REPLY</h1>
+					<div className='container-inputs-login'>
+						<div className='campoFormularioLogin'>
+							<input
+								type='text'
+								placeholder='UserName'
+								className='formInput'
+								onChange={handleInputChange}
+								name='userName'
+							></input>
+						</div>
+						<div className='campoFormularioLogin'>
+							<input
+								type='password'
+								placeholder='Password'
+								className='formInput'
+								onChange={handleInputChange}
+								name='password'
+							></input>
+						</div>
+					</div>
+
+					<div className='btnPadding'>
+						<button type='submit' className='btnLogin' onClick={checkLogin}>
+							Login
+						</button>
+					</div>
+
+					<div className='registerText'>
+						<p>
+							if you don't have an account,{' '}
+							<Link className='registerScreen' to={`/reply/register`}>
+								register here
+							</Link>
+						</p>
+					</div>
+				</form>
+			</div>
+		</div>
+	)
 }
