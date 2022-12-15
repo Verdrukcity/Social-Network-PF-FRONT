@@ -2,7 +2,7 @@ import { createSlice, current } from '@reduxjs/toolkit'
 
 const initialState = {
 	user: [],
-	message: {},
+	message: [],
 }
 
 export const userSlice = createSlice({
@@ -19,7 +19,6 @@ export const userSlice = createSlice({
 			state.user = action.payload
 		},
 		authUser: (state, action) => {
-			console.log(action.payload)
 			state.message = action.payload
 		},
 	},

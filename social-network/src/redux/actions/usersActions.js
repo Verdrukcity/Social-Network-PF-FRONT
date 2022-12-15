@@ -22,10 +22,18 @@ export const getAllUsersAsync = (data) => async (dispatch) => {
 }
 
 export const authUserAsync = (data) => async (dispatch) => {
-	try {
-		const response = await axios.post('http://127.0.0.1:3001/authuser', data)
-		dispatch(authUser(response))
-	} catch (error) {
-		console.log(error)
-	}
+	/*
+	 * data: {
+	 *   userName : nombre de usuario (string),
+	 *   password: contraseña del usuario(string)
+	 * }
+	 */
+
+	const userPromise = axios
+		.post('http://127.0.0.1:3001/authuser', data)
+		.then((res) => res.data)
+		.catch((err) => err.response.data.error)
+
+	const res = await userPromise
+	return dispatch(authUser(res))
 }

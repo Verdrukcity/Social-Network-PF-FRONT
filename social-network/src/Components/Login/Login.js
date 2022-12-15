@@ -1,27 +1,26 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
-import {
-	getAllUsersAsync,
-	authUserAsync,
-} from '../../redux/actions/usersActions'
-import {
-	messageSelector,
-} from '../../redux/reducer/usersReducer'
+import { authUserAsync } from '../../redux/actions/usersActions'
+import { messageSelector } from '../../redux/reducer/usersReducer'
 import { imgLogin } from '../../shared/assets/icons/all-icons'
 import './Login.css'
 
 /*
-  Home es el componente principal donde el usuario encuentra:
-   • El header con los botones de navegación
-   • Las publicaciones
-   • Botón para crear publicación y subir al inicio
+  Login comprueba el usuario y contraseña enviando el siguiente objeto:
+	 * data: {
+	 *   userName : nombre de usuario (string),
+	 *   password: contraseña del usuario(string)
+	 * }
+	Respondiendo con la respuesta del selector message en un sweet alert
 */
 
 export default function Login() {
 	const dispatch = useDispatch()
+	const history = useHistory()
 
 	const message = useSelector(messageSelector)
 
@@ -29,6 +28,9 @@ export default function Login() {
 		userName: '',
 		password: '',
 	})
+
+	const [errorMessage, setErrorMessage] = useState('')
+
 	const sweetAlert = withReactContent(Swal)
 
 	const handleInputChange = (event) => {
@@ -38,42 +40,27 @@ export default function Login() {
 		})
 	}
 
-	function checkLogin(e) {
+	function handleLogin(e) {
 		e.preventDefault()
 
-		//const usernames = users.map((u) => u.user_Name)
-
-		dispatch(authUserAsync(datos))
-
-		console.log(message)
-
-		sweetAlert.fire({
-			title: <strong>Oops...</strong>,
-			html: <i>{message}</i>,
-			icon: 'error',
-		})
-
-		/* 		if (!usernames.includes(datos.userName)) {
+		if (errorMessage.length) {
 			sweetAlert.fire({
 				title: <strong>Oops...</strong>,
 				html: <i>{message}</i>,
 				icon: 'error',
 			})
-		} else if (usernames.includes(datos.userName)) {
-			sweetAlert.fire({
-				position: 'center ',
-				icon: 'success',
-				title: 'El usuario ingresó correctamente',
-				showConfirmButton: false,
-				timer: 1500,
-			})
+		} else {
 			history.push('/reply/home')
-		} */
+		}
 	}
 
 	useEffect(() => {
-		dispatch(getAllUsersAsync())
-	}, [dispatch])
+		setErrorMessage(message)
+	}, [dispatch, message])
+
+	useEffect(() => {
+		dispatch(authUserAsync(datos))
+	}, [dispatch, datos])
 
 	return (
 		<div className='container-fluid bg container-flex-center'>
@@ -103,7 +90,7 @@ export default function Login() {
 					</div>
 
 					<div className='btnPadding'>
-						<button type='submit' className='btnLogin' onClick={checkLogin}>
+						<button type='submit' className='btnLogin' onClick={handleLogin}>
 							Login
 						</button>
 					</div>
