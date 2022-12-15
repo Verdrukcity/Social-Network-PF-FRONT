@@ -98,7 +98,7 @@ const Register = () => {
     })
   }
 
-  const enviarDatos = async (event) => {
+  const enviarDatos = (event) => {
     event.preventDefault()
 
     if (
