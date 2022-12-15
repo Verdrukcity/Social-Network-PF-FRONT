@@ -39,7 +39,7 @@ export default function Home() {
   let categories = useSelector((state) => state.categories.name)
 
   let userDetail = useSelector((state) => state.posts.userDetail)
-  
+
   const categoriesArr = categories?.map((c) => c.category)
 
   const dispatch = useDispatch()
