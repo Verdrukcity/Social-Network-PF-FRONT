@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react'
-import { useDispatch, useSelector, useStore } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import Select from 'react-select'
 import { SelectDatepicker } from 'react-select-datepicker'
@@ -46,8 +46,6 @@ const Register = () => {
   // const [botonSubmit, setBotonSubmits] = useState(true)
   const [estiloInput, setEstiloInput] = useState('formImput')
   const [estiloEmail, setEstiloEmail] = useState('formImput')
-
-  const createdStatus = (useSelector(state => state.users.userCreated))
 
   useEffect(() => {
     dispatch(getAllCountriesAsync())
