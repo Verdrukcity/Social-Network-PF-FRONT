@@ -3,6 +3,7 @@ import posts from '../reducer/postsReducer'
 import comments from '../reducer/commentsReducer'
 import categories from '../reducer/categoriesReducer'
 import countries from '../reducer/countriesReducer'
+import pago from '../reducer/pagoReducer'
 
 
 const store = configureStore({
@@ -11,6 +12,7 @@ const store = configureStore({
     countries: countries,
     comments: comments,
     categories: categories,
+    pago:pago,
   },
 })
 
