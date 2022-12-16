@@ -9,10 +9,11 @@ import './Register.css'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import { createUser } from '../../redux/actions/usersActions'
+import bcrypt from 'bcryptjs';
+
 
 
 const Register = () => {
-
   const MySwal = withReactContent(Swal)
   const dispatch = useDispatch()
   const history = useHistory()
@@ -118,8 +119,23 @@ const Register = () => {
     }
     else {
       //de country solo necesito el id para que lo busque en la db, y el birthdate era un objeto y necesita un string
-      let userToCreate = {...datos,country: datos.country.value ,birthdate: datos.birthdate.toString()}
+
+      //encripta contraseña
+      let hashedPass = bcrypt.hashSync(datos.password, 10)
+      
+      //objeto enviado para la creacion de usuario
+      let userToCreate = {
+        user_Name: datos.user_Name,
+        name: datos.name,
+        lastname: datos.lastname,
+        email: datos.email,
+        country: datos.country.value ,
+        birthdate: datos.birthdate.toString(), 
+        password: hashedPass
+      }
+      
       dispatch(createUser(userToCreate))
+
       MySwal.fire({
         position: 'top-end',
         icon: 'success',
