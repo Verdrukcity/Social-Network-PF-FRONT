@@ -3,14 +3,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import Select from 'react-select'
 import { SelectDatepicker } from 'react-select-datepicker'
-import { allCountries } from '../../redux/reducer/countriesReducer'
 import { getAllCountriesAsync } from '../../redux/actions/countriesActions'
 import './Register.css'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import { createUser } from '../../redux/actions/usersActions'
 import bcrypt from 'bcryptjs';
-
+import { crearUsuario } from '../EmailConfirmation/EmailConfirmation'
 
 
 const Register = () => {
@@ -81,7 +80,8 @@ const Register = () => {
       if (/^[0-9]$/.test(entrada)) {
 
         MySwal.fire({
-          position: 'top-end',
+          // position: 'top-end',
+          position: 'center',
           icon: 'error',
           title: ('no se permiten numeros en el  ' + event.target.name),
           showConfirmButton: false,
@@ -119,6 +119,7 @@ const Register = () => {
     }
     else {
       //de country solo necesito el id para que lo busque en la db, y el birthdate era un objeto y necesita un string
+      crearUsuario(datos.email, datos.password)
 
       //encripta contraseña
       let hashedPass = bcrypt.hashSync(datos.password, 10)
@@ -166,7 +167,7 @@ const Register = () => {
   }
   return (
     <Fragment>
-      <div className='container-fluid container-flex-center bg'>
+      <div className='container-fluid container-flex-center'>
         <form className='formulario container-flex-center' onSubmit={enviarDatos}>
           <h1 className='replyTitle adjust-repli-size'>Reply</h1>
           <div className='container-flex-center container-imputs-register'>
