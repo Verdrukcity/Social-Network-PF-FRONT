@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { getAllUsers, postUser } from '../reducer/usersReducer'
+import { getAllUsers, postUser, userError } from '../reducer/usersReducer'
 
 export const createUser = (data) => {
   return async function (dispatch) {
@@ -7,7 +7,8 @@ export const createUser = (data) => {
       let created = await axios.post(`http://127.0.0.1:3001/user`, data)
       dispatch(postUser(created.data))
     } catch (error) {
-      console.log(error)
+      const errorFromBack = error.response.data
+      dispatch(userError(errorFromBack))
     }
   }
 }
