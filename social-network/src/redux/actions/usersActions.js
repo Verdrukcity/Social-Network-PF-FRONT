@@ -4,6 +4,7 @@ import {
 	getAllUsers,
 	postUser,
 	userError,
+	sendToken,
 } from '../reducer/usersReducer'
 
 export const createUser = (data) => {
@@ -42,4 +43,12 @@ export const authUserAsync = (data) => async (dispatch) => {
 
 	const res = await userPromise
 	return dispatch(authUser(res))
+}
+
+export const sendTokenAction = (data) => async (dispatch) => {
+	try {
+		dispatch(sendToken(data))
+	} catch (error) {
+		console.error(error)
+	}
 }
