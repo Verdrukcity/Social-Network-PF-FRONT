@@ -36,6 +36,7 @@ export const authUserAsync = (data) => async (dispatch) => {
 	 * }
 	 */
 
+	// TODO: si la data está vacía no hacer dispatch
 	const userPromise = axios
 		.post('http://127.0.0.1:3001/authuser', data)
 		.then((res) => res.data)

@@ -13,30 +13,30 @@ import {
  */
 
 export const getAllPostsAsync = (data) => async (dispatch) => {
-	try {
-		const config = {
-			headers: {
-				'auth-token': data,
-				'Content-type': 'application/json; charset=UTF-8',
-				Authorization: data,
-			},
-		}
-
-		const authPost = axios
-			.get('http://127.0.0.1:3001/create', config)
-			.then((res) => {
-				console.log('RES: ', res)
-				return res.data
-			})
-			.catch((err) => console.error('CATCH: ', err))
-
-		const res = await authPost
-
-		return dispatch(getAllPosts(res))
-	} catch (error) {
-		console.log('ERROR: ', error)
-	}
+	const auth = await axios.get(`http://127.0.0.1:3001/create?token=${data}`)
+	return dispatch(getAllPosts(auth.data.data))
 }
+
+/* export const getAllPostsAsync = (data) => async (dispatch) => {
+	const config = {
+		headers: {
+			'auth-token': data,
+			'Content-type': 'application/json; charset=UTF-8',
+			'Authorization': `Bearer: ${data}`,
+		},
+	}
+
+	const authPost = axios
+		.get('http://127.0.0.1:3001/create', config)
+		.then((res) => {
+			return res.data
+		})
+		.catch((err) => console.error('CATCH: ', err))
+
+	const res = await authPost
+
+	return dispatch(getAllPosts(res.data))
+} */
 
 export const getUserDetailAsync = () => (dispatch) => {
 	try {
