@@ -4,6 +4,7 @@ import {
 	getAllUsers,
 	postUser,
 	userError,
+	sendToken,
 } from '../reducer/usersReducer'
 
 export const createUser = (data) => {
@@ -35,6 +36,7 @@ export const authUserAsync = (data) => async (dispatch) => {
 	 * }
 	 */
 
+	// TODO: si la data está vacía no hacer dispatch
 	const userPromise = axios
 		.post('http://127.0.0.1:3001/authuser', data)
 		.then((res) => res.data)
@@ -42,4 +44,12 @@ export const authUserAsync = (data) => async (dispatch) => {
 
 	const res = await userPromise
 	return dispatch(authUser(res))
+}
+
+export const sendTokenAction = (data) => async (dispatch) => {
+	try {
+		dispatch(sendToken(data))
+	} catch (error) {
+		console.error(error)
+	}
 }

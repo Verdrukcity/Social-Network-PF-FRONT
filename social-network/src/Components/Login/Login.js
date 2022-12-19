@@ -4,7 +4,10 @@ import { Link } from 'react-router-dom'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
-import { authUserAsync } from '../../redux/actions/usersActions'
+import {
+	authUserAsync,
+	sendTokenAction,
+} from '../../redux/actions/usersActions'
 import { messageSelector } from '../../redux/reducer/usersReducer'
 import { imgLogin } from '../../shared/assets/icons/all-icons'
 import './Login.css'
@@ -33,6 +36,18 @@ export default function Login() {
 
 	const sweetAlert = withReactContent(Swal)
 
+	const Toast = Swal.mixin({
+		toast: true,
+		position: 'top-end',
+		showConfirmButton: false,
+		timer: 3000,
+		timerProgressBar: true,
+		didOpen: (toast) => {
+			toast.addEventListener('mouseenter', Swal.stopTimer)
+			toast.addEventListener('mouseleave', Swal.resumeTimer)
+		},
+	})
+
 	const handleInputChange = (event) => {
 		setDatos({
 			...datos,
@@ -43,13 +58,26 @@ export default function Login() {
 	function handleLogin(e) {
 		e.preventDefault()
 
+		// Se revisa y envía el error en el if e ingresa en el else
 		if (errorMessage.length) {
 			sweetAlert.fire({
 				title: <strong>Oops...</strong>,
 				html: <i>{message}</i>,
 				icon: 'error',
 			})
-		} else {
+		} else if (message.message) {
+			Toast.fire({
+				icon: 'success',
+				title: 'El usuario ingresó correctamente',
+			})
+
+			// Si el usuario ingresa sin problemas guardamos el token
+			const isLogged = message.data.token
+			if (isLogged) localStorage.setItem('token', isLogged)
+			const token = localStorage.getItem('token')
+
+			dispatch(sendTokenAction(token))
+
 			history.push('/reply/home')
 		}
 	}
