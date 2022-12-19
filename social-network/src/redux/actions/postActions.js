@@ -13,17 +13,29 @@ import {
  */
 
 export const getAllPostsAsync = (data) => async (dispatch) => {
-	const headers = {
-		'auth-token': data,
+	try {
+		const config = {
+			headers: {
+				'auth-token': data,
+				'Content-type': 'application/json; charset=UTF-8',
+				Authorization: data,
+			},
+		}
+
+		const authPost = axios
+			.get('http://127.0.0.1:3001/create', config)
+			.then((res) => {
+				console.log('RES: ', res)
+				return res.data
+			})
+			.catch((err) => console.error('CATCH: ', err))
+
+		const res = await authPost
+
+		return dispatch(getAllPosts(res))
+	} catch (error) {
+		console.log('ERROR: ', error)
 	}
-
-	const postPromise = axios
-		.get('http://127.0.0.1:3001/create', {}, { headers })
-		.then((res) => res.data)
-		.catch((err) => console.error('ERR: ', err))
-
-	const promiseResponse = await postPromise
-	dispatch(getAllPosts(promiseResponse))
 }
 
 export const getUserDetailAsync = () => (dispatch) => {

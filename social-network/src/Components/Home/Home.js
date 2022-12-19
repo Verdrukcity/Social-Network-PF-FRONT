@@ -1,10 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-/* import {
-  getAllPostsAsync,
-  getByCategory,
-  getUserDetailAsync,
-} from '../../redux/reducer/postsReducer' */
 import {
 	getAllPostsAsync,
 	getUserDetailAsync,
@@ -51,7 +46,9 @@ export default function Home() {
 
 	useEffect(() => {
 		/**me traigo todos los posts */
-		dispatch(getAllPostsAsync(token))
+		if (token) {
+			dispatch(getAllPostsAsync(token))
+		}
 		/**me traigo el detalle del usuario */
 		dispatch(getUserDetailAsync())
 	}, [dispatch, token])
@@ -81,10 +78,12 @@ export default function Home() {
 
 	useEffect(() => {
 		// si hay elementos activos despacha una acción de filtrado
-		activeCategories.size === 0
-			? dispatch(getAllPostsAsync())
-			: dispatch(getByCategory(Array.from(activeCategories)))
-	}, [dispatch, activeCategories])
+		if (activeCategories.size === 0) {
+			if (token) dispatch(getAllPostsAsync(token))
+		} else {
+			dispatch(getByCategory(Array.from(activeCategories)))
+		}
+	}, [dispatch, activeCategories, token])
 
 	// END FILTER BY CATEGORIES
 
