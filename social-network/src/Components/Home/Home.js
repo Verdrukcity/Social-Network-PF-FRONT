@@ -124,6 +124,7 @@ export default function Home() {
 								userImg={data.userId.image_profil}
 								categories={data.category}
 								comments={data.commentId}
+								stripeId={data.userStripe}
 							/>
 						)
 					})}
