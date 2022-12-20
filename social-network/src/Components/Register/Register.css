@@ -1,31 +1,32 @@
+.formulario {
 
-.formulario{
-
-        height: 750px;
-        width: 650px;
-        border-radius: 15px;
-        background-color: var(--main-gray);
-        border: 2px solid transparent;
-        padding: 50px;
-        position: relative;
-        flex-direction: column;
-        overflow-y: hidden;
+    height: 750px;
+    width: 650px;
+    border-radius: 15px;
+    background-color: var(--main-gray);
+    border: 2px solid transparent;
+    padding: 50px;
+    position: relative;
+    flex-direction: column;
+    overflow-y: hidden;
 }
-.container-form-register{
+
+.container-form-register {
     margin: 10px;
 }
 
-    .container-imputs-register{
-        flex-direction: column;
-    }
+.container-imputs-register {
+    flex-direction: column;
+}
 
-.selectFormulario{
+.selectFormulario {
     display: flex;
     flex-direction: column;
     border-color: transparent;
     padding: 10px;
 }
-.botonRegister{
+
+.botonRegister {
     border-radius: 15px;
     height: 40px;
     width: 150px;
@@ -35,59 +36,93 @@
     border: 2px solid transparent;
     margin-left: 20px;
     font-family: Georgia, 'Times New Roman', Times, serif;
-    
+
 }
 
-.country{
+.country {
 
     padding: 10px;
     order: 2px solid transparent;
 }
+
 .formImputMal {
 
     border-radius: 15px;
     height: 30px;
     width: 200px;
     border: 2px solid transparent;
-   border-color: rgb(201, 9, 9);
+    border-color: rgb(201, 9, 9);
 
 }
-.adjust-repli-size{
+
+.adjust-repli-size {
     font-size: 80px;
 }
-@media(max-width: 450px){
-    .formulario{
+
+@media(max-width: 450px) {
+    .formulario {
         width: 95%;
         height: 95%;
     }
-    .replyTitle{
+
+    .replyTitle {
         display: none;
     }
-    .formImput{
+
+    .formImput {
         width: 90%;
         height: 20px;
         font-size: 18px;
+        border-radius: 15px;
+        border: 2px solid transparent;
     }
-   .select-date-register{
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    color: gray;
-    width: 150px;
-   }
-   .botonPadding{
-    padding: 0;
-   }
-}
-@media(min-width: 450px){
-   
-    .formImput{
+
+    .formImputMal {
+
         width: 100%;
         height: 36px;
+        border-radius: 15px;
+        border: 2px solid transparent;
+        text-align: center;
+        border-color: rgb(201, 9, 9);
+    }
+
+    .select-date-register {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        color: gray;
+        width: 150px;
+    }
+
+    .botonPadding {
+        padding: 0;
     }
 }
-.labelPais{
-    margin-top: 8px;
+
+@media(min-width: 450px) {
+
+    .formImput {
+        width: 100%;
+        height: 36px;
+        border-radius: 15px;
+        border: 2px solid transparent;
+        text-align: center;
+    }
+
+    .formImputMal {
+
+        width: 100%;
+        height: 36px;
+        border-radius: 15px;
+        border: 2px solid transparent;
+        text-align: center;
+        border-color: rgb(201, 9, 9);
+    }
+}
+
+.labelPais {
+    margin-top: 0.5rem;
     color: black;
     font-size: large;
 }
