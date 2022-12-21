@@ -144,8 +144,8 @@ export default function Home() {
 								categories={data.category}
 								comments={data.commentId}
 								stripeId={data.userStripe}
-								likes = {data.likes}
-								logedUser = {id}
+								likes={data.likes}
+								logedUser={id}
 							/>
 						)
 					})}

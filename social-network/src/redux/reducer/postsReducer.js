@@ -51,16 +51,17 @@ export const postSlice = createSlice({
 		},
 		orderByLikes: (state) => {
 			// ordenamiento por likes de mayor a menor
-			const orderedPosts = state.posts?.map((post) => {
-				return post.likes.length
-			})
 
-			state.posts = orderedPosts.sort((a, b) => a - b)
+			const orderedPosts = state.posts.sort(
+				(a, b) => a.likes.length - b.likes.length
+			)
+
+			state.posts = orderedPosts
 		},
 		likePost: (state, action) => {
 			state.like = action.payload
 			console.log(state.like)
-		}
+		},
 	},
 })
 
