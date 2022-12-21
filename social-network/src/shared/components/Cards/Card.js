@@ -6,6 +6,9 @@ import { useDispatch } from 'react-redux'
 import { likeIcon, payIcon, sendIcon, shareIcon } from '../../assets/icons/all-icons'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import {
+  chekout
+} from '../../../redux/actions/pagoActions'
 // the props we are going to use are:
 // img, username, imgUser, text
 //hacer un efecto para ir a details, cuando paso por sobre la foto que se haga una spmbra o se agrande un poco...
@@ -34,7 +37,49 @@ function Card(props) {
             [event.target.name]: event.target.value
         })
     };
+   const pagoStripe=async()=>{
+    const price=""
+    MySwal.fire({
+        position: 'center',
+        input:"select",
+		inputOptions: {
+    '1': '$1',
+    '5': '$5',
+    '10': '$10'
+  },
+  inputPlaceholder: 'Select donation ',
+        icon: 'question',
+        title: 'Cuanto deseas donar',
+        showConfirmButton: true,
+		showCancelButton:true,
+        
+      }).then(async(result) => {
+  /* Read more about isConfirmed, isDenied below */
+  if (result.isConfirmed) {
 
+    if(result.value ==='1') price="price_1MFR4BAFCTt3dg6N5rtauWLe"
+    if(result.value ==='5') price="price_1MFR8nAFCTt3dg6Nlc0bydXW"
+    if(result.value ==='10') price="price_1MFR9oAFCTt3dg6NIuUBD8gC"
+
+    
+     const data={
+        id: props.stripeId,
+        price:price
+    }
+        await dispatch(chekout(data))
+
+        Swal.fire("realizaste donacion de $" + result.value + " Muchas gracias!!")
+  } else {
+    Swal.fire('Donacion cancelada')
+    return;
+  }
+})
+
+     
+   
+
+
+   }
     const handleSubmit = (e) => {
         e.preventDefault()
         
@@ -105,7 +150,7 @@ function Card(props) {
                     <img src={sendIcon} onClick={handleSubmit} className='curser-pointer-card icon-size m-2 ' alt='icon de share'/>        
                 </div>
                 <div className='d-flex justify-content-center align-items-center'>
-                    <img src={payIcon} className='icon-size m-2' alt='icon de pay'/>
+                    {props.stripeId && <img src={payIcon}  onClick={pagoStripe} className='icon-size m-2' alt='icon de pay'/>}
                     <img src={shareIcon} className='icon-size m-2' alt='icon de share'/>
                 </div>
             </div>
