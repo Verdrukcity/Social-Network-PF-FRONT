@@ -9,6 +9,7 @@ import withReactContent from 'sweetalert2-react-content'
 import {
   chekout
 } from '../../../redux/actions/pagoActions'
+import {likePostAsync} from '../../../redux/actions/postActions'
 // the props we are going to use are:
 // img, username, imgUser, text
 //hacer un efecto para ir a details, cuando paso por sobre la foto que se haga una spmbra o se agrande un poco...
@@ -73,13 +74,14 @@ function Card(props) {
     Swal.fire('Donacion cancelada')
     return;
   }
-})
+    }) 
+}
 
-     
-   
+    const handleLike = (postId, userLoged) => {
+        dispatch(likePostAsync(postId, userLoged))
+        history.push('/reply/home')
+    }    
 
-
-   }
     const handleSubmit = (e) => {
         e.preventDefault()
         
@@ -142,8 +144,8 @@ function Card(props) {
                         
             <div className='comments p-2 d-flex align-items-center justify-content-evenly m-0 p-0'>
                 <div className='d-flex  flex-column'>
-                    <img src={likeIcon} className='icon-size' alt='icon de likes'/>
-                    <p className='fw-bold m-0'>111</p>
+                    <img src={likeIcon} className='icon-size' alt='icon de likes' onClick={e => {handleLike(props.id, props.logedUser)}}/>
+                    <p className='fw-bold m-0'>{props.likes.length}</p>
                 </div>
                 <div className='inp p-2 d-flex'>
                     <input className='inp text-start' value={input.text} name='text' placeholder='Escribe un comentario ...' onChange={handleInputChange} />
