@@ -10,6 +10,7 @@ const initialState = {
 	comments: [],
 	detail: {},
 	userDetail: {},
+	like: {},
 }
 
 // REDUCERS
@@ -48,6 +49,10 @@ export const postSlice = createSlice({
 
 			state.posts = filterCategories
 		},
+		likePost: (state, action) => {
+			state.like = action.payload
+			console.log(state.like)
+		}
 	},
 })
 
@@ -61,6 +66,7 @@ export const {
 	createPosts,
 	getPostDetail,
 	getDetailUser,
+	likePost,
 } = postSlice.actions
 
 export default postSlice.reducer
