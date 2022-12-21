@@ -4,6 +4,7 @@ import {
 	createPosts,
 	getPostDetail,
 	getDetailUser,
+	likePost,
 } from '../reducer/postsReducer'
 
 //ETAS ACCIONES NO SIRVEN POR PROBLEMAS CON EL REDUCER
@@ -73,5 +74,16 @@ export const getPostDetailAsync = (postId) => async (dispatch) => {
 		dispatch(getPostDetail(details.data))
 	} catch (error) {
 		console.log(error)
+	}
+}
+
+export const likePostAsync = (postId, usersLiked) => async (dispatch) => {
+	console.log(usersLiked)
+	try{
+		const likeStatus = await axios.post(`http://127.0.0.1:3001/like/${postId}`, {usersLiked})
+		dispatch(likePost(likeStatus.data))
+	}
+	catch(err){
+		console.log(err)
 	}
 }

@@ -12,6 +12,12 @@
     width: 25px;
     height: 25px;
     color: #D77937;
+    cursor: pointer;
+}
+
+.icon-size:hover{
+    width: 30px;
+    height: 30px;
 }
 
 #cardContainer{
