@@ -32,10 +32,12 @@ export default function Home() {
 	 */
 	const [open, setOpen] = useState(false)
 	const posts = useSelector((state) => state.posts.posts)
-	const token = useSelector(tokenSelector)
+	// const token = useSelector(tokenSelector)
+	const token = localStorage.getItem("token")
 	let categories = useSelector((state) => state.categories.name)
 
 	let userDetail = useSelector((state) => state.posts.userDetail)
+	const id = window.localStorage.getItem('userId');
 
 	const categoriesArr = categories?.map((c) => c.category)
 
@@ -48,9 +50,10 @@ export default function Home() {
 		/**me traigo todos los posts */
 		if (token) {
 			dispatch(getAllPostsAsync(token))
+			
 		}
 		/**me traigo el detalle del usuario */
-		dispatch(getUserDetailAsync())
+		dispatch(getUserDetailAsync(id))
 	}, [dispatch, token])
 
 	const ref = useRef(null)

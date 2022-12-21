@@ -75,7 +75,7 @@ export default function Login() {
 			const isLogged = message.data.token
 			if (isLogged) localStorage.setItem('token', isLogged)
 			const token = localStorage.getItem('token')
-
+			localStorage.setItem('userId', message.data.id)
 			dispatch(sendTokenAction(token))
 
 			history.push('/reply/home')

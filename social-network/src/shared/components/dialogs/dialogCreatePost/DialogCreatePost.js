@@ -57,9 +57,11 @@ export default function DialogCreatePost({
 	const [textArea, SetTextArea] = React.useState('')
 
 	const [loader, setLoader] = useState(false)
-
+	const id = localStorage.getItem('userId');
+	const token = localStorage.getItem("token");
 	useEffect(() => {
-		dispatch(getUserDetailAsync())
+		dispatch(getUserDetailAsync(id))
+
 	}, [dispatch])
 
 	const [ImageSelectedPrevious, setImageSelectedPrevious] = React.useState(null)
@@ -124,7 +126,7 @@ export default function DialogCreatePost({
 			if (result.isConfirmed) {
 				setOpen(true)
 				setLoader(true)
-				await dispatch(CreatePostsAsync(formData))
+				await dispatch(CreatePostsAsync(formData, id, token))
 				setLoader(false)
 				Swal.fire('Posted!', 'Your file has been Posted.', 'success')
 			}

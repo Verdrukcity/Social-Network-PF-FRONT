@@ -36,7 +36,7 @@ export const userSlice = createSlice({
 // SELECTOR
 export const allUsersSelector = (state) => state.users.user
 export const messageSelector = (state) => state.users.message
-export const tokenSelector = (state) => state.users.token
+// export const tokenSelector = (state) => state.users.token
 
 export const { postUser, getAllUsers, authUser, userError, sendToken } =
 	userSlice.actions
