@@ -36,6 +36,7 @@ export default function Home() {
 	let categories = useSelector((state) => state.categories.name)
 
 	let userDetail = useSelector((state) => state.posts.userDetail)
+	const id = window.localStorage.getItem('userId');
 
 	const categoriesArr = categories?.map((c) => c.category)
 
@@ -50,7 +51,7 @@ export default function Home() {
 			dispatch(getAllPostsAsync(token))
 		}
 		/**me traigo el detalle del usuario */
-		dispatch(getUserDetailAsync())
+		dispatch(getUserDetailAsync(id))
 	}, [dispatch, token])
 
 	const ref = useRef(null)
