@@ -48,10 +48,10 @@ export const getUserDetailAsync = (id) => (dispatch) => {
 	}
 }
 
-export const CreatePostsAsync = (data, id) => (dispatch) => {
+export const CreatePostsAsync = (data, id, token) => (dispatch) => {
 	try {
 		axios
-			.post(`http://127.0.0.1:3001/create/${id}`, data, {
+			.post(`http://127.0.0.1:3001/create/${id}?token=${token}`, data, {
 				// Endpoint to send files
 				headers: {
 					// Add any auth token here

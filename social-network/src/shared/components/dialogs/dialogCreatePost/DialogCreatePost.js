@@ -57,7 +57,8 @@ export default function DialogCreatePost({
 	const [textArea, SetTextArea] = React.useState('')
 
 	const [loader, setLoader] = useState(false)
-	const id = window.localStorage.getItem('userId');
+	const id = localStorage.getItem('userId');
+	const token = localStorage.getItem("token");
 	useEffect(() => {
 		dispatch(getUserDetailAsync(id))
 
@@ -125,7 +126,7 @@ export default function DialogCreatePost({
 			if (result.isConfirmed) {
 				setOpen(true)
 				setLoader(true)
-				await dispatch(CreatePostsAsync(formData, "63a1fe7ab19b2b73a6f4c81f"))
+				await dispatch(CreatePostsAsync(formData, id, token))
 				setLoader(false)
 				Swal.fire('Posted!', 'Your file has been Posted.', 'success')
 			}
