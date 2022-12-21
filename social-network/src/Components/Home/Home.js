@@ -4,7 +4,11 @@ import {
 	getAllPostsAsync,
 	getUserDetailAsync,
 } from '../../redux/actions/postActions'
-import { getByCategory } from '../../redux/reducer/postsReducer'
+import {
+	allPostsSelector,
+	getByCategory,
+	orderByLikes,
+} from '../../redux/reducer/postsReducer'
 import { tokenSelector } from '../../redux/reducer/usersReducer'
 import { arrowUp, plus } from '../../shared/assets/icons/all-icons'
 import ButtonActions from '../../shared/components/ButtonActions/ButtonActions'
@@ -19,10 +23,10 @@ import './Home.css'
    • El header con los botones de navegación
    • Las publicaciones (la ruta es /reply)
    • Botón para crear publicación y subir al inicio
-  Se realizó la importacion del componente ButtonActtions, 
-  este tiene un boton de forma global funcional,
-  el mismo ejecuta una accion que le pasas por props,
-  tambien se le puede establecer el estilo (aquí usamos el id)
+  Se realizó la importación del componente ButtonActions, 
+  este tiene un botón de forma global funcional,
+  el mismo ejecuta una acción que le pasas por props,
+  también se le puede establecer el estilo (aquí usamos el id)
   y el tipo, que no es demasiado relevante, pero funciona!!
 */
 
@@ -31,13 +35,13 @@ export default function Home() {
 	 * estado local para abrir y cerrar el dialog del create
 	 */
 	const [open, setOpen] = useState(false)
-	const posts = useSelector((state) => state.posts.posts)
+	const posts = useSelector(allPostsSelector)
 	// const token = useSelector(tokenSelector)
-	const token = localStorage.getItem("token")
+	const token = localStorage.getItem('token')
 	let categories = useSelector((state) => state.categories.name)
 
 	let userDetail = useSelector((state) => state.posts.userDetail)
-	const id = window.localStorage.getItem('userId');
+	const id = window.localStorage.getItem('userId')
 
 	const categoriesArr = categories?.map((c) => c.category)
 
@@ -46,11 +50,16 @@ export default function Home() {
 	 * Dispatch y useEffect para traer todos los posts del back
 	 */
 
+	const [actualPosts, setActualPosts] = useState()
+
+	useEffect(() => {
+		setActualPosts(posts)
+	}, [posts])
+
 	useEffect(() => {
 		/**me traigo todos los posts */
 		if (token) {
 			dispatch(getAllPostsAsync(token))
-			
 		}
 		/**me traigo el detalle del usuario */
 		dispatch(getUserDetailAsync(id))
@@ -90,6 +99,12 @@ export default function Home() {
 
 	// END FILTER BY CATEGORIES
 
+	// Order likes
+
+	function fnOrderByLikes() {
+		dispatch(orderByLikes())
+	}
+
 	const addPost = (event) => {
 		/*Esta función debería agregar un post*/
 		event.preventDefault()
@@ -105,6 +120,7 @@ export default function Home() {
 		<div ref={ref} id='home' className='mt-2'>
 			<Header
 				filterByCategory={filterByCategory}
+				orderByLikes={fnOrderByLikes}
 				innerContent={categoriesArr}
 			/>
 			<DialogCreatePost
@@ -114,7 +130,7 @@ export default function Home() {
 				userDetail={userDetail}
 			/>
 			<div className='container d-flex flex-column justify-content-center mt-10'>
-				{posts &&
+				{actualPosts &&
 					posts.map((data) => {
 						return (
 							<Card
