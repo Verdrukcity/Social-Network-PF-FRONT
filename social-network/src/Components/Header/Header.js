@@ -5,6 +5,7 @@ import { getAllCategoriesAsync } from '../../redux/actions/categoriesActions'
 import * as allIcons from '../../shared/assets/icons/all-icons'
 import ButtonActions from '../../shared/components/ButtonActions/ButtonActions'
 import DialogCategories from '../../shared/components/dialogs/dialogCategories/DialogCategories.js'
+import { activeRoundedButton } from '../../shared/assets/globals'
 import './Header.css'
 
 /**
@@ -32,13 +33,6 @@ export default function Header({
 	}, [dispatch])
 
 	const [activeTrend, setActiveTrend] = useState(false)
-
-	const objStyleTrend = {
-		backgroundColor: '#cf4b2e',
-		borderRadius: '50%',
-		width: '40px',
-		height: '40px',
-	}
 
 	const goTo = (event) => {
 		switch (event.target.alt) {
@@ -78,7 +72,7 @@ export default function Header({
 						type='submit'
 						action={goTo}
 						id='all-icons'
-						styling={activeTrend ? objStyleTrend : {}}
+						styling={activeTrend ? activeRoundedButton : {}}
 						content={<img src={allIcons.trend} alt='icon-trend' />}
 					/>
 				</li>
@@ -90,14 +84,17 @@ export default function Header({
 						content={<img src={allIcons.explore} alt='icon-explore' />}
 					/>
 				</li>
-				<DialogCategories
-					filterByCategory={filterByCategory}
-					id='icon-categories'
-					buttonContent={
-						<img src={allIcons.categories} alt='icon-categories' />
-					}
-					innerContent={innerContent}
-				/>
+				<li id='icon-categories'>
+					<DialogCategories
+						filterByCategory={filterByCategory}
+						id='icon-categories'
+						buttonContent={
+							<img src={allIcons.categories} alt='icon-categories' />
+						}
+						innerContent={innerContent}
+					/>
+				</li>
+
 				<li id='icon-profile'>
 					<ButtonActions
 						type='submit'
