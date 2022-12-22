@@ -1,8 +1,9 @@
+import { useState } from 'react'
 import Box from '@mui/material/Box'
 import ClickAwayListener from '@mui/material/ClickAwayListener'
 import * as React from 'react'
 import './DialogCategories.css'
-import { activeRoundedButton } from '../../../assets/globals'
+import { activeRoundedButton, categoryBox } from '../../../assets/globals'
 
 /*
   Este Dialog permite mostrar en un cuadro aparte las categorías
@@ -14,9 +15,12 @@ export default function ClickAway({
 	buttonContent,
 	innerContent,
 	filterByCategory,
+	activeCategories,
 }) {
-	const [open, setOpen] = React.useState(false)
-	const [activeCategory, setActiveCategory] = React.useState(false)
+	const activeCategoriesArr = [...activeCategories]
+
+	const [open, setOpen] = useState(false)
+	const [activeCategory, setActiveCategory] = useState(false)
 
 	const handleClick = () => {
 		setActiveCategory(!activeCategory)
@@ -27,23 +31,6 @@ export default function ClickAway({
 		setOpen(false)
 	}
 
-	const styles = {
-		position: 'absolute',
-		top: 50,
-		right: -270,
-		zIndex: 1,
-		border: 'none',
-		borderRadius: '25px',
-		p: 1,
-		padding: '15px 70px',
-		width: '50vw',
-		height: 'auto',
-		textAlign: 'left',
-		bgcolor: '#D9D9D9',
-		boxShadow:
-			'rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px',
-	}
-
 	return (
 		<ClickAwayListener onClickAway={handleClickAway}>
 			<Box sx={{ position: 'relative' }}>
@@ -51,7 +38,7 @@ export default function ClickAway({
 					type='button'
 					onClick={handleClick}
 					style={
-						activeCategory
+						open && activeCategories.size > 0
 							? activeRoundedButton
 							: { border: 'none', backgroundColor: '#ff8d00' }
 					}
@@ -59,8 +46,8 @@ export default function ClickAway({
 					{buttonContent}
 				</button>
 				{open ? (
-					<Box sx={styles}>
-						<h3 className='categories-title'>Categorías destacadas</h3>
+					<Box sx={categoryBox}>
+						<p className='categories-title'>Categorías destacadas</p>
 						<section className='d-flex flex-wrap'>
 							{innerContent?.map((inner) => (
 								<button
@@ -70,6 +57,13 @@ export default function ClickAway({
 								>
 									{inner}
 								</button>
+							))}
+						</section>
+						<section className='d-flex flex-wrap'>
+							{activeCategoriesArr?.map((category) => (
+								<span className='badge text-bg-light mx-2 mt-4'>
+									{category}
+								</span>
 							))}
 						</section>
 					</Box>

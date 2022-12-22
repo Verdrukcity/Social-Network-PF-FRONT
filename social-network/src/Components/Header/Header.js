@@ -23,6 +23,7 @@ export default function Header({
 	filterByCategory,
 	innerContent,
 	orderByLikes,
+	activeCategories,
 }) {
 	const dispatch = useDispatch()
 
@@ -92,6 +93,7 @@ export default function Header({
 							<img src={allIcons.categories} alt='icon-categories' />
 						}
 						innerContent={innerContent}
+						activeCategories={activeCategories}
 					/>
 				</li>
 

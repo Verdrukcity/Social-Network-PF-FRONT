@@ -122,6 +122,7 @@ export default function Home() {
 				filterByCategory={filterByCategory}
 				orderByLikes={fnOrderByLikes}
 				innerContent={categoriesArr}
+				activeCategories={activeCategories}
 			/>
 			<DialogCreatePost
 				open={open}
