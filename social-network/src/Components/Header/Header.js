@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { getAllCategoriesAsync } from '../../redux/actions/categoriesActions'
@@ -31,12 +31,22 @@ export default function Header({
 		dispatch(getAllCategoriesAsync())
 	}, [dispatch])
 
+	const [activeTrend, setActiveTrend] = useState(false)
+
+	const objStyleTrend = {
+		backgroundColor: '#cf4b2e',
+		borderRadius: '50%',
+		width: '40px',
+		height: '40px',
+	}
+
 	const goTo = (event) => {
 		switch (event.target.alt) {
 			case 'icon-trend':
 				// history.push("/reply/trend");
 				// Debería traer los trends o enviar donde estén
 				orderByLikes()
+				setActiveTrend(!activeTrend)
 				break
 			case 'icon-explore':
 				// history.push("/reply/explore");
@@ -68,6 +78,7 @@ export default function Header({
 						type='submit'
 						action={goTo}
 						id='all-icons'
+						styling={activeTrend ? objStyleTrend : {}}
 						content={<img src={allIcons.trend} alt='icon-trend' />}
 					/>
 				</li>
