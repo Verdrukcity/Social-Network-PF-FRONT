@@ -49,12 +49,20 @@ export const postSlice = createSlice({
 
 			state.posts = filterCategories
 		},
+		orderByLikes: (state) => {
+			// ordenamiento por likes de mayor a menor
+			state.posts = state.posts.sort((a, b) => b.likes.length - a.likes.length)
+		},
 		likePost: (state, action) => {
 			state.like = action.payload
 			console.log(state.like)
-		}
+		},
 	},
 })
+
+// SELECTOR
+
+export const allPostsSelector = (state) => state.posts.posts
 
 /**
  * aquí se exportan todos los reducer y las actions.
@@ -66,6 +74,7 @@ export const {
 	createPosts,
 	getPostDetail,
 	getDetailUser,
+	orderByLikes,
 	likePost,
 } = postSlice.actions
 
