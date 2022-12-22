@@ -8,27 +8,23 @@ import ButtonActions from "../../shared/components/ButtonActions/ButtonActions";
 import "./Profile.css";
 
 export default function Profile(props) {
+	const id = localStorage.getItem('userId');
 	const user = useSelector((state) => state.posts.userDetail);
-
-	console.log(user)
-
-	// const caca = useSelector((state) => state.posts.userDetail)
 
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		dispatch(getUserDetailAsync());
+		dispatch(getUserDetailAsync(id));
 	}, [dispatch]);
 
 	let history = useHistory();
 
-	const goTo = () => {
+	const goTo = (e) => {
 		history.push("/reply/home");
 	};
 
 	return (
 		<div className="profile-container">
-			{console.log(user)}
 			<div className="goToHome">
 				<ButtonActions
 					type="submit"
@@ -40,7 +36,7 @@ export default function Profile(props) {
 			<div className="profile-container-dates">
 				<div className="profile-container-user">
 					<img
-						src={user ? user.image_profil : props.profileImage}
+						src={user.image_profil ? user.image_profil : props.profileImage}
 						alt="perfil"
 						className="user-image"
 					/>
@@ -72,15 +68,18 @@ export default function Profile(props) {
 							<Card
 								key={data._id}
 								id={data._id}
-								userId={data.userId}
+								userId={data.userId._id}
 								text={data.text}
 								img={data.multimedia}
 								username={user.user_Name}
-								userImg={user.image_profil}
+								userImg={user.image_profil || props.profileImage}
 								categories={data.category}
 								comments={data.commentId}
+								stripeId={data.userStripe}
+								likes = {data.likes}
+								logedUser = {id}
 							/>
-						);
+						)
 					})}
 			</div>
 		</div>
