@@ -7,7 +7,6 @@
 	padding: 20px;
 	font-family: "Inter", sans-serif;
 	font-style: italic;
-	color: white;
 }
 .profile-container h1 {
 	color: black;
@@ -46,6 +45,7 @@
 	font-weight: bold;
 	font-style: oblique;
 	margin: 10px;
+	color: white;
 }
 .profile-container-ff p {
 	text-align: right;
