@@ -147,6 +147,7 @@ export default function Home() {
 								stripeId={data.userStripe}
 								likes={data.likes}
 								logedUser={id}
+								resourseType = {data.resourseType}
 							/>
 						)
 					})}

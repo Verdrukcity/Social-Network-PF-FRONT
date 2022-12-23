@@ -110,7 +110,9 @@ function Card(props) {
                     <div className='container p-4 pb-0 m-0'>
                         <div className='d-flex col m-0'>
                             <div className='row-8 d-block'>
-                                <img className='imgCard' src={props.img || obj.img} alt='postImg'></img>
+                                {props.resourseType === "image"? <img className='imgCard' src={props.img || obj.img} alt='postImg'></img>:
+                                 <video className='imgCard' src={props.img || obj.img} alt= "video" controls width="320" height="240"/> }
+                                
                             </div>
 
                             <div className='row-2 ms-3'>
