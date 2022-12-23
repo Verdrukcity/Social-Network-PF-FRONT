@@ -78,7 +78,6 @@ export const getPostDetailAsync = (postId) => async (dispatch) => {
 }
 
 export const likePostAsync = (postId, usersLiked) => async (dispatch) => {
-	console.log(usersLiked)
 	try {
 		const likeStatus = await axios.post(
 			`http://127.0.0.1:3001/like/${postId}`,
