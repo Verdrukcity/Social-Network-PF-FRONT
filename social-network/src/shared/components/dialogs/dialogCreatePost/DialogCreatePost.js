@@ -164,7 +164,7 @@ export default function DialogCreatePost({
 								onChange={(e) => {
 									changeImage(e)
 								}}
-								accept='image/*'
+								accept='image/* video/*'
 								className='file-upload-input'
 							/>
 
