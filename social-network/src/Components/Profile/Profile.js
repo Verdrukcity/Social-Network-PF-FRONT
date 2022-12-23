@@ -8,14 +8,14 @@ import ButtonActions from "../../shared/components/ButtonActions/ButtonActions";
 import "./Profile.css";
 
 export default function Profile(props) {
-	const id = localStorage.getItem('userId');
+	const id = localStorage.getItem("userId");
 	const user = useSelector((state) => state.posts.userDetail);
 
 	const dispatch = useDispatch();
 
 	useEffect(() => {
 		dispatch(getUserDetailAsync(id));
-	}, [dispatch]);
+	}, [dispatch, id]);
 
 	let history = useHistory();
 
@@ -36,7 +36,7 @@ export default function Profile(props) {
 			<div className="profile-container-dates">
 				<div className="profile-container-user">
 					<img
-						src={user.image_profil ? user.image_profil : props.profileImage}
+						src={user.image_profil}
 						alt="perfil"
 						className="user-image"
 					/>
@@ -52,7 +52,7 @@ export default function Profile(props) {
 							Followers: <p>{props.followers}</p>
 						</span>
 					</div>
-					<div className="profile-container-ff" >
+					<div className="profile-container-ff">
 						<img src={allIcons.cash} alt="cashicon" />
 						<span>
 							Your balance: <p>$ {props.cashValue}</p>
@@ -72,14 +72,16 @@ export default function Profile(props) {
 								text={data.text}
 								img={data.multimedia}
 								username={user.user_Name}
-								userImg={user.image_profil || props.profileImage}
+								userImg={
+									user.image_profil || props.profileImage
+								}
 								categories={data.category}
 								comments={data.commentId}
 								stripeId={data.userStripe}
-								likes = {data.likes}
-								logedUser = {id}
+								likes={data.likes}
+								logedUser={id}
 							/>
-						)
+						);
 					})}
 			</div>
 		</div>
