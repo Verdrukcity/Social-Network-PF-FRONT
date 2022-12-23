@@ -3,15 +3,16 @@
     position: bottom;
     vertical-align:left;
     display: flex;
+    height: 45px;
+    width: 45px;
 }
 
 .logout-container{
 	background-color: #ff8d00;
     align-items: center;
-    border-radius: 15px;
-    height: 55px;
-    width: 55px;
+    border-radius: 10px;
+    height: 90%;
+    width: 90%;
     position: inherit;
-    padding: 10%;
-
+    padding: 12%;
 }

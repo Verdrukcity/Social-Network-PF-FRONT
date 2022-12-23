@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { logout } from "../../shared/assets/icons/all-icons";
 import './Logout.css'
-import { sendTokenAction } from "../../redux/actions/usersActions";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { useSelector } from "react-redux";
 
 export default function Logout() {
 
@@ -12,9 +10,12 @@ export default function Logout() {
 
     const handleClick = (e) => {
         e.preventDefault()
-        sendTokenAction(null)
+        localStorage.clear()
+        // localStorage.removeItem('token')
+        // localStorage.removeItem('userId')
         history.push('/reply/login')
     }
+
 
 
     return (
