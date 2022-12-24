@@ -2,7 +2,6 @@
 
 .profile-container {
 	background-color: #d9d9d9;
-	margin: 30px;
 	border-radius: 20px;
 	padding: 20px;
 	font-family: "Inter", sans-serif;
@@ -12,23 +11,21 @@
 	color: black;
 	margin: 50px 0px 0px 0px;
 }
-.goToHome {
-	display: flex;
-	transform: rotate(-90deg);
-	width: max-content;
+#all-icons-arrowBack {
+    background-color: #ff8d00;
+    padding: 5px;
+    border-radius: 25%;
+    height: 55px;
+    width: 55px;
+    border: none;
+}
+.all-icons-image {
+	width: 45px;
+	height: 45px;
 }
 .user-image {
 	width: 150px;
 	border-radius: 50%;
-}
-
-.profile-container-dates {
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-}
-.profile-container-dates {
-	margin: 20px 0px 0px 0px;
-	align-items: center;
 }
 
 .profile-container-ff {

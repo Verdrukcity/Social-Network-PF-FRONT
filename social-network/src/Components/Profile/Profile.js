@@ -1,16 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { getUserDetailAsync } from "../../redux/actions/postActions";
 import * as allIcons from "../../shared/assets/icons/all-icons";
 import Card from "../../shared/components/Cards/Card";
 import ButtonActions from "../../shared/components/ButtonActions/ButtonActions";
+import DialogUserUpdate from "../../shared/components/dialogs/dialogUserUpdate/DialogUserUpdate";
 import "./Profile.css";
 import Logout from "../Logout/Logout";
 
 export default function Profile(props) {
 	const id = localStorage.getItem("userId");
 	const user = useSelector((state) => state.posts.userDetail);
+
+	const [open, setOpen] = useState(false);
 
 	const dispatch = useDispatch();
 
@@ -24,37 +27,65 @@ export default function Profile(props) {
 		history.push("/reply/home");
 	};
 
+	const userUpdate = (event) => {
+		event.preventDefault();
+		setOpen(true);
+	};
+
 	return (
-		<div className="profile-container">
-			<div className="goToHome">
+		<div className="profile-container row d-flex w-99 m-3 justify-content-center">
+			<DialogUserUpdate
+				open={open}
+				setOpen={setOpen}
+				innerContent={["categoriesArr"]}
+				userDetail={user}
+			/>
+			<div className="col-5 d-flex justify-content-start w-50">
 				<ButtonActions
 					type="submit"
 					action={goTo}
-					id="all-icons"
-					content={<img src={allIcons.arrowUp} alt="icon-home" />}
+					id="all-icons-arrowBack"
+					content={
+						<img
+							src={allIcons.arrowBack}
+							className="all-icons-image"
+							alt="icon-home"
+						/>
+					}
 				/>
 			</div>
-			<div className="profile-container-logout">
+			<div className="col-5 d-flex justify-content-end w-50 align-items-center">
 				<Logout />
 			</div>
-			<div className="profile-container-dates">
-				<div className="profile-container-user">
+			<div className="col-10 row w-100 d-flex justify-content-center">
+				<div className="col-10 d-flex justify-content-end">
+					<ButtonActions
+						type="submit"
+						action={userUpdate}
+						id="all-icons"
+						content={
+							<img src={allIcons.editData} alt="user-update" />
+						}
+					/>
+				</div>
+				<div className="row col-5 justify-content-center align-items-center">
 					<img
 						src={user.image_profil || props.image_profil}
 						alt="perfil"
-						className="user-image"
+						className="user-image col-5"
 					/>
-
-					{/* <h3>{user && user.user_Name}</h3> */}
-					<h3>{user.user_Name || props.user_Name}</h3>
+					<h3 className="col-5">
+						{user.user_Name || props.user_Name}
+					</h3>
 				</div>
-				<div className="profile-container-balance">
+				<div className="profile-container-balance col-5">
 					<div className="profile-container-ff">
 						<span>
 							Follows: <p>{user.follow && props.follow}</p>
 						</span>
 						<span>
-							Followers: <p>{user.followers && props.followers}</p>
+							Followers:{" "}
+							<p>{user.followers && props.followers}</p>
 							{/* facilitaria para mostrar que follow y followers sean numeros y no un arreglos en el modelo de la DB */}
 						</span>
 					</div>
@@ -66,8 +97,15 @@ export default function Profile(props) {
 					</div>
 				</div>
 			</div>
-			<h1>Your posts</h1>
-			<div className="profile-container-posts">
+			{user.contents && user.contents.length ? (
+				<h1 className="col-10">Your posts</h1>
+			) : (
+				<h1>
+					Aun no tienes post empieza a compartir <br />
+					<a href="/reply/home">Ir al Home</a>
+				</h1>
+			)}
+			<div className="container d-flex flex-column justify-content-center mt-10">
 				{user.contents &&
 					user.contents.map((data) => {
 						return (
@@ -78,14 +116,13 @@ export default function Profile(props) {
 								text={data.text}
 								img={data.multimedia}
 								username={user.user_Name}
-								userImg={
-									user.image_profil || props.profileImage
-								}
+								userImg={user.image_profil}
 								categories={data.category}
 								comments={data.commentId}
 								stripeId={data.userStripe}
 								likes={data.likes}
 								logedUser={id}
+								resourseType={data.resourseType}
 							/>
 						);
 					})}
