@@ -6,16 +6,17 @@ import * as allIcons from "../../shared/assets/icons/all-icons";
 import Card from "../../shared/components/Cards/Card";
 import ButtonActions from "../../shared/components/ButtonActions/ButtonActions";
 import "./Profile.css";
+import Logout from "../Logout/Logout";
 
 export default function Profile(props) {
-	const id = localStorage.getItem('userId');
+	const id = localStorage.getItem("userId");
 	const user = useSelector((state) => state.posts.userDetail);
 
 	const dispatch = useDispatch();
 
 	useEffect(() => {
 		dispatch(getUserDetailAsync(id));
-	}, [dispatch]);
+	}, [dispatch, id]);
 
 	let history = useHistory();
 
@@ -33,26 +34,31 @@ export default function Profile(props) {
 					content={<img src={allIcons.arrowUp} alt="icon-home" />}
 				/>
 			</div>
+			<div className="profile-container-logout">
+				<Logout />
+			</div>
 			<div className="profile-container-dates">
 				<div className="profile-container-user">
 					<img
-						src={user.image_profil ? user.image_profil : props.profileImage}
+						src={user.image_profil || props.image_profil}
 						alt="perfil"
 						className="user-image"
 					/>
 
-					<h3>{user && user.user_Name}</h3>
+					{/* <h3>{user && user.user_Name}</h3> */}
+					<h3>{user.user_Name || props.user_Name}</h3>
 				</div>
 				<div className="profile-container-balance">
 					<div className="profile-container-ff">
 						<span>
-							Follows: <p>{props.follows}</p>
+							Follows: <p>{user.follow && props.follow}</p>
 						</span>
 						<span>
-							Followers: <p>{props.followers}</p>
+							Followers: <p>{user.followers && props.followers}</p>
+							{/* facilitaria para mostrar que follow y followers sean numeros y no un arreglos en el modelo de la DB */}
 						</span>
 					</div>
-					<div className="profile-container-ff" >
+					<div className="profile-container-ff">
 						<img src={allIcons.cash} alt="cashicon" />
 						<span>
 							Your balance: <p>$ {props.cashValue}</p>
@@ -72,14 +78,16 @@ export default function Profile(props) {
 								text={data.text}
 								img={data.multimedia}
 								username={user.user_Name}
-								userImg={user.image_profil || props.profileImage}
+								userImg={
+									user.image_profil || props.profileImage
+								}
 								categories={data.category}
 								comments={data.commentId}
 								stripeId={data.userStripe}
-								likes = {data.likes}
-								logedUser = {id}
+								likes={data.likes}
+								logedUser={id}
 							/>
-						)
+						);
 					})}
 			</div>
 		</div>
@@ -87,12 +95,12 @@ export default function Profile(props) {
 }
 
 Profile.defaultProps = {
-	profileImage:
+	image_profil:
 		"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
-	username: "User Default",
-	follows: "1",
+	user_Name: "User Default",
+	follow: "1",
 	followers: "100000",
-	cashValue: "1000000",
+	cashValue: "999",
 	userPosts: [
 		{
 			_id: "6393c28d810999a485add515",

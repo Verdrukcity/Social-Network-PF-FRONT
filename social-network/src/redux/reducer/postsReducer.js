@@ -55,7 +55,6 @@ export const postSlice = createSlice({
 		},
 		likePost: (state, action) => {
 			state.like = action.payload
-			console.log(state.like)
 		},
 	},
 })

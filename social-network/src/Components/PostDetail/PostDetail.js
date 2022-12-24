@@ -41,7 +41,8 @@ export default function PostDetail(props){
                 description: details.post.text,
                 postImg: details.post.multimedia,
                 categories: details.post.category,
-                comments: details.comments
+                comments: details.comments,
+                resourseType: details.resourseType
             })
         }
     }, [details])
@@ -54,7 +55,8 @@ export default function PostDetail(props){
                 <div className="row">
                 {/* primera columna con foto y cateogries */}
                 <div className="col-8 ">
-                    <img className="postImg w-100" alt="imagen-detail" src={postDetail.postImg}/>
+                    {postDetail.resourseType === "image"? <img className='imgCard' src={postDetail.postImg} alt='postImg'></img>:
+                    <video className='imgCard' src={postDetail.postImg} alt= "video" controls width="320" height="240"/> }
 
                     {/* Aqui va a mapear las categories que contenga el post (esto es temporal)*/}
                     <div className=" mt-2 w-100 d-flex">
