@@ -155,7 +155,7 @@ function Card(props) {
 					</div>
 
 					<div className='d-flex color-white ps-4 pt-0 m-0 align-items-center'>
-						<p className='fs-3 m-2'>#</p>
+						<p className='fs-1 m-2 fw-bold'>#</p>
 						<div className='d-flex align-items-center'>
 							{props.categories?.map((e) => {
 								return (
