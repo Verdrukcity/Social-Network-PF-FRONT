@@ -9,15 +9,15 @@
 }
 
 .icon-size {
-	width: 25px;
-	height: 25px;
+	width: 30px;
+	height: 30px;
 	color: #d77937;
 	cursor: pointer;
 }
 
 .icon-size:hover {
-	width: 30px;
-	height: 30px;
+	width: 35px;
+	height: 35px;
 }
 
 #cardContainer {
@@ -39,7 +39,7 @@
 	min-width: 20vw;
 	max-width: 20vw;
 
-	min-height: calc(20vw / 2);
+	min-height: calc(20vw / 1.5);
 	max-height: calc(20vw);
 
 	border-radius: 1rem;
@@ -74,25 +74,14 @@
 }
 .comments {
 	background-color: #ffffff;
-	box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.466);
-	border-radius: 30px;
+	border-radius: 25px;
 }
 .inp {
 	margin: 10px;
-	width: 100%;
-	border-radius: 10px;
+	width: 70%;
+	border-radius: 25px;
 	border: none;
 	text-align: center;
 	background-color: #eaeaea;
 	outline: none;
-}
-
-.commentBtn {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	background-color: #ff8d00;
-	color: #eaeaea;
-	margin: 15px;
-	border-radius: 10px;
 }
