@@ -120,7 +120,7 @@ function Card(props) {
 									></img>
 								) : (
 									<iframe
-										class='embed-responsive-item imgCard'
+										className='embed-responsive-item imgCard'
 										title='user video'
 										src={props.img || obj.img}
 										frameborder='0'
