@@ -111,7 +111,10 @@ function Card(props) {
                         <div className='d-flex col m-0'>
                             <div className='row-8 d-block'>
                                 {props.resourseType === "image"? <img className='imgCard' src={props.img || obj.img} alt='postImg'></img>:
-                                 <video className='imgCard' src={props.img || obj.img} alt= "video" controls width="320" height="240"/> }
+                                //  <video className='imgCard' src={props.img || obj.img} alt= "video" controls width="320" height="240"/>
+                                  <div class="embed-responsive embed-responsive-16by9">
+  <iframe class="embed-responsive-item" src={props.img || obj.img} allowfullscreen></iframe>
+</div>}
                                 
                             </div>
 
