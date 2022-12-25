@@ -2,35 +2,35 @@
 
 #home #btn-add-post,
 #btn-go-up {
-  width: 90px;
-  height: 90px;
+	width: 90px;
+	height: 90px;
 
-  border-radius: 50%;
-  border: none;
+	border-radius: 50%;
+	border: none;
 }
 
 #btn-add-post {
-  background-color: #ff8d00;
-  position: fixed;
-  bottom: 30px;
-  left: 30px;
-  cursor: pointer;
+	background-color: #ff8d00;
+	position: fixed;
+	bottom: 30px;
+	left: 30px;
+	cursor: pointer;
 }
-#btn-add-post:hover{
-  background-color: #e27c00 ;
+#btn-add-post:hover {
+	background-color: #e27c00;
 }
 
 #btn-go-up {
-  background-color: #cf4b2e;
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  cursor: pointer;
+	background-color: #cf4b2e;
+	position: fixed;
+	bottom: 30px;
+	right: 30px;
+	cursor: pointer;
 }
-#btn-go-up:hover{
-  background-color: #b23f25;
+#btn-go-up:hover {
+	background-color: #b23f25;
 }
 
 #home .icon {
-  width: 50%;
+	width: 50%;
 }
