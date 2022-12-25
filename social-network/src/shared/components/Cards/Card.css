@@ -1,5 +1,9 @@
 @import url(../../assets/globals.css);
 
+html {
+	scroll-snap-type: y mandatory;
+}
+
 .text-morecomments {
 	text-decoration: none;
 	color: #d77a37;
@@ -24,6 +28,9 @@
 	background-color: #eb853d;
 	border-radius: 30px;
 	box-shadow: 0px 12px 12px rgba(0, 0, 0, 0.25);
+
+	scroll-margin-top: 20vh;
+	scroll-snap-align: start;
 }
 
 .curser-pointer-card {
