@@ -38,7 +38,7 @@ export default function ClickAway({
 					type='button'
 					onClick={handleClick}
 					style={
-						open && activeCategories.size > 0
+						open || activeCategories.size > 0
 							? activeRoundedButton
 							: { border: 'none', backgroundColor: '#ff8d00' }
 					}

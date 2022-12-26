@@ -58,7 +58,7 @@ export default function Header({
 	}
 
 	return (
-		<div id='header-component'>
+		<div id='header-component' className='sticky-top mt-4'>
 			<ul id='icons-container'>
 				<li id='icon-home'>
 					<ButtonActions
