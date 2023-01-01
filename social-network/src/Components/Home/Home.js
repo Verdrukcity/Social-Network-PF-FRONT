@@ -10,7 +10,7 @@ import {
 	orderByLikes,
 } from '../../redux/reducer/postsReducer'
 import { tokenSelector } from '../../redux/reducer/usersReducer'
-import { arrowUp, plus } from '../../shared/assets/icons/all-icons'
+import { arrowUp, plus, logo } from '../../shared/assets/icons/all-icons'
 import ButtonActions from '../../shared/components/ButtonActions/ButtonActions'
 import Card from '../../shared/components/Cards/Card'
 import DialogCreatePost from '../../shared/components/dialogs/dialogCreatePost/DialogCreatePost'
@@ -118,6 +118,12 @@ export default function Home() {
 
 	return (
 		<div ref={ref} id='home' className='mt-2'>
+			<img
+				src={logo}
+				alt='logo reply'
+				className='fixed-top d-none d-md-inline-flex ms-4 mt-4'
+			/>
+
 			<Header
 				filterByCategory={filterByCategory}
 				orderByLikes={fnOrderByLikes}
@@ -147,7 +153,7 @@ export default function Home() {
 								stripeId={data.userStripe}
 								likes={data.likes}
 								logedUser={id}
-								resourseType = {data.resourseType}
+								resourseType={data.resourseType}
 							/>
 						)
 					})}

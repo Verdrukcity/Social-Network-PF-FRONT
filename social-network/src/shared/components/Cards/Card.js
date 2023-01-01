@@ -107,11 +107,11 @@ function Card(props) {
 			id='cardContainer'
 			className='container d-flex justify-content-center flex-column mb-5 p-0  w-auto h-auto'
 		>
-			<div className='d-flex '>
-				<div className=''>
-					<div className='container p-4 pb-0 m-0'>
+			<div className='d-flex'>
+				<div className='p-1'>
+					<div className='container px-4 pt-4 m-0'>
 						<div className='d-flex col m-0'>
-							<div className='row-8 d-block'>
+							<div>
 								{props.resourseType === 'image' ? (
 									<img
 										className='imgCard'
@@ -120,7 +120,7 @@ function Card(props) {
 									></img>
 								) : (
 									<iframe
-										class='embed-responsive-item imgCard'
+										className='embed-responsive-item imgCard'
 										title='user video'
 										src={props.img || obj.img}
 										frameborder='0'
@@ -130,14 +130,14 @@ function Card(props) {
 								)}
 							</div>
 
-							<div className='row-2 ms-3'>
-								<div className='userInfo'>
+							<div className='ms-3'>
+								<div className='d-flex justify-content-around align-items-center my-3'>
 									<img
-										className='userImgCard img-fluid me-2'
+										className='userImgCard img-fluid'
 										src={props.userImg || obj.imgUser}
 										alt='userImg'
 									></img>
-									<p className='fs-3 fw-bold '>
+									<p className='fs-3 fw-bold text-white m-0 me-3'>
 										{props.username || obj.username}
 									</p>
 								</div>
@@ -154,8 +154,8 @@ function Card(props) {
 						</div>
 					</div>
 
-					<div className='d-flex color-white ps-4 pt-0 m-0 align-items-center'>
-						<p className='fs-3 m-2'>#</p>
+					<div className='d-flex color-white ps-4 align-items-center'>
+						<p className='fs-1 m-2 fw-bold'>#</p>
 						<div className='d-flex align-items-center'>
 							{props.categories?.map((e) => {
 								return (
@@ -169,7 +169,7 @@ function Card(props) {
 				</div>
 			</div>
 
-			<div className='comments p-2 d-flex align-items-center justify-content-evenly m-0 p-0'>
+			<div className='comments px-4 d-flex align-items-center justify-content-evenly m-0'>
 				<div className='d-flex  flex-column'>
 					<img
 						src={likeIcon}
@@ -181,7 +181,7 @@ function Card(props) {
 					/>
 					<p className='fw-bold m-0'>{props.likes.length}</p>
 				</div>
-				<div className='inp p-2 d-flex'>
+				<div className='inp p-2 d-flex justify-content-around'>
 					<input
 						className='inp text-start'
 						value={input.text}
