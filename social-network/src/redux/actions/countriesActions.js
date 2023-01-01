@@ -6,7 +6,7 @@ export const getAllCountriesAsync = () => async (dispatch) => {
      * TODO: consultar endpoint con todos los países
      */
     try {
-        const response = await axios.get('http://127.0.0.1:3001/maps')
+        const response = await axios.get('/maps')
 
         //por cada pais un objeto con nombre e id para buscar en la db
         let countriesName = response.data.data.map((country) => ({
