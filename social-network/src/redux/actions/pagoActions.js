@@ -5,7 +5,7 @@ import { confirmarPago } from "../reducer/pagoReducer"
 export const confirmacionPagosAsync = (data) => async (dispatch) => {
   try {
     const respuesta = await axios
-       .post('http://127.0.0.1:3001/pago ', data, {
+       .post('/pago ', data, {
          // Endpoint to send files
          headers: {
            // Add any auth token here
@@ -22,7 +22,7 @@ export const confirmacionPagosAsync = (data) => async (dispatch) => {
 }
 export const acountCreator = (id) => async (dispatch) => {
   try {
-    const respuesta = await axios.post(`http://127.0.0.1:3001/stripe/account/${id}`)
+    const respuesta = await axios.post(`/stripe/account/${id}`)
        //console.log(respuesta.data)
       // dispatch(confirmarPago(response.data.data))
       const confirmacion=respuesta.data;
@@ -34,7 +34,7 @@ export const acountCreator = (id) => async (dispatch) => {
 
 export const srtipeAccountLink = (id) => async (dispatch) => {
   try {
-    const respuesta = await axios.post(`http://127.0.0.1:3001/stripe/accountLink/${id}`)
+    const respuesta = await axios.post(`/stripe/accountLink/${id}`)
        //console.log(respuesta.data)
       // dispatch(confirmarPago(response.data.data))
       const confirmacion=respuesta.data;
@@ -46,7 +46,7 @@ export const srtipeAccountLink = (id) => async (dispatch) => {
 ////////consulta stripe cuenta
 export const stripeAccountsConsult = (id) => async (dispatch) => {
   try {
-    const respuesta = await axios.get(`http://127.0.0.1:3001/stripe/account/${id}`)
+    const respuesta = await axios.get(`/stripe/account/${id}`)
        //console.log(respuesta.data)
       // dispatch(confirmarPago(response.data.data))
       const confirmacion=respuesta.data;
@@ -59,7 +59,7 @@ export const stripeAccountsConsult = (id) => async (dispatch) => {
 export const chekout = (data) => async (dispatch) => {
   try {
     const respuesta = await axios
-       .post('http://127.0.0.1:3001/stripe/chekout/ ', data, {
+       .post('/stripe/chekout/ ', data, {
          // Endpoint to send files
          headers: {
            // Add any auth token here
@@ -80,7 +80,7 @@ export const chekout = (data) => async (dispatch) => {
 
 export const getPrices = () => async (dispatch) => {
   try {
-    const respuesta = await axios.get(`http://127.0.0.1:3001/stripe/prices/`)
+    const respuesta = await axios.get(`/stripe/prices/`)
        //console.log(respuesta.data)
       // dispatch(confirmarPago(response.data.data))
       const confirmacion=respuesta.data;

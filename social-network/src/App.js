@@ -8,6 +8,10 @@ import LandingPage from './Components/LandingPage/LandingPage'
 import PostDetail from './Components/PostDetail/PostDetail'
 import Profile from './Components/Profile/Profile'
 import Pago from './Components/Stripe/Pago'
+import axios from 'axios'
+
+// axios.defaults.baseURL = "http://localhost:3001"
+axios.defaults.baseURL = "http://social-network-pf-back-production.up.railway.app"
 
 /*
   App se utiliza para navegar a las rutas necesarias en el frontend:

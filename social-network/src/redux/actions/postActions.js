@@ -14,7 +14,7 @@ import {
  */
 
 export const getAllPostsAsync = (data) => async (dispatch) => {
-	const auth = await axios.get(`http://127.0.0.1:3001/create?token=${data}`)
+	const auth = await axios.get(`/create?token=${data}`)
 	return dispatch(getAllPosts(auth.data.data))
 }
 
@@ -28,7 +28,7 @@ export const getAllPostsAsync = (data) => async (dispatch) => {
 	}
 
 	const authPost = axios
-		.get('http://127.0.0.1:3001/create', config)
+		.get('/create', config)
 		.then((res) => {
 			return res.data
 		})
@@ -42,7 +42,7 @@ export const getAllPostsAsync = (data) => async (dispatch) => {
 export const getUserDetailAsync = (id) => (dispatch) => {
 	try {
 		axios
-			.get(`http://127.0.0.1:3001/userDetail/?id=${id}`)
+			.get(`/userDetail/?id=${id}`)
 			.then((response) => dispatch(getDetailUser(response.data)))
 	} catch (error) {
 		console.log(error)
@@ -52,7 +52,7 @@ export const getUserDetailAsync = (id) => (dispatch) => {
 export const CreatePostsAsync = (data, id, token) => (dispatch) => {
 	try {
 		axios
-			.post(`http://127.0.0.1:3001/create/${id}?token=${token}`, data, {
+			.post(`/create/${id}?token=${token}`, data, {
 				// Endpoint to send files
 				headers: {
 					// Add any auth token here
@@ -68,7 +68,7 @@ export const CreatePostsAsync = (data, id, token) => (dispatch) => {
 export const getPostDetailAsync = (postId) => async (dispatch) => {
 	try {
 		//Obtenemos el post buscado por id en la variable details
-		const details = await axios.get(`http://127.0.0.1:3001/detail/${postId}`)
+		const details = await axios.get(`/detail/${postId}`)
 
 		//despachamos la accion
 		dispatch(getPostDetail(details.data))
@@ -80,7 +80,7 @@ export const getPostDetailAsync = (postId) => async (dispatch) => {
 export const likePostAsync = (postId, usersLiked) => async (dispatch) => {
 	try {
 		const likeStatus = await axios.post(
-			`http://127.0.0.1:3001/like/${postId}`,
+			`/like/${postId}`,
 			{ usersLiked }
 		)
 		dispatch(likePost(likeStatus.data))

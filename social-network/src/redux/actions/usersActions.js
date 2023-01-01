@@ -11,7 +11,7 @@ import {
 export const createUser = (data) => {
 	return async function (dispatch) {
 		try {
-			let created = await axios.post(`http://127.0.0.1:3001/user`, data)
+			let created = await axios.post(`/user`, data)
 			dispatch(postUser(created.data))
 		} catch (error) {
 			const errorFromBack = error.response.data
@@ -22,7 +22,7 @@ export const createUser = (data) => {
 
 export const getAllUsersAsync = (data) => async (dispatch) => {
 	try {
-		const response = await axios.get('http://127.0.0.1:3001/user')
+		const response = await axios.get('/user')
 		dispatch(getAllUsers(response.data))
 	} catch (error) {
 		console.log(error)
@@ -39,7 +39,7 @@ export const authUserAsync = (data) => async (dispatch) => {
 
 	// TODO: si la data está vacía no hacer dispatch
 	const userPromise = axios
-		.post('http://127.0.0.1:3001/authuser', data)
+		.post('/authuser', data)
 		.then((res) => res.data)
 		.catch((err) => err.response.data.error)
 
@@ -58,7 +58,7 @@ export const sendTokenAction = (data) => async (dispatch) => {
 export const updateUserAsync = (data, id, token) => async (dispatch) => {
 	try {
 		axios
-			.post(`http://127.0.0.1:3001/useredit/${id}`, data, {
+			.post(`/useredit/${id}`, data, {
 				// Endpoint to send files
 				headers: {
 					// Add any auth token here
