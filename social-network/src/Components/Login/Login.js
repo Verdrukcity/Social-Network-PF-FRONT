@@ -58,6 +58,8 @@ export default function Login() {
 	function handleLogin(e) {
 		e.preventDefault()
 
+		dispatch(authUserAsync(datos))
+
 		// Se revisa y envía el error en el if e ingresa en el else
 		if (errorMessage.length) {
 			sweetAlert.fire({
@@ -85,10 +87,6 @@ export default function Login() {
 	useEffect(() => {
 		setErrorMessage(message)
 	}, [dispatch, message])
-
-	useEffect(() => {
-		dispatch(authUserAsync(datos))
-	}, [dispatch, datos])
 
 	return (
 		<div className='container-fluid bg container-flex-center'>
