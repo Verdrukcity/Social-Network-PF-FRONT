@@ -19,6 +19,7 @@ import Chip from '@mui/material/Chip'
 import { DialogActions, TextareaAutosize } from '@mui/material'
 import {
 	CreatePostsAsync,
+	getAllPostsAsync,
 	getUserDetailAsync,
 } from '../../../../redux/actions/postActions'
 import ButtonActions from '../../ButtonActions/ButtonActions'
@@ -62,15 +63,24 @@ export default function DialogCreatePost({
 	useEffect(() => {
 		dispatch(getUserDetailAsync(id))
 		// eslint-disable-next-line react-hooks/exhaustive-deps
+		
 	}, [dispatch])
 
 	const [ImageSelectedPrevious, setImageSelectedPrevious] = React.useState(null)
 
+	const [IsVideo , setIsVideo]= React.useState(false)
+	/**
+	 * funcion para traer y setear la imagen del input
+	 */
+
 	const changeImage = (e) => {
+		console.log(e.target.files[0])
 		if (e.target.files[0] !== undefined) {
 			let fileToUse = e.target.files[0]
 			const reader = new FileReader()
-
+			if(e.target.files[0].type=="video/mp4"){
+				setIsVideo(true)
+			}
 			fileSet(fileToUse)
 
 			reader.readAsDataURL(e.target.files[0])
@@ -104,6 +114,7 @@ export default function DialogCreatePost({
 		e.preventDefault()
 		let formData = new FormData()
 		formData.append('text', textArea)
+		dispatch(getAllPostsAsync())
 
 		for (var i = 0; i < categoryName.length; i++) {
 			formData.append('category', categoryName[i])
@@ -161,6 +172,7 @@ export default function DialogCreatePost({
 							<input
 								type='file'
 								name='multimedia'
+								allo
 								onChange={(e) => {
 									changeImage(e)
 								}}
@@ -169,20 +181,26 @@ export default function DialogCreatePost({
 							/>
 
 							<div>
-								{ImageSelectedPrevious && (
+								{ImageSelectedPrevious&&!IsVideo && (
 									<img
 										src={ImageSelectedPrevious}
 										className='text-information-img img-fluid'
 										alt='imagen para seleccionar'
 									/>
 								)}
-								{!ImageSelectedPrevious && (
+								{!ImageSelectedPrevious&& !IsVideo  &&  (
 									<img
 										src={imgPhotoLoad}
 										className='text-information-img img-fluid'
 										alt='imagen seleccionada'
 									/>
 								)}
+								{IsVideo && (
+									<video className='text-information-img img-fluid' src={ImageSelectedPrevious} alt= "video" controls width="320" height="240" />
+								)}
+
+
+
 							</div>
 						</div>
 
