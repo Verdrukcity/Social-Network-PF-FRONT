@@ -13,6 +13,7 @@ import { messageSelector } from '../../redux/reducer/usersReducer'
 import { imgLogin } from '../../shared/assets/icons/all-icons'
 import ButtonActions from '../../shared/components/ButtonActions/ButtonActions'
 import './Login.css'
+import LoginExterno from '../../shared/components/ButtonLogin/LoginExterno'
 
 /*
   Login comprueba el usuario y contraseña enviando el siguiente objeto:
@@ -136,9 +137,14 @@ export default function Login() {
 					</div>
 
 					<div className='btnPadding'>
-						<button type='submit' className='btnLogin' onClick={handleLogin}>
+						<button
+							type='submit'
+							className='btnLogin mx-3'
+							onClick={handleLogin}
+						>
 							Login
 						</button>
+						<LoginExterno type={'button'} click={() => alert('auth0')} />
 					</div>
 
 					<div className='registerText'>

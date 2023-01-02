@@ -11,6 +11,7 @@ import withReactContent from 'sweetalert2-react-content'
 import { createUser } from '../../redux/actions/usersActions'
 import * as bcrypt from 'bcryptjs'
 import ButtonActions from '../../shared/components/ButtonActions/ButtonActions'
+import LoginExterno from '../../shared/components/ButtonLogin/LoginExterno'
 // import { crearUsuario } from '../EmailConfirmation/EmailConfirmation'
 
 const Register = () => {
@@ -271,13 +272,16 @@ const Register = () => {
 							}
 						/>
 					</div>
-					<button
-						type='submit'
-						className='btnRegister my-3'
-						/*disabled={botonSubmit}*/
-					>
-						Regístrate
-					</button>
+					<section>
+						<button
+							type='submit'
+							className='btnRegister my-3 mx-3'
+							/*disabled={botonSubmit}*/
+						>
+							Regístrate
+						</button>
+						<LoginExterno type={'button'} click={() => alert('auth0')} />
+					</section>
 					<div className='registerText'>
 						<p>
 							Si ya tienes una cuenta,{' '}
