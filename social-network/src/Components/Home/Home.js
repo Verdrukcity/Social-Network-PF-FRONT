@@ -9,14 +9,13 @@ import {
 	getByCategory,
 	orderByLikes,
 } from '../../redux/reducer/postsReducer'
-import { tokenSelector } from '../../redux/reducer/usersReducer'
 import { arrowUp, plus, logo } from '../../shared/assets/icons/all-icons'
 import ButtonActions from '../../shared/components/ButtonActions/ButtonActions'
 import Card from '../../shared/components/Cards/Card'
 import DialogCreatePost from '../../shared/components/dialogs/dialogCreatePost/DialogCreatePost'
 import Header from '../Header/Header.js'
 
-import './Home.css'
+import home from './Home.css'
 
 /*
   Home es el componente principal donde el usuario encuentra:
@@ -63,6 +62,7 @@ export default function Home() {
 		}
 		/**me traigo el detalle del usuario */
 		dispatch(getUserDetailAsync(id))
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [dispatch, token])
 
 	const ref = useRef(null)
@@ -135,6 +135,7 @@ export default function Home() {
 				setOpen={setOpen}
 				innerContent={categoriesArr}
 				userDetail={userDetail}
+				className={home}
 			/>
 			<div className='container d-flex flex-column justify-content-center mt-10'>
 				{actualPosts &&

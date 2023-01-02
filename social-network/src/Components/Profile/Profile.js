@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { getUserDetailAsync } from "../../redux/actions/postActions";
@@ -6,7 +6,7 @@ import * as allIcons from "../../shared/assets/icons/all-icons";
 import Card from "../../shared/components/Cards/Card";
 import ButtonActions from "../../shared/components/ButtonActions/ButtonActions";
 import DialogUserUpdate from "../../shared/components/dialogs/dialogUserUpdate/DialogUserUpdate";
-import "./Profile.css";
+import profilecss from "./Profile.css";
 import Logout from "../Logout/Logout";
 
 export default function Profile(props) {
@@ -100,7 +100,7 @@ export default function Profile(props) {
 			{user.contents && user.contents.length ? (
 				<h1 className="col-10">Your posts</h1>
 			) : (
-				<h1>
+				<h1 className={profilecss}>
 					Aun no tienes post empieza a compartir <br />
 					<a href="/reply/home">Ir al Home</a>
 				</h1>

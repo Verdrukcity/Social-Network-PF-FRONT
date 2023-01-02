@@ -5,7 +5,7 @@ import DialogContent from '@mui/material/DialogContent'
 import { useTheme } from '@mui/material/styles'
 
 import { useDispatch } from 'react-redux'
-import './DialogCreatePost.css'
+import dialogcss from './DialogCreatePost.css'
 
 import { imgPhotoLoad } from '../../../assets/icons/all-icons'
 
@@ -61,7 +61,7 @@ export default function DialogCreatePost({
 	const token = localStorage.getItem("token");
 	useEffect(() => {
 		dispatch(getUserDetailAsync(id))
-
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [dispatch])
 
 	const [ImageSelectedPrevious, setImageSelectedPrevious] = React.useState(null)
@@ -247,7 +247,7 @@ export default function DialogCreatePost({
 					</div>
 
 					<DialogActions className='d-flex justify-content-center'>
-						<div className=''>
+						<div className={dialogcss}>
 							<ButtonActions
 								action={handleSubmit}
 								id={'buttonAction'}

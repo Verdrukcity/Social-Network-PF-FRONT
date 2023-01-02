@@ -1,18 +1,15 @@
 import React, { useEffect, useState } from "react";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
-
-import { useTheme } from "@mui/material/styles";
-
 import { useDispatch } from "react-redux";
-import "./DialogUserUpdate.css";
+import dialogcss from "./DialogUserUpdate.css";
 
 //import { imgPhotoLoad } from "../../../assets/icons/all-icons";
 import { DialogActions, Input } from "@mui/material";
 import { getUserDetailAsync } from "../../../../redux/actions/postActions";
 import { updateUserAsync } from "../../../../redux/actions/usersActions";
 import ButtonActions from "../../ButtonActions/ButtonActions";
-import bcrypt from "bcryptjs";
+import * as bcrypt from "bcryptjs";
 import Loader from "../../loader/loader";
 
 import Swal from "sweetalert2";
@@ -32,10 +29,10 @@ export default function DialogUserUpdate({
 
 	/**array de strings provisional para las categorias */
 
-	const categories = innerContent;
+	// const categories = innerContent;
 
 	const [file, fileSet] = React.useState();
-	const theme = useTheme();
+	// const theme = useTheme();
 	const [userName, setUserName] = React.useState(userDetail.user_Name);
 	const [userPassword, setUserPassword] = React.useState(userDetail.password);
 
@@ -44,6 +41,7 @@ export default function DialogUserUpdate({
 	const token = localStorage.getItem("token");
 	useEffect(() => {
 		dispatch(getUserDetailAsync(id));
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [dispatch]);
 
 	const [ImageSelectedPrevious, setImageSelectedPrevious] =
@@ -222,6 +220,7 @@ export default function DialogUserUpdate({
 					</DialogActions>
 				</DialogContent>
 			</div>
+			<div className={dialogcss}></div>
 		</Dialog>
 	);
 }

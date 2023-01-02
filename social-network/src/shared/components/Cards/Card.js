@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import './Card.css'
+import cardcss from './Card.css'
 import { createComment } from '../../../redux/actions/commentsActions'
 import { useDispatch } from 'react-redux'
 import {
@@ -42,7 +42,7 @@ function Card(props) {
 		})
 	}
 	const pagoStripe = async () => {
-		const price = ''
+		let price = ''
 		MySwal.fire({
 			position: 'center',
 			input: 'select',
@@ -208,7 +208,9 @@ function Card(props) {
 					<img src={shareIcon} className='icon-size m-2' alt='icon de share' />
 				</div>
 			</div>
+			<div className={cardcss}></div>
 		</div>
+		
 	)
 }
 // recordar que este link es para el detalle

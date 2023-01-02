@@ -1,5 +1,5 @@
 import React from 'react'
-import './loader.css'
+import loadercss from './loader.css'
 
 export default function Loader() {
   return (
@@ -9,7 +9,7 @@ export default function Loader() {
         <div className="dot2"></div>
         <div className="dot3"></div>
     </div>
-
+    <div className={loadercss}></div>
     </div>
 
   )
