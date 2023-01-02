@@ -9,7 +9,7 @@ export default function Loader() {
         <div className="dot2"></div>
         <div className="dot3"></div>
     </div>
-
+    <div className={loadercss}></div>
     </div>
 
   )

@@ -100,7 +100,7 @@ export default function Profile(props) {
 			{user.contents && user.contents.length ? (
 				<h1 className="col-10">Your posts</h1>
 			) : (
-				<h1>
+				<h1 className={profilecss}>
 					Aun no tienes post empieza a compartir <br />
 					<a href="/reply/home">Ir al Home</a>
 				</h1>

@@ -28,6 +28,7 @@ export default function Logout() {
                 title="Cerrar sesion"
                 onClick={handleClick}
             />
+            <div className={logoutcss}></div>
         </div>
     )
 }
