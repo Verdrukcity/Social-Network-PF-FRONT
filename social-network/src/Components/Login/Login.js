@@ -33,6 +33,7 @@ export default function Login() {
 	})
 
 	const [errorMessage, setErrorMessage] = useState('')
+	const [clickLogin, setClickLogin] = useState(false)
 
 	const sweetAlert = withReactContent(Swal)
 
@@ -60,19 +61,20 @@ export default function Login() {
 	function handleLogin(e) {
 		e.preventDefault()
 
+		setClickLogin(!clickLogin)
 		dispatch(authUserAsync(datos))
 	}
 
 	useEffect(() => {
 		setErrorMessage(message)
-	}, [dispatch, message])
+	}, [dispatch, message, errorMessage, clickLogin])
 
 	useEffect(() => {
 		// Se revisa y envía el error en el if e ingresa en el else
-		if (errorMessage.length) {
+		if (message.length) {
 			sweetAlert.fire({
 				title: <strong>Oops...</strong>,
-				html: <i>{message}</i>,
+				html: <i>{errorMessage}</i>,
 				icon: 'error',
 			})
 		} else if (message.message) {
@@ -90,7 +92,7 @@ export default function Login() {
 
 			history.push('/reply/home')
 		}
-	}, [dispatch, message, errorMessage])
+	}, [dispatch, errorMessage, clickLogin])
 
 	return (
 		<div className='container-fluid bg container-flex-center'>
