@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import './Card.css'
+import cardcss from './Card.css'
 import { createComment } from '../../../redux/actions/commentsActions'
 import { useDispatch } from 'react-redux'
 import {
@@ -42,7 +42,7 @@ function Card(props) {
 		})
 	}
 	const pagoStripe = async () => {
-		const price = ''
+		let price = ''
 		MySwal.fire({
 			position: 'center',
 			input: 'select',

@@ -5,7 +5,7 @@ import DialogContent from '@mui/material/DialogContent'
 import { useTheme } from '@mui/material/styles'
 
 import { useDispatch } from 'react-redux'
-import './DialogCreatePost.css'
+import dialogcss from './DialogCreatePost.css'
 
 import { imgPhotoLoad } from '../../../assets/icons/all-icons'
 

@@ -1,6 +1,6 @@
 import React from "react";
-import './PostDetail.css'
-import 'bootstrap/dist/css/bootstrap.min.css'
+import css from './PostDetail.css'
+
 import { arrowUp } from "../../shared/assets/icons/all-icons";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
@@ -89,7 +89,7 @@ export default function PostDetail(props){
                         (comment)=> { return(
                                 <div className="comentcont">
                                     <div className="d-flex p-2 justify-content-start align-items-center">
-                                        <img className="comentimg" alt="image-profile" src={comment.profileId.image_profil}></img>
+                                        <img className="comentimg" alt="profile" src={comment.profileId.image_profil}></img>
                                         <h5 className="username ms-2 fs-6">{comment.profileId.user_Name}</h5>
                                     </div> 
                                     <div className="textcommen fs-6">

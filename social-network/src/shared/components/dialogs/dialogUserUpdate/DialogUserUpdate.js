@@ -5,7 +5,7 @@ import DialogContent from "@mui/material/DialogContent";
 import { useTheme } from "@mui/material/styles";
 
 import { useDispatch } from "react-redux";
-import "./DialogUserUpdate.css";
+import dialogcss from "./DialogUserUpdate.css";
 
 //import { imgPhotoLoad } from "../../../assets/icons/all-icons";
 import { DialogActions, Input } from "@mui/material";
@@ -32,7 +32,7 @@ export default function DialogUserUpdate({
 
 	/**array de strings provisional para las categorias */
 
-	const categories = innerContent;
+	// const categories = innerContent;
 
 	const [file, fileSet] = React.useState();
 	const theme = useTheme();
