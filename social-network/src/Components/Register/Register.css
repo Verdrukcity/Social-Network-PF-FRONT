@@ -169,3 +169,9 @@
 	color: #ff8d00;
 	margin-top: 15px;
 }
+
+#all-icons-arrowBack {
+	position: absolute;
+	top: 30px;
+	left: 60px;
+}

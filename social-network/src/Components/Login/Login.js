@@ -107,7 +107,7 @@ export default function Login() {
 						<img
 							src={allIcons.arrowBack}
 							className='all-icons-image'
-							alt='icon-home'
+							alt='icon-return'
 						/>
 					}
 				/>
