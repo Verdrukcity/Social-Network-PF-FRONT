@@ -55,11 +55,19 @@ export default function Login() {
 		})
 	}
 
+	// TODO : Separar el onclick del sweetAlert con el mensaje
+
 	function handleLogin(e) {
 		e.preventDefault()
 
 		dispatch(authUserAsync(datos))
+	}
 
+	useEffect(() => {
+		setErrorMessage(message)
+	}, [dispatch, message])
+
+	useEffect(() => {
 		// Se revisa y envía el error en el if e ingresa en el else
 		if (errorMessage.length) {
 			sweetAlert.fire({
@@ -82,11 +90,7 @@ export default function Login() {
 
 			history.push('/reply/home')
 		}
-	}
-
-	useEffect(() => {
-		setErrorMessage(message)
-	}, [dispatch, message])
+	}, [dispatch, message, errorMessage])
 
 	return (
 		<div className='container-fluid bg container-flex-center'>
