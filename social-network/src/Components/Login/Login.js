@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import * as allIcons from '../../shared/assets/icons/all-icons'
 import { Link } from 'react-router-dom'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 import Swal from 'sweetalert2'
@@ -10,6 +11,7 @@ import {
 } from '../../redux/actions/usersActions'
 import { messageSelector } from '../../redux/reducer/usersReducer'
 import { imgLogin } from '../../shared/assets/icons/all-icons'
+import ButtonActions from '../../shared/components/ButtonActions/ButtonActions'
 import './Login.css'
 
 /*
@@ -97,6 +99,18 @@ export default function Login() {
 	return (
 		<div className='container-fluid bg container-flex-center'>
 			<div className=' container-flex-center '>
+				<ButtonActions
+					type='submit'
+					action={() => history.push('/')}
+					id='all-icons-arrowBack'
+					content={
+						<img
+							src={allIcons.arrowBack}
+							className='all-icons-image'
+							alt='icon-home'
+						/>
+					}
+				/>
 				<img className='imgLogin' alt='imagen login' src={imgLogin}></img>
 				<form className='formularioLogin'>
 					<h1 className='replyTitle reply'>REPLY</h1>

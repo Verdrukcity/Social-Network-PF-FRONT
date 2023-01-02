@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react'
+import * as allIcons from '../../shared/assets/icons/all-icons'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
 import Select from 'react-select'
@@ -9,6 +10,7 @@ import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import { createUser } from '../../redux/actions/usersActions'
 import * as bcrypt from 'bcryptjs'
+import ButtonActions from '../../shared/components/ButtonActions/ButtonActions'
 // import { crearUsuario } from '../EmailConfirmation/EmailConfirmation'
 
 const Register = () => {
@@ -165,6 +167,18 @@ const Register = () => {
 	return (
 		<Fragment>
 			<div className='container-fluid container-flex-center'>
+				<ButtonActions
+					type='submit'
+					action={() => history.push('/')}
+					id='all-icons-arrowBack'
+					content={
+						<img
+							src={allIcons.arrowBack}
+							className='all-icons-image'
+							alt='icon-home'
+						/>
+					}
+				/>
 				<form
 					className='formulario container-flex-center'
 					onSubmit={enviarDatos}
