@@ -129,9 +129,9 @@ export default function Login() {
 
 					<div className='registerText'>
 						<p>
-							if you don't have an account,{' '}
+							Si aún no tienes una cuenta,{' '}
 							<Link className='registerScreen' to={`/reply/register`}>
-								register here
+								regístrate aquí
 							</Link>
 						</p>
 					</div>
