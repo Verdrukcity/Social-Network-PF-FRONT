@@ -5,6 +5,7 @@ import { getAllCategoriesAsync } from '../../redux/actions/categoriesActions'
 import * as allIcons from '../../shared/assets/icons/all-icons'
 import ButtonActions from '../../shared/components/ButtonActions/ButtonActions'
 import DialogCategories from '../../shared/components/dialogs/dialogCategories/DialogCategories.js'
+import DialogSearchBar from '../../shared/components/dialogs/dialogSearchBar/DialogSearchBar.js'
 import { activeRoundedButton } from '../../shared/assets/globals'
 import header from  './Header.css'
 
@@ -78,11 +79,9 @@ export default function Header({
 					/>
 				</li>
 				<li id='icon-explore'>
-					<ButtonActions
-						type='submit'
-						action={goTo}
-						id='all-icons'
-						content={<img src={allIcons.explore} alt='icon-explore' />}
+					<DialogSearchBar
+						id='icon-categories'
+						buttonContent={<img src={allIcons.explore} alt='icon-categories' />}
 					/>
 				</li>
 				<li id='icon-categories'>
