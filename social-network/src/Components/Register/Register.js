@@ -4,12 +4,12 @@ import { useHistory } from 'react-router-dom'
 import Select from 'react-select'
 import { SelectDatepicker } from 'react-select-datepicker'
 import { getAllCountriesAsync } from '../../redux/actions/countriesActions'
-import './Register.css'
+import registercss from './Register.css'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import { createUser } from '../../redux/actions/usersActions'
 import bcrypt from 'bcryptjs';
-import { crearUsuario } from '../EmailConfirmation/EmailConfirmation'
+// import { crearUsuario } from '../EmailConfirmation/EmailConfirmation'
 
 
 const Register = () => {
@@ -119,7 +119,7 @@ const Register = () => {
     }
     else {
       //de country solo necesito el id para que lo busque en la db, y el birthdate era un objeto y necesita un string
-      crearUsuario(datos.email, datos.password)
+      // crearUsuario(datos.email, datos.password)
 
       //encripta contraseña
       let hashedPass = bcrypt.hashSync(datos.password, 10)

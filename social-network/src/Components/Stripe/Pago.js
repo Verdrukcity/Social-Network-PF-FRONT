@@ -1,7 +1,7 @@
 import React from 'react'
 import {loadStripe} from '@stripe/stripe-js'
 import {Elements,CardElement,useStripe,useElements, PaymentElement} from '@stripe/react-stripe-js'
-import "bootswatch/dist/lux/bootstrap.min.css"
+import bosstrapcss from "bootswatch/dist/lux/bootstrap.min.css"
 import {
   confirmacionPagosAsync
 } from '../../redux/actions/pagoActions'

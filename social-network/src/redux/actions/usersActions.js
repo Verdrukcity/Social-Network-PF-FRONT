@@ -44,6 +44,7 @@ export const authUserAsync = (data) => async (dispatch) => {
 		.catch((err) => err.response.data.error)
 
 	const res = await userPromise
+	
 	return dispatch(authUser(res))
 }
 

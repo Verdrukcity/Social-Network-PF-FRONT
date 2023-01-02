@@ -2,7 +2,7 @@ import { useState } from 'react'
 import Box from '@mui/material/Box'
 import ClickAwayListener from '@mui/material/ClickAwayListener'
 import * as React from 'react'
-import './DialogCategories.css'
+import dialogcss from './DialogCategories.css'
 import { activeRoundedButton, categoryBox } from '../../../assets/globals'
 
 /*

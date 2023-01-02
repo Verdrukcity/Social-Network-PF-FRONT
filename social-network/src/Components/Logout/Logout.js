@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { logout } from "../../shared/assets/icons/all-icons";
-import './Logout.css'
+import logoutcss from './Logout.css'
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function Logout() {
 
     const history = useHistory()
-    const [token, setToken] = useState({})
+    // const [token, setToken] = useState({})
 
     const handleClick = (e) => {
         e.preventDefault()

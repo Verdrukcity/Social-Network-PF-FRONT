@@ -1,6 +1,6 @@
 import React from "react";
 import { landingPage } from "../../shared/assets/icons/all-icons";
-import './LandingPage.css'
+import landing from './LandingPage.css'
 
 /**
  * Agregue un alt a la imagen (landingPage) para evitar un warning de compilacion
@@ -36,7 +36,7 @@ export default function LandingPage() {
                 <div className="container">
                         <img  className="img-fluid landing-img" alt="imagen landingpage" src={landingPage} />
                 </div>
-
+                <div className={landing}></div>
             </div>
  
         </main>

@@ -1,5 +1,5 @@
 import axios from "axios"
-import { confirmarPago } from "../reducer/pagoReducer"
+// import { confirmarPago } from "../reducer/pagoReducer"
 
 
 export const confirmacionPagosAsync = (data) => async (dispatch) => {
