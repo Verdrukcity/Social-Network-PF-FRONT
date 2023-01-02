@@ -18,7 +18,7 @@ root.render(
       <React.StrictMode>
          <Provider store={store}>
             <BrowserRouter>
-               <App />
+               <App prop={indexcss} />
             </BrowserRouter>
          </Provider>
       </React.StrictMode>

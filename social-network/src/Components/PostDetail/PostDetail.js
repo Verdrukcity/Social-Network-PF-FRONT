@@ -98,7 +98,7 @@ export default function PostDetail(props){
                                 </div> 
                                 )                    
                         }
-                        ):( <p >Sin comentarios</p>
+                        ):( <p className={css} >Sin comentarios</p>
                         )  } 
                     </div>
                 </div>

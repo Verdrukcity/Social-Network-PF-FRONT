@@ -8,7 +8,7 @@ import registercss from './Register.css'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import { createUser } from '../../redux/actions/usersActions'
-import bcrypt from 'bcryptjs';
+import * as bcrypt from 'bcryptjs';
 // import { crearUsuario } from '../EmailConfirmation/EmailConfirmation'
 
 
@@ -258,7 +258,7 @@ const Register = () => {
           
         </form>
       </div>
-
+      <div className={registercss}></div>
     </Fragment>
   )
 }

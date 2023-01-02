@@ -61,7 +61,7 @@ export default function DialogCreatePost({
 	const token = localStorage.getItem("token");
 	useEffect(() => {
 		dispatch(getUserDetailAsync(id))
-
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [dispatch])
 
 	const [ImageSelectedPrevious, setImageSelectedPrevious] = React.useState(null)
@@ -247,7 +247,7 @@ export default function DialogCreatePost({
 					</div>
 
 					<DialogActions className='d-flex justify-content-center'>
-						<div className=''>
+						<div className={dialogcss}>
 							<ButtonActions
 								action={handleSubmit}
 								id={'buttonAction'}

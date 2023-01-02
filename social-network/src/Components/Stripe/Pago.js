@@ -1,11 +1,11 @@
 import React from 'react'
 import {loadStripe} from '@stripe/stripe-js'
-import {Elements,CardElement,useStripe,useElements, PaymentElement} from '@stripe/react-stripe-js'
+import {Elements,CardElement,useStripe,useElements} from '@stripe/react-stripe-js'
 import bosstrapcss from "bootswatch/dist/lux/bootstrap.min.css"
 import {
   confirmacionPagosAsync
 } from '../../redux/actions/pagoActions'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 
@@ -32,14 +32,14 @@ const CheckOutForm=()=>{
             const respuesta=await dispatch(confirmacionPagosAsync({id:paymentMethod.id,amount:amount}))
 
 
-              {MySwal.fire({
+              MySwal.fire({
                   position: 'top-end',
                   icon: 'success',
                   title: 'El pago esta en estado  ' + respuesta,
                   showConfirmButton: false,
                   timer: 1500
                 });
-               }
+               
        }
         else{
 
@@ -59,7 +59,7 @@ const CheckOutForm=()=>{
         <form onSubmit={handleSubmit} className="card card-body">
             
                 <div className='form-group'> 
-                <img  width="200" height="200" src="https://www.bancodeoccidente.com.co/wps/wcm/connect/banco-de-occidente/11e8dbea-4f62-4272-8ca7-72995437e64b/pagar-tarjeta.png?MOD=AJPERES&CACHEID=ROOTWORKSPACE.Z18_PQ441IO0LGGB20ANDOHIQE20P6-11e8dbea-4f62-4272-8ca7-72995437e64b-nCQYeII"></img>
+                <img  width="200" height="200" alt='Payment' src="https://www.bancodeoccidente.com.co/wps/wcm/connect/banco-de-occidente/11e8dbea-4f62-4272-8ca7-72995437e64b/pagar-tarjeta.png?MOD=AJPERES&CACHEID=ROOTWORKSPACE.Z18_PQ441IO0LGGB20ANDOHIQE20P6-11e8dbea-4f62-4272-8ca7-72995437e64b-nCQYeII"></img>
                      <CardElement className='form-control'/>
                      
                 </div>
@@ -77,7 +77,7 @@ const CheckOutForm=()=>{
     return(
 
 
-        <Elements stripe={stripePromise}  >
+        <Elements className={bosstrapcss} stripe={stripePromise}  >
             
             <div className='row'>
                 <div className='col-md-4 offset-md-4'>
