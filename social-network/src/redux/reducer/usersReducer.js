@@ -6,6 +6,7 @@ const initialState = {
 	userCreated: {},
 	userError: '',
 	token: '',
+	userUpdateData: {}
 }
 
 export const userSlice = createSlice({
@@ -30,14 +31,17 @@ export const userSlice = createSlice({
 		sendToken: (state, action) => {
 			state.token = action.payload
 		},
+		userUpdate: (state, action) => {
+			state.userUpdateData = action.payload
+		}
 	},
 })
 
 // SELECTOR
 export const allUsersSelector = (state) => state.users.user
 export const messageSelector = (state) => state.users.message
-export const tokenSelector = (state) => state.users.token
+// export const tokenSelector = (state) => state.users.token
 
-export const { postUser, getAllUsers, authUser, userError, sendToken } =
+export const { postUser, getAllUsers, authUser, userError, sendToken, userUpdate } =
 	userSlice.actions
 export default userSlice.reducer

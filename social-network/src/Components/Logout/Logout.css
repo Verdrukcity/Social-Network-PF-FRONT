@@ -1,0 +1,18 @@
+
+.logout-main-container{
+    position: bottom;
+    vertical-align:left;
+    display: flex;
+    height: 45px;
+    width: 45px;
+}
+
+.logout-container{
+	background-color: #ff8d00;
+    align-items: center;
+    border-radius: 10px;
+    height: 90%;
+    width: 90%;
+    position: inherit;
+    padding: 12%;
+}

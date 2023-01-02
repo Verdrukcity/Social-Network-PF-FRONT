@@ -1,6 +1,6 @@
 import React from "react";
-import './PostDetail.css'
-import 'bootstrap/dist/css/bootstrap.min.css'
+import css from './PostDetail.css'
+
 import { arrowUp } from "../../shared/assets/icons/all-icons";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
@@ -41,7 +41,8 @@ export default function PostDetail(props){
                 description: details.post.text,
                 postImg: details.post.multimedia,
                 categories: details.post.category,
-                comments: details.comments
+                comments: details.comments,
+                resourseType: details.resourseType
             })
         }
     }, [details])
@@ -54,7 +55,8 @@ export default function PostDetail(props){
                 <div className="row">
                 {/* primera columna con foto y cateogries */}
                 <div className="col-8 ">
-                    <img className="postImg w-100" alt="imagen-detail" src={postDetail.postImg}/>
+                    {postDetail.resourseType === "image"? <img className='imgCard' src={postDetail.postImg} alt='postImg'></img>:
+                    <video className='imgCard' src={postDetail.postImg} alt= "video" controls width="320" height="240"/> }
 
                     {/* Aqui va a mapear las categories que contenga el post (esto es temporal)*/}
                     <div className=" mt-2 w-100 d-flex">
@@ -87,7 +89,7 @@ export default function PostDetail(props){
                         (comment)=> { return(
                                 <div className="comentcont">
                                     <div className="d-flex p-2 justify-content-start align-items-center">
-                                        <img className="comentimg" alt="image-profile" src={comment.profileId.image_profil}></img>
+                                        <img className="comentimg" alt="profile" src={comment.profileId.image_profil}></img>
                                         <h5 className="username ms-2 fs-6">{comment.profileId.user_Name}</h5>
                                     </div> 
                                     <div className="textcommen fs-6">
@@ -96,7 +98,7 @@ export default function PostDetail(props){
                                 </div> 
                                 )                    
                         }
-                        ):( <p >Sin comentarios</p>
+                        ):( <p className={css} >Sin comentarios</p>
                         )  } 
                     </div>
                 </div>

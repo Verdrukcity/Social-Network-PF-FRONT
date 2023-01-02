@@ -1,6 +1,5 @@
 import React from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import './App.css'
 import Home from './Components/Home/Home'
 import Login from './Components/Login/Login'
 import Register from './Components/Register/Register'
@@ -12,6 +11,10 @@ import axios from 'axios'
 
 // axios.defaults.baseURL = "http://localhost:3001"
 axios.defaults.baseURL = "http://social-network-pf-back-production.up.railway.app"
+import axios from 'axios'
+
+axios.defaults.baseURL = "http://localhost:3001"
+// axios.defaults.baseURL = "http://social-network-pf-back-production.up.railway.app"
 
 /*
   App se utiliza para navegar a las rutas necesarias en el frontend:
