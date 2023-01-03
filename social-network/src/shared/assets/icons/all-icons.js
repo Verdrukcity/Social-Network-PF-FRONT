@@ -17,7 +17,7 @@ export { default as imgPhotoLoad } from './imgPhoto.jpg'
 export { default as imgLogin } from './imgLogin.png'
 export { default as cash } from './cash.png'
 // export { default as logout } from "./logout.png"
-export { default as logout } from './white-logout-icon.png'
+export { default as logoutbtn } from './white-logout-icon.png'
 
 export { default as likeIcon } from './likeIcon.svg'
 export { default as likedIcon } from './liked.png'

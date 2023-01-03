@@ -29,16 +29,17 @@ export const getAllUsersAsync = (data) => async (dispatch) => {
 	}
 }
 
-export const authUserAsync = (data) => async (dispatch) => {
+export const authUserAsync = (data, auth) => async (dispatch) => {
 	/*
 	 * data: {
 	 *   userName : nombre de usuario (string),
 	 *   password: contraseña del usuario(string)
 	 * }
 	 */
-
+	
 	// TODO: si la data está vacía no hacer dispatch
-	const userPromise = axios
+	if (!auth) {
+		const userPromise = axios
 		.post('/authuser', data)
 		.then((res) => res.data)
 		.catch((err) => err.response.data.error)
@@ -46,6 +47,18 @@ export const authUserAsync = (data) => async (dispatch) => {
 	const res = await userPromise
 	
 	return dispatch(authUser(res))
+	} else {
+		const userPromise = axios
+		.post('/authuserAuth0', {email: data})
+		.then((res) => res.data)
+		.catch((err) => err.response.data.error)
+		const res = await userPromise
+		
+		localStorage.setItem("userId", res.data.id)
+		localStorage.setItem("token", res.data.token)
+	
+	}
+	
 }
 
 export const sendTokenAction = (data) => async (dispatch) => {
