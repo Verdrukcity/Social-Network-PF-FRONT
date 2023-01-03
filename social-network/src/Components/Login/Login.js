@@ -71,7 +71,7 @@ export default function Login() {
 
 	useEffect(() => {
 		setErrorMessage(message)
-	}, [dispatch, message, errorMessage, clickLogin])
+	}, [message])
 
 	useEffect(() => {
 		// Se revisa y envía el error en el if e ingresa en el else
@@ -96,7 +96,7 @@ export default function Login() {
 
 			history.push('/reply/home')
 		}
-	}, [dispatch, errorMessage, clickLogin])
+	}, [dispatch, errorMessage, clickLogin, message, Toast, history, sweetAlert])
 
 	return (
 		<div className='container-fluid bg container-flex-center'>
