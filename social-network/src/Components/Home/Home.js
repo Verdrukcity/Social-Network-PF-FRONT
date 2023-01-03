@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { Link, useHistory } from 'react-router-dom'
 import {
 	getAllPostsAsync,
 	getUserDetailAsync,
@@ -30,6 +31,8 @@ import home from './Home.css'
 */
 
 export default function Home() {
+	const history = useHistory()
+
 	/**
 	 * estado local para abrir y cerrar el dialog del create
 	 */
@@ -118,11 +121,13 @@ export default function Home() {
 
 	return (
 		<div ref={ref} id='home' className='mt-2'>
-			<img
-				src={logo}
-				alt='logo reply'
-				className='fixed-top d-none d-md-inline-flex ms-4 mt-4'
-			/>
+			<Link to={'/'}>
+				<img
+					src={logo}
+					alt='logo reply'
+					className='fixed-top d-none d-md-inline-flex ms-4 mt-4'
+				/>
+			</Link>
 
 			<Header
 				filterByCategory={filterByCategory}
