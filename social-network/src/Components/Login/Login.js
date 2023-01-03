@@ -95,7 +95,8 @@ export default function Login() {
 
 			history.push('/reply/home')
 		}
-	}, [dispatch, errorMessage, clickLogin, message, Toast, history, sweetAlert])
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [dispatch, errorMessage])
 
 	return (
 		<div className='container-fluid bg container-flex-center'>
