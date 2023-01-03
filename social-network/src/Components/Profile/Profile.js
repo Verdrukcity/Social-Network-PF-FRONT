@@ -8,8 +8,12 @@ import ButtonActions from "../../shared/components/ButtonActions/ButtonActions";
 import DialogUserUpdate from "../../shared/components/dialogs/dialogUserUpdate/DialogUserUpdate";
 import profilecss from "./Profile.css";
 import Logout from "../Logout/Logout";
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+import { acountCreator,srtipeAccountLink } from '../../redux/actions/pagoActions'
 
 export default function Profile(props) {
+	const MySwal = withReactContent(Swal)
 	const id = localStorage.getItem("userId");
 	const user = useSelector((state) => state.posts.userDetail);
 
@@ -32,6 +36,53 @@ export default function Profile(props) {
 		setOpen(true);
 	};
 
+	const pagoStripe=()=>{
+
+		if(props.userStripe){
+			MySwal.fire({
+			position: 'top-end',
+			icon: 'success',
+			title:" tu usuario de Stripe: " + props.userStripe,
+			showConfirmButton: false,
+			timer: 1500,
+		})
+
+
+		}
+		else{
+
+			MySwal.fire({
+			position: 'top-end',
+			icon: 'question',
+			title: "no tienes ususario ! \n quieres crear cuenta de Stripe ?",
+			showConfirmButton: true,
+			showCancelButton: true,
+		
+		}).then(async (result) => {
+
+			if (result.isConfirmed) {
+			const perfilStripe=dispatch(acountCreator(props.id))
+			const linkStripe= dispatch(srtipeAccountLink(perfilStripe))
+			
+				window.open(linkStripe)
+    		MySwal.fire(
+			'Creado!',
+			'Your Profilefile has been Created, por favor continue su inscripcion en la pagina de stripe',
+			'success'
+			)
+  } else if (  result.dismiss === Swal.DismissReason.cancel
+  ) {
+			MySwal.fire(
+			'Cancelled',
+			'Cuenta no creada',
+			'error'
+			)
+  }
+})
+}
+				
+
+	}
 	return (
 		<div className="profile-container row d-flex w-99 m-3 justify-content-center">
 			<DialogUserUpdate
@@ -90,7 +141,7 @@ export default function Profile(props) {
 						</span>
 					</div>
 					<div className="profile-container-ff">
-						<img src={allIcons.cash} alt="cashicon" />
+						<img onClick={pagoStripe} src={allIcons.cash} alt="cashicon" />
 						<span>
 							Your balance: <p>$ {props.cashValue}</p>
 						</span>
@@ -138,6 +189,7 @@ Profile.defaultProps = {
 	follow: "1",
 	followers: "100000",
 	cashValue: "999",
+	
 	userPosts: [
 		{
 			_id: "6393c28d810999a485add515",
