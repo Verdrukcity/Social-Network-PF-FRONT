@@ -120,14 +120,16 @@ export default function Profile(props) {
 					/>
 				</div>
 				<div className="row col-5 justify-content-center align-items-center">
-					<img
+					<div className="col-5 image_profil_container">
+						<img
 						src={user.image_profil || props.image_profil}
 						alt="perfil"
-						className="user-image col-5"
-					/>
-					<h3 className="col-5">
-						{user.user_Name || props.user_Name}
-					</h3>
+						className="user-image"
+						/>
+					</div>
+					<div  className="col-5">
+						<h3 className="">{user.user_Name || props.user_Name}</h3>
+					</div>
 				</div>
 				<div className="profile-container-balance col-5">
 					<div className="profile-container-ff">

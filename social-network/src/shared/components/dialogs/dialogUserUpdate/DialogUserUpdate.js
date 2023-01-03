@@ -35,6 +35,7 @@ export default function DialogUserUpdate({
 	// const theme = useTheme();
 	const [userName, setUserName] = React.useState(userDetail.user_Name);
 	const [userPassword, setUserPassword] = React.useState(userDetail.password);
+	const [changeUserPasswordBoolean, setChangeUserPasswordBoolean] = React.useState(false)
 
 	const [loader, setLoader] = useState(false);
 	const id = localStorage.getItem("userId");
@@ -48,6 +49,7 @@ export default function DialogUserUpdate({
 		React.useState(null);
 
 	const changeImage = (event) => {
+		event.preventDefault();
 		if (event.target.files[0] !== undefined) {
 			let fileToUse = event.target.files[0];
 			const reader = new FileReader();
@@ -64,21 +66,26 @@ export default function DialogUserUpdate({
 	};
 
 	/**funciones para manejar los cambios  */
-	/**funcion que maneja el estado de las categorias */
 	const changeUserName = (event) => {
 		event.preventDefault();
 		let value = event.target.value;
-		setUserName(value);
+		if(value.length > 5){
+		setUserPassword(value);
+			setUserName(value);
+		}
 	};
 	/* funcion que controla el text */
 	const changeUserPassword = (event) => {
 		event.preventDefault();
 		let value = event.target.value;
-		setUserPassword(value);
+		if(value.length > 5){
+			setUserPassword(value);
+			setChangeUserPasswordBoolean(true)
+		}
 	};
 	/*funcion que envia la data */
-	const handleSubmit = async (e) => {
-		e.preventDefault();
+	const handleSubmit = async (event) => {
+		event.preventDefault();
 		let formData = new FormData();
 		let hashedPassword = bcrypt.hashSync(userPassword, 10);
 		formData.append(
@@ -87,7 +94,7 @@ export default function DialogUserUpdate({
 		);
 		formData.append(
 			"password",
-			userPassword ? hashedPassword : userDetail.password
+			changeUserPasswordBoolean ? hashedPassword : userDetail.password
 		);
 		if (!file) {
 			formData.append("image_profil", userDetail.image_profil);
@@ -97,6 +104,9 @@ export default function DialogUserUpdate({
 				formData.append("image_publi_id", userDetail.image_publi_id);
 			}
 		}
+		setUserName("")
+		setUserPassword("")
+		setChangeUserPasswordBoolean(false)
 
 		const MySwal = withReactContent(Swal);
 		setOpen(false);
@@ -162,18 +172,20 @@ export default function DialogUserUpdate({
 								className="file-upload-input-user"
 							/>
 
-							<div className="d-flex justify-content-center">
+							<div /*className="d-flex justify-content-center"*/ className="image_profil_container">
 								{ImageSelectedPrevious && (
 									<img
 										src={ImageSelectedPrevious}
-										className="text-information-img img-fluid w-50 "
+										/*className="text-information-img img-fluid w-50 "*/
+										className="user-image"
 										alt="imagen para seleccionar"
 									/>
 								)}
 								{!ImageSelectedPrevious && (
 									<img
 										src={userDetail.image_profil}
-										className="text-information-img img-fluid w-50"
+										/*className="text-information-img img-fluid w-50"*/
+										className="user-image"
 										alt="imagen seleccionada"
 									/>
 								)}
@@ -200,6 +212,7 @@ export default function DialogUserUpdate({
 								className="w-100 d-flex justify-content-start align-items-center "
 							>
 								<Input
+									type="password"
 									id="my-input"
 									aria-describedby="my-helper-text"
 									placeholder={"Contraseña"}
@@ -208,7 +221,7 @@ export default function DialogUserUpdate({
 							</div>
 						</div>
 					</div>
-					<p className="text-center">La imagen debe ser cuadrada</p>
+					<p className="text-center">La imagen debe ser cuadrada <br/> El username y contraseña debe tener minimo 6 caracteres</p>
 					<DialogActions className="d-flex justify-content-center">
 						<div className="">
 							<ButtonActions
