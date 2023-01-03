@@ -11,4 +11,5 @@
   outline: none;
   opacity: 0;
   cursor: pointer;
+  z-index: 2;
 }
