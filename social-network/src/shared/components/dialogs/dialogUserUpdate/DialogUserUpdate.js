@@ -172,18 +172,20 @@ export default function DialogUserUpdate({
 								className="file-upload-input-user"
 							/>
 
-							<div className="d-flex justify-content-center">
+							<div /*className="d-flex justify-content-center"*/ className="image_profil_container">
 								{ImageSelectedPrevious && (
 									<img
 										src={ImageSelectedPrevious}
-										className="text-information-img img-fluid w-50 "
+										/*className="text-information-img img-fluid w-50 "*/
+										className="user-image"
 										alt="imagen para seleccionar"
 									/>
 								)}
 								{!ImageSelectedPrevious && (
 									<img
 										src={userDetail.image_profil}
-										className="text-information-img img-fluid w-50"
+										/*className="text-information-img img-fluid w-50"*/
+										className="user-image"
 										alt="imagen seleccionada"
 									/>
 								)}
