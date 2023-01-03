@@ -11,6 +11,8 @@ import {
 import { messageSelector } from '../../redux/reducer/usersReducer'
 import { imgLogin } from '../../shared/assets/icons/all-icons'
 import './Login.css'
+import { useAuth0 } from "@auth0/auth0-react";
+
 
 /*
   Login comprueba el usuario y contraseña enviando el siguiente objeto:
@@ -24,6 +26,8 @@ import './Login.css'
 export default function Login() {
 	const dispatch = useDispatch()
 	const history = useHistory()
+
+	const { loginWithRedirect, logout,  } = useAuth0();
 
 	const message = useSelector(messageSelector)
 
@@ -125,6 +129,8 @@ export default function Login() {
 						<button type='submit' className='btnLogin' onClick={handleLogin}>
 							Login
 						</button>
+						<button onClick={() => loginWithRedirect()}>Log In auth</button>
+						<button onClick={() => logout({ returnTo: "http://localhost:3000/reply/login"})}>Log out</button>
 					</div>
 
 					<div className='registerText'>

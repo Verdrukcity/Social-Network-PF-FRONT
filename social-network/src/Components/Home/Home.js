@@ -14,6 +14,7 @@ import ButtonActions from '../../shared/components/ButtonActions/ButtonActions'
 import Card from '../../shared/components/Cards/Card'
 import DialogCreatePost from '../../shared/components/dialogs/dialogCreatePost/DialogCreatePost'
 import Header from '../Header/Header.js'
+import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 
 import home from './Home.css'
 
@@ -29,16 +30,18 @@ import home from './Home.css'
   y el tipo, que no es demasiado relevante, pero funciona!!
 */
 
-export default function Home() {
+ function Home() {
 	/**
 	 * estado local para abrir y cerrar el dialog del create
 	 */
+	const { user, isAuthenticated, isLoading } = useAuth0();
+	
 	const [open, setOpen] = useState(false)
 	const posts = useSelector(allPostsSelector)
 	// const token = useSelector(tokenSelector)
 	const token = localStorage.getItem('token')
 	let categories = useSelector((state) => state.categories.name)
-
+	console.log({user, isAuthenticated, isLoading})
 	let userDetail = useSelector((state) => state.posts.userDetail)
 	const id = window.localStorage.getItem('userId')
 
@@ -53,6 +56,7 @@ export default function Home() {
 
 	useEffect(() => {
 		setActualPosts(posts)
+		
 	}, [posts])
 
 	useEffect(() => {
@@ -188,3 +192,5 @@ export default function Home() {
 		</div>
 	)
 }
+
+export default withAuthenticationRequired(Home)
