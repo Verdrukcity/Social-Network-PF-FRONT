@@ -64,7 +64,7 @@ export default function DialogCreatePost({
 		dispatch(getUserDetailAsync(id))
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 		
-	}, [dispatch])
+	}, [dispatch, id])
 
 	const [ImageSelectedPrevious, setImageSelectedPrevious] = React.useState(null)
 
@@ -78,7 +78,7 @@ export default function DialogCreatePost({
 		if (e.target.files[0] !== undefined) {
 			let fileToUse = e.target.files[0]
 			const reader = new FileReader()
-			if(e.target.files[0].type=="video/mp4"){
+			if(e.target.files[0].type==="video/mp4"){
 				setIsVideo(true)
 			}
 			fileSet(fileToUse)
