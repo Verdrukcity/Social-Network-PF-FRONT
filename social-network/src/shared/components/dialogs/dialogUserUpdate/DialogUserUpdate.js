@@ -69,7 +69,7 @@ export default function DialogUserUpdate({
 	const changeUserName = (event) => {
 		event.preventDefault();
 		let value = event.target.value;
-		if(value.length > 6){
+		if(value.length > 5){
 		setUserPassword(value);
 			setUserName(value);
 		}
@@ -78,7 +78,7 @@ export default function DialogUserUpdate({
 	const changeUserPassword = (event) => {
 		event.preventDefault();
 		let value = event.target.value;
-		if(value.length > 6){
+		if(value.length > 5){
 			setUserPassword(value);
 			setChangeUserPasswordBoolean(true)
 		}
@@ -219,7 +219,7 @@ export default function DialogUserUpdate({
 							</div>
 						</div>
 					</div>
-					<p className="text-center">La imagen debe ser cuadrada</p>
+					<p className="text-center">La imagen debe ser cuadrada <br/> El username y contraseña debe tener minimo 6 caracteres</p>
 					<DialogActions className="d-flex justify-content-center">
 						<div className="">
 							<ButtonActions
