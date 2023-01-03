@@ -100,7 +100,8 @@ export default function Login() {
 
 			history.push('/reply/home')
 		}
-	}, [dispatch, errorMessage, clickLogin, message, Toast, history, sweetAlert])
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [dispatch, errorMessage])
 
 	if (isLoading) return <Loader></Loader>;
 	if(isAuthenticated) history.push("/reply/home");
