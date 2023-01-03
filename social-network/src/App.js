@@ -10,8 +10,8 @@ import Pago from './Components/Stripe/Pago'
 import axios from 'axios'
 
 
-// axios.defaults.baseURL = "http://localhost:3001"
-axios.defaults.baseURL = "https://social-network-pf-back-production.up.railway.app"
+axios.defaults.baseURL = "http://localhost:3001"
+//axios.defaults.baseURL = "https://social-network-pf-back-production.up.railway.app"
 
 /*
   App se utiliza para navegar a las rutas necesarias en el frontend:
