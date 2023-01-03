@@ -5,7 +5,9 @@ import { arrowUp } from "../../shared/assets/icons/all-icons";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from "react";
-import {getPostDetailAsync} from '../../redux/actions/postActions'
+import {getPostDetailAsync, likePostAsync} from '../../redux/actions/postActions'
+import {likeIcon} from '../../shared/assets/icons/all-icons'
+import {DialogLikesList} from '../../shared/components/dialogs/dialogLikesList/DialogLikesList'
 
 
 export default function PostDetail(props){
@@ -17,6 +19,9 @@ export default function PostDetail(props){
         categories: [],
         comments: []
     })
+
+    const [open, setOpen] = useState(false)
+
     const dispatch = useDispatch() 
 
     //obtenemos el id por params para buscar el detail correpondiente
@@ -34,7 +39,6 @@ export default function PostDetail(props){
     //cuando este la info en el reducer, la traigo al componente
     useEffect(()=>{
         if (Object.keys(details).length){
-            console.log(details)
             setPostDetail({
                 profile: details.userId.user_Name,
                 profileImg: details.userId.image_profil,
@@ -42,23 +46,34 @@ export default function PostDetail(props){
                 postImg: details.post.multimedia,
                 categories: details.post.category,
                 comments: details.comments,
-                resourseType: details.resourseType
+                isVideo: details.post.multimedia_id.includes("videos"),
+                likes: details.post.likes
             })
         }
     }, [details])
 
+    const handleLike = (postId, userLoged) => {
+		dispatch(likePostAsync(postId, userLoged))
+	}
+
+    const seeLikes = (e)=>{
+        e.preventDefault();
+        setOpen(true)
+    }
+
     return(
         
         <div className="bg-podt-detail p-2"> 
+            <DialogLikesList open={open} setOpen={setOpen} innerContent={postDetail.likes}/>
 
             <div className="container mt-4 ">
                 <div className="row">
                 {/* primera columna con foto y cateogries */}
                 <div className="col-8 ">
-                    {postDetail.resourseType === "image"? <img className='imgCard' src={postDetail.postImg} alt='postImg'></img>:
+                    {!postDetail.isVideo ? <img className='imgCard' src={postDetail.postImg} alt='postImg'></img>:
                     <video className='imgCard' src={postDetail.postImg} alt= "video" controls width="320" height="240"/> }
 
-                    {/* Aqui va a mapear las categories que contenga el post (esto es temporal)*/}
+                    {/* Aqui va a mapear las categories que contenga el post*/}
                     <div className=" mt-2 w-100 d-flex">
                          <p className="categorysimbol">#</p>
                          <div className="d-flex justify-content-start align-items-center w-100">
@@ -79,12 +94,23 @@ export default function PostDetail(props){
                     <div className="textpost mt-2">
                         <p className="">{postDetail.description}</p>
                     </div>
-
+                    
+                    <div className="textpost mt-2 mb-4">
+                        <img
+                            src={likeIcon}
+                            className='icon-size'
+                            alt='icon de likes'
+                            onClick={(e) => {
+                                handleLike(props.id, props.logedUser)
+                            }}
+                        />
+                        <h4 className="username verlikes mt-2 mb-2" onClick={e => seeLikes(e)}>Ver likes</h4>
+                    </div>
+                    
                     <h4 className="username mt-2 mb-2">Comentarios</h4>
                     
                     <div className="comentscont">
                         {/* Aqui va a mapear los comentarios (esto es temporal) */}
-                        
                         { postDetail.comments.length?postDetail.comments.map(                    
                         (comment)=> { return(
                                 <div className="comentcont">
@@ -92,8 +118,8 @@ export default function PostDetail(props){
                                         <img className="comentimg" alt="profile" src={comment.profileId.image_profil}></img>
                                         <h5 className="username ms-2 fs-6">{comment.profileId.user_Name}</h5>
                                     </div> 
-                                    <div className="textcommen fs-6">
-                                        <p className="">{comment.text}</p>
+                                    <div className="textcomment fs-6">
+                                        <p className="textcomment fs-6">{comment.text}</p>
                                     </div>
                                 </div> 
                                 )                    

@@ -29,7 +29,7 @@ function Card(props) {
 	const dispatch = useDispatch()
 	const [input, setInput] = useState({
 		text: '',
-		profileId: `${props.userId}`,
+		profileId: `${props.logedUser}`,
 	})
 	const history = useHistory()
 
