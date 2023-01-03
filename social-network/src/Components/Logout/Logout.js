@@ -17,8 +17,9 @@ export default function Logout() {
         localStorage.clear()
         // localStorage.removeItem('token')
         // localStorage.removeItem('userId')
-        logout()
-        history.push('/reply/login')
+        if(isAuthenticated)logout({ returnTo: window.location.origin });
+
+        history.push('/')
     }
 
 
