@@ -166,14 +166,14 @@ export default function DialogUserUpdate({
 								{ImageSelectedPrevious && (
 									<img
 										src={ImageSelectedPrevious}
-										className="text-information-img img-fluid rounded-circle w-50 "
+										className="text-information-img img-fluid w-50 "
 										alt="imagen para seleccionar"
 									/>
 								)}
 								{!ImageSelectedPrevious && (
 									<img
 										src={userDetail.image_profil}
-										className="text-information-img img-fluid rounded-circle w-50"
+										className="text-information-img img-fluid w-50"
 										alt="imagen seleccionada"
 									/>
 								)}

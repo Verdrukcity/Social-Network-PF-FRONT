@@ -21,8 +21,17 @@ export const confirmacionPagosAsync = (data) => async (dispatch) => {
   }
 }
 export const acountCreator = (id) => async (dispatch) => {
+  const data ={id:id}
   try {
-    const respuesta = await axios.post(`/stripe/account/${id}`)
+    const respuesta = await axios.post(`/stripe/account/`, data, {
+         // Endpoint to send files
+         headers: {
+           // Add any auth token here
+           'content-type': 'multipart/form-data',
+         },
+       }
+    
+    )
        //console.log(respuesta.data)
       // dispatch(confirmarPago(response.data.data))
       const confirmacion=respuesta.data;

@@ -7,7 +7,7 @@ import ButtonActions from '../../shared/components/ButtonActions/ButtonActions'
 import DialogCategories from '../../shared/components/dialogs/dialogCategories/DialogCategories.js'
 import DialogSearchBar from '../../shared/components/dialogs/dialogSearchBar/DialogSearchBar.js'
 import { activeRoundedButton } from '../../shared/assets/globals'
-import header from  './Header.css'
+import header from './Header.css'
 
 /**
  * Header  con botones funcionales, aun falta agregar algunos pero así va:
@@ -38,6 +38,9 @@ export default function Header({
 
 	const goTo = (event) => {
 		switch (event.target.alt) {
+			case 'icon-home':
+				history.push('/')
+				break
 			case 'icon-trend':
 				// history.push("/reply/trend");
 				// Debería traer los trends o enviar donde estén
@@ -66,7 +69,9 @@ export default function Header({
 						type='submit'
 						action={goTo}
 						id='all-icons'
-						content={<img src={allIcons.home} alt='icon-home' className={header} />}
+						content={
+							<img src={allIcons.home} alt='icon-home' className={header} />
+						}
 					/>
 				</li>
 				<li id='icon-trend'>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import * as allIcons from '../../shared/assets/icons/all-icons'
 import { Link } from 'react-router-dom'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 import Swal from 'sweetalert2'
@@ -10,9 +11,9 @@ import {
 } from '../../redux/actions/usersActions'
 import { messageSelector } from '../../redux/reducer/usersReducer'
 import { imgLogin } from '../../shared/assets/icons/all-icons'
+import ButtonActions from '../../shared/components/ButtonActions/ButtonActions'
 import './Login.css'
-import { useAuth0 } from "@auth0/auth0-react";
-
+import LoginExterno from '../../shared/components/ButtonLogin/LoginExterno'
 
 /*
   Login comprueba el usuario y contraseña enviando el siguiente objeto:
@@ -101,6 +102,18 @@ export default function Login() {
 	return (
 		<div className='container-fluid bg container-flex-center'>
 			<div className=' container-flex-center '>
+				<ButtonActions
+					type='submit'
+					action={() => history.push('/')}
+					id='all-icons-arrowBack'
+					content={
+						<img
+							src={allIcons.arrowBack}
+							className='all-icons-image'
+							alt='icon-return'
+						/>
+					}
+				/>
 				<img className='imgLogin' alt='imagen login' src={imgLogin}></img>
 				<form className='formularioLogin'>
 					<h1 className='replyTitle reply'>REPLY</h1>
@@ -126,18 +139,21 @@ export default function Login() {
 					</div>
 
 					<div className='btnPadding'>
-						<button type='submit' className='btnLogin' onClick={handleLogin}>
+						<button
+							type='submit'
+							className='btnLogin mx-3'
+							onClick={handleLogin}
+						>
 							Login
 						</button>
-						<button onClick={() => loginWithRedirect()}>Log In auth</button>
-						<button onClick={() => logout({ returnTo: "http://localhost:3000/reply/login"})}>Log out</button>
+						<LoginExterno type={'button'} click={() => alert('auth0')} />
 					</div>
 
 					<div className='registerText'>
 						<p>
-							if you don't have an account,{' '}
+							Si aún no tienes una cuenta,{' '}
 							<Link className='registerScreen' to={`/reply/register`}>
-								register here
+								regístrate aquí
 							</Link>
 						</p>
 					</div>

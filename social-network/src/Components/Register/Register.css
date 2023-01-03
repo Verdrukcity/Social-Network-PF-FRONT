@@ -1,128 +1,177 @@
 .formulario {
+	display: flex;
+	flex-direction: column;
 
-    height: 750px;
-    width: 650px;
-    border-radius: 15px;
-    background-color: var(--main-gray);
-    border: 2px solid transparent;
-    padding: 50px;
-    position: relative;
-    flex-direction: column;
-    overflow-y: hidden;
+	width: 650px;
+	height: auto;
+	padding: 50px;
+
+	background-color: var(--main-gray);
+	border-radius: 25px;
+
+	box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
+}
+
+.replyTitle {
+	margin: 25px 0;
 }
 
 .container-form-register {
-    margin: 10px;
+	margin: 10px;
 }
 
 .container-imputs-register {
-    flex-direction: column;
+	width: 80%;
+
+	flex-wrap: wrap;
 }
 
 .selectFormulario {
-    display: flex;
-    flex-direction: column;
-    border-color: transparent;
-    padding: 10px;
+	display: flex;
+	align-items: center;
+
+	width: 80%;
+	padding: 10px;
+
+	flex-direction: column;
+	border-color: transparent;
+
+	text-align: center;
+}
+
+.selectFormulario select {
+	width: 120px;
+	margin: 0 5px;
+	padding: 3px;
+
+	border: transparent;
+	border-radius: 25px;
+
+	text-align: center;
 }
 
 .botonRegister {
-    border-radius: 15px;
-    height: 40px;
-    width: 150px;
-    color: white;
-    background-color: #ff8d00;
-    font-size: 30px;
-    border: 2px solid transparent;
-    margin-left: 20px;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-
+	border-radius: 15px;
+	height: 40px;
+	width: 150px;
+	color: white;
+	background-color: #ff8d00;
+	font-size: 30px;
+	border: 2px solid transparent;
+	margin-left: 20px;
+	font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 .country {
+	width: 80%;
 
-    padding: 10px;
-    order: 2px solid transparent;
+	padding: 10px;
+	order: 2px solid transparent;
 }
 
 .formImputMal {
-
-    border-radius: 15px;
-    height: 30px;
-    width: 200px;
-    border: 2px solid transparent;
-    border-color: rgb(201, 9, 9);
-
+	border-radius: 15px;
+	height: 30px;
+	width: 200px;
+	border: 2px solid transparent;
+	border-color: rgb(201, 9, 9);
 }
 
 .adjust-repli-size {
-    font-size: 80px;
+	font-size: 80px;
 }
 
-@media(max-width: 450px) {
-    .formulario {
-        width: 95%;
-        height: 95%;
-    }
+@media (max-width: 450px) {
+	.formulario {
+		width: 100%;
+		padding: 20px 0;
+	}
 
-    .replyTitle {
-        display: none;
-    }
+	.formImput {
+		width: 90%;
+		height: 20px;
+		font-size: 18px;
+		border-radius: 15px;
+		border: 2px solid transparent;
+	}
 
-    .formImput {
-        width: 90%;
-        height: 20px;
-        font-size: 18px;
-        border-radius: 15px;
-        border: 2px solid transparent;
-    }
+	.formImputMal {
+		width: 100%;
+		height: 36px;
+		border-radius: 15px;
+		border: 2px solid transparent;
+		text-align: center;
+		border-color: rgb(201, 9, 9);
+	}
 
-    .formImputMal {
+	.select-date-register {
+		display: flex;
+		flex-direction: column;
+		text-align: center;
+		color: gray;
+		width: 150px;
+	}
 
-        width: 100%;
-        height: 36px;
-        border-radius: 15px;
-        border: 2px solid transparent;
-        text-align: center;
-        border-color: rgb(201, 9, 9);
-    }
-
-    .select-date-register {
-        display: flex;
-        flex-direction: column;
-        text-align: center;
-        color: gray;
-        width: 150px;
-    }
-
-    .botonPadding {
-        padding: 0;
-    }
+	.botonPadding {
+		padding: 0;
+	}
 }
 
-@media(min-width: 450px) {
+@media (min-width: 450px) {
+	.formImput {
+		width: 100%;
+		height: 36px;
+		border-radius: 15px;
+		border: 2px solid transparent;
+		text-align: center;
+	}
 
-    .formImput {
-        width: 100%;
-        height: 36px;
-        border-radius: 15px;
-        border: 2px solid transparent;
-        text-align: center;
-    }
-
-    .formImputMal {
-
-        width: 100%;
-        height: 36px;
-        border-radius: 15px;
-        border: 2px solid transparent;
-        text-align: center;
-        border-color: rgb(201, 9, 9);
-    }
+	.formImputMal {
+		width: 100%;
+		height: 36px;
+		border-radius: 15px;
+		border: 2px solid transparent;
+		text-align: center;
+		border-color: rgb(201, 9, 9);
+	}
 }
 
 .labelPais {
-    margin-top: 0.5rem;
-    color: black;
-    font-size: large;
+	margin-top: 0.5rem;
+	color: black;
+	font-size: large;
+}
+
+.btnRegister {
+	border-radius: 15px;
+	margin-bottom: 25px;
+	height: 40px;
+	width: 150px;
+	color: white;
+	background-color: #ff8d00;
+	font-size: 20px;
+	border: 2px solid transparent;
+	font-family: Georgia, 'Times New Roman', Times, serif;
+	box-shadow: 0 0 15px rgba(0, 0, 0, 0.201);
+	transition: 0.5s;
+}
+.btnRegister:hover {
+	background-color: var(--main-orange-ligth);
+	color: var(--main-orange-primary);
+}
+
+.registerText {
+	display: inline-flex;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.registerScreen {
+	color: #ff8d00;
+	margin-top: 15px;
+}
+
+#all-icons-arrowBack {
+	position: absolute;
+	top: 30px;
+	left: 60px;
 }

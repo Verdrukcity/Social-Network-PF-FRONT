@@ -74,6 +74,7 @@
 .username{
     text-align: start;
     color: white;
+    cursor: pointer;
 }
 
 .textpost{
@@ -91,7 +92,7 @@
     background-color:#FF8D00;
     border-radius: 25px;
     margin-bottom: 10px;
-    height: 30%;
+    height: 40%;
 }
 
 .comentscont{        
@@ -99,7 +100,7 @@
     flex-direction: column;
     overflow-y: scroll;
     overflow-x: hidden;
-    height: 50%;
+    height: 40%;
     
 }
 .comentscont::-webkit-scrollbar-track-piece {
@@ -138,4 +139,12 @@
 .comentimg{
     border-radius: 50%;
     height: 50px;
+}
+
+.icon-size{
+    margin-right: auto;
+}
+
+.verlikes{
+    margin-right:100px
 }
