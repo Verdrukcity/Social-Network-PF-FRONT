@@ -46,7 +46,6 @@ export default function Home() {
 	// const token = useSelector(tokenSelector)
 	const token = localStorage.getItem('token')
 	let categories = useSelector((state) => state.categories.name)
-	console.log({user, isAuthenticated, isLoading})
 	let userDetail = useSelector((state) => state.posts.userDetail)
 	const id = window.localStorage.getItem('userId')
 
