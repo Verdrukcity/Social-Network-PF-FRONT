@@ -15,7 +15,6 @@ import {
 
 export const getAllPostsAsync = (data) => async (dispatch) => {
 	const auth = await axios.get(`/create?token=${data}`)
-	console.log('m traigo todos')
 	return dispatch(getAllPosts(auth.data.data))
 }
 

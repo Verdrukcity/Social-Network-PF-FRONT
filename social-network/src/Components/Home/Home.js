@@ -42,7 +42,6 @@ export default function Home() {
 
 	const [open, setOpen] = useState(false)
 	const posts = useSelector(allPostsSelector)
-	console.log(posts)
 	// const token = useSelector(tokenSelector)
 	const token = localStorage.getItem('token')
 	let categories = useSelector((state) => state.categories.name)
@@ -119,8 +118,15 @@ export default function Home() {
 
 	// SEARCHBAR
 
+	const searchRef = useRef('')
+
 	function handleSearchBarChange(e) {
+		searchRef.current = e.target.value
 		dispatch(findBy(e.target.value))
+	}
+
+	function deleteFindText(e) {
+		ref.current.value = ''
 	}
 
 	const addPost = (event) => {
@@ -145,6 +151,8 @@ export default function Home() {
 			</Link>
 
 			<Header
+				deleteFindText={deleteFindText}
+				findByText={searchRef.current}
 				handleSearchBarChange={handleSearchBarChange}
 				filterByCategory={filterByCategory}
 				orderByLikes={fnOrderByLikes}
