@@ -114,6 +114,7 @@ export default function Home() {
 
 	function fnOrderByLikes() {
 		dispatch(orderByLikes())
+		goToUp()
 	}
 
 	// SEARCHBAR
@@ -123,11 +124,13 @@ export default function Home() {
 	function handleSearchBarChange(e) {
 		searchRef.current = e.target.value
 		dispatch(findBy(e.target.value))
+		goToUp()
 	}
 
 	function deleteFindText() {
 		searchRef.current = ''
 		dispatch(getAllPostsAsync(token))
+		goToUp()
 	}
 
 	const addPost = (event) => {
