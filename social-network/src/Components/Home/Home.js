@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import {
 	getAllPostsAsync,
 	getUserDetailAsync,
@@ -15,8 +15,11 @@ import ButtonActions from '../../shared/components/ButtonActions/ButtonActions'
 import Card from '../../shared/components/Cards/Card'
 import DialogCreatePost from '../../shared/components/dialogs/dialogCreatePost/DialogCreatePost'
 import Header from '../Header/Header.js'
+import { useAuth0 } from "@auth0/auth0-react";
 
 import home from './Home.css'
+import { authUserAsync } from '../../redux/actions/usersActions'
+import Loader from '../../shared/components/loader/loader'
 
 /*
   Home es el componente principal donde el usuario encuentra:
@@ -31,17 +34,18 @@ import home from './Home.css'
 */
 
 export default function Home() {
-	const history = useHistory()
+
 
 	/**
 	 * estado local para abrir y cerrar el dialog del create
 	 */
+	const { user, isAuthenticated, isLoading } = useAuth0();
+	
 	const [open, setOpen] = useState(false)
 	const posts = useSelector(allPostsSelector)
 	// const token = useSelector(tokenSelector)
 	const token = localStorage.getItem('token')
 	let categories = useSelector((state) => state.categories.name)
-
 	let userDetail = useSelector((state) => state.posts.userDetail)
 	const id = window.localStorage.getItem('userId')
 
@@ -54,9 +58,14 @@ export default function Home() {
 
 	const [actualPosts, setActualPosts] = useState()
 
+
 	useEffect(() => {
 		setActualPosts(posts)
-	}, [posts])
+		if(isAuthenticated && !isLoading){
+			dispatch (authUserAsync(user.email, isAuthenticated))
+		}
+		   // eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [posts, isAuthenticated])
 
 	useEffect(() => {
 		/**me traigo todos los posts */
@@ -118,7 +127,7 @@ export default function Home() {
 		/*Esta función debería llevarte al inicio de las publicaciones*/
 		ref.current?.scrollIntoView({ behavior: 'smooth' })
 	}
-
+	if (isLoading) return <Loader></Loader>
 	return (
 		<div ref={ref} id='home' className='mt-2'>
 			<Link to={'/'}>

@@ -1,6 +1,6 @@
 import React from "react";
 import Dialog from '@mui/material/Dialog'
-import css from './DialogLikesList.css'
+import './DialogLikesList.css'
 
 export function DialogLikesList({open, setOpen, innerContent}){
 

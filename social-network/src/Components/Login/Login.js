@@ -14,6 +14,8 @@ import { imgLogin } from '../../shared/assets/icons/all-icons'
 import ButtonActions from '../../shared/components/ButtonActions/ButtonActions'
 import './Login.css'
 import LoginExterno from '../../shared/components/ButtonLogin/LoginExterno'
+import { useAuth0 } from "@auth0/auth0-react";
+import Loader from '../../shared/components/loader/loader.js'
 
 /*
   Login comprueba el usuario y contraseña enviando el siguiente objeto:
@@ -27,6 +29,9 @@ import LoginExterno from '../../shared/components/ButtonLogin/LoginExterno'
 export default function Login() {
 	const dispatch = useDispatch()
 	const history = useHistory()
+	const {isAuthenticated, isLoading} = useAuth0();
+
+	
 
 	const message = useSelector(messageSelector)
 
@@ -96,6 +101,8 @@ export default function Login() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [dispatch, errorMessage])
 
+	if (isLoading) return <Loader></Loader>;
+	if(isAuthenticated) history.push("/reply/home");
 	return (
 		<div className='container-fluid bg container-flex-center'>
 			<div className=' container-flex-center '>
@@ -143,7 +150,7 @@ export default function Login() {
 						>
 							Login
 						</button>
-						<LoginExterno type={'button'} click={() => alert('auth0')} />
+						<LoginExterno type={'button'}  />
 					</div>
 
 					<div className='registerText'>
