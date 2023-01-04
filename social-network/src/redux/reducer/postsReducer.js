@@ -1,4 +1,4 @@
-import { createSlice, } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 
 /**
  * estado global de los posts
@@ -11,7 +11,6 @@ const initialState = {
 	detail: {},
 	userDetail: {},
 	like: {},
-	
 }
 
 // REDUCERS
@@ -57,6 +56,17 @@ export const postSlice = createSlice({
 		likePost: (state, action) => {
 			state.like = action.payload
 		},
+		findBy: (state, action) => {
+			const posts = state.allPost
+
+			const findPosts = posts.filter((post) =>
+				post.userId.user_Name
+					.toLowerCase()
+					.includes(action.payload.toLowerCase())
+			)
+
+			state.posts = findPosts
+		},
 	},
 })
 
@@ -76,6 +86,7 @@ export const {
 	getDetailUser,
 	orderByLikes,
 	likePost,
+	findBy,
 } = postSlice.actions
 
 export default postSlice.reducer

@@ -7,6 +7,7 @@ import {
 } from '../../redux/actions/postActions'
 import {
 	allPostsSelector,
+	findBy,
 	getByCategory,
 	orderByLikes,
 } from '../../redux/reducer/postsReducer'
@@ -15,7 +16,7 @@ import ButtonActions from '../../shared/components/ButtonActions/ButtonActions'
 import Card from '../../shared/components/Cards/Card'
 import DialogCreatePost from '../../shared/components/dialogs/dialogCreatePost/DialogCreatePost'
 import Header from '../Header/Header.js'
-import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth0 } from '@auth0/auth0-react'
 
 import home from './Home.css'
 import { authUserAsync } from '../../redux/actions/usersActions'
@@ -34,15 +35,14 @@ import Loader from '../../shared/components/loader/loader'
 */
 
 export default function Home() {
-
-
 	/**
 	 * estado local para abrir y cerrar el dialog del create
 	 */
-	const { user, isAuthenticated, isLoading } = useAuth0();
-	
+	const { user, isAuthenticated, isLoading } = useAuth0()
+
 	const [open, setOpen] = useState(false)
 	const posts = useSelector(allPostsSelector)
+	console.log(posts)
 	// const token = useSelector(tokenSelector)
 	const token = localStorage.getItem('token')
 	let categories = useSelector((state) => state.categories.name)
@@ -58,13 +58,12 @@ export default function Home() {
 
 	const [actualPosts, setActualPosts] = useState()
 
-
 	useEffect(() => {
 		setActualPosts(posts)
-		if(isAuthenticated && !isLoading){
-			dispatch (authUserAsync(user.email, isAuthenticated))
+		if (isAuthenticated && !isLoading) {
+			dispatch(authUserAsync(user.email, isAuthenticated))
 		}
-		   // eslint-disable-next-line react-hooks/exhaustive-deps
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [posts, isAuthenticated])
 
 	useEffect(() => {
@@ -118,6 +117,12 @@ export default function Home() {
 		dispatch(orderByLikes())
 	}
 
+	// SEARCHBAR
+
+	function handleSearchBarChange(e) {
+		dispatch(findBy(e.target.value))
+	}
+
 	const addPost = (event) => {
 		/*Esta función debería agregar un post*/
 		event.preventDefault()
@@ -140,6 +145,7 @@ export default function Home() {
 			</Link>
 
 			<Header
+				handleSearchBarChange={handleSearchBarChange}
 				filterByCategory={filterByCategory}
 				orderByLikes={fnOrderByLikes}
 				innerContent={categoriesArr}

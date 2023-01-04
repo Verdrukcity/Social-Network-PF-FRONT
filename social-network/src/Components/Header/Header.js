@@ -25,6 +25,8 @@ export default function Header({
 	innerContent,
 	orderByLikes,
 	activeCategories,
+	handleSearchBarSubmit,
+	handleSearchBarChange,
 }) {
 	const dispatch = useDispatch()
 
@@ -86,6 +88,7 @@ export default function Header({
 				<li id='icon-explore'>
 					<DialogSearchBar
 						id='icon-categories'
+						handleSearchBarChange={handleSearchBarChange}
 						buttonContent={<img src={allIcons.explore} alt='icon-categories' />}
 					/>
 				</li>

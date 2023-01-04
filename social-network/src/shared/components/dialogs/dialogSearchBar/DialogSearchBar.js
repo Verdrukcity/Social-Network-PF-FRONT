@@ -11,7 +11,7 @@ import { activeRoundedButton, searchBox } from '../../../assets/globals'
   publicaciones en su feed
 */
 
-export default function ClickAway({ buttonContent }) {
+export default function ClickAway({ buttonContent, handleSearchBarChange }) {
 	const [open, setOpen] = useState(false)
 
 	const handleClick = () => {
@@ -38,9 +38,13 @@ export default function ClickAway({ buttonContent }) {
 				</button>
 				{open ? (
 					<Box sx={searchBox}>
-						<p className='categories-title'>Categorías destacadas</p>
-
-						<p>AAAAAAAAAA</p>
+						<p className='categories-title'>Busca un usuario</p>
+						<input
+							className='navbar-input-search'
+							type='text'
+							placeholder='Nombre de usuario'
+							onChange={handleSearchBarChange}
+						/>
 					</Box>
 				) : null}
 			</Box>
