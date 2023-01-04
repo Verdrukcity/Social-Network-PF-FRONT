@@ -25,6 +25,9 @@ export default function Header({
 	innerContent,
 	orderByLikes,
 	activeCategories,
+	findByText,
+	deleteFindText,
+	handleSearchBarChange,
 }) {
 	const dispatch = useDispatch()
 
@@ -86,6 +89,9 @@ export default function Header({
 				<li id='icon-explore'>
 					<DialogSearchBar
 						id='icon-categories'
+						findByText={findByText}
+						deleteFindText={deleteFindText}
+						handleSearchBarChange={handleSearchBarChange}
 						buttonContent={<img src={allIcons.explore} alt='icon-categories' />}
 					/>
 				</li>
