@@ -6,7 +6,7 @@ const initialState = {
 	userCreated: {},
 	userError: '',
 	token: '',
-	userUpdateData: {}
+	userUpdateData: {},
 }
 
 export const userSlice = createSlice({
@@ -33,15 +33,23 @@ export const userSlice = createSlice({
 		},
 		userUpdate: (state, action) => {
 			state.userUpdateData = action.payload
-		}
+		},
 	},
 })
 
 // SELECTOR
 export const allUsersSelector = (state) => state.users.user
 export const messageSelector = (state) => state.users.message
+export const errorSelector = (state) => state.users.userError
+export const userCreatedSelector = (state) => state.users.userCreated
 // export const tokenSelector = (state) => state.users.token
 
-export const { postUser, getAllUsers, authUser, userError, sendToken, userUpdate } =
-	userSlice.actions
+export const {
+	postUser,
+	getAllUsers,
+	authUser,
+	userError,
+	sendToken,
+	userUpdate,
+} = userSlice.actions
 export default userSlice.reducer
