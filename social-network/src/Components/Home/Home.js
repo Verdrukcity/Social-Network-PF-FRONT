@@ -125,8 +125,9 @@ export default function Home() {
 		dispatch(findBy(e.target.value))
 	}
 
-	function deleteFindText(e) {
-		ref.current.value = ''
+	function deleteFindText() {
+		searchRef.current = ''
+		dispatch(getAllPostsAsync(token))
 	}
 
 	const addPost = (event) => {
