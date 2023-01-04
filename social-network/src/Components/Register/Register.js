@@ -12,7 +12,23 @@ import { createUser } from '../../redux/actions/usersActions'
 import * as bcrypt from 'bcryptjs'
 import ButtonActions from '../../shared/components/ButtonActions/ButtonActions'
 import LoginExterno from '../../shared/components/ButtonLogin/LoginExterno'
+import {
+	errorSelector,
+	userCreatedSelector,
+} from '../../redux/reducer/usersReducer'
 // import { crearUsuario } from '../EmailConfirmation/EmailConfirmation'
+
+export const Toast = Swal.mixin({
+	toast: true,
+	position: 'top-end',
+	showConfirmButton: false,
+	timer: 3000,
+	timerProgressBar: true,
+	didOpen: (toast) => {
+		toast.addEventListener('mouseenter', Swal.stopTimer)
+		toast.addEventListener('mouseleave', Swal.resumeTimer)
+	},
+})
 
 const Register = () => {
 	const MySwal = withReactContent(Swal)
@@ -25,6 +41,8 @@ const Register = () => {
 	 */
 
 	const countries = useSelector((state) => state.countries.list)
+	const error = useSelector(errorSelector)
+	const userCreated = useSelector(userCreatedSelector)
 
 	//el value será el id, que necesitamos, y el label lo que muestra el select
 	const options = countries.map((country) => {
@@ -136,17 +154,33 @@ const Register = () => {
 			}
 
 			dispatch(createUser(userToCreate))
-
-			MySwal.fire({
-				position: 'top-end',
-				icon: 'success',
-				title: 'Usuario creado Correctamente',
-				showConfirmButton: false,
-				timer: 1500,
-			})
-			history.push('/reply/login')
 		}
 	}
+
+	// Mensaje y redirección al crear un usuario
+	useEffect(() => {
+		if (userCreated && datos.user_Name === userCreated.user_Name) {
+			Toast.fire({
+				icon: 'success',
+				title: 'Usuario registrado correctamente',
+			})
+
+			history.push('/reply/login')
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [userCreated])
+
+	// Mensaje de error del backend al crear un usuario
+	useEffect(() => {
+		if (error.length > 0) {
+			MySwal.fire({
+				title: <strong>Oops...</strong>,
+				html: <i>{error}</i>,
+				icon: 'error',
+			})
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [dispatch, error])
 
 	const onDateChange = (value) => {
 		setDatos({
@@ -165,6 +199,7 @@ const Register = () => {
 		if (datos.password !== event.target.value) setEstiloInput('formImputMal')
 		if (datos.password === event.target.value) setEstiloInput('formImput')
 	}
+
 	return (
 		<Fragment>
 			<div className='container-fluid container-flex-center'>
@@ -253,8 +288,6 @@ const Register = () => {
 
 					<div className='selectFormulario'>
 						<SelectDatepicker
-							maxDate={new Date('2007-01-01')}
-							minDate={new Date('1941-01-01')}
 							hideLabels
 							selectedDate={datos.birthdate}
 							onDateChange={(value) => onDateChange(value)}
