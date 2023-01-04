@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import cardcss from './Card.css'
 import { createComment } from '../../../redux/actions/commentsActions'
 import { useDispatch } from 'react-redux'
 import {
 	likeIcon,
+	likeIconFilled,
 	payIcon,
 	sendIcon,
 	shareIcon,
@@ -13,6 +14,7 @@ import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import { chekout } from '../../../redux/actions/pagoActions'
 import { likePostAsync } from '../../../redux/actions/postActions'
+import LikeButton from '../../../Components/LikeButton/LikeButton'
 // the props we are going to use are:
 // img, username, imgUser, text
 //hacer un efecto para ir a details, cuando paso por sobre la foto que se haga una spmbra o se agrande un poco...
@@ -79,9 +81,10 @@ function Card(props) {
 		})
 	}
 
+	
 	const handleLike = (postId, userLoged) => {
 		dispatch(likePostAsync(postId, userLoged))
-		history.push('/reply/home')
+		// history.push('/reply/home')
 	}
 
 	const handleSubmit = (e) => {
@@ -172,7 +175,7 @@ function Card(props) {
 			<div className='comments px-4 d-flex align-items-center justify-content-evenly m-0'>
 				<div className='d-flex  flex-column'>
 					<img
-						src={likeIcon}
+						src={likeIconFilled}
 						className='icon-size'
 						alt='icon de likes'
 						onClick={(e) => {
@@ -180,6 +183,7 @@ function Card(props) {
 						}}
 					/>
 					<p className='fw-bold m-0'>{props.likes.length}</p>
+					{/* <LikeButton/> */}
 				</div>
 				<div className='inp p-2 d-flex justify-content-around'>
 					<input

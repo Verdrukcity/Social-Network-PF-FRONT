@@ -1,0 +1,13 @@
+@import url('../../shared/assets/globals.css');
+
+.icon-size {
+	width: 30px;
+	height: 30px;
+	color: #d77937;
+	cursor: pointer;
+}
+
+.icon-size:hover {
+	width: 35px;
+	height: 35px;
+}
