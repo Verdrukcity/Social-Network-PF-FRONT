@@ -64,8 +64,6 @@ export default function Login() {
 		})
 	}
 
-	// TODO : Separar el onclick del sweetAlert con el mensaje
-
 	function handleLogin(e) {
 		e.preventDefault()
 
