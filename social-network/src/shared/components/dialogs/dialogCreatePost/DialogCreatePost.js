@@ -74,7 +74,6 @@ export default function DialogCreatePost({
 	 */
 
 	const changeImage = (e) => {
-		console.log(e.target.files[0])
 		if (e.target.files[0] !== undefined) {
 			let fileToUse = e.target.files[0]
 			const reader = new FileReader()
@@ -114,7 +113,7 @@ export default function DialogCreatePost({
 		e.preventDefault()
 		let formData = new FormData()
 		formData.append('text', textArea)
-		dispatch(getAllPostsAsync())
+		
 
 		for (var i = 0; i < categoryName.length; i++) {
 			formData.append('category', categoryName[i])
@@ -138,10 +137,10 @@ export default function DialogCreatePost({
 				setOpen(true)
 				setLoader(true)
 				await dispatch(CreatePostsAsync(formData, id, token))
+				dispatch(getAllPostsAsync())
 				setLoader(false)
 				Swal.fire('Posted!', 'Your file has been Posted.', 'success')
 			}
-			//window.location.reload();
 		})
 	}
 

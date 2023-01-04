@@ -102,6 +102,7 @@ export default function Home() {
 
 	useEffect(() => {
 		// si hay elementos activos despacha una acción de filtrado
+		if (token) dispatch(getAllPostsAsync(token))
 		if (activeCategories.size === 0) {
 			if (token) dispatch(getAllPostsAsync(token))
 		} else {

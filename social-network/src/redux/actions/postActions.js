@@ -15,6 +15,7 @@ import {
 
 export const getAllPostsAsync = (data) => async (dispatch) => {
 	const auth = await axios.get(`/create?token=${data}`)
+	console.log('m traigo todos')
 	return dispatch(getAllPosts(auth.data.data))
 }
 
@@ -59,7 +60,10 @@ export const CreatePostsAsync = (data, id, token) => (dispatch) => {
 					'content-type': 'multipart/form-data',
 				},
 			})
-			.then((response) => dispatch(createPosts(response.data.data)))
+			.then((response) => {
+				dispatch(createPosts(response.data.data))
+				dispatch(getAllPostsAsync(token))
+			})
 	} catch (error) {
 		console.log(error)
 	}

@@ -11,6 +11,7 @@ const initialState = {
 	detail: {},
 	userDetail: {},
 	like: {},
+	
 }
 
 // REDUCERS
