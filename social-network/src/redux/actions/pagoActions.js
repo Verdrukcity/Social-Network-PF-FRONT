@@ -43,7 +43,7 @@ export const acountCreator = (id) => async (dispatch) => {
 
 export const srtipeAccountLink = (id) => async (dispatch) => {
   try {
-    const respuesta = await axios.post(`/stripe/accountLink/${id}`)
+    const respuesta = await axios.post(`/stripe/accountLink/?id=${id}`)
        //console.log(respuesta.data)
       // dispatch(confirmarPago(response.data.data))
       const confirmacion=respuesta.data;
@@ -55,7 +55,7 @@ export const srtipeAccountLink = (id) => async (dispatch) => {
 ////////consulta stripe cuenta
 export const stripeAccountsConsult = (id) => async (dispatch) => {
   try {
-    const respuesta = await axios.get(`/stripe/account/${id}`)
+    const respuesta = await axios.get(`/stripe/account/?id=${id}`)
        //console.log(respuesta.data)
       // dispatch(confirmarPago(response.data.data))
       const confirmacion=respuesta.data;
