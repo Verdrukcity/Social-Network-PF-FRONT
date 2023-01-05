@@ -20,6 +20,7 @@ export { default as cash } from './cash.png'
 export { default as logoutbtn } from './white-logout-icon.png'
 
 export { default as likeIcon } from './likeIcon.svg'
+export { default as likeIconFilled } from './likeIconFilled.svg'
 export { default as likedIcon } from './liked.png'
 export { default as payIcon } from './payIcon.svg'
 export { default as shareIcon } from './shareIcon.svg'

@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import cardcss from './Card.css'
 import { createComment } from '../../../redux/actions/commentsActions'
 import { useDispatch } from 'react-redux'
 import {
 	likeIcon,
+	likeIconFilled,
 	payIcon,
 	sendIcon,
 	shareIcon,
@@ -13,6 +14,7 @@ import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import { chekout } from '../../../redux/actions/pagoActions'
 import { likePostAsync } from '../../../redux/actions/postActions'
+import LikeButton from '../../../Components/LikeButton/LikeButton'
 // the props we are going to use are:
 // img, username, imgUser, text
 //hacer un efecto para ir a details, cuando paso por sobre la foto que se haga una spmbra o se agrande un poco...
@@ -79,10 +81,33 @@ function Card(props) {
 		})
 	}
 
-	const handleLike = (postId, userLoged) => {
-		dispatch(likePostAsync(postId, userLoged))
-		history.push('/reply/home')
+	const [isLike, setIsLiked] = useState(false)
+	const [likes, setLikes] = useState(props.likes.length)
+	const [Icon, setIcon] = useState(likeIcon)
+
+	function throttle(cb, delay) {
+		let inThrottle;
+		return (...args) => {
+			if (inThrottle) return;
+			inThrottle = true;
+			cb(...args);
+			setTimeout(() => {
+				inThrottle = false;
+			}, delay);
+		};
 	}
+
+	const handleLike = (postId, userLoged) => {
+		// setIsLiked(!isLike)
+		dispatch(likePostAsync(postId, userLoged))
+	}
+
+	const throttleHandleLike = throttle(handleLike, 1200)
+
+	useEffect(() => {
+		setIcon(isLike ? likeIconFilled : likeIcon)
+		setLikes(props.likes.length)
+	})
 
 	const handleSubmit = (e) => {
 		e.preventDefault()
@@ -99,7 +124,7 @@ function Card(props) {
 		setInput({
 			text: '',
 		})
-		history.push('/reply/home')
+		// history.push('/reply/home')
 	}
 
 	return (
@@ -172,14 +197,17 @@ function Card(props) {
 			<div className='comments px-4 d-flex align-items-center justify-content-evenly m-0'>
 				<div className='d-flex  flex-column'>
 					<img
-						src={likeIcon}
+						src={Icon}
 						className='icon-size'
 						alt='icon de likes'
-						onClick={(e) => {
-							handleLike(props.id, props.logedUser)
-						}}
+						onClick={()=> {throttleHandleLike(props.id, props.logedUser)}}
 					/>
-					<p className='fw-bold m-0'>{props.likes.length}</p>
+					<p className='fw-bold m-0'>{likes}</p>
+					{/* <LikeButton
+					postId={props.id}
+					userLoged={props.logedUser}
+					likes={props.likes}
+					/> */}
 				</div>
 				<div className='inp p-2 d-flex justify-content-around'>
 					<input
@@ -210,7 +238,7 @@ function Card(props) {
 			</div>
 			<div className={cardcss}></div>
 		</div>
-		
+
 	)
 }
 // recordar que este link es para el detalle
