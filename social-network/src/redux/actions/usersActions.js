@@ -13,6 +13,8 @@ export const createUser = (data) => {
 		try {
 			let created = await axios.post(`/user`, data)
 			dispatch(postUser(created.data))
+			let receiver = data.email
+			await axios.post('/mail', {receiver})
 		} catch (error) {
 			const errorFromBack = error.response.data
 			dispatch(userError(errorFromBack))
