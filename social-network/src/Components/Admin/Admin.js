@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { getUserDetailAsync } from "../../redux/actions/postActions";
+import { allUsersVerifySelector } from "../../redux/reducer/adminReducer";
 import * as allIcons from "../../shared/assets/icons/all-icons";
 import Card from "../../shared/components/Cards/Card";
 import ButtonActions from "../../shared/components/ButtonActions/ButtonActions";
@@ -14,8 +14,21 @@ import {
 	acountCreator,
 	srtipeAccountLink,
 } from "../../redux/actions/pagoActions";
+import {getAllUsersVerifyAsync} from "../../redux/actions/adminActions";
 
 export default function Admin(props) {
+
+	const users = useSelector(allUsersVerifySelector)
+	const token = localStorage.getItem('token')
+
+	const dispatch = useDispatch()
+
+	useEffect(() => {
+		dispatch(getAllUsersVerifyAsync(token))
+	}, [dispatch])
+
+	
+
 	return (
 		<div className="admin-container">
 			<div className="admin-information">
