@@ -80,10 +80,11 @@ export const getPostDetailAsync = (postId) => async (dispatch) => {
 	}
 }
 
-export const likePostAsync = (postId, usersLiked) => async (dispatch) => {
+export const likePostAsync = (postId, usersLiked, token) => async (dispatch) => {
 	try {
 		const likeStatus = await axios.post(`/like/${postId}`, { usersLiked })
 		dispatch(likePost(likeStatus.data))
+		dispatch(getAllPostsAsync(token))
 		console.log(likeStatus.data)
 	} catch (err) {
 		console.log(err)
