@@ -117,15 +117,15 @@ import LikeButton from '../../../Components/LikeButton/LikeButton'
 
 	const handleLike = (postId, userLoged) => {
 		// setIsLiked(!isLike)
-		dispatch(likePostAsync(postId, userLoged))
+		dispatch(likePostAsync(postId, userLoged, props.token))
 	}
-
+	
 	const throttleHandleLike = throttle(handleLike, 1200)
 
 	useEffect(() => {
-		setIcon(isLike ? likeIconFilled : likeIcon)
+		// setIcon(isLike ? likeIconFilled : likeIcon)
 		setLikes(props.likes.length)
-	})
+	}, )
 
 	const handleSubmit = (e) => {
 		e.preventDefault()

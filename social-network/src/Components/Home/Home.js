@@ -188,6 +188,7 @@ export default function Home() {
 								likes={data.likes}
 								logedUser={id}
 								resourseType={data.resourseType}
+								token = {token}
 							/>
 						)
 					})}
