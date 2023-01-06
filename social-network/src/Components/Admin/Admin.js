@@ -1,7 +1,32 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import TableData from '../../shared/components/Table/TableData'
+import { useDispatch, useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom'
+import { allUsersVerifySelector } from '../../redux/reducer/adminReducer'
+import * as allIcons from '../../shared/assets/icons/all-icons'
+import Card from '../../shared/components/Cards/Card'
+import ButtonActions from '../../shared/components/ButtonActions/ButtonActions'
+import DialogUserUpdate from '../../shared/components/dialogs/dialogUserUpdate/DialogUserUpdate'
+import profilecss from './Admin.css'
+import Logout from '../Logout/Logout'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+import {
+	acountCreator,
+	srtipeAccountLink,
+} from '../../redux/actions/pagoActions'
+import { getAllUsersVerifyAsync } from '../../redux/actions/adminActions'
 
 export default function Admin(props) {
+	const users = useSelector(allUsersVerifySelector)
+	const token = localStorage.getItem('token')
+
+	const dispatch = useDispatch()
+
+	useEffect(() => {
+		dispatch(getAllUsersVerifyAsync(token))
+	}, [dispatch])
+
 	return (
 		<div className='container'>
 			<div className='admin-information'>
