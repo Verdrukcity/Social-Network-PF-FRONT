@@ -20,6 +20,7 @@ import LikeButton from '../../../Components/LikeButton/LikeButton'
 //hacer un efecto para ir a details, cuando paso por sobre la foto que se haga una spmbra o se agrande un poco...
 
  function Card(props) {
+	console.log(props)
 	const MySwal = withReactContent(Swal)
 	const obj = {
 		username: 'compañero guerra',
@@ -84,7 +85,9 @@ import LikeButton from '../../../Components/LikeButton/LikeButton'
 					id: props.stripeId,
 					price: price,
 				}
-				await dispatch(chekout(data))
+				const respuestaPago=await dispatch(chekout(data))
+				window.open(respuestaPago.url)
+				console.log(respuestaPago.url)
 
 				Swal.fire(
 					'realizaste donacion de $' + result.value + ' Muchas gracias!!'
