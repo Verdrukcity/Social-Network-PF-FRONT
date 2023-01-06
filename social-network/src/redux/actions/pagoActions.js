@@ -67,14 +67,7 @@ export const stripeAccountsConsult = (id) => async (dispatch) => {
 /////donaciones
 export const chekout = (data) => async (dispatch) => {
   try {
-    const respuesta = await axios
-       .post('/stripe/chekout/ ', data, {
-         // Endpoint to send files
-         headers: {
-           // Add any auth token here
-           'content-type': 'multipart/form-data',
-         },
-       })
+    const respuesta = await axios.post(`/stripe/chekout/?id=${data.id}&price=${data.price}`)
        //console.log(respuesta.data)
       // dispatch(confirmarPago(response.data.data))
       const confirmacion=respuesta.data;
