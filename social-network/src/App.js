@@ -7,6 +7,7 @@ import LandingPage from './Components/LandingPage/LandingPage'
 import PostDetail from './Components/PostDetail/PostDetail'
 import Profile from './Components/Profile/Profile'
 import Pago from './Components/Stripe/Pago'
+import Admin from './Components/Admin/Admin'
 import axios from 'axios'
 
 
@@ -32,6 +33,7 @@ function App() {
             <Route exact path='/reply/postdetail/:id' component={PostDetail} />
             <Route exact path='/reply/profile' component={Profile} />
             <Route exact path='/reply/pago' component={Pago} />
+            <Route exact path='/reply/admin' component={Admin} />
           </Switch>
         </div>
       </BrowserRouter>

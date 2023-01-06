@@ -5,6 +5,7 @@ import countries from '../reducer/countriesReducer'
 import posts from '../reducer/postsReducer'
 import users from '../reducer/usersReducer'
 import pago from '../reducer/pagoReducer'
+import allUsers from '../reducer/adminReducer'
 const store = configureStore({
   reducer: {
     users,
@@ -13,6 +14,7 @@ const store = configureStore({
     countries,
     categories,
     pago,
+    allUsers,
   },
 })
 
