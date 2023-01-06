@@ -12,14 +12,14 @@ import {
 } from '../../assets/icons/all-icons'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
-import { chekout } from '../../../redux/actions/pagoActions'
+import { chekout,stripeAccountsConsult } from '../../../redux/actions/pagoActions'
 import { likePostAsync } from '../../../redux/actions/postActions'
 import LikeButton from '../../../Components/LikeButton/LikeButton'
 // the props we are going to use are:
 // img, username, imgUser, text
 //hacer un efecto para ir a details, cuando paso por sobre la foto que se haga una spmbra o se agrande un poco...
 
-function Card(props) {
+ function Card(props) {
 	const MySwal = withReactContent(Swal)
 	const obj = {
 		username: 'compañero guerra',
@@ -34,7 +34,22 @@ function Card(props) {
 		profileId: `${props.logedUser}`,
 	})
 	const history = useHistory()
+	const [stripe, setStripe] = useState(false)
 
+	const verificarStripe=async()=>{
+		if(props.stripeId ) {
+		const pagoActivo= await dispatch(stripeAccountsConsult(props.stripeId ))
+
+			if(pagoActivo.data.capabilities.card_payments==="active")
+			{
+				setStripe(true)
+			}
+
+	}
+	}
+	verificarStripe();
+	
+	
 	const handleInputChange = (event) => {
 		// console.log(event.target.name)
 		// console.log(event.target.value)
@@ -225,7 +240,7 @@ function Card(props) {
 					/>
 				</div>
 				<div className='d-flex justify-content-center align-items-center'>
-					{props.stripeId && (
+					{stripe && (
 						<img
 							src={payIcon}
 							onClick={pagoStripe}
