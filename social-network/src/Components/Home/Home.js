@@ -184,10 +184,11 @@ export default function Home() {
 								userImg={data.userId.image_profil}
 								categories={data.category}
 								comments={data.commentId}
-								stripeId={data.userStripe}
+								stripeId={data.userId.userStripe}
 								likes={data.likes}
 								logedUser={id}
 								resourseType={data.resourseType}
+								token = {token}
 							/>
 						)
 					})}
