@@ -19,10 +19,9 @@ import Header from '../Header/Header.js'
 import { useAuth0 } from '@auth0/auth0-react'
 
 import home from './Home.css'
-import { authUserAsync } from '../../redux/actions/usersActions'
 import Loader from '../../shared/components/loader/loader'
 import Swal from 'sweetalert2'
-
+import axios from "axios"
 /*
   Home es el componente principal donde el usuario encuentra:
    • El header con los botones de navegación
@@ -57,27 +56,41 @@ export default function Home() {
 	 */
 
 	const [actualPosts, setActualPosts] = useState()
-
+	
 	useEffect(() => {
 		setActualPosts(posts)
 		if (isAuthenticated && !isLoading) {
-			dispatch(authUserAsync(user.email, isAuthenticated));
-			if(!localStorage.getItem("userId")){
-				Swal.fire({
-					icon: 'error',
-					title: 'Oops...',
-					text: 'Parece que aún no te has registrado',
-					footer: '<a href="">Why do I have this issue?</a>'
-				  }).then((responce) => {
-					if(responce.isConfirmed){
-						logout({ returnTo: window.location.origin })
-					}
-				  })
+			
+			const asincronous = async () =>{
+				const userPromise = await axios
+					.post('/authuserAuth0', {email: user.email})
+					.then((res) => res.data).then(res => {
+						if(res.data && res.message !== "no se encontro el usuario"){
+					localStorage.setItem("userId", res.data.id)
+					localStorage.setItem("token", res.data.token)
+	}				
+	if(!localStorage.getItem("userId")){
+		Swal.fire({
+			icon: 'error',
+			title: 'Oops...',
+			text: 'Parece que aún no te has registrado',
+		  }).then((responce) => {
+			if(responce.isConfirmed){
+				logout({ returnTo: window.location.origin })
 			}
+		  })
+	}
+					})
+					.catch((err) => err.response.data.error)
+
+					
+			}
+					 asincronous()
+			
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [posts, isAuthenticated, user])
-
+	
 	useEffect(() => {
 		/**me traigo todos los posts */
 		if (token) {
