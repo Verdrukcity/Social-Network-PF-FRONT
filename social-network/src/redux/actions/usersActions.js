@@ -55,10 +55,10 @@ export const authUserAsync = (data, auth) => async (dispatch) => {
 		.then((res) => res.data)
 		.catch((err) => err.response.data.error)
 		const res = await userPromise
-		
+		if(res.data && res.message !== "no se encontro el usuario"){
 		localStorage.setItem("userId", res.data.id)
 		localStorage.setItem("token", res.data.token)
-	
+	}
 	}
 	
 }

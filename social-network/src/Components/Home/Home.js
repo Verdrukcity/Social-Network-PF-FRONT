@@ -21,6 +21,7 @@ import { useAuth0 } from '@auth0/auth0-react'
 import home from './Home.css'
 import { authUserAsync } from '../../redux/actions/usersActions'
 import Loader from '../../shared/components/loader/loader'
+import Swal from 'sweetalert2'
 
 /*
   Home es el componente principal donde el usuario encuentra:
@@ -38,7 +39,7 @@ export default function Home() {
 	/**
 	 * estado local para abrir y cerrar el dialog del create
 	 */
-	const { user, isAuthenticated, isLoading } = useAuth0()
+	const { user, isAuthenticated, isLoading, logout } = useAuth0()
 
 	const [open, setOpen] = useState(false)
 	const posts = useSelector(allPostsSelector)
@@ -60,10 +61,22 @@ export default function Home() {
 	useEffect(() => {
 		setActualPosts(posts)
 		if (isAuthenticated && !isLoading) {
-			dispatch(authUserAsync(user.email, isAuthenticated))
+			dispatch(authUserAsync(user.email, isAuthenticated));
+			if(!localStorage.getItem("userId")){
+				Swal.fire({
+					icon: 'error',
+					title: 'Oops...',
+					text: 'Parece que aún no te has registrado',
+					footer: '<a href="">Why do I have this issue?</a>'
+				  }).then((responce) => {
+					if(responce.isConfirmed){
+						logout({ returnTo: window.location.origin })
+					}
+				  })
+			}
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [posts, isAuthenticated])
+	}, [posts, isAuthenticated, user])
 
 	useEffect(() => {
 		/**me traigo todos los posts */

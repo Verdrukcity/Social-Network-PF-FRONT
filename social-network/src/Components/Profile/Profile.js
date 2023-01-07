@@ -11,13 +11,12 @@ import Logout from "../Logout/Logout";
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import { acountCreator,srtipeAccountLink,stripeAccountsConsult } from '../../redux/actions/pagoActions'
-import { Button } from "@mui/material";
 
 export default function Profile(props) {
 	const MySwal = withReactContent(Swal)
 	const id = localStorage.getItem("userId");
 	const user = useSelector((state) => state.posts.userDetail);
-	console.log(user)
+
 	const [open, setOpen] = useState(false);
 
 	const dispatch = useDispatch();
