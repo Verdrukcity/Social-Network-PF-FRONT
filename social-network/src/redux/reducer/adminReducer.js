@@ -13,12 +13,12 @@ export const userSlice = createSlice({
 			 * traer todos los usuarios
 			 */
 			state.allUsers = action.payload
-		}
+		},
 	},
 })
 
 // SELECTOR
-export const allUsersVerifySelector = (state) => state.allUsers
+export const allUsersVerifySelector = (state) => state.allUsers.allUsers
 
-export const {getAllUsersVerify} = userSlice.actions
+export const { getAllUsersVerify } = userSlice.actions
 export default userSlice.reducer
