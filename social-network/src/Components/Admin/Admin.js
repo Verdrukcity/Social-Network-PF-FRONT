@@ -5,7 +5,7 @@ import { allUsersVerifySelector } from '../../redux/reducer/adminReducer'
 
 import { getAllUsersVerifyAsync } from '../../redux/actions/adminActions'
 
-export default function Admin(props) {
+export default function Admin() {
 	const users = useSelector(allUsersVerifySelector)
 	const token = localStorage.getItem('token')
 
@@ -27,17 +27,18 @@ export default function Admin(props) {
 	]
 
 	return (
-		<div className='container'>
-			<div className='admin-information'>
-				<h1 className='admin-welcome'>
-					Bienenid@ al dashboard del {props.role}
-				</h1>
-				<div className='admin-data'>
-					<h4 className='admin-username'>Username: {props.username}</h4>
-					<h4 className='admin-role'>Role: {props.role}</h4>
-				</div>
+		<div
+			className='bg-warning text-dark bg-opacity-50'
+			style={{ height: '100vh' }}
+		>
+			<div className='container pt-3 bg-light'>
+				<header className='text-center my-4'>
+					<h1>Bienenid@ al dashboard de administrador</h1>
+				</header>
+				<section className='p-4 my-5'>
+					<TableData columns={columns} nodes={users} />
+				</section>
 			</div>
-			<TableData columns={columns} nodes={users} />
 		</div>
 	)
 }
