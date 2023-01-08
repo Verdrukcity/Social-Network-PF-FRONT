@@ -17,8 +17,8 @@ export default function Admin() {
 
 	// Columnas requeridas en la tabla @table-library
 	const columns = [
-		{ label: 'id', renderCell: (item) => item._id },
-		{ label: 'username', renderCell: (item) => item.user_Name },
+		{ label: 'id', renderCell: (item) => item._id, resize: true },
+		{ label: 'username', renderCell: (item) => item.user_Name, resize: true },
 		{
 			label: 'status',
 			renderCell: (item) => {
@@ -28,8 +28,34 @@ export default function Admin() {
 					<span className='badge text-bg-danger'>desactivado</span>
 				)
 			},
+			resize: true,
 		},
-		{ label: 'email', renderCell: (item) => item.email },
+		{ label: 'email', renderCell: (item) => item.email, resize: true },
+		{
+			label: 'posts',
+			renderCell: (item) => (
+				<button className='btn btn-light btn-sm text-lowercase'>
+					los posts van aquí
+				</button>
+			),
+			resize: true,
+		},
+
+		// TODO: Aquí va la acción que cambia el estado del usuario
+		{
+			label: 'acciones',
+			renderCell: (item) => {
+				return item.status ? (
+					<button type='button' class='btn btn-danger btn-sm text-lowercase'>
+						Desactivar
+					</button>
+				) : (
+					<button type='button' class='btn btn-success btn-sm text-lowercase'>
+						Activar
+					</button>
+				)
+			},
+		},
 	]
 
 	return (
@@ -41,7 +67,7 @@ export default function Admin() {
 				<header className='text-center my-4'>
 					<h1>Bienenid@ al dashboard de administrador</h1>
 				</header>
-				<section className='p-4 my-5'>
+				<section className='p-4 my-5 text-wrap'>
 					<TableData columns={columns} nodes={users} />
 				</section>
 			</div>
