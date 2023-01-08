@@ -19,6 +19,16 @@ export default function Admin() {
 	const columns = [
 		{ label: 'id', renderCell: (item) => item._id, resize: true },
 		{ label: 'username', renderCell: (item) => item.user_Name, resize: true },
+		{ label: 'email', renderCell: (item) => item.email, resize: true },
+		{
+			label: 'posts',
+			renderCell: (item) => (
+				<button className='btn btn-light btn-sm text-lowercase'>
+					los posts van aquí
+				</button>
+			),
+			resize: true,
+		},
 		{
 			label: 'status',
 			renderCell: (item) => {
@@ -28,16 +38,6 @@ export default function Admin() {
 					<span className='badge text-bg-danger'>desactivado</span>
 				)
 			},
-			resize: true,
-		},
-		{ label: 'email', renderCell: (item) => item.email, resize: true },
-		{
-			label: 'posts',
-			renderCell: (item) => (
-				<button className='btn btn-light btn-sm text-lowercase'>
-					los posts van aquí
-				</button>
-			),
 			resize: true,
 		},
 
