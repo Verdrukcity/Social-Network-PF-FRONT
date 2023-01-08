@@ -21,7 +21,13 @@ export default function Admin() {
 		{ label: 'username', renderCell: (item) => item.user_Name },
 		{
 			label: 'status',
-			renderCell: (item) => item.status.toString(),
+			renderCell: (item) => {
+				return item.status ? (
+					<span className='badge text-bg-success'>activo</span>
+				) : (
+					<span className='badge text-bg-danger'>desactivado</span>
+				)
+			},
 		},
 		{ label: 'email', renderCell: (item) => item.email },
 	]
