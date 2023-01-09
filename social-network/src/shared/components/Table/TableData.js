@@ -14,8 +14,11 @@ export default function TableData({ columns, nodes }) {
 
 	//! filtro para buscar por user_Name
 	data = {
-		nodes: data.nodes.filter((item) =>
-			item.user_Name.toLowerCase().includes(search.toLowerCase())
+		nodes: data.nodes.filter(
+			(item) =>
+				item.user_Name.toLowerCase().includes(search.toLowerCase()) ||
+				item._id === search ||
+				item.email.toLowerCase().includes(search.toLowerCase())
 		),
 	}
 
@@ -37,18 +40,34 @@ export default function TableData({ columns, nodes }) {
 
 	return (
 		<>
-			<label htmlFor='search'>
-				Búsqueda por usuario:&nbsp;
-				<input id='search' type='text' value={search} onChange={handleSearch} />
-			</label>
+			<div class='form-floating mb-3'>
+				<input
+					id='search'
+					className='form-control'
+					type='text'
+					value={search}
+					onChange={handleSearch}
+					placeholder='Búsqueda por usuario o id'
+				/>
+
+				<label>Búsqueda por nombre de usuario, id o email</label>
+			</div>
+
 			<br />
 			<CompactTable
 				columns={columns}
 				data={data}
 				theme={theme}
 				pagination={pagination}
+				const
 			/>
-			<div style={{ display: 'flex', justifyContent: 'space-between' }}>
+			<div
+				style={{
+					display: 'flex',
+					justifyContent: 'space-around',
+					flexWrap: 'wrap',
+				}}
+			>
 				<span>Usuarios en total: {data.nodes.length}</span>
 				<span>
 					Filas por pagina:{' '}
