@@ -62,7 +62,7 @@ export default function Home() {
 		if (isAuthenticated && !isLoading) {
 			
 			const asincronous = async () =>{
-				const userPromise = await axios
+				await axios
 					.post('/authuserAuth0', {email: user.email})
 					.then((res) => res.data).then(res => {
 						if(res.data && res.message !== "no se encontro el usuario"){
