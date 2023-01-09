@@ -66,7 +66,6 @@ export default function Home() {
 				await axios
 					.post('/authuserAuth0', user)
 					.then((res) => res.data).then(res => {
-						console.log("auth0: ", res)
 						if (res.data && res.message) {
 							localStorage.setItem("userId", res.data.id);
 							localStorage.setItem("token", res.data.token);
