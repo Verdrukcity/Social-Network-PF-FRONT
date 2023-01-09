@@ -40,6 +40,7 @@ export default function Home() {
 	 */
 	const { user, isAuthenticated, isLoading, logout } = useAuth0()
 
+	const [loading, setLoading] = useState(true)
 	const [open, setOpen] = useState(false)
 	const posts = useSelector(allPostsSelector)
 	// const token = useSelector(tokenSelector)
@@ -59,38 +60,42 @@ export default function Home() {
 	
 	useEffect(() => {
 		setActualPosts(posts)
-		if (isAuthenticated && !isLoading) {
-			
-			const asincronous = async () =>{
-				await axios
-					.post('/authuserAuth0', {email: user.email})
-					.then((res) => res.data).then(res => {
-						if(res.data && res.message !== "no se encontro el usuario"){
-					localStorage.setItem("userId", res.data.id)
-					localStorage.setItem("token", res.data.token)
-	}				
-	if(!localStorage.getItem("userId")){
-		Swal.fire({
-			icon: 'error',
-			title: 'Oops...',
-			text: 'Parece que aún no te has registrado',
-		  }).then((responce) => {
-			if(responce.isConfirmed){
-				logout({ returnTo: window.location.origin })
-			}
-		  })
-	}
-					})
-					.catch((err) => err.response.data.error)
+		if (isAuthenticated && !isLoading && user) {
 
-					
+			const asincronous = async () => {
+				await axios
+					.post('/authuserAuth0', user)
+					.then((res) => res.data).then(res => {
+						console.log("auth0: ", res)
+						if (res.data && res.message) {
+							localStorage.setItem("userId", res.data.id);
+							localStorage.setItem("token", res.data.token);
+							setLoading(false);
+						}
+						if(res.message === "Usuario logueado y creado correctamente") {
+							Swal.fire('¡Buen trabajo!',
+						`Tu usuario es: "${user.nickname}" y tu contraseña "${user.email}" si deseas cambiarlos
+						dirigete a tu perfil`,
+						'success')
+						}
+					})
+					.catch((err) => Swal.fire({
+						icon: 'error',
+						title: 'Oops...',
+						text: 'Parece que aún algo salio mal',
+					}).then((responce) => {
+						if (responce.isConfirmed) {
+							logout({ returnTo: window.location.origin })
+						}
+					}))
+
+
 			}
-					 asincronous()
-			
+			asincronous()
+
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [posts, isAuthenticated, user])
-	
+	}, [posts, isAuthenticated, user, isLoading, logout])
+
 	useEffect(() => {
 		/**me traigo todos los posts */
 		if (token) {
@@ -117,11 +122,11 @@ export default function Home() {
 		// preguntar por id y agregar o elimina la categoría del estado
 		activeCategories.has(id)
 			? setActiveCategories(
-					(prev) => new Set([...prev].filter((x) => x !== id))
-			  )
+				(prev) => new Set([...prev].filter((x) => x !== id))
+			)
 			: setActiveCategories(
-					(activeCategories) => new Set([...activeCategories, id])
-			  )
+				(activeCategories) => new Set([...activeCategories, id])
+			)
 	}
 
 	useEffect(() => {
@@ -169,7 +174,7 @@ export default function Home() {
 		/*Esta función debería llevarte al inicio de las publicaciones*/
 		ref.current?.scrollIntoView({ behavior: 'smooth' })
 	}
-	if (isLoading) return <Loader></Loader>
+	if (isLoading || loading) return <Loader></Loader>
 	return (
 		<div ref={ref} id='home' className='mt-2'>
 			<Link to={'/'}>
@@ -214,7 +219,7 @@ export default function Home() {
 								likes={data.likes}
 								logedUser={id}
 								resourseType={data.resourseType}
-								token = {token}
+								token={token}
 							/>
 						)
 					})}
