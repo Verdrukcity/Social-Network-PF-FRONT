@@ -50,7 +50,7 @@ export default function TableData({ columns, nodes }) {
 					placeholder='Búsqueda por usuario o id'
 				/>
 
-				<label>Búsqueda por nombre de usuario, id o email</label>
+				<label>Búsqueda por id, nombre de usuario o correo</label>
 			</div>
 
 			<br />
