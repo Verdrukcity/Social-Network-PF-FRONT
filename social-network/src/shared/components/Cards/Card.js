@@ -107,9 +107,9 @@ function Card(props) {
 			});
 		} else {
 			return Swal.fire({
-			icon: "error",
-			title: "Oops...",
-			text: "Parece que aún algo salio mal, el usuario aun no tiene todos los datos completos",
+				icon: "error",
+				title: "Oops...",
+				text: "Parece que aún algo salio mal, el usuario aun no tiene todos los datos completos",
 			});
 		}
 	};
@@ -158,6 +158,25 @@ function Card(props) {
 			text: "",
 		});
 		// history.push('/reply/home')
+	};
+
+	const [link, setLink] = useState(null);
+	const urlToShare = `${window.location.origin}/reply/postdetail/${props.id}`;
+
+	const linkShare = async () => {
+		console.log(props)
+		try {
+			const generatedLink = urlToShare; // generate a link
+			setLink(generatedLink);
+			await navigator.clipboard.writeText(generatedLink);
+		} catch (err) {
+			console.error("Failed to copy link: ", err);
+		}
+		return Swal.fire({
+			icon: "success",
+			title: "Link copiado en el portapapeles",
+			text: urlToShare,
+		})
 	};
 
 	return (
@@ -272,6 +291,7 @@ function Card(props) {
 					)}
 					<img
 						src={shareIcon}
+						onClick={linkShare}
 						className="icon-size m-2"
 						alt="icon de share"
 					/>
