@@ -76,6 +76,14 @@ export default function DialogTablePost({ open, setOpen, userId }) {
 			open={open}
 			onClose={handleClose}
 			aria-labelledby='responsive-dialog-title'
+			sx={{
+				'& .MuiDialog-container': {
+					'& .MuiPaper-root': {
+						width: '100%',
+						maxWidth: '1200px', // Set your width here
+					},
+				},
+			}}
 		>
 			<div className='dialog-bg overflow-hidden'>
 				{loader && <Loader />}
