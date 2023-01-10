@@ -70,7 +70,6 @@ export default function Home() {
 					.post('/authuserAuth0', user)
 					.then((res) => res.data)
 					.then((res) => {
-						console.log(res)
 						if (res.data && res.message) {
 							localStorage.setItem('userId', res.data.id);
 							localStorage.setItem('token', res.data.token);
