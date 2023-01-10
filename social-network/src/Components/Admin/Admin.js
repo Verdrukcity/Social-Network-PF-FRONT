@@ -36,6 +36,11 @@ export default function Admin() {
 		dispatch(getUserDetailAsync(id));
 	}, [dispatch, token]);
 
+
+	if (!userDetail.role) {
+		window.location = "/";
+	}
+
 	if (userDetail.role === "user") {
 		window.location = "/reply/home";
 	}
