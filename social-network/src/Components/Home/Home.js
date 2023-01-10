@@ -1,27 +1,28 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import {
 	getAllPostsAsync,
 	getUserDetailAsync,
-} from '../../redux/actions/postActions'
+} from "../../redux/actions/postActions";
 import {
 	allPostsSelector,
 	findBy,
 	getByCategory,
 	orderByLikes,
-} from '../../redux/reducer/postsReducer'
-import { arrowUp, plus, logo } from '../../shared/assets/icons/all-icons'
-import ButtonActions from '../../shared/components/ButtonActions/ButtonActions'
-import Card from '../../shared/components/Cards/Card'
-import DialogCreatePost from '../../shared/components/dialogs/dialogCreatePost/DialogCreatePost'
-import Header from '../Header/Header.js'
-import { useAuth0 } from '@auth0/auth0-react'
-
-import home from './Home.css'
-import Loader from '../../shared/components/loader/loader'
-import Swal from 'sweetalert2'
-import axios from "axios"
+} from "../../redux/reducer/postsReducer";
+import { arrowUp, plus, logo } from "../../shared/assets/icons/all-icons";
+import ButtonActions from "../../shared/components/ButtonActions/ButtonActions";
+import Card from "../../shared/components/Cards/Card";
+import DialogCreatePost from "../../shared/components/dialogs/dialogCreatePost/DialogCreatePost";
+import Header from "../Header/Header.js";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import home from "./Home.css";
+import Loader from "../../shared/components/loader/loader";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+import axios from "axios";
 /*
   Home es el componente principal donde el usuario encuentra:
    • El header con los botones de navegación
@@ -38,74 +39,77 @@ export default function Home() {
 	/**
 	 * estado local para abrir y cerrar el dialog del create
 	 */
-	const { user, isAuthenticated, isLoading, logout } = useAuth0()
+	const { user, isAuthenticated, isLoading, logout } = useAuth0();
+	const history = useHistory();
 
-	const [loading, setLoading] = useState(true)
-	const [open, setOpen] = useState(false)
-	const posts = useSelector(allPostsSelector)
+	const [loading, setLoading] = useState(true);
+	const [open, setOpen] = useState(false);
+	const posts = useSelector(allPostsSelector);
 	// const token = useSelector(tokenSelector)
-	const token = localStorage.getItem('token')
-	let categories = useSelector((state) => state.categories.name)
-	let userDetail = useSelector((state) => state.posts.userDetail)
-	const id = window.localStorage.getItem('userId')
+	const token = localStorage.getItem("token");
+	let categories = useSelector((state) => state.categories.name);
+	let userDetail = useSelector((state) => state.posts.userDetail);
+	const id = window.localStorage.getItem("userId");
 
-	const categoriesArr = categories?.map((c) => c.category)
+	const categoriesArr = categories?.map((c) => c.category);
 
-	const dispatch = useDispatch()
+	const dispatch = useDispatch();
 	/**
 	 * Dispatch y useEffect para traer todos los posts del back
 	 */
 
-	const [actualPosts, setActualPosts] = useState()
-	
-	useEffect(() => {
-		setActualPosts(posts)
-		if (isAuthenticated && !isLoading && user) {
+	const [actualPosts, setActualPosts] = useState();
 
+	useEffect(() => {
+		setActualPosts(posts);
+		if (isAuthenticated && !isLoading && user) {
 			const asincronous = async () => {
 				await axios
-					.post('/authuserAuth0', user)
-					.then((res) => res.data).then(res => {
+					.post("/authuserAuth0", user)
+					.then((res) => res.data)
+					.then((res) => {
+						console.log(res.data);
 						if (res.data && res.message) {
 							localStorage.setItem("userId", res.data.id);
 							localStorage.setItem("token", res.data.token);
 							setLoading(false);
 						}
-						if(res.message === "Usuario logueado y creado correctamente") {
-							Swal.fire('¡Buen trabajo!',
-						`Tu usuario es: "${user.nickname}" y tu contraseña "${user.email}" si deseas cambiarlos
+						if (res.message === "Usuario logueado y creado correctamente") {
+							Swal.fire(
+								"¡Buen trabajo!",
+								`Tu usuario es: "${user.nickname}" y tu contraseña "${user.email}" si deseas cambiarlos
 						dirigete a tu perfil`,
-						'success')
+								"success"
+							);
 						}
 					})
-					.catch((err) => Swal.fire({
-						icon: 'error',
-						title: 'Oops...',
-						text: 'Parece que aún algo salio mal',
-					}).then((responce) => {
-						if (responce.isConfirmed) {
-							logout({ returnTo: window.location.origin })
-						}
-					}))
-
-
-			}
-			asincronous()
-
+					.catch((err) =>
+						Swal.fire({
+							icon: "error",
+							title: "Oops...",
+							text: "Parece que aún algo salio mal",
+						}).then((responce) => {
+							if (responce.isConfirmed) {
+								logout({ returnTo: window.location.origin });
+							}
+						})
+					);
+			};
+			asincronous();
 		}
-	}, [posts, isAuthenticated, user, isLoading, logout])
+	}, [posts, isAuthenticated, user, isLoading, logout]);
 
 	useEffect(() => {
 		/**me traigo todos los posts */
 		if (token) {
-			dispatch(getAllPostsAsync(token))
+			dispatch(getAllPostsAsync(token));
 		}
 		/**me traigo el detalle del usuario */
-		dispatch(getUserDetailAsync(id))
+		dispatch(getUserDetailAsync(id));
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [dispatch, token])
+	}, [dispatch, token]);
 
-	const ref = useRef(null)
+	const ref = useRef(null);
 
 	// FILTER BY CATEGORIES
 
@@ -113,74 +117,91 @@ export default function Home() {
 	 * filterByCategory hace el dispatch de un estado con los categories activos
 	 */
 
-	const [activeCategories, setActiveCategories] = useState(new Set())
+	const [activeCategories, setActiveCategories] = useState(new Set());
 
 	function filterByCategory(e) {
-		const { id } = e.target
+		const { id } = e.target;
 
 		// preguntar por id y agregar o elimina la categoría del estado
 		activeCategories.has(id)
 			? setActiveCategories(
-				(prev) => new Set([...prev].filter((x) => x !== id))
-			)
+					(prev) => new Set([...prev].filter((x) => x !== id))
+			  )
 			: setActiveCategories(
-				(activeCategories) => new Set([...activeCategories, id])
-			)
+					(activeCategories) => new Set([...activeCategories, id])
+			  );
 	}
 
 	useEffect(() => {
 		// si hay elementos activos despacha una acción de filtrado
-		if (token) dispatch(getAllPostsAsync(token))
+		if (token) dispatch(getAllPostsAsync(token));
 		if (activeCategories.size === 0) {
-			if (token) dispatch(getAllPostsAsync(token))
+			if (token) dispatch(getAllPostsAsync(token));
 		} else {
-			dispatch(getByCategory(Array.from(activeCategories)))
+			dispatch(getByCategory(Array.from(activeCategories)));
 		}
-	}, [dispatch, activeCategories, token])
+	}, [dispatch, activeCategories, token]);
 
 	// END FILTER BY CATEGORIES
 
 	// Order likes
 
 	function fnOrderByLikes() {
-		dispatch(orderByLikes())
-		goToUp()
+		dispatch(orderByLikes());
+		goToUp();
 	}
 
 	// SEARCHBAR
 
-	const searchRef = useRef('')
+	const searchRef = useRef("");
 
 	function handleSearchBarChange(e) {
-		searchRef.current = e.target.value
-		dispatch(findBy(e.target.value))
-		goToUp()
+		searchRef.current = e.target.value;
+		dispatch(findBy(e.target.value));
+		goToUp();
 	}
 
 	function deleteFindText() {
-		searchRef.current = ''
-		dispatch(getAllPostsAsync(token))
-		goToUp()
+		searchRef.current = "";
+		dispatch(getAllPostsAsync(token));
+		goToUp();
 	}
 
 	const addPost = (event) => {
 		/*Esta función debería agregar un post*/
-		event.preventDefault()
-		setOpen(true)
-	}
+		event.preventDefault();
+		setOpen(true);
+	};
 
 	const goToUp = (event) => {
 		/*Esta función debería llevarte al inicio de las publicaciones*/
-		ref.current?.scrollIntoView({ behavior: 'smooth' })
+		ref.current?.scrollIntoView({ behavior: "smooth" });
+	};
+	//if (isLoading || loading) return <Loader></Loader>
+
+	if (userDetail.status === false) {
+		return Swal.fire({
+			icon: "error",
+			title: "Oops...",
+			text: "Parece que aún algo salio mal, tu usuario ha sido desactivado",
+		}).then((response) => {
+			if (response.isConfirmed) {window.location = "/"}
+		});
 	}
-	if (isLoading || loading) return <Loader></Loader>
+
+	if (userDetail.role === "admin") {
+		window.location = "/reply/admin"
+	}
+	// const [token, setToken] = useState({})
+
 	return (
-		<div ref={ref} id='home' className='mt-2'>
-			<Link to={'/'}>
+		<div>
+		{userDetail.role === "user" ? <div ref={ref} id="home" className="mt-2">
+			<Link to={"/"}>
 				<img
 					src={logo}
-					alt='logo reply'
-					className='fixed-top d-none d-md-inline-flex ms-4 mt-4'
+					alt="logo reply"
+					className="fixed-top d-none d-md-inline-flex ms-4 mt-4"
 				/>
 			</Link>
 
@@ -200,7 +221,7 @@ export default function Home() {
 				userDetail={userDetail}
 				className={home}
 			/>
-			<div className='container d-flex flex-column justify-content-center mt-10'>
+			<div className="container d-flex flex-column justify-content-center mt-10">
 				{actualPosts &&
 					posts.map((data) => {
 						return (
@@ -220,35 +241,35 @@ export default function Home() {
 								resourseType={data.resourseType}
 								token={token}
 							/>
-						)
+						);
 					})}
 			</div>
 			<div>
 				<ButtonActions
-					type='submit'
+					type="submit"
 					action={addPost}
-					id='btn-add-post'
+					id="btn-add-post"
 					content={
 						<img
-							className='icon add-post'
+							className="icon add-post"
 							src={plus}
-							alt='icon to create post'
+							alt="icon to create post"
 						/>
 					}
 				/>
 				<ButtonActions
-					type={'submit'}
+					type={"submit"}
 					action={goToUp}
-					id={'btn-go-up'}
+					id={"btn-go-up"}
 					content={
 						<img
-							className='icon go-up'
+							className="icon go-up"
 							src={arrowUp}
-							alt='icon to go up in the feed'
+							alt="icon to go up in the feed"
 						/>
 					}
 				/>
 			</div>
-		</div>
-	)
+		</div> : <div></div>}</div>
+	);
 }
