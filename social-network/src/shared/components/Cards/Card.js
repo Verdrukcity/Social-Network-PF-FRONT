@@ -19,7 +19,6 @@ import {
 import { likePostAsync } from "../../../redux/actions/postActions";
 // import LikeButton from "../../../Components/LikeButton/LikeButton";
 import { Throttle } from 'react-throttle'
-import throttle from "lodash.throttle";
 
 
 // the props we are going to use are:
