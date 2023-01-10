@@ -171,124 +171,150 @@ function Card(props) {
 	return (
 		<div
 			id="cardContainer"
-			className="container d-flex justify-content-center flex-column mb-5 p-0  w-auto h-auto"
+			className="container p-0 mx-auto mb-4 w-auto h-auto col"
 		>
-			<div className="d-flex">
-				<div className="p-1">
-					<div className="container px-4 pt-4 m-0">
-						<div className="d-flex col m-0">
-							<div>
+				<div className="p-4 m-0 row" >
+					<div className="container p-0 m-0">
+					<div className="row p-0 m-0">
+						<div className="col-6">
+							<div >
 								{props.resourseType === "image" ? (
 									<img
-										className="imgCard"
+										className="imgCard img-fluid"
 										src={props.img || obj.img}
 										alt="postImg"
 									></img>
 								) : (
-									<iframe
-										className="embed-responsive-item imgCard"
-										title="user video"
-										src={props.img || obj.img}
-										frameBorder="0"
-										seamless
-										allowFullScreen
-									></iframe>
+								<iframe
+									className=" imgCard"
+									title="user video"
+									src={props.img || obj.img}
+									frameBorder="0"
+									seamless
+									allowFullScreen
+								></iframe>
 								)}
 							</div>
+						</div>
+						
 
-							<div className="ms-3">
-								<div className="d-flex justify-content-around align-items-center my-3">
-									<img
-										className="userImgCard img-fluid"
-										src={props.userImg || obj.imgUser}
-										alt="userImg"
-									></img>
-									<p className="fs-3 fw-bold text-white m-0 me-3">
-										{props.username || obj.username}
-									</p>
+							<div className="col-6 ">
+								<div className="col h-75 ">
+									<div className="row-4">
+										<div className="d-flex justify-content-around align-items-center my-3">
+										<img
+											className="userImgCard img-fluid"
+											src={props.userImg || obj.imgUser}
+											alt="userImg"
+										></img>
+										<p className="fs-3 fw-bold text-white m-0 me-3">
+											{props.username || obj.username}
+										</p>
+										</div>
+									</div>
+									<div className="row-4 containerContentInfo h-">
+										<p className="p-2 m-0 h-100">
+											{props.text || obj.text}
+										</p>
+									</div>
+									<div className="row-2">
+										<a
+										className="text-morecomments "
+										href={`/reply/postdetail/${props.id}`}
+										>
+										Ver todos los comentarios...
+										</a>
+									</div>
+									
 								</div>
-								<div className="containerContentInfo">
-									<p className="p-2 m-0 h-100">
-										{props.text || obj.text}
-									</p>
-								</div>
-								<a
-									className="text-morecomments"
-									href={`/reply/postdetail/${props.id}`}
-								>
-									Ver todos los comentarios...
-								</a>
+								
 							</div>
 						</div>
-					</div>
-
-					<div className="d-flex color-white ps-4 align-items-center">
-						<p className="fs-1 m-2 fw-bold">#</p>
-						<div className="d-flex align-items-center">
-							{props.categories?.map((e) => {
-								return (
-									<p className="m-2 p-2 text-center card-container-categories">
-										{e}{" "}
-									</p>
-								);
-							})}
-						</div>
+					
 					</div>
 				</div>
+			<div className=" color-white ps-2 row">
+			<div className="d-flex justify-content-start align-items-center">
+				<p className="fs-1 fw-bold">#</p>
+				<div className="d-flex ">
+					{props.categories?.map((e) => {
+						return (
+							<p className="m-2 p-2 text-center card-container-categories">
+								{e}{" "}
+							</p>
+						);
+					})}
+				</div>
+			
 			</div>
+			</div>
+			
 
-			<div className="comments px-4 d-flex align-items-center justify-content-evenly m-0">
-				<div className="d-flex  flex-column">
-					<Throttle time='1200' handler='onClick'>
-					<img
-						src={Icon}
-						className="icon-size"
-						alt="icon de likes"
-						onClick={() => {
-							handleLike(props.id, props.logedUser);
-						}}
-						/>
-					{/* <LikeButton
-					postId={props.id}
-					userLoged={props.logedUser}
-					likes={props.likes}
-				/> */}
-				</Throttle>
-					<p className="fw-bold m-0">{likes}</p>
-				</div>
-				<div className="inp p-2 d-flex justify-content-around">
-					<input
-						className="inp text-start"
-						value={input.text}
-						name="text"
-						placeholder="Escribe un comentario ..."
-						onChange={handleInputChange}
-					/>
-					<img
-						src={sendIcon}
-						onClick={handleSubmit}
-						className="curser-pointer-card icon-size m-2 "
-						alt="icon de share"
-					/>
-				</div>
-				<div className="d-flex justify-content-center align-items-center">
-					{stripe && (
+			<div className="comments p-2 m-0 row">
+			<div className="row">
+				<div className="col-2 m-0 p-0">
+				<div className="d-flex flex-column justify-content-center align-items-center">
+				<Throttle time='1200' handler='onClick' >
 						<img
-							src={payIcon}
-							onClick={pagoStripe}
-							className="icon-size m-2"
-							alt="icon de pay"
+							src={Icon}
+							className="icon-size d-flex  justify-content-center align-items-center me-0  p-0 m-0"
+							alt="icon de likes"
+							onClick={() => {
+								handleLike(props.id, props.logedUser);
+							}}
 						/>
-					)}
-					<img
-						src={shareIcon}
-						onClick={linkShare}
-						className="icon-size m-2"
-						alt="icon de share"
-					/>
+						{/* <LikeButton
+								postId={props.id}
+								userLoged={props.logedUser}
+									likes={props.likes}
+						/> */}
+					</Throttle>
+						<p className="fw-bold m-0">{likes}</p>
 				</div>
+					
+					</div>
+					<div className="inp col-8 p-0 m-0">
+						<div className="d-flex "> 	
+						<input
+							className="inp text-start "
+							value={input.text}
+							name="text"
+							placeholder="Escribe un comentario ..."
+							onChange={handleInputChange}
+						/>
+						<img
+							src={sendIcon}
+							onClick={handleSubmit}
+							className="curser-pointer-card m-2 icon-size"
+							alt="icon de share"
+						/>
+						
+						
+						</div>
+					
+				
+						
+					</div>
+					<div className=" col-2 p-0 m-0">
+						{stripe && (
+							<img
+								src={payIcon}
+								onClick={pagoStripe}
+								className="icon-size m-2"
+								alt="icon de pay"
+							/>
+						)}
+						<img
+							src={shareIcon}
+							onClick={linkShare}
+							className="icon-size m-2"
+							alt="icon de share"
+						/>
+					</div>
+				</div>
+							
 			</div>
-			<div className={cardcss}></div>
+						
 		</div>
 	);
 }

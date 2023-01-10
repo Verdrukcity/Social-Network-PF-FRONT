@@ -43,8 +43,11 @@ html {
 	border-radius: 50%;
 }
 .imgCard {
-	min-width: 20vw;
-	max-width: 20vw;
+	padding: 0;
+	margin: 0;
+	width: 400px;
+	height: 400px;
+	
 
 	min-height: calc(20vw / 1.5);
 	max-height: calc(20vw);
@@ -57,7 +60,8 @@ html {
 }
 .card-container-categories {
 	background-color: var(--main-red-secondary);
-	border-radius: 30px;
+	border-radius: 15px;
+	
 }
 .cardContainerContent {
 	display: flex;
@@ -85,10 +89,16 @@ html {
 }
 .inp {
 	margin: 10px;
-	width: 70%;
+	/* width: 70%; */
 	border-radius: 25px;
 	border: none;
 	text-align: center;
 	background-color: #eaeaea;
 	outline: none;
+}
+
+
+.max-w-250{
+	max-width: 250px;
+	width: 250px;
 }
