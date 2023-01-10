@@ -8,12 +8,16 @@ import ButtonActions from "../../shared/components/ButtonActions/ButtonActions";
 import DialogUserUpdate from "../../shared/components/dialogs/dialogUserUpdate/DialogUserUpdate";
 import profilecss from "./Profile.css";
 import Logout from "../Logout/Logout";
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
-import { acountCreator,srtipeAccountLink,stripeAccountsConsult } from '../../redux/actions/pagoActions'
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+import {
+	acountCreator,
+	srtipeAccountLink,
+	stripeAccountsConsult,
+} from "../../redux/actions/pagoActions";
 
 export default function Profile(props) {
-	const MySwal = withReactContent(Swal)
+	const MySwal = withReactContent(Swal);
 	const id = localStorage.getItem("userId");
 	const user = useSelector((state) => state.posts.userDetail);
 
@@ -36,95 +40,73 @@ export default function Profile(props) {
 		setOpen(true);
 	};
 
-	const pagoStripe=async()=>{
-
-		if(user.userStripe){
-
-			const pagoActivo= await dispatch(stripeAccountsConsult(user.userStripe))
-
-			if(pagoActivo.data.capabilities.card_payments==="inactive")
-			{
-				MySwal.fire({
-			position: 'top-end',
-			icon: 'question',
-			title: "tu ususario no esta habilitado para pagos ! \n quieres habilitar tu cuenta de Stripe ?",
-			showConfirmButton: true,
-			showCancelButton: true,
-		
-		}).then(async (result) => {
-
-			if (result.isConfirmed) {
-			
-			const linkStripe= await dispatch(srtipeAccountLink(user.userStripe))
-			
-				window.open(linkStripe.data.url)
-    		MySwal.fire(
-			'Creado!',
-			'Your Profilefile has been Created, por favor continue su inscripcion en la pagina de stripe',
-			'success'
-			)
-  } else if (  result.dismiss === Swal.DismissReason.cancel
-  ) {
-			MySwal.fire(
-			'Cancelled',
-			'Cuenta no creada',
-			'error'
-			)
-  }
-})
-
-			}
-			else{
-					MySwal.fire({
-			position: 'top-end',
-			icon: 'success',
-			title:" cuentas con tu usuario de Stripe habilitado ",
-			showConfirmButton: false,
-			timer: 1500,
-		})
-
-			}
-			console.log(pagoActivo.data.capabilities.card_payments)
-			
-
-
-		}
-		else{
-
-			MySwal.fire({
-			position: 'top-end',
-			icon: 'question',
-			title: "no tienes ususario ! \n quieres crear cuenta de Stripe ?",
-			showConfirmButton: true,
-			showCancelButton: true,
-		
-		}).then(async (result) => {
-
-			if (result.isConfirmed) {
-				console.log(id)
-			const perfilStripe= await dispatch(acountCreator(id))
-			await console.log(perfilStripe.data.id)
-			const linkStripe= await dispatch(srtipeAccountLink(perfilStripe.data.id))
-			await console.log(linkStripe.data.url)
-				window.open(linkStripe.data.url)
-    		MySwal.fire(
-			'Creado!',
-			'Your Profilefile has been Created, por favor continue su inscripcion en la pagina de stripe',
-			'success'
-			)
-  } else if (  result.dismiss === Swal.DismissReason.cancel
-  ) {
-			MySwal.fire(
-			'Cancelled',
-			'Cuenta no creada',
-			'error'
-			)
-  }
-})
-}
-				
-
+	if (!user.role) {
+		window.location = "/";
 	}
+
+	const pagoStripe = async () => {
+		if (user.userStripe) {
+			const pagoActivo = await dispatch(
+				stripeAccountsConsult(user.userStripe)
+			);
+
+			if (pagoActivo.data.capabilities.card_payments === "inactive") {
+				MySwal.fire({
+					position: "top-end",
+					icon: "question",
+					title: "tu ususario no esta habilitado para pagos ! \n quieres habilitar tu cuenta de Stripe ?",
+					showConfirmButton: true,
+					showCancelButton: true,
+				}).then(async (result) => {
+					if (result.isConfirmed) {
+						const linkStripe = await dispatch(
+							srtipeAccountLink(user.userStripe)
+						);
+
+						window.open(linkStripe.data.url);
+						MySwal.fire(
+							"Creado!",
+							"Your Profilefile has been Created, por favor continue su inscripcion en la pagina de stripe",
+							"success"
+						);
+					} else if (result.dismiss === Swal.DismissReason.cancel) {
+						MySwal.fire("Cancelled", "Cuenta no creada", "error");
+					}
+				});
+			} else {
+				MySwal.fire({
+					position: "top-end",
+					icon: "success",
+					title: " cuentas con tu usuario de Stripe habilitado ",
+					showConfirmButton: false,
+					timer: 1500,
+				});
+			}
+		} else {
+			MySwal.fire({
+				position: "top-end",
+				icon: "question",
+				title: "no tienes ususario ! \n quieres crear cuenta de Stripe ?",
+				showConfirmButton: true,
+				showCancelButton: true,
+			}).then(async (result) => {
+				if (result.isConfirmed) {
+					const perfilStripe = await dispatch(acountCreator(id));
+					const linkStripe = await dispatch(
+						srtipeAccountLink(perfilStripe.data.id)
+					);
+					window.open(linkStripe.data.url);
+					MySwal.fire(
+						"Creado!",
+						"Your Profilefile has been Created, por favor continue su inscripcion en la pagina de stripe",
+						"success"
+					);
+				} else if (result.dismiss === Swal.DismissReason.cancel) {
+					MySwal.fire("Cancelled", "Cuenta no creada", "error");
+				}
+			});
+		}
+	};
 	return (
 		<div className="profile-container row d-flex w-99 m-3 justify-content-center">
 			<DialogUserUpdate
@@ -164,13 +146,15 @@ export default function Profile(props) {
 				<div className="row col-5 justify-content-center align-items-center">
 					<div className="col-5 image_profil_container">
 						<img
-						src={user.image_profil || props.image_profil}
-						alt="perfil"
-						className="user-image"
+							src={user.image_profil || props.image_profil}
+							alt="perfil"
+							className="user-image"
 						/>
 					</div>
-					<div  className="col-5">
-						<h3 className="">{user.user_Name || props.user_Name}</h3>
+					<div className="col-5">
+						<h3 className="">
+							{user.user_Name || props.user_Name}
+						</h3>
 					</div>
 				</div>
 				<div className="profile-container-balance col-5">
@@ -186,9 +170,9 @@ export default function Profile(props) {
 					</div>
 					<div className="profile-container-ff">
 						<Link onClick={pagoStripe}>
-							<img  src={allIcons.cash} alt="cashicon" />
+							<img src={allIcons.cash} alt="cashicon" />
 						</Link>
-						
+
 						<span>
 							Your balance: <p>$ {props.cashValue}</p>
 						</span>
@@ -236,7 +220,7 @@ Profile.defaultProps = {
 	follow: "1",
 	followers: "100000",
 	cashValue: "999",
-	
+
 	userPosts: [
 		{
 			_id: "6393c28d810999a485add515",

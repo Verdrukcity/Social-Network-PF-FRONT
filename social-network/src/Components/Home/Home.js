@@ -179,6 +179,16 @@ export default function Home() {
 	};
 	//if (isLoading || loading) return <Loader></Loader>
 
+	if(!token) {
+		return Swal.fire({
+			icon: "error",
+			title: "Oops...",
+			text: "Parece que aún algo salio mal, no has iniciado sesion",
+		}).then((response) => {
+			if (response.isConfirmed) {window.location = "/"}
+		});
+	}
+
 	if (userDetail.status === false) {
 		return Swal.fire({
 			icon: "error",
