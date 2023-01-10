@@ -8,5 +8,5 @@ export default function TablePosts({ columns, nodes }) {
 
 	const theme = useTheme(getTheme())
 
-	return <CompactTable columns={columns} data={data} theme={theme} const />
+	return <CompactTable columns={columns} data={data} theme={theme} />
 }

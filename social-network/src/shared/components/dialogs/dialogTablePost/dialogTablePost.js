@@ -3,6 +3,7 @@ import Dialog from '@mui/material/Dialog'
 import DialogContent from '@mui/material/DialogContent'
 import Loader from '../../loader/loader'
 import TablePosts from '../../Table/TablePosts'
+import './DialogTablePost.css'
 import { Switch } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { updatePostStatus } from '../../../../redux/actions/adminActions'
@@ -34,10 +35,12 @@ export default function DialogTablePost({ open, setOpen, userId }) {
 		{
 			label: 'id',
 			renderCell: (item) => item._id,
+			resize: true,
 		},
 		{
 			label: 'texto',
 			renderCell: (item) => item.text,
+			resize: true,
 		},
 		{
 			label: 'multimedia',
@@ -53,6 +56,7 @@ export default function DialogTablePost({ open, setOpen, userId }) {
 					</a>
 				)
 			},
+			resize: true,
 		},
 		{
 			label: 'estado',
@@ -63,6 +67,7 @@ export default function DialogTablePost({ open, setOpen, userId }) {
 					color='warning'
 				/>
 			),
+			resize: true,
 		},
 	]
 
