@@ -21,7 +21,6 @@ import { likePostAsync } from "../../../redux/actions/postActions";
 import { Throttle } from 'react-throttle'
 
 
-
 // the props we are going to use are:
 // img, username, imgUser, text
 //hacer un efecto para ir a details, cuando paso por sobre la foto que se haga una spmbra o se agrande un poco...

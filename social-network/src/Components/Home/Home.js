@@ -40,16 +40,15 @@ export default function Home() {
 	 * estado local para abrir y cerrar el dialog del create
 	 */
 	const { user, isAuthenticated, isLoading, logout } = useAuth0()
-	const history = useHistory()
-
+	console.log({user, isAuthenticated, isLoading})
 	const [loading, setLoading] = useState(true)
 	const [open, setOpen] = useState(false)
 	const posts = useSelector(allPostsSelector)
 	// const token = useSelector(tokenSelector)
-	const token = localStorage.getItem('token')
+	let token = localStorage.getItem('token')
 	let categories = useSelector((state) => state.categories.name)
 	let userDetail = useSelector((state) => state.posts.userDetail)
-	const id = window.localStorage.getItem('userId')
+	let id = window.localStorage.getItem('userId')
 
 	const categoriesArr = categories?.map((c) => c.category)
 
@@ -62,16 +61,20 @@ export default function Home() {
 
 	useEffect(() => {
 		setActualPosts(posts)
-		if (isAuthenticated && !isLoading && user) {
+		if(actualPosts) setLoading(false);
+
+		// auth0 function
+		if (isAuthenticated && !isLoading && user && !token) {
 			const asincronous = async () => {
 				await axios
 					.post('/authuserAuth0', user)
 					.then((res) => res.data)
 					.then((res) => {
-						console.log(res.data)
 						if (res.data && res.message) {
-							localStorage.setItem('userId', res.data.id)
-							localStorage.setItem('token', res.data.token)
+							localStorage.setItem('userId', res.data.id);
+							localStorage.setItem('token', res.data.token);
+							token = localStorage.getItem("token");
+							id = localStorage.getItem("userId")
 							setLoading(false)
 						}
 						if (res.message === 'Usuario logueado y creado correctamente') {
@@ -82,6 +85,8 @@ export default function Home() {
 								'success'
 							)
 						}
+					}).then(()=>{
+						dispatch(getAllPostsAsync(token))
 					})
 					.catch((err) =>
 						Swal.fire({
@@ -90,24 +95,27 @@ export default function Home() {
 							text: 'Parece que aún algo salio mal',
 						}).then((responce) => {
 							if (responce.isConfirmed) {
-								logout({ returnTo: window.location.origin })
+								localStorage.clear();
+								logout({ returnTo: window.location.origin });
 							}
 						})
 					)
 			}
 			asincronous()
 		}
-	}, [posts, isAuthenticated, user, isLoading, logout])
+	}, [posts, isAuthenticated, user, isLoading, logout, token])
 
 	useEffect(() => {
 		/**me traigo todos los posts */
-		if (token) {
-			dispatch(getAllPostsAsync(token))
-		}
+		
+		if(token && !isAuthenticated)dispatch(getAllPostsAsync(token));
+		
 		/**me traigo el detalle del usuario */
-		dispatch(getUserDetailAsync(id))
+		if(id) dispatch(getUserDetailAsync(id));
+		
+		
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [dispatch, token])
+	}, [dispatch, id, isAuthenticated, token])
 
 	const ref = useRef(null)
 
@@ -177,22 +185,23 @@ export default function Home() {
 		/*Esta función debería llevarte al inicio de las publicaciones*/
 		ref.current?.scrollIntoView({ behavior: 'smooth' })
 	}
-	//if (isLoading || loading) return <Loader></Loader>
+	if (isLoading || loading || !actualPosts) return <Loader></Loader>;
 
-	if (!token) {
+	if (!token && !isAuthenticated) {
 		return Swal.fire({
 			icon: 'error',
 			title: 'Oops...',
 			text: 'Parece que aún algo salio mal, no has iniciado sesion',
 		}).then((response) => {
 			if (response.isConfirmed) {
+				localStorage.clear();
 				window.location = '/'
 			}
 		})
 	}
 
 	if (userDetail.status === false) {
-		return Swal.fire({
+		 Swal.fire({
 			icon: 'error',
 			title: 'Oops...',
 			text: 'Parece que aún algo salio mal, tu usuario ha sido desactivado',
@@ -210,7 +219,6 @@ export default function Home() {
 
 	return (
 		<div>
-			{userDetail.role === 'user' ? (
 				<div ref={ref} id='home' className='mt-2'>
 					<Link to={'/'}>
 						<img
@@ -286,9 +294,7 @@ export default function Home() {
 						/>
 					</div>
 				</div>
-			) : (
-				<div></div>
-			)}
+		
 		</div>
 	)
 }
