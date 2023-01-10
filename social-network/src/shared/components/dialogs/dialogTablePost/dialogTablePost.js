@@ -85,7 +85,7 @@ export default function DialogTablePost({ open, setOpen, userId }) {
 				},
 			}}
 		>
-			<div className='dialog-bg overflow-hidden'>
+			<div className='dialog-bg-post overflow-hidden'>
 				{loader && <Loader />}
 
 				<DialogContent>
