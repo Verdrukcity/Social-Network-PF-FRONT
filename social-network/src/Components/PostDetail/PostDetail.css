@@ -1,0 +1,150 @@
+.container-fluid{
+    padding: 3%;
+    /* overflow-y: hidden; */
+}
+.bg-podt-detail{
+    background-color: var(--main-orange-secondary);
+    height: 100vh;
+    font-style: italic;
+    overflow: hidden;
+}
+
+.postImg{
+    
+    border-radius: 25px;
+    
+}
+
+.col-8{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.categoriescont{
+    margin-top: 2%;
+    width: 60%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.categorysimbol{
+    font-weight: bolder;
+    color: white;
+    font-size: xx-large;
+}
+
+.category{
+    color: white;
+    background-color: #CF4B2E;
+    border-radius: 15px;
+}
+
+.arrowback{
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    background-color: #FF8D00;
+    width: 90px;
+    height: 90px;
+    padding: 1%;
+    border-radius: 50%;
+    transform: rotate(270deg);
+}
+
+.arrowback:hover{
+    background-color: #d47500;
+}
+
+
+
+.usercont{
+    border: black solid;
+}
+
+.userimg{
+    
+    height: 125%;
+    margin-right: auto;
+    border-radius: 50%;
+
+}
+
+.username{
+    text-align: start;
+    color: white;
+    cursor: pointer;
+}
+
+.textpost{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: #c46e31;
+    padding: 20px;
+    border-radius: 25px;
+}
+
+.comentcont{
+    color: white;
+    background-color:#FF8D00;
+    border-radius: 25px;
+    margin-bottom: 10px;
+    height: 60%;
+}
+
+.comentscont{        
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 40%;
+    
+}
+.comentscont::-webkit-scrollbar-track-piece {
+    background-color: #eb853d;
+}
+      
+    /* width */
+    .comentscont::-webkit-scrollbar {
+    width: 5px;
+    
+  }
+  
+  /* Track */
+  
+   
+  /* Handle */
+  .comentscont::-webkit-scrollbar-thumb {
+    background: #ffffff; 
+    border-radius: 3px;
+  }
+  
+  /* Handle on hover */
+  .comentscont::-webkit-scrollbar-thumb:hover {
+    background: #e0e0e0; 
+  }  
+
+
+
+.textcomment{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.comentimg{
+    border-radius: 50%;
+    height: 50px;
+}
+
+.icon-size{
+    margin-right: auto;
+}
+
+.verlikes{
+    margin-right:100px
+}

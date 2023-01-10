@@ -1,0 +1,98 @@
+@import url('../../../assets/globals.css');
+
+.dialog-bg{
+    background-color: var(--main-orange-primary);
+    
+}
+
+.color-whie-reply{
+  color: var(--main-white);
+}
+
+
+.file-upload-content {
+    display: none;
+    text-align: center;
+  }
+  .file-upload-input {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    outline: none;
+    opacity: 0;
+    cursor: pointer;
+  }
+  .image-upload-wrap {
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+
+  }
+ 
+  .button-create{
+
+    background-color: #d77937;
+    color: #ffffff;
+
+  }
+  .MuiButton-text{
+    color: #ffffff;
+  }
+ 
+  
+  .text-information-img{
+    display: block;
+    max-width: auto;
+    height: auto;
+    width: auto;
+    margin: 0;
+    padding: 0;
+    border-radius: 30px;
+  }
+ 
+  .border-radius-30{
+    border-radius: 30px;
+  }
+
+  .bg-input{
+    background-color: #d77937;
+  }
+  .dialog-input{
+    background-color: #d77937;
+    border: 0;
+    border-radius: 30px;
+    outline: none;
+    
+  }
+  .dialog-input::placeholder{
+    color: #0000007f;
+  }
+  .dialog-input:active{
+    border: none;
+  }
+
+  .profile-img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    
+  }
+  #buttonAction{
+    color: #ffffff;
+    background-color: #d77937;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+  }
+  #buttonAction:active{
+    background-color: #ba692f;
+  } 
+  #buttonAction:hover{
+    background-color: #ba692f;
+  } 
+  
+
+  

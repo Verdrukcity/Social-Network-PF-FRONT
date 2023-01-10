@@ -1,0 +1,33 @@
+.dialog-bg{
+    background-color:  #ff8d00;
+    color: #eaeaea;  
+    padding: 50px;
+}
+
+.likesTitle{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.userLike{
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.userImg{
+    margin-right: auto;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.userName{
+    font-style: italic;
+    text-align: start;
+    color: #eaeaea;
+    cursor: pointer;
+    margin-left: 20px;
+    
+}

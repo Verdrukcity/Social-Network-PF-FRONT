@@ -1,0 +1,32 @@
+@import url(../../../assets/globals.css);
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@800&display=swap');
+
+.categories-title {
+	margin: 8px 0;
+
+	font-family: 'Inter', sans-serif;
+	font-size: 1.6rem;
+	font-weight: bold;
+	font-style: italic;
+
+	color: var(--main-red-secondary);
+}
+
+.button-inner {
+	margin: 10px;
+	padding: 5px 15px;
+
+	border: none;
+	border-radius: 25px;
+
+	color: var(--main-white);
+	background-color: var(--main-red);
+}
+
+.button-inner:hover {
+	box-shadow: 2px 2px 5px var(--main-red);
+}
+
+.active {
+	color: black;
+}

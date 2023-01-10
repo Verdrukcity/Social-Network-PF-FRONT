@@ -1,0 +1,57 @@
+/*colores principales*/
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@800&display=swap');
+:root {
+  --main-white: #eaeaea;
+  --main-orange-ligth: #ebc886;
+  --main-orange-primary: #ff8d00;
+  --main-orange-secondary: #eb853d;
+  --main-red: #cf4b2e;
+  --main-red-secondary: #ff4800;
+  --main-gray: #d9d9d9;
+}
+
+.bg{
+  background-color: var(--main-white);
+  height: 100vh;
+}
+
+.replyTitle{
+  color: var(--main-orange-primary);
+  font-family: 'Inter', sans-serif;
+  font-style: italic;
+  font-size: 128px;
+}
+@media (max-width:450px){
+  .replyTitle{
+    font-size: 98px;
+  }
+}
+@media (min-width:780px){
+  .replyTitle{
+    font-size: 128px;
+  }
+}
+@media (min-width:1000px){
+  .replyTitle{
+    font-size: 150px;
+  }
+}
+.font{
+  color: var(--main-white);
+  font-size:23px;
+}
+
+.container-flex-center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@media (max-width:770px){
+  .container-flex-center{
+  flex-direction: column;
+}
+}
+
+.bx-shadow{
+  box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.197);
+}

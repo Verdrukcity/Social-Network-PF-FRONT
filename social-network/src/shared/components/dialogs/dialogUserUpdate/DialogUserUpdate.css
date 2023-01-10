@@ -1,0 +1,15 @@
+.file-upload-content-user {
+  display: none;
+  text-align: center;
+}
+.file-upload-input-user {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  width: 50%;
+  height: 100%;
+  outline: none;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 2;
+}

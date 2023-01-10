@@ -1,0 +1,94 @@
+@import url(../../assets/globals.css);
+
+html {
+	scroll-snap-type: y mandatory;
+}
+
+.text-morecomments {
+	text-decoration: none;
+	color: #d77a37;
+}
+.text-morecomments:hover {
+	color: #ffffff;
+}
+
+.icon-size {
+	width: 30px;
+	height: 30px;
+	color: #d77937;
+	cursor: pointer;
+}
+
+.icon-size:hover {
+	width: 35px;
+	height: 35px;
+}
+
+#cardContainer {
+	background-color: #eb853d;
+	border-radius: 30px;
+	box-shadow: 0px 12px 12px rgba(0, 0, 0, 0.25);
+
+	scroll-margin-top: 20vh;
+	scroll-snap-align: start;
+}
+
+.curser-pointer-card {
+	cursor: pointer;
+}
+
+.userImgCard {
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+}
+.imgCard {
+	min-width: 20vw;
+	max-width: 20vw;
+
+	min-height: calc(20vw / 1.5);
+	max-height: calc(20vw);
+
+	border-radius: 1rem;
+}
+
+.color-white {
+	color: #eaeaea;
+}
+.card-container-categories {
+	background-color: var(--main-red-secondary);
+	border-radius: 30px;
+}
+.cardContainerContent {
+	display: flex;
+	flex-direction: row;
+}
+.containerContentInfo {
+	background-color: #d77937;
+	border-radius: 1rem;
+	color: #eaeaea;
+	font-size: 16px;
+	font-style: italic;
+	height: 77%;
+}
+.userInfo {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	color: #eaeaea;
+	font-size: 20px;
+	font-style: italic;
+}
+.comments {
+	background-color: #ffffff;
+	border-radius: 25px;
+}
+.inp {
+	margin: 10px;
+	width: 70%;
+	border-radius: 25px;
+	border: none;
+	text-align: center;
+	background-color: #eaeaea;
+	outline: none;
+}

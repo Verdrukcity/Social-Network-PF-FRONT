@@ -1,0 +1,101 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@800;900&display=swap");
+
+.profile-container {
+	background-color: #d9d9d9;
+	border-radius: 20px;
+	padding: 20px;
+	font-family: "Inter", sans-serif;
+	font-style: italic;
+
+	scroll-snap-align: start;
+}
+.profile-container h1 {
+	color: black;
+	margin: 50px 0px 0px 0px;
+}
+#all-icons-arrowBack {
+	background-color: #ff8d00;
+	padding: 5px;
+	border-radius: 25%;
+	height: 55px;
+	width: 55px;
+	border: none;
+}
+.all-icons-image {
+	width: 45px;
+	height: 45px;
+}
+
+.profile-container-ff {
+	width: fit-content;
+}
+
+.profile-container-ff span {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	background-color: #ff8d00;
+	padding: 5px 0px 5px 15px;
+	border-radius: 25px;
+	align-items: center;
+	font-weight: bold;
+	font-style: oblique;
+	margin: 10px;
+	color: white;
+}
+.profile-container-ff p {
+	text-align: right;
+	margin: 0px 15px 0px 0px;
+}
+.profile-container-ff img {
+	padding: 3px;
+}
+
+.profile-container-user {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	justify-items: center;
+	align-items: center;
+}
+
+.profile-container-user h3 {
+	text-align: start;
+	width: -webkit-fill-available;
+	color: black;
+}
+.profile-container-balance {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+}
+.profile-container-posts {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.profile-container-logout {
+	position: absolute;
+	right: 0%;
+	top: 1%;
+	display: grid;
+	margin: 4%;
+}
+
+.image_profil_container {
+	width: 50px;
+	height: 170px;
+	overflow: hidden;
+	margin: 10px;
+	position: relative;
+	border-radius: 50%;
+}
+
+.image_profil_container > .user-image {
+	width: 150px;
+	position: absolute;
+	left: -100%;
+	right: -100%;
+	top: -100%;
+	bottom: -100%;
+	margin: auto;
+	min-height: 100%;
+	min-width: 100%;
+}
