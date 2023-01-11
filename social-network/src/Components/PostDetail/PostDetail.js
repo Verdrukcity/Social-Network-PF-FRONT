@@ -5,9 +5,10 @@ import { arrowUp } from "../../shared/assets/icons/all-icons";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from "react";
-import {getPostDetailAsync, likePostAsync} from '../../redux/actions/postActions'
+import {getPostDetailAsync, likeInDetailAsync} from '../../redux/actions/postActions'
 import {likeIcon} from '../../shared/assets/icons/all-icons'
 import {DialogLikesList} from '../../shared/components/dialogs/dialogLikesList/DialogLikesList'
+import { Throttle } from 'react-throttle'
 
 
 export default function PostDetail(props){
@@ -25,12 +26,15 @@ export default function PostDetail(props){
     const dispatch = useDispatch() 
 
     //obtenemos el id por params para buscar el detail correpondiente
-    const id = props.match.params.id;
+    const postId = props.match.params.id;
+
+    //
+    const userId = window.localStorage.getItem('userId')
 
     //dispatch para obtener el detalle
     useEffect(()=>{
-        dispatch(getPostDetailAsync(id))
-    },[dispatch,id])
+        dispatch(getPostDetailAsync(postId))
+    },[dispatch,postId])
 
     //traigo el detail del store
     const details = useSelector(state => state.posts.detail)
@@ -53,7 +57,7 @@ export default function PostDetail(props){
     }, [details])
 
     const handleLike = (postId, userLoged) => {
-		dispatch(likePostAsync(postId, userLoged))
+		dispatch(likeInDetailAsync(postId, userLoged))
 	}
 
     const seeLikes = (e)=>{
@@ -96,14 +100,16 @@ export default function PostDetail(props){
                     </div>
                     
                     <div className="textpost mt-2 mb-4">
-                        <img
-                            src={likeIcon}
-                            className='icon-size'
-                            alt='icon de likes'
-                            onClick={(e) => {
-                                handleLike(props.id, props.logedUser)
-                            }}
-                        />
+                        <Throttle time='1200' handler='onClick'>
+                            <img
+                                src={likeIcon}
+                                className='icon-size'
+                                alt='icon de likes'
+                                onClick={() => {
+                                    handleLike(postId, userId)
+                                }}
+                            />
+                        </Throttle>
                         <h4 className="username verlikes mt-2 mb-2" onClick={e => seeLikes(e)}>Ver likes</h4>
                     </div>
                     
