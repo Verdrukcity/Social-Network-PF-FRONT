@@ -199,7 +199,8 @@ export default function Home() {
 		}).then((response) => {
 			if (response.isConfirmed) {
 				localStorage.clear()
-				window.location = '/'
+				window.location = '/';
+				logout();
 			}
 		})
 	}
