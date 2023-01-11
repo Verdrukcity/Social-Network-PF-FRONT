@@ -200,7 +200,7 @@ export default function Home() {
 			if (response.isConfirmed) {
 				localStorage.clear()
 				window.location = '/';
-				logout();
+				logout({ returnTo: window.location.origin });
 			}
 		})
 	}
