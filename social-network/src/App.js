@@ -9,6 +9,8 @@ import Profile from './Components/Profile/Profile'
 import Admin from './Components/Admin/Admin'
 import Pago from './Components/Stripe/Pago'
 import axios from 'axios'
+import auth0succes from './Components/auth0routes/auth0succes'
+import auth0Fail from './Components/auth0routes/auth0Fail'
 
 // axios.defaults.baseURL = "http://localhost:3001"
 axios.defaults.baseURL = 'https://social-network-pf-back-production.up.railway.app'
@@ -33,6 +35,8 @@ function App() {
 						<Route exact path='/reply/profile' component={Profile} />
 						<Route exact path='/reply/admin' component={Admin} />
 						<Route exact path='/reply/pago' component={Pago} />
+						<Route exact path='/reply/pago/succes/' component={auth0succes} />
+						<Route exact path='/reply/pago/fail/' component={auth0Fail} />
 					</Switch>
 				</div>
 			</BrowserRouter>
