@@ -250,7 +250,29 @@ export default function Home() {
 				/>
 
 				<div className='container d-flex flex-column justify-content-center mt-10'>
-					<h1 className={!arePost ? '' : 'd-none'}>404</h1>
+					<section
+						className={!arePost ? '' : 'd-none'}
+						style={{
+							display: 'flex',
+							flexDirection: 'column',
+							justifyContent: 'space-around',
+							width: '100%',
+							height: '80vh',
+						}}
+					>
+						<h2 style={{ fontWeight: 'bold', textAlign: 'center' }}>
+							No encontramos ningún post
+						</h2>
+						<img
+							src={logo}
+							alt='logo reply'
+							style={{ width: '90px', height: 'auto', margin: '0 auto' }}
+						/>
+						<h4 style={{ textAlign: 'center' }}>
+							Puedes crear un post único con estas categorías
+						</h4>
+					</section>
+
 					{actualPosts &&
 						posts.map((data) => {
 							return (
