@@ -39,25 +39,24 @@ export default function Home() {
 	/**
 	 * estado local para abrir y cerrar el dialog del create
 	 */
-	const { user, isAuthenticated, isLoading, logout } = useAuth0()
-	console.log({user, isAuthenticated, isLoading})
-	const [loading, setLoading] = useState(true)
-	const [open, setOpen] = useState(false)
-	const posts = useSelector(allPostsSelector)
+	const { user, isAuthenticated, isLoading, logout } = useAuth0();
+	const [loading, setLoading] = useState(true);
+	const [open, setOpen] = useState(false);
+	const posts = useSelector(allPostsSelector);
 	// const token = useSelector(tokenSelector)
-	let token = localStorage.getItem('token')
-	let categories = useSelector((state) => state.categories.name)
-	let userDetail = useSelector((state) => state.posts.userDetail)
-	let id = window.localStorage.getItem('userId')
+	let token = localStorage.getItem('token');
+	let categories = useSelector((state) => state.categories.name);
+	let userDetail = useSelector((state) => state.posts.userDetail);
+	let id = window.localStorage.getItem('userId');
 
-	const categoriesArr = categories?.map((c) => c.category)
+	const categoriesArr = categories?.map((c) => c.category);
 
-	const dispatch = useDispatch()
+	const dispatch = useDispatch();
 	/**
 	 * Dispatch y useEffect para traer todos los posts del back
 	 */
 
-	const [actualPosts, setActualPosts] = useState()
+	const [actualPosts, setActualPosts] = useState();
 
 	useEffect(() => {
 		setActualPosts(posts)
