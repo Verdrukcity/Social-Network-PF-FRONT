@@ -5,7 +5,7 @@ import { Link, useHistory } from 'react-router-dom'
 import Select from 'react-select'
 import { SelectDatepicker } from 'react-select-datepicker'
 import { getAllCountriesAsync } from '../../redux/actions/countriesActions'
-import  './Register.css'
+import './Register.css'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import { createUser } from '../../redux/actions/usersActions'
@@ -99,7 +99,7 @@ const Register = () => {
 
 			if (/^[0-9]$/.test(entrada)) {
 				MySwal.fire({
-					// position: 'top-end',
+					// position: 'center',
 					position: 'center',
 					icon: 'error',
 					title: 'no se permiten numeros en el  ' + event.target.name,

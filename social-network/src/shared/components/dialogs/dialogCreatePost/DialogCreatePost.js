@@ -58,17 +58,16 @@ export default function DialogCreatePost({
 	const [textArea, SetTextArea] = React.useState('')
 
 	const [loader, setLoader] = useState(false)
-	const id = localStorage.getItem('userId');
-	const token = localStorage.getItem("token");
+	const id = localStorage.getItem('userId')
+	const token = localStorage.getItem('token')
 	useEffect(() => {
 		dispatch(getUserDetailAsync(id))
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-		
 	}, [dispatch, id])
 
 	const [ImageSelectedPrevious, setImageSelectedPrevious] = React.useState(null)
 
-	const [IsVideo , setIsVideo]= React.useState(false)
+	const [IsVideo, setIsVideo] = React.useState(false)
 	/**
 	 * funcion para traer y setear la imagen del input
 	 */
@@ -77,7 +76,7 @@ export default function DialogCreatePost({
 		if (e.target.files[0] !== undefined) {
 			let fileToUse = e.target.files[0]
 			const reader = new FileReader()
-			if(e.target.files[0].type==="video/mp4"){
+			if (e.target.files[0].type === 'video/mp4') {
 				setIsVideo(true)
 			}
 			fileSet(fileToUse)
@@ -108,12 +107,24 @@ export default function DialogCreatePost({
 		let value = e.target.value
 		SetTextArea(value)
 	}
+
+	const Toast = Swal.mixin({
+		toast: true,
+		position: 'top-end',
+		showConfirmButton: false,
+		timer: 3000,
+		timerProgressBar: true,
+		didOpen: (toast) => {
+			toast.addEventListener('mouseenter', Swal.stopTimer)
+			toast.addEventListener('mouseleave', Swal.resumeTimer)
+		},
+	})
+
 	/*funcion que envia la data */
 	const handleSubmit = async (e) => {
 		e.preventDefault()
 		let formData = new FormData()
 		formData.append('text', textArea)
-		
 
 		for (var i = 0; i < categoryName.length; i++) {
 			formData.append('category', categoryName[i])
@@ -123,10 +134,10 @@ export default function DialogCreatePost({
 		const MySwal = withReactContent(Swal)
 		setOpen(false)
 		MySwal.fire({
-			position: 'top-end',
-			title: 'Are you sure?',
-			text: "You won't be able to revert this!",
-			icon: 'warning',
+			position: 'center',
+			title: 'Nuevo post',
+			text: 'Confirma para crear un post',
+			icon: 'info',
 			showCancelButton: true,
 			confirmButtonColor: '#3085d6',
 			cancelButtonColor: '#d33',
@@ -139,7 +150,11 @@ export default function DialogCreatePost({
 				await dispatch(CreatePostsAsync(formData, id, token))
 				dispatch(getAllPostsAsync())
 				setLoader(false)
-				Swal.fire('Posted!', 'Your file has been Posted.', 'success')
+				Toast.fire({
+					position: 'top-end',
+					title: 'Publicación creada exitosamente',
+					icon: 'success',
+				})
 			}
 		})
 	}
@@ -180,14 +195,14 @@ export default function DialogCreatePost({
 							/>
 
 							<div>
-								{ImageSelectedPrevious&&!IsVideo && (
+								{ImageSelectedPrevious && !IsVideo && (
 									<img
 										src={ImageSelectedPrevious}
 										className='text-information-img img-fluid'
 										alt='imagen para seleccionar'
 									/>
 								)}
-								{!ImageSelectedPrevious&& !IsVideo  &&  (
+								{!ImageSelectedPrevious && !IsVideo && (
 									<img
 										src={imgPhotoLoad}
 										className='text-information-img img-fluid'
@@ -195,11 +210,15 @@ export default function DialogCreatePost({
 									/>
 								)}
 								{IsVideo && (
-									<video className='text-information-img img-fluid' src={ImageSelectedPrevious} alt= "video" controls width="320" height="240" />
+									<video
+										className='text-information-img img-fluid'
+										src={ImageSelectedPrevious}
+										alt='video'
+										controls
+										width='320'
+										height='240'
+									/>
 								)}
-
-
-
 							</div>
 						</div>
 
