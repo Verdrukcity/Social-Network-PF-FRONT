@@ -28,6 +28,10 @@
 
 .profile-container-ff {
 	width: fit-content;
+	position:relative;
+	right: 350px;
+	top:80px;
+	
 }
 
 .profile-container-ff span {

@@ -44,6 +44,11 @@ export default function Profile(props) {
 		window.location = "/";
 	}
 
+	const linkStripe=()=>{
+		
+
+		window.open("https://dashboard.stripe.com/login")
+	}
 	const pagoStripe = async () => {
 		if (user.userStripe) {
 			const pagoActivo = await dispatch(
@@ -95,7 +100,9 @@ export default function Profile(props) {
 					const perfilStripe = await dispatch(acountCreator(id));
 					const linkStripe = await dispatch(
 						srtipeAccountLink(perfilStripe.data.id)
+						
 					);
+					console.log(perfilStripe.data)
 					window.open(linkStripe.data.url);
 					MySwal.fire(
 						"Completado!",
@@ -160,23 +167,17 @@ export default function Profile(props) {
 				</div>
 				<div className="profile-container-balance col-5">
 					<div className="profile-container-ff">
-						<span>
-							Follows: <p>{user.follow && props.follow}</p>
-						</span>
-						<span>
-							Followers:{" "}
-							<p>{user.followers && props.followers}</p>
-							{/* facilitaria para mostrar que follow y followers sean numeros y no un arreglos en el modelo de la DB */}
-						</span>
+						
 					</div>
 					<div className="profile-container-ff">
 						<Link onClick={pagoStripe}>
 							<img src={allIcons.cash} alt="cashicon" />
 						</Link>
-
-						<span>
-							Your balance: <p>$ {props.cashValue}</p>
+				
+						<span onClick={linkStripe}>
+							Your balance
 						</span>
+						
 					</div>
 				</div>
 			</div>
