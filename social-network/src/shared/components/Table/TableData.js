@@ -29,7 +29,7 @@ export default function TableData({ columns, nodes }) {
 	const pagination = usePagination(data, {
 		state: {
 			page: 0,
-			size: 10,
+			size: 8,
 		},
 		onChange: onPaginationChange,
 	})

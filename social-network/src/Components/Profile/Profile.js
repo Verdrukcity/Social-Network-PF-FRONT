@@ -65,28 +65,29 @@ export default function Profile(props) {
 
 						window.open(linkStripe.data.url);
 						MySwal.fire(
-							"Creado!",
-							"Your Profilefile has been Created, por favor continue su inscripcion en la pagina de stripe",
+							'',
+							"por favor completa tu inscripcion en la pagina de stripe, para habilitar pagos",
 							"success"
 						);
 					} else if (result.dismiss === Swal.DismissReason.cancel) {
-						MySwal.fire("Cancelled", "Cuenta no creada", "error");
+						MySwal.fire("Cancelled", "Cuenta no habilitada", "error");
+						return;
 					}
 				});
-			} else {
-				MySwal.fire({
-					position: "top-end",
-					icon: "success",
-					title: " cuentas con tu usuario de Stripe habilitado ",
-					showConfirmButton: false,
-					timer: 1500,
-				});
-			}
+				} else {
+					MySwal.fire({
+						position: "top-end",
+						icon: "success",
+						title: " cuentas con tu usuario de Stripe habilitado para pagos ",
+						showConfirmButton: false,
+						timer: 1500,
+					});
+				}
 		} else {
 			MySwal.fire({
 				position: "top-end",
 				icon: "question",
-				title: "no tienes ususario ! \n quieres crear cuenta de Stripe ?",
+				title: "no tienes ususario de Stripe ! \n quieres crear cuenta de Stripe ?",
 				showConfirmButton: true,
 				showCancelButton: true,
 			}).then(async (result) => {
@@ -97,8 +98,8 @@ export default function Profile(props) {
 					);
 					window.open(linkStripe.data.url);
 					MySwal.fire(
-						"Creado!",
-						"Your Profilefile has been Created, por favor continue su inscripcion en la pagina de stripe",
+						"Completado!",
+						"tu perfil de Stripe ha sido creado, por favor continua tu inscripcion en la pagina de stripe para habilitar pagos",
 						"success"
 					);
 				} else if (result.dismiss === Swal.DismissReason.cancel) {
