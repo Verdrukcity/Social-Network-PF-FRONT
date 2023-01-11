@@ -39,41 +39,44 @@ export default function Home() {
 	/**
 	 * estado local para abrir y cerrar el dialog del create
 	 */
-	const { user, isAuthenticated, isLoading, logout } = useAuth0();
-	const [loading, setLoading] = useState(true);
-	const [open, setOpen] = useState(false);
-	const posts = useSelector(allPostsSelector);
+	const { user, isAuthenticated, isLoading, logout } = useAuth0()
+	const [loading, setLoading] = useState(true)
+	const [open, setOpen] = useState(false)
+	const posts = useSelector(allPostsSelector)
 	// const token = useSelector(tokenSelector)
-	let token = localStorage.getItem('token');
-	let categories = useSelector((state) => state.categories.name);
-	let userDetail = useSelector((state) => state.posts.userDetail);
-	let id = window.localStorage.getItem('userId');
+	let token = localStorage.getItem('token')
+	let categories = useSelector((state) => state.categories.name)
+	let userDetail = useSelector((state) => state.posts.userDetail)
+	let id = window.localStorage.getItem('userId')
 
-	const categoriesArr = categories?.map((c) => c.category);
+	const categoriesArr = categories?.map((c) => c.category)
 
-	const dispatch = useDispatch();
+	const dispatch = useDispatch()
 	/**
 	 * Dispatch y useEffect para traer todos los posts del back
 	 */
 
-	const [actualPosts, setActualPosts] = useState();
+	const [actualPosts, setActualPosts] = useState()
+
+	const [arePost, setArePost] = useState(true)
 
 	useEffect(() => {
 		setActualPosts(posts)
-		if(actualPosts) setLoading(false);
+		if (actualPosts) setLoading(false)
+		posts.length ? setArePost(true) : setArePost(false)
 
-		// auth0 function
 		if (isAuthenticated && !isLoading && user && !token) {
+			// auth0 function
 			const asincronous = async () => {
 				await axios
 					.post('/authuserAuth0', user)
 					.then((res) => res.data)
 					.then((res) => {
 						if (res.data && res.message) {
-							localStorage.setItem('userId', res.data.id);
-							localStorage.setItem('token', res.data.token);
-							token = localStorage.getItem("token");
-							id = localStorage.getItem("userId")
+							localStorage.setItem('userId', res.data.id)
+							localStorage.setItem('token', res.data.token)
+							token = localStorage.getItem('token')
+							id = localStorage.getItem('userId')
 							setLoading(false)
 						}
 						if (res.message === 'Usuario logueado y creado correctamente') {
@@ -84,7 +87,8 @@ export default function Home() {
 								'success'
 							)
 						}
-					}).then(()=>{
+					})
+					.then(() => {
 						dispatch(getAllPostsAsync(token))
 					})
 					.catch((err) =>
@@ -94,8 +98,8 @@ export default function Home() {
 							text: 'Parece que aún algo salio mal',
 						}).then((responce) => {
 							if (responce.isConfirmed) {
-								localStorage.clear();
-								logout({ returnTo: window.location.origin });
+								localStorage.clear()
+								logout({ returnTo: window.location.origin })
 							}
 						})
 					)
@@ -106,13 +110,12 @@ export default function Home() {
 
 	useEffect(() => {
 		/**me traigo todos los posts */
-		
-		if(token && !isAuthenticated)dispatch(getAllPostsAsync(token));
-		
+
+		if (token && !isAuthenticated) dispatch(getAllPostsAsync(token))
+
 		/**me traigo el detalle del usuario */
-		if(id) dispatch(getUserDetailAsync(id));
-		
-		
+		if (id) dispatch(getUserDetailAsync(id))
+
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [dispatch, id, isAuthenticated, token])
 
@@ -147,6 +150,8 @@ export default function Home() {
 		} else {
 			dispatch(getByCategory(Array.from(activeCategories)))
 		}
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [dispatch, activeCategories, token])
 
 	// END FILTER BY CATEGORIES
@@ -184,7 +189,7 @@ export default function Home() {
 		/*Esta función debería llevarte al inicio de las publicaciones*/
 		ref.current?.scrollIntoView({ behavior: 'smooth' })
 	}
-	if (isLoading || loading || !actualPosts || !posts) return <Loader></Loader>;
+	if (isLoading || loading || !actualPosts || !posts) return <Loader></Loader>
 
 	if (!token && !isAuthenticated) {
 		return Swal.fire({
@@ -193,14 +198,14 @@ export default function Home() {
 			text: 'Parece que aún algo salio mal, no has iniciado sesion',
 		}).then((response) => {
 			if (response.isConfirmed) {
-				localStorage.clear();
+				localStorage.clear()
 				window.location = '/'
 			}
 		})
 	}
 
 	if (userDetail.status === false) {
-		 Swal.fire({
+		Swal.fire({
 			icon: 'error',
 			title: 'Oops...',
 			text: 'Parece que aún algo salio mal, tu usuario ha sido desactivado',
@@ -218,82 +223,83 @@ export default function Home() {
 
 	return (
 		<div>
-				<div ref={ref} id='home' className='mt-2'>
-					<Link to={'/'}>
-						<img
-							src={logo}
-							alt='logo reply'
-							className='fixed-top d-none d-md-inline-flex ms-4 mt-4'
-						/>
-					</Link>
+			<div ref={ref} id='home' className='mt-2'>
+				<Link to={'/'}>
+					<img
+						src={logo}
+						alt='logo reply'
+						className='fixed-top d-none d-md-inline-flex ms-4 mt-4'
+					/>
+				</Link>
 
-					<Header
-						deleteFindText={deleteFindText}
-						findByText={searchRef.current}
-						handleSearchBarChange={handleSearchBarChange}
-						filterByCategory={filterByCategory}
-						orderByLikes={fnOrderByLikes}
-						innerContent={categoriesArr}
-						activeCategories={activeCategories}
-					/>
-					<DialogCreatePost
-						open={open}
-						setOpen={setOpen}
-						innerContent={categoriesArr}
-						userDetail={userDetail}
-						className={home}
-					/>
-					<div className='container d-flex flex-column justify-content-center mt-10'>
-						{actualPosts &&
-							posts.map((data) => {
-								return (
-									<Card
-										key={data._id}
-										id={data._id}
-										userId={data.userId._id}
-										text={data.text}
-										img={data.multimedia}
-										username={data.userId.user_Name}
-										userImg={data.userId.image_profil}
-										categories={data.category}
-										comments={data.commentId}
-										stripeId={data.userId.userStripe}
-										likes={data.likes}
-										logedUser={id}
-										resourseType={data.resourseType}
-										token={token}
-									/>
-								)
-							})}
-					</div>
-					<div>
-						<ButtonActions
-							type='submit'
-							action={addPost}
-							id='btn-add-post'
-							content={
-								<img
-									className='icon add-post'
-									src={plus}
-									alt='icon to create post'
+				<Header
+					deleteFindText={deleteFindText}
+					findByText={searchRef.current}
+					handleSearchBarChange={handleSearchBarChange}
+					filterByCategory={filterByCategory}
+					orderByLikes={fnOrderByLikes}
+					innerContent={categoriesArr}
+					activeCategories={activeCategories}
+				/>
+				<DialogCreatePost
+					open={open}
+					setOpen={setOpen}
+					innerContent={categoriesArr}
+					userDetail={userDetail}
+					className={home}
+				/>
+
+				<div className='container d-flex flex-column justify-content-center mt-10'>
+					<h1 className={!arePost ? '' : 'd-none'}>404</h1>
+					{actualPosts &&
+						posts.map((data) => {
+							return (
+								<Card
+									key={data._id}
+									id={data._id}
+									userId={data.userId._id}
+									text={data.text}
+									img={data.multimedia}
+									username={data.userId.user_Name}
+									userImg={data.userId.image_profil}
+									categories={data.category}
+									comments={data.commentId}
+									stripeId={data.userId.userStripe}
+									likes={data.likes}
+									logedUser={id}
+									resourseType={data.resourseType}
+									token={token}
 								/>
-							}
-						/>
-						<ButtonActions
-							type={'submit'}
-							action={goToUp}
-							id={'btn-go-up'}
-							content={
-								<img
-									className='icon go-up'
-									src={arrowUp}
-									alt='icon to go up in the feed'
-								/>
-							}
-						/>
-					</div>
+							)
+						})}
 				</div>
-		
+				<div>
+					<ButtonActions
+						type='submit'
+						action={addPost}
+						id='btn-add-post'
+						content={
+							<img
+								className='icon add-post'
+								src={plus}
+								alt='icon to create post'
+							/>
+						}
+					/>
+					<ButtonActions
+						type={'submit'}
+						action={goToUp}
+						id={'btn-go-up'}
+						content={
+							<img
+								className='icon go-up'
+								src={arrowUp}
+								alt='icon to go up in the feed'
+							/>
+						}
+					/>
+				</div>
+			</div>
 		</div>
 	)
 }
