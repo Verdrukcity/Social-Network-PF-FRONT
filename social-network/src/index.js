@@ -20,7 +20,7 @@ root.render(
             <Auth0Provider
     domain="dev-n0tndfczuguai6qe.us.auth0.com"
     clientId="GZQnpYCVIozKYry5dgWdOnhnRMRX2yP6"
-    redirectUri={window.location.origin+"reply/home" || "http://localhost:3000/reply/home"}
+    redirectUri={window.location +"reply/home" || "http://localhost:3000/reply/home"}
   >
          <Provider store={store}>
             <BrowserRouter>
