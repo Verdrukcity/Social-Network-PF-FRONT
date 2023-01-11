@@ -96,13 +96,15 @@ function Card(props) {
 						price: price,
 					};
 					const respuestaPago = await dispatch(chekout(data));
-					window.open(respuestaPago.url);
+					
 
 					Swal.fire(
-						"realizaste donacion de $" +
+						"vas a realizar una donacion de $" +
 							result.value +
-							" Muchas gracias!!"
+							", Se te va a redireccionar a la pagina de pago!!"
 					);
+					window.open(respuestaPago.url);
+					
 				} else {
 					Swal.fire("Donacion cancelada");
 					return;
