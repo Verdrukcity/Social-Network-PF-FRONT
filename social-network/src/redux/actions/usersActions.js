@@ -7,6 +7,7 @@ import {
 	sendToken,
 	userUpdate,
 } from '../reducer/usersReducer'
+import {getUserDetailAsync} from './postActions'
 
 export const createUser = (data) => {
 	return async function (dispatch) {
@@ -81,7 +82,10 @@ export const updateUserAsync = (data, id, token) => async (dispatch) => {
 					'content-type': 'multipart/form-data',
 				},
 			})
-			.then((response) => dispatch(userUpdate(response.data.data)))
+			.then((response) => {
+				dispatch(userUpdate(response.data.data))
+				dispatch(getUserDetailAsync(id))
+			})
 	} catch (error) {
 		console.log(error)
 	}

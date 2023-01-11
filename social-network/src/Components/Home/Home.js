@@ -275,7 +275,7 @@ export default function Home() {
 
 					{actualPosts &&
 						posts.map((data) => {
-							return (
+							if(data._id && data.userId && data.status){return (
 								<Card
 									key={data._id}
 									id={data._id}
@@ -292,7 +292,7 @@ export default function Home() {
 									resourseType={data.resourseType}
 									token={token}
 								/>
-							)
+							)}
 						})}
 				</div>
 				<div>
