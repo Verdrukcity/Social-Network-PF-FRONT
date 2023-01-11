@@ -185,7 +185,7 @@ export default function Home() {
 		/*Esta función debería llevarte al inicio de las publicaciones*/
 		ref.current?.scrollIntoView({ behavior: 'smooth' })
 	}
-	if (isLoading || loading || !actualPosts) return <Loader></Loader>;
+	if (isLoading || loading || !actualPosts || !posts) return <Loader></Loader>;
 
 	if (!token && !isAuthenticated) {
 		return Swal.fire({
