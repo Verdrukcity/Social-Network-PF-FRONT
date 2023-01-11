@@ -1,23 +1,36 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { fail } from '../../shared/assets/icons/all-icons'
 import "./auth0Succes.css"
 import { useAuth0 } from '@auth0/auth0-react'
 import Loader from '../../shared/components/loader/loader'
+import { getUserDetailAsync } from '../../redux/actions/postActions'
+import { useDispatch, useSelector } from 'react-redux'
+import {failedPaymentMail} from '../../redux/actions/pagoActions'
+
 const Auth0Fail = () => {
     const {isAuthenticated, isLoading, user} =useAuth0();
     const id = localStorage.getItem("userId");
     const token = localStorage.getItem("token");
-    if(!isLoading && !id && !token){
-        if(!isAuthenticated ){
-        window.location = "/"
-        return <Loader></Loader>;}
-    } else {
-        if(id || token || isAuthenticated){
-            // Aqui puedes meter tu dispatch
-            // En user.email esta el email del sujeto por si lo necesitas pero solo funciona si esta autenticado con auth0
-            console.log(user)
+    const dispatch = useDispatch()
+    const userData = useSelector(state => state.posts.userDetail)
+
+    useEffect(()=>{
+        if(!isLoading && !id && !token){
+            if(!isAuthenticated ){
+            window.location = "/"
+            return <Loader></Loader>;}
+        } else {
+            if(id || token || isAuthenticated){
+                dispatch(getUserDetailAsync(id))
+            }
         }
+    },[dispatch])
+
+    const handleClick = () => {
+        dispatch(failedPaymentMail(userData.email))
+        window.location = '/reply/home'
     }
+    
     if(isLoading) return <Loader></Loader>;
     return (
         <div className='container-fluid'>
@@ -25,7 +38,7 @@ const Auth0Fail = () => {
                 <h1>Tu pago no pudo ser procesado procesado</h1>
                 <img src={fail} alt= "succesGif"></img>
                 <p className=''>Si tienes alguna duda por favor ponte en contacto con nosotros <b>social.reply.team@gmail.com</b></p>
-                <button className='btnLogin' onClick={()=> window.location  = '/reply/home'}> Home</button>
+                <button className='btnLogin' onClick={()=> handleClick()}> Home</button>
             </div>
         </div>
       )
