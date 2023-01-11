@@ -21,6 +21,9 @@
   font-style: italic;
   font-size: 128px;
 }
+.fonts{
+  font-family: 'Inter',
+}
 @media (max-width:450px){
   .replyTitle{
     font-size: 98px;
