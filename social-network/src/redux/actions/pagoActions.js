@@ -91,3 +91,24 @@ export const getPrices = () => async (dispatch) => {
     console.log(error)
   }
 }
+
+///mail de pago exitoso
+
+export const succesPaymentMail = (mailReceiver) => async (dispatch) => {
+  try{
+    await axios.post('/successpaymentmail', {mailReceiver})
+  }
+  catch(error){
+    console.log(error)
+  }
+}
+
+//mail de pago fallido
+export const failedPaymentMail = (mailReceiver) => async (dispatch) => {
+  try{
+    await axios.post('/failedpaymentmail', {mailReceiver})
+  }
+  catch(error){
+    console.log(error)
+  }
+}
