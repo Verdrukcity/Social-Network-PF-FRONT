@@ -189,6 +189,18 @@ export default function Home() {
 		/*Esta función debería llevarte al inicio de las publicaciones*/
 		ref.current?.scrollIntoView({ behavior: 'smooth' })
 	}
+	if (userDetail.status === false) {
+		Swal.fire({
+			icon: 'error',
+			title: 'Oops...',
+			text: 'Parece que aún algo salio mal, tu usuario ha sido desactivado',
+		}).then((response) => {
+			if (response.isConfirmed) {
+				logout()
+				window.location = '/'
+			}
+		})
+	}
 	if (isLoading || loading || !actualPosts || !posts) return <Loader></Loader>
 
 	if (!token && !isAuthenticated) {
@@ -205,17 +217,7 @@ export default function Home() {
 		})
 	}
 
-	if (userDetail.status === false) {
-		Swal.fire({
-			icon: 'error',
-			title: 'Oops...',
-			text: 'Parece que aún algo salio mal, tu usuario ha sido desactivado',
-		}).then((response) => {
-			if (response.isConfirmed) {
-				window.location = '/'
-			}
-		})
-	}
+	
 
 	if (userDetail.role === 'admin') {
 		window.location = '/reply/admin'

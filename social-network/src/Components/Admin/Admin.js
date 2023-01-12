@@ -34,7 +34,7 @@ export default function Admin() {
 		dispatch(getAllUsersVerifyAsync(token))
 		dispatch(getAllPostsAsync(token))
 		dispatch(getUserDetailAsync(id))
-	}, [dispatch, token])
+	}, [dispatch, token, id])
 
 	if (!token) {
 		window.location = '/'
