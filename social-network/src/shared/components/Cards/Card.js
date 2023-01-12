@@ -93,8 +93,8 @@ function Card(props) {
 
 					Swal.fire(
 						'vas a realizar una donacion de $' +
-							result.value +
-							', Se te va a redireccionar a la pagina de pago!!'
+						result.value +
+						', Se te va a redireccionar a la pagina de pago!!'
 					)
 					window.open(respuestaPago.url)
 				} else {
@@ -111,20 +111,19 @@ function Card(props) {
 		}
 	}
 
-	// const [isLike, setIsLiked] = useState(false);
-	const [likes, setLikes] = useState(props.likes.length)
-	const [Icon, setIcon] = useState(likeIcon)
+	const [isLiked, setIsLiked] = useState(props.likes.some(e => e.usersLiked === props.logedUser))
+	const [likes, setLikes] = useState(props.likes.length);
 
 	const handleLike = (postId, userLoged) => {
-		// setIsLiked(!isLike)
 		dispatch(likePostAsync(postId, userLoged, props.token))
-	}
+	};
 
 	useEffect(() => {
-		// setIcon(isLike ? likeIconFilled : likeIcon)
-		setLikes(props.likes.length)
-		verificarStripe()
-	})
+		setIsLiked(props.likes.some(e => e.usersLiked === props.logedUser))
+		setLikes(props.likes.length);
+		verificarStripe();
+	}, [props, isLiked]);
+
 
 	const handleSubmit = (e) => {
 		e.preventDefault()
@@ -217,8 +216,10 @@ function Card(props) {
 									</a>
 								</div>
 							</div>
+
 						</div>
 					</div>
+
 				</div>
 			</div>
 			<div className=' color-white ps-2 row'>
@@ -240,21 +241,20 @@ function Card(props) {
 				<div className='row'>
 					<div className='col-2 m-0 p-0'>
 						<div className='d-flex flex-column justify-content-center align-items-center'>
-							<Throttle time='1200' handler='onClick'>
+							{/* <Throttle time='1200' handler='onClick'> */}
 								<img
-									src={Icon}
 									className='icon-size d-flex  justify-content-center align-items-center me-0  p-0 m-0'
+									src={isLiked ? likeIconFilled : likeIcon}
 									alt='icon de likes'
 									onClick={() => {
 										handleLike(props.id, props.logedUser)
 									}}
+								/* alt='icon de likes'
+								onClick={() => {
+									handleLike(props.id, props.logedUser)
+								}} */
 								/>
-								{/* <LikeButton
-								postId={props.id}
-								userLoged={props.logedUser}
-									likes={props.likes}
-						/> */}
-							</Throttle>
+							{/* </Throttle> */}
 							<p className='fw-bold m-0'>{likes}</p>
 						</div>
 					</div>

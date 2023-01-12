@@ -231,6 +231,10 @@ export default function Profile(props) {
 							);
 						}
 					})}
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 			</div>
 		</div>
 	);
