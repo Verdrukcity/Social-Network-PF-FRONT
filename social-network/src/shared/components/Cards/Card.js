@@ -26,6 +26,7 @@ import { Throttle } from 'react-throttle'
 
 function Card(props) {
 	const MySwal = withReactContent(Swal)
+	const token = localStorage.getItem('token')
 	const obj = {
 		username: 'compañero guerra',
 		imgUser:
@@ -115,7 +116,7 @@ function Card(props) {
 	const [likes, setLikes] = useState(props.likes.length);
 
 	const handleLike = (postId, userLoged) => {
-		dispatch(likePostAsync(postId, userLoged, props.token))
+		dispatch(likePostAsync(postId, userLoged, token))
 	};
 
 	useEffect(() => {
