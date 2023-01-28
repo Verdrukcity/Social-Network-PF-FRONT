@@ -13,7 +13,7 @@ import auth0succes from './Components/auth0routes/auth0succes'
 import auth0Fail from './Components/auth0routes/auth0Fail'
 
 // axios.defaults.baseURL = "http://localhost:3001"
-axios.defaults.baseURL = 'https://social-network-pf-back-production.up.railway.app'
+axios.defaults.baseURL = 'reply-back-end-deploy.onrender.com'
 
 /*
   App se utiliza para navegar a las rutas necesarias en el frontend:
